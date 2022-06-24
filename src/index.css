@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.box-bgcolor {
+  background-color: rgb(255, 97, 97);
+  /* top: 200px; */
+  height: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  padding-bottom: 20px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 4px 8px 0px, rgb(0 0 0 / 19%) 0px 6px 20px 0px;
+}
+
+.box-btnbg {
+  font-family: montserrat-extrabold;
+  font-weight: 800;
+  font-size: 12px;
+  border: 2px solid rgb(255, 255, 255);
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px inset;
+  border-radius: 12px;
+  background-color: rgb(255, 189, 18);
+}
+
+.lego-box-bgcolor {
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+
+.bor-color {
+  border: 3px solid #18191F;
+}
+
+.lego-box-btnbg {
+  background: #FFBD12;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  box-shadow: inset 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 12px;
+}
+
+.bg1 {
+  background-color: #E9E7FC
+}
+
+.bg2 {
+  background-color: rgb(255, 189, 18);
+}
+
+.audio-font {
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.lego-font {
+  font-weight: 700 !important;
+  /* color: #18191F !important; */
+}
+
+@media only screen and (max-width: 700px) {
+  .audio-font>div>p>span {
+    /* font-size: 17px !important; */
+  }
+  .Speakdiv {
+    font-size: 19px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .audio-font>div>p>span {
+    font-size: 1em !important;
+  }
+}
+
+.Speakdiv {
+  font-family: montserrat-medium;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.4;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.manage-container .logo {
+  max-height: 25vh;
+}
+
+.manage-container .header-text {
+  font-size: 1em;
+  font-weight: bold;
+  color: #000;
+}
+
+.manage-container .age-box {
+  border: 1px solid #57c7af;
+  padding: 5px;
+  margin: 0 5px;
+  flex: 1;
+  cursor: pointer;
+}
+.manage-container .age-box.active {
+  background: #57c7af;
+  color: #fff;
+  border: 1px solid #17725f;
+}
+.manage-container .box {
+  padding: 10px 25px;
+  border: 1px solid #57c7af;
+  margin: 10px 25px;
+  cursor: pointer;
+}
+
+.manage-container .box.active {
+  background: #57c7af;
+  color: #fff;
+  border: 1px solid #17725f;
+}
+.manage-container .submit-div {
+  margin: 10px 25px;
+}
+.manage-container .submit {
+  border-color: rgb(24, 25, 31);
+  border-radius: 10px;
+  background: #000;
+  background-color: black;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+}
+
+.manage-container .logo img {
+  height: 15vh;
+}

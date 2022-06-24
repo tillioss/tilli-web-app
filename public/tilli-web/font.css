@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'montserrat-bold';
+    src: local('montserrat-bold'),  url("./assets/fonts/Montserrat-Black.ttf")format('truetype');
+}
+@font-face {
+    font-family: 'montserrat-medium';
+    src: local('montserrat-medium'),  url("./assets/fonts/Montserrat-Medium.ttf")format('truetype');
+}
+@font-face {
+    font-family: 'montserrat-regular';
+    src: local('montserrat-regular'),  url("./assets/fonts/Montserrat-Regular.ttf")format('truetype');
+}
+@font-face {
+    font-family: 'montserrat-extrabold';
+    src: local('montserrat-extrabold'),  url("./assets/fonts/Montserrat-ExtraBold.ttf")format('truetype');
+}
+@font-face {
+    font-family: 'montserrat-semibold';
+    src: local('montserrat-semibold'),  url("./assets/fonts/Montserrat-SemiBold.ttf")format('truetype');
+}
+@font-face {
+    font-family: 'schoolbell-regular';
+    src: local('schoolbell-regular'),  url("./assets/fonts/Schoolbell-Regular.ttf")format('truetype');
+
+}
+
+ 
