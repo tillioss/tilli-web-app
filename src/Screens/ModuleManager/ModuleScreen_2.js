@@ -327,7 +327,7 @@ class ModuleScreen_2 extends React.Component {
     async getLevelAttemptCount() {
         let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
         let postJson = { userId: loginId, levelId: this.props.match.params.id };
-        let responseData = await doConnect("getModulgetLevelAttemptCounteLanguageMapping", "POST", postJson);
+        let responseData = await doConnect("getLevelAttemptCount", "POST", postJson);
 
         var json = responseData;
         //var response = JSON.parse(json.response);
