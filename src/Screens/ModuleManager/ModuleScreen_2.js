@@ -145,12 +145,12 @@ class ModuleScreen_2 extends React.Component {
             if (currentStage == 1) {
                 // navigation.navigate('Home');
                 if (localStorage.getItem("loggedUserId")) {
-                    // this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
-                    this.setState({ viewScreen: false })
+                    this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
+                    // this.setState({ viewScreen: false })
                 }
                 else {
                     console.log("please logout")
-                    this.setState({ viewScreen: false })
+                    // this.setState({ viewScreen: false })
                 }
             } else {
                 this.setState({ stage: currentStage - 1, PreviousPages: true, scorePointsView: scoreBordScreen });
