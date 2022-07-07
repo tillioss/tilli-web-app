@@ -23,8 +23,7 @@ import { connect } from 'react-redux';
 import { userTrack } from '../../config/Common';
 import AskGender from './Themes/AskGender';
 import AskAge from './Themes/AskAge';
-
-
+import ThemeViewer from './ThemeViewer';
 
 
 
@@ -36,7 +35,7 @@ class ModuleScreen_2 extends React.Component {
             stage: 1,
             moduleJson: null,
             PreviousPages: false,
-            viewScreen: false,
+            viewScreen: true,
             scorePointsView: false,
             scoreCurrentStage: 0,
             attemptCount: 0,
@@ -51,9 +50,6 @@ class ModuleScreen_2 extends React.Component {
         this.getLevelMappingData(this.props.match.params.id)
         this.languagechangeTheme()
         userTrack("ModuleScreen", "Landing")
-
-
-
 
         localStorage.setItem('levelPoints', 0)
         localStorage.setItem('totalPoints', 0)
@@ -167,7 +163,7 @@ class ModuleScreen_2 extends React.Component {
 
     completeFinalStage() {
 
-        // this.updateAttemptData()
+        this.updateAttemptData()
         this.redirect_Page()
         //}
         // this.redirect_Page()
@@ -307,7 +303,6 @@ class ModuleScreen_2 extends React.Component {
             // console.log("stages[findNextThemeIndex]", stages[cstage])
             // console.log("stages[findNextThemeIndex]", stages[findNextThemeIndex])
         }
-
         await this.setState({ scoreCurrentStage: action == "Previous" ? cstage - 1 : cstage, scorePointsView: scorePoint })
         this.updateStatusBasedOnStory()
     }
@@ -403,7 +398,7 @@ class ModuleScreen_2 extends React.Component {
         let responseData = await doConnect("getStoryBasedStatus", "POST", postJson);
         var json = responseData;
 
-        if (json && json.response ) {
+        if (json && json.response) {
             console.log("getStoryBasedStatus--->", JSON.parse(json.response))
             let responseData = JSON.parse(json.response)
             if (responseData.status == "Paused" && responseData.language && responseData.language.label == languageType.label) {
@@ -438,12 +433,12 @@ class ModuleScreen_2 extends React.Component {
 
 
 
-    async  updateUserDetailsInfo(postdata) {
+    async updateUserDetailsInfo(postdata) {
         var postJson = postdata;
         let that = this;
         let responseData = await doConnect("updateUserDetails", "POST", postJson);
         console.log("responseData", responseData)
-        
+
     }
 
     previousScorePagefun(type, index) {
@@ -521,6 +516,21 @@ class ModuleScreen_2 extends React.Component {
                 // console.log("PercentageTotal", PreTotal)
                 let progressDiv = ""
                 // let progressDiv=""
+                let themeType = stage.themeType;
+
+                switch (themeType) {
+                    case 'Dynamic':
+                        return (
+                            <div className='app-content' key={index.toString()}>
+                                <ThemeViewer
+                                    layersData={stage.layers}
+                                    navigation={this.props.history}
+                                    changeStage={this.changeStage}
+                                    stage={this.state.stage}
+                                />
+                            </div>
+                        );
+                }
 
                 switch (theme) {
 
