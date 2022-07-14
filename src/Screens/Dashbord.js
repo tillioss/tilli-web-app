@@ -22,7 +22,7 @@ class Dashbord extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bodydata: [], progressingLevel: 0, points: 0, feellingsTool: 0, nameOfChild: '',
+      bodydata: [], progressingLevel: 1, points: 0, feellingsTool: 0, nameOfChild: '',
       levelLanguageMappingData: {}, languageMappingData: {}, languageBaseData: {},
       deviceHeight: window.innerWidth
     }
@@ -123,13 +123,13 @@ class Dashbord extends React.Component {
     let json = responseData;
     if (json.response == null) {
       // this.props.setUserInfo('progressingLevel', 0)
-      this.setState({ progressingLevel: 0 })
+      this.setState({ progressingLevel: 1 })
     }
     else {
       // console.log('postJson get==>', JSON.parse(responseData.response))
       //this.props.setUserInfo('progressingLevel', JSON.parse(responseData.response).level)
       // let a = false ? JSON.parse(responseData.response).level : 0
-      let a = JSON.parse(responseData.response) ? JSON.parse(responseData.response).level : 0
+      let a = JSON.parse(responseData.response) ? JSON.parse(responseData.response).level : 1
       this.setState({
         progressingLevel: a,
         points: JSON.parse(responseData.response).points, feellingsTool: JSON.parse(responseData.response).feelingTool,
