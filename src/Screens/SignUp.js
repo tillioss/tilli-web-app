@@ -382,7 +382,7 @@ class SignUp extends React.Component {
           <div className="row mx-0">
             <div className="col-sm-3"> </div>
             <div className="col-sm-6">
-              <span style={{ fontSize: 20, color: '#18191F' }}> {this.returnContent(10)}   </span> <span style={{ fontSize: 20, cursor: 'pointer', color: '#00C6AE' }} onClick={() => {
+              <span style={{ fontSize: 20, color: '#18191F' }}> {this.returnContent(10)}   </span> <span style={{ fontSize: 20, cursor: 'pointer', color: '#DD3B96' }} onClick={() => {
                 this.props.history.push("/tilli-web")
               }}>  {this.returnContent(11)}.</span>
 

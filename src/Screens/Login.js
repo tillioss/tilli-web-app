@@ -186,7 +186,7 @@ class Login extends React.Component {
           <div className="row mx-0">
             <div className="col-sm-3"> </div>
             <div className="col-sm-6">
-              <span style={{ fontSize: 20, color: '#18191F' }}>  {this.returnContent(5)} </span> <span style={{ fontSize: 20, color: '#00C6AE', cursor: 'pointer' }} onClick={() => {
+              <span style={{ fontSize: 20, color: '#18191F' }}>  {this.returnContent(5)} </span> <span style={{ fontSize: 20, color: '#DD3B96', cursor: 'pointer' }} onClick={() => {
                 //window.location.href = '/tilli-web/signup'
                 this.props.history.push("/tilli-web/signup")
               }}>  {this.returnContent(6)} </span>
