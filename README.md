@@ -24,7 +24,7 @@ You can play our game here: https://tilli.teqbahn.com/tilli-web
 
 1. Configuration:
 
-b. Need to change IP address of Your Server IP and Port in config/Myconstant.js :
+   Need to change IP address of Your Server IP and Port in config/Myconstant.js :
 
 Ex:apiURL: 'http://192.yyy.1.xxx:8093/tilli-api/'
 
