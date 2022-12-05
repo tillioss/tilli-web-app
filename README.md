@@ -42,3 +42,9 @@ b. Enter below CMD to start :
 
 Running Url:
 http://localhost:3023/tilli-web/
+
+******************** 
+
+If you wish to work on the IDE to create or modify modules kindly refer the Tilli IDE Repository here: https://github.com/tillioss/tilli-ide
+
+
