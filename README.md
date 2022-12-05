@@ -1,4 +1,4 @@
-# Tilli Web App:
+# Tilli Web App (For Content Creators):
 
 Tilli Safety Tool Box comprises of 3 modules:
 
@@ -14,13 +14,15 @@ Tilli Safety Tool Box comprises of 3 modules:
 ## Module 3: Digital Safety (WIP)
 - Understanding internet safety and developing positive habits around safe sharing, noticing red flags, being kind and reaching out to a trusted adult
 
-Our 3 modules (and even the modules you create) can be accessed with a Web browser over the World Wide Web on any mobile device. Unlike classical game software, browser-based games can be played instantly and do not require a prior installation! 
+Our 3 modules (and even the modules you create in the Tilli IDE) can be accessed or reviewed with a Web browser over the World Wide Web on any mobile device. Unlike classical game software, browser-based games can be played instantly and do not require a prior installation! 
 
-You can play our game here: https://tilli.teqbahn.com/tilli-web
+You can play/test our game here: https://tilli.teqbahn.com/tilli-web
 
 ******************** 
 
-# Installing Tilli Web App
+# Installing Tilli Web App (For Developers)
+
+Developers can install the Tilli Web App to make changes/optimizations for some of the hard coded screens.
 
 1. Configuration:
 
