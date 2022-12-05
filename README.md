@@ -1,4 +1,4 @@
-# Tilli Web App (For Content Creators):
+# Tilli Web App:
 
 Tilli Safety Tool Box comprises of 3 modules:
 
