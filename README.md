@@ -18,8 +18,6 @@ Our 3 modules (and even the modules you create in the Tilli IDE) can be accessed
 
 You can play/test our game here: https://tilli.teqbahn.com/tilli-web
 
-For more information on how to start using the IDE kindly go here: https://github.com/tillioss/tilli-ide
-
 ******************** 
 
 # Installing Tilli Web App (For Developers)
