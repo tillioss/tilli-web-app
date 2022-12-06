@@ -1,17 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchGetLanguageMapping, fetchGetLevelNameLanguageMapping } from '../redux/actions/languageActions';
-import { setLanguageData } from '../redux/actions/languageActions';
-import image from "../../src/images/tilli.jpg";
-import MyConstant from '../config/MyConstant';
-import { Style } from "react-style-tag";
-import DropDown from "../Component/DropDown";
 import { doConnect } from '../config/Common';
-
-
-
-
-
 
 
 class LanguageSelect extends React.Component {
@@ -19,7 +9,6 @@ class LanguageSelect extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
             selectedOption: { label: "Select", value: "Select " },
             optionsData: []
         }
@@ -29,21 +18,18 @@ class LanguageSelect extends React.Component {
 
     componentDidMount() {
         //back ground color change ...
-
         document.body.style.backgroundColor = "white";
         this.getLanguageList();
+    }
 
-        // if(localStorage.getItem("ChooseLanguage"))
-        // {
-        //     this.getLangugeBaseData(JSON.parse(localStorage.getItem("ChooseLanguage")))
-        //     this.setState({ selectedOption :JSON.parse(localStorage.getItem("ChooseLanguage")) })
-        // }
+    checklanguageChoose() {
+        let { optionsData } = this.state;
+        let getEnglishDetails = optionsData.filter((key) => { return key.label.toLowerCase() == "english" })
         if (!localStorage.getItem("ChooseLanguage")) {
-
-            this.getLangugeBaseData({ "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" })
+            if (getEnglishDetails.length > 0) {
+                this.getLangugeBaseData(getEnglishDetails[0])
+            }
         }
-
-
     }
 
 
@@ -52,20 +38,19 @@ class LanguageSelect extends React.Component {
         let postJson = { sessionId: '1223' };
         let responseData = await doConnect("getLanguages", "POST", postJson);
         let datavalue = JSON.parse(responseData.response)
-                Object.keys(datavalue).map(ival => {
-                    optionsData.push({ label: datavalue[ival], value: ival })
-                })
-
-                // selectedOption.push({label:"",value:""})
-                this.setState({ "languagesData": JSON.parse(responseData.response), optionsData })
+        Object.keys(datavalue).map(ival => {
+            optionsData.push({ label: datavalue[ival], value: ival })
+        })
+        // selectedOption.push({label:"",value:""})
+        this.setState({ "languagesData": JSON.parse(responseData.response), optionsData }, () => {
+            this.checklanguageChoose()
+        })
     }
 
 
 
     async getLangugeBaseData(e) {
-
         console.log("this get call")
-
         localStorage.setItem("currentLanguage", e.value)
         localStorage.setItem("ChooseLanguage", JSON.stringify(e))
 
@@ -81,18 +66,12 @@ class LanguageSelect extends React.Component {
         let postJson_4 = { grouptype: "commonPageGroup", languageId: e.value, sessionId: "1223" };
         this.props.fetchGetLanguageMappingData(postJson_4)
 
-
-
-
-
     }
     render() {
-
-        const { selectedOption, optionsData } = this.state;
-        const { ParentPage } = this.props;
+        let { optionsData } = this.state;
         let viewcontent = []
         optionsData.map((ival, indexvalue) => {
-            viewcontent.push(<div className="col-4" id={indexvalue} onClick={(e) => {
+            viewcontent.push(<div className="col-4" id={indexvalue} key={indexvalue} onClick={(e) => {
                 e.preventDefault()
 
                 this.getLangugeBaseData(optionsData[e.target.id])

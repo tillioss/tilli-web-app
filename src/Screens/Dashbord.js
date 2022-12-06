@@ -22,7 +22,7 @@ class Dashbord extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bodydata: [], progressingLevel: 0, points: 0, feellingsTool: 0, nameOfChild: '',
+      bodydata: [], progressingLevel: 1, points: 0, feellingsTool: 0, nameOfChild: '',
       levelLanguageMappingData: {}, languageMappingData: {}, languageBaseData: {},
       deviceHeight: window.innerWidth
     }
@@ -52,6 +52,7 @@ class Dashbord extends React.Component {
     let postJson = { languageId: language, sessionId: "1223" }
     let that = this;
     let responseData = await doConnect("getLevelsNameLanguageMapping", "POST", postJson);
+
 
     if (responseData.response != null) {
       this.setState({ levelLanguageMappingData: JSON.parse(responseData.response) })
@@ -114,18 +115,21 @@ class Dashbord extends React.Component {
 
 
     let postJson = { sessionId: '1223', userId: localStorage.getItem("loggedUserId") };
+    // alert(JSON.stringify(postJson))
     let responseData = await doConnect("getUserGameStatus", "POST", postJson);
+    // alert(JSON.stringify(responseData))
     //console.log('postJson get level==>', postJson)
     let that = this;
     let json = responseData;
     if (json.response == null) {
       // this.props.setUserInfo('progressingLevel', 0)
-      this.setState({ progressingLevel: 0 })
+      this.setState({ progressingLevel: 1 })
     }
     else {
       // console.log('postJson get==>', JSON.parse(responseData.response))
       //this.props.setUserInfo('progressingLevel', JSON.parse(responseData.response).level)
-      let a = false ? JSON.parse(responseData.response).level : 0
+      // let a = false ? JSON.parse(responseData.response).level : 0
+      let a = JSON.parse(responseData.response) ? JSON.parse(responseData.response).level : 1
       this.setState({
         progressingLevel: a,
         points: JSON.parse(responseData.response).points, feellingsTool: JSON.parse(responseData.response).feelingTool,
@@ -140,7 +144,7 @@ class Dashbord extends React.Component {
     let that = this;
     let responseData = await doConnect("getGameLevels", "POST", postJson);
     let json = responseData;
-    //console.log('json level',json)
+    // console.log('json level', json)
     if (
       Object.keys(json).length > 0 &&
       json.levelsMap != null &&
@@ -157,8 +161,8 @@ class Dashbord extends React.Component {
         a.sortOrder > b.sortOrder ? 1 : b.sortOrder > a.sortOrder ? -1 : 0,
       );
       that.setState({ bodydata: levelsDataList });
+    }
   }
-}
 
   async LanguageBaseDataget(e) {
 
@@ -196,7 +200,9 @@ class Dashbord extends React.Component {
     let retrunData = []
     //this new code
     this.state.bodydata.map((ival, index) => {
-      if (index == 0) {
+
+      // if (index == 0) {
+      if (index < this.state.progressingLevel) {
         retrunData.push(<div className="col-3 opadding justify-content-center align-self-center"
           key={index.toString()}
           style={{
@@ -232,13 +238,21 @@ class Dashbord extends React.Component {
             <div className="col-3" >
               <div>
                 <div className="dashboard-level" style={{ backgroundColor: this.state.bodydata[val].color }} onClick={() => {
-                  console.log(index)
-                  if (index == 0) {
-                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module/' + this.state.bodydata[val].id + '/' + index + '/' + this.state.progressingLevel)
+                  // console.log(index)
+                  // if (index == 0) {
+                  // console.log(index, "***", this.state.progressingLevel)
+                  if (index < this.state.progressingLevel) {
+                    let progressLevel = index + 1
+                    if (index == this.state.progressingLevel) {
+                      progressLevel = this.state.progressingLevel
+                    }
+                    // console.log("progressLevel", progressLevel)
+                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module-manage/' + this.state.bodydata[val].id + '/' + index + '/' + progressLevel)
                     //this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/module/' + this.state.bodydata[val].id + '/' + 0 + '/' + this.state.progressingLevel)
                   }
                 }}>
-                  {index > 0 ?
+                  {/* {index > 0 ? */}
+                  {index + 1 > this.state.progressingLevel ?
                     <React.Fragment>
                       <div style={{
                         position: 'absolute',
@@ -270,7 +284,7 @@ class Dashbord extends React.Component {
                 </div>
               </div>
             </div>
-          </React.Fragment>
+          </React.Fragment >
         )
         changeIndex++;
       })
@@ -429,7 +443,7 @@ class Dashbord extends React.Component {
                           <tr>
                             <td><img src={winImg} /></td>
                             <td style={{ padding: '0 2px' }}>
-                              <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.feellingsTool}</div>
+                              <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.progressingLevel}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, }}>
                                 {this.returnContent(4)}
                               </div>

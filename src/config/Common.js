@@ -1,4 +1,6 @@
 import MyConstant from './MyConstant';
+import inputJson from "../pages/tilli-game-web/json/input.json"
+
 
 
 export function doGetConnect(subUrl) {
@@ -157,5 +159,23 @@ export async function getMyIp() {
         var ipAddress = json.ip
         return ipAddress;
     });
+}
+
+export function keyReadData(eventList, keyName) {
+    let filterData = eventList.filter((key) => { return key.key.trim("") === keyName })
+    let returnData = {}
+    if (filterData.length > 0) {
+        returnData = filterData[0]
+    }
+    return returnData
+}
+
+export function readJsonFile(screenName) {
+    let filterData = inputJson.filter((key) => { return key.screenName === screenName })
+    let returnData = {}
+    if (filterData.length > 0) {
+        returnData = filterData[0]
+    }
+    return returnData
 }
 
