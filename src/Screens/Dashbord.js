@@ -247,7 +247,7 @@ class Dashbord extends React.Component {
                       progressLevel = this.state.progressingLevel
                     }
                     // console.log("progressLevel", progressLevel)
-                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module/' + this.state.bodydata[val].id + '/' + index + '/' + progressLevel)
+                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module-manage/' + this.state.bodydata[val].id + '/' + index + '/' + progressLevel)
                     //this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/module/' + this.state.bodydata[val].id + '/' + 0 + '/' + this.state.progressingLevel)
                   }
                 }}>

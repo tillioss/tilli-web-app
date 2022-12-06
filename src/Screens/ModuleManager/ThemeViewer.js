@@ -17,7 +17,8 @@ export default class ThemeViewer extends React.Component {
             deviceWidth: "",
             audioRecognize: "",
             recordText: "",
-            loggedOrg_id: ""
+            loggedOrg_id: "",
+            resetTextState: false
         }
         this.dynamicThemeAction = this.dynamicThemeAction.bind(this);
         this.setRecord = this.setRecord.bind(this);
@@ -103,6 +104,13 @@ export default class ThemeViewer extends React.Component {
                 btn.addEventListener('touchcancel', function () {
                     console.log('btn moving cancel');
                 })
+                break;
+            case "Reset Text":
+                let resetDiv = "layer" + layer.layers.resetText[0];
+                if (resetDiv) {
+                    document.getElementById(resetDiv).innerHTML = "";
+                    this.setState({ recordText: "", resetTextState: true })
+                }
                 break;
         }
 
@@ -319,8 +327,15 @@ export default class ThemeViewer extends React.Component {
 
     render() {
         let { layers, audioRecognize, recordText } = this.state;
+        let { data } = this.props
         // console.log("audioRecognize", audioRecognize)
         // console.log("layers", layers)
+
+        let audioFileFind = ""
+        if (data && data.backgroundAudio && data.backgroundAudio != "") {
+            audioFileFind = data.backgroundAudio
+        }
+
         return <div className="mobile-responsive tilli-web"
             ref={(e) => { this.mobile = e }}
         >
@@ -330,11 +345,23 @@ export default class ThemeViewer extends React.Component {
 
                 {
                     layers.map((layer, index) => {
-                        return audioRecognize === index ? <AudioRecognize
+                        return audioRecognize === index ? <AudioRecognize resetTextState={this.state.resetTextState}
+                            updateResetText={() => {
+                                this.setState({ resetTextState: false })
+                            }}
                             setRecord={this.setRecord}>{this.layerBuildRecord(layer, index, recordText)}</AudioRecognize> : this.layerBuild(layer, index)
                     })
                 }
             </div>
+            {audioFileFind && audioFileFind != "" && <div
+                style={{ display: "none" }}
+            >
+                <audio controls autoPlay >
+                    <source src={audioFileFind} type="audio/ogg" />
+                    <source src={audioFileFind} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                </audio>
+            </div>}
         </div>;
     }
 }
