@@ -5,6 +5,7 @@ import signUpReducer from './signUpReducer';
 import loginReducer from './loginReducer';
 import userInfoReducer from './userInfoReducer';
 import languageReducer from './languageReducer';
+import gameAuthReducer from './gameAuthReducer';
 
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   loginReducer: loginReducer,
   userInfoReducer: userInfoReducer,
   languageReducer: languageReducer,
+  gameAuthReducer:gameAuthReducer
 
 });
 

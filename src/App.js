@@ -35,6 +35,9 @@ import NotFoundPage from './Screens/NotFoundPage';
 import Manage from './Screens/Manage';
 import UserManage from './Screens/UserManage';
 
+import TilliGameWeb from './pages/TilliGameWeb';
+
+
 
 const history = createBrowserHistory();
 
@@ -312,6 +315,12 @@ function App() {
                             <div className={classNameForDevice}>
                                 <Manage {...props} />
                             </div>
+                        </React.Fragment>
+                    } />
+                     {/* tilli-game-web */}
+                     <Route path={"/" + MyConstant.keyList.projectUrl + "/games"} history={history} render={(props) =>
+                        <React.Fragment>
+                            <TilliGameWeb />
                         </React.Fragment>
                     } />
                     <Route component={NotFoundPage} />

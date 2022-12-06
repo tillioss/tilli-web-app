@@ -1,0 +1,571 @@
+ [
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "create_garden",
+      "eventList": [
+        {
+          "key": "num_of_soil_patches",
+          "value": [
+            "based_on_calendar_days_left"
+          ]
+        },
+        {
+          "key": " homebutton",
+          "value": [
+            "goes_back_to_module_section_screen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "first_time_animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "first_time_animation"
+          ]
+        },
+        {
+          "key": " truthtable",
+          "value": [
+            "1",
+            "0"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "next_day_animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "next_day_animation"
+          ]
+        },
+        {
+          "key": " truthtable",
+          "value": [
+            "0",
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "if_first_time_animation_triggers_then_trigger_hand_animation_after_that",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "points_at_unplanted_soil_patch"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "missed_day_animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "missed_day_animation"
+          ]
+        },
+        {
+          "key": " truthtable",
+          "value": [
+            "0",
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "after_next_day_animation_if_child_does_not_select_soil_patch_in_5_seconds_then_trigger_hand_animation_after",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "points_at_unplanted_soil_patch"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "after_missed_day_animation_if_child_does_not_select_soil_patch_in_5_seconds_then_trigger_hand_animation_after",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "points_at_unplanted_soil_patch"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "select_soil_patch",
+      "eventList": [
+        {
+          "key": "select_soil_patch",
+          "value": [
+            "based_on_calendar_days_left_and_is_unplanted"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "select_soil_patch",
+      "eventList": [
+        {
+          "key": "select_soil_patch",
+          "value": [
+            "selected"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "emotion_popup",
+      "eventList": [
+        {
+          "key": "select_emotion",
+          "value": [
+            "happy_plant",
+            "sad_plant",
+            "angry_plant",
+            "disgusted_plant",
+            "surprised_plant",
+            "scared_plant"
+          ]
+        },
+        {
+          "key": " systemtriggered",
+          "value": [
+            "prompt_for_selecting_emotion_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "plant_growing_animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "plant_growing_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "tilli_and_tree_talking_animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "tilli_and_tree_talking_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "voice_input_popup_hand_animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "points_at_record"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "voice_input_popup",
+      "eventList": [
+        {
+          "key": "record_button",
+          "value": [
+            "starts_recording_input",
+            " stops_recording_input"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "voice_input_popup",
+      "eventList": [
+        {
+          "key": "redo_button",
+          "value": [
+            "erases_input"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "voice_input_popup",
+      "eventList": [
+        {
+          "key": "done_button",
+          "value": [
+            "saves_input_and_closes_voice_input_popup"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "voice_input_popup_hand_animation_after_stop_recording_input",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "points_at_done"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "plant_reward_animation_displaying_heart_counter",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "total_hearts_collected"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "if_child_taps_on_any_plant",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "plant_movement_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "if_missed_day_animation_triggers_then_voice_input_popup_triggers_after_that",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "record",
+            "redo",
+            "done"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "on_month_complete",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "completion_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "photo_is_documented",
+      "eventList": [
+        {
+          "key": "alue[save_image_in_parent_section]",
+          "value": [
+            "photo_is_documented"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "if_child_taps_on_abcde_pin_wheel_button",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "transition_screen_animation_lands_on_module1dabcdepinwheel"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1cmindgarden",
+    "screenName": "mainscreen",
+    "eventContext": {
+      "eventName": "homebutton",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "transition_screen_animation_lands_on_module_section_screen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "splashscreen",
+    "eventContext": {
+      "eventName": "animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "splashscreen_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "loadingscreen",
+    "eventContext": {
+      "eventName": "animation",
+      "eventList": [
+        {
+          "key": "systemtriggered",
+          "value": [
+            "loadingscreen_animation"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "selectlanguagescreen",
+    "eventContext": {
+      "eventName": "select_language",
+      "eventList": [
+        {
+          "key": "language",
+          "value": [
+            "United Kingdom- English",
+            "United States- English",
+            "Sri Lanka- Sinhala",
+            "Sri Lanka- Tamil"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "parentsignupscreen",
+    "eventContext": {
+      "eventName": "sign_up",
+      "eventList": [
+        {
+          "key": "emailid",
+          "value": [
+            "email@id"
+          ]
+        },
+        {
+          "key": " password",
+          "value": [
+            "password itself"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "parentsignupscreen",
+    "eventContext": {
+      "eventName": "continue_with_gmail",
+      "eventList": [
+        {
+          "key": "emailid",
+          "value": [
+            "email@id"
+          ]
+        },
+        {
+          "key": " password",
+          "value": [
+            "password itself"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "childprofilescreen",
+    "eventContext": {
+      "eventName": "save_profile",
+      "eventList": [
+        {
+          "key": "name",
+          "value": [
+            "name"
+          ]
+        },
+        {
+          "key": " age",
+          "value": [
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "10+"
+          ]
+        },
+        {
+          "key": " school",
+          "value": [
+            "Hejaaz International School",
+            "Royal International School",
+            "Methodist College - Sri Lanka",
+            "Other"
+          ]
+        },
+        {
+          "key": " class",
+          "value": [
+            "1A",
+            "1B",
+            "1C",
+            "1D",
+            "1E",
+            "1F",
+            "1G",
+            "2A",
+            "2B",
+            "2C",
+            "2D",
+            "2E",
+            "2F",
+            "2G",
+            "Other"
+          ]
+        },
+        {
+          "key": " gender",
+          "value": [
+            "girl",
+            "boy"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "moduleName": "module1",
+    "screenName": "parentpasscodescreen",
+    "eventContext": {
+      "eventName": "continue",
+      "eventList": [
+        {
+          "key": "birthyear",
+          "value": [
+            "year of birth"
+          ]
+        }
+      ]
+    }
+  }
+]

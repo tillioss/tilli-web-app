@@ -6,6 +6,9 @@ import {
   SET_AUTH,
   RESET_AUTH,
   SET_USER_INFO,
+  SET_GAME_AUTH,
+  RESET_GAME_AUTH ,
+  SET_MULTIPLE_GAME_AUTH
 } from '../constants/actionTypes';
 
 export const setAuthData = (key, value) => ({
@@ -42,4 +45,19 @@ export const setUserInfo = (key, value) => ({
   type: SET_USER_INFO,
   key: key,
   value: value,
+});
+
+export const setGameAuthData = (key, value) => ({
+  type: SET_GAME_AUTH,
+  key: key,
+  value: value,
+});
+
+export const setGameMultipleAuthData = (data) => ({
+  type: SET_MULTIPLE_GAME_AUTH,
+  data: data,
+});
+
+export const reSetGameAuthData = () => ({
+  type: RESET_GAME_AUTH,
 });
