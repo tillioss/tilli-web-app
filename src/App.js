@@ -34,8 +34,11 @@ import WinningPage2 from './TilliYourWinning/WinningPage2';
 import NotFoundPage from './Screens/NotFoundPage';
 import Manage from './Screens/Manage';
 import UserManage from './Screens/UserManage';
-
 import TilliGameWeb from './pages/TilliGameWeb';
+
+import ModuleScreenMange from './Screens/ModuleManager/ModuleScreenMange';
+import GodotPlay from './Screens/ModuleManager/GodotPlay';
+import GodotRedirect from './Screens/ModuleManager/GodotRedirect';
 
 
 
@@ -261,7 +264,7 @@ function App() {
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/demo"} search='?gender=male&age=7&language=english&userType=normal' history={history} render={(props) =>
                         <React.Fragment>
                             <div className={classNameForDevice}>
-                                <DemoUserLogin_2 {...props} landingFrom={"nenesa"}/>
+                                <DemoUserLogin_2 {...props} landingFrom={"nenesa"} />
                             </div>
                         </React.Fragment>
                     } />
@@ -275,7 +278,7 @@ function App() {
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/test"} history={history} render={(props) =>
                         <React.Fragment>
                             <div className={classNameForDevice}>
-                                <UserManage {...props} landingFrom="test"/>
+                                <UserManage {...props} landingFrom="test" />
                                 {/* <DemoUserLogin_2 {...props} landingFrom="test"/> */}
                             </div>
                         </React.Fragment>
@@ -283,7 +286,7 @@ function App() {
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/internal-demo"} history={history} render={(props) =>
                         <React.Fragment>
                             <div className={classNameForDevice}>
-                                <UserManage {...props} landingFrom="demo"/>
+                                <UserManage {...props} landingFrom="demo" />
                                 {/* <DemoUserLogin_2 {...props} landingFrom="demo"/> */}
                             </div>
                         </React.Fragment>
@@ -317,8 +320,26 @@ function App() {
                             </div>
                         </React.Fragment>
                     } />
-                     {/* tilli-game-web */}
-                     <Route path={"/" + MyConstant.keyList.projectUrl + "/games"} history={history} render={(props) =>
+
+                    <Route exact path={"/" + MyConstant.keyList.projectUrl + "/module-manage/:id?/:levelIndex?/:progressingLevel?/:gameIndex?"} render={(props) =>
+                        <ModuleScreenMange {...props} />
+                    } />
+                    {/* godot */}
+                    <Route path={"/" + MyConstant.keyList.projectUrl + "/godotplay/:gameId/:themeId/:gameIndex?"} history={history} render={(props) =>
+                        <React.Fragment>
+                            <GodotPlay {...props} />
+                        </React.Fragment>
+                    } />
+                    <Route path={"/" + MyConstant.keyList.projectUrl + "/godot-redirect/:gameIndex?"} history={history} render={(props) =>
+                        <React.Fragment>
+                            <GodotRedirect {...props} />
+                        </React.Fragment>
+                    } />
+
+                    {/* godot */}
+
+                    {/* tilli-game-web */}
+                    <Route path={"/" + MyConstant.keyList.projectUrl + "/games"} history={history} render={(props) =>
                         <React.Fragment>
                             <TilliGameWeb />
                         </React.Fragment>
