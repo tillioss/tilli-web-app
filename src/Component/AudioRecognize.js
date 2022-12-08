@@ -1,15 +1,5 @@
 import React from 'react'
-
-import shuffleImage from '../images/shuffle.png';
-import rewindImage from '../images/rewind.png';
-import repeatImage from '../images/repeat.png';
-import fastForwardImage from '../images/fastForward.png';
-import outlineIconOnlyImage from '../images/outlineIconOnly.png';
-import nounVoiceRecordImage from '../images/nounVoiceRecord.png';
-import heartImage from '../images/heart.png';
 import DropDown from "./DropDown";
-
-
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 const AudioRecognize1 = (props) => {
     const { transcript, resetTranscript } = useSpeechRecognition()
@@ -22,14 +12,14 @@ const AudioRecognize1 = (props) => {
         <>
             <div className="row">
                 <div className="col-sm-4">
-                    <button onClick={ () => {
-                        SpeechRecognition.startListening({ language: props.laSelect.value,continuous: true, })
+                    <button onClick={() => {
+                        SpeechRecognition.startListening({ language: props.laSelect.value, continuous: true, })
                     }}>Start</button>
                 </div>
                 <div className="col-sm-4">
-                    <button onClick={()=>{
+                    <button onClick={() => {
                         console.log("stop");
-                       SpeechRecognition.stopListening({ continuous: false })
+                        SpeechRecognition.stopListening({ continuous: false })
                     }}>Stop</button>
                 </div>
                 <div className="col-sm-4">
