@@ -1,55 +1,46 @@
 import React, { Component } from 'react';
 import MyConstant from '../config/MyConstant';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 
 class ParentScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { verify_State: true,innerPageData:false }
+        this.state = {
+            verify_State: true,
+            innerPageData: false
+        }
     }
 
-    async componentDidMount()
-    {
-      
-     
-       
+    async componentDidMount() {
+
+    }
+
+    return_content(pageIndex, index) {
+
+        const { innerGroupLanguageMappingData, innnerGroupLanguageBaseData } = this.props
+        if (innerGroupLanguageMappingData && innerGroupLanguageMappingData[pageIndex] && innerGroupLanguageMappingData[pageIndex].fieldData[index]) {
+            return innerGroupLanguageMappingData[pageIndex].fieldData[index].value
+
+        }
+
+        else if (innnerGroupLanguageBaseData && innnerGroupLanguageBaseData[pageIndex] && innnerGroupLanguageBaseData[pageIndex].fieldData[index]) {
+            return innnerGroupLanguageBaseData[pageIndex].fieldData[index].value
+
+        }
+
+        else
+            return ""
 
 
     }
 
-return_content(pageIndex,index)
-{
-    const {innerPageData}=this.state;
-
-    const {innerGroupLanguageMappingData,innnerGroupLanguageBaseData} =this.props
-    if(innerGroupLanguageMappingData  && innerGroupLanguageMappingData[pageIndex]  && innerGroupLanguageMappingData[pageIndex].fieldData[index] )
-    {
-        return innerGroupLanguageMappingData[pageIndex].fieldData[index].value
-    
-    }
-    
-    else if(innnerGroupLanguageBaseData &&  innnerGroupLanguageBaseData[pageIndex] && innnerGroupLanguageBaseData[pageIndex].fieldData[index])
-    {
-        return innnerGroupLanguageBaseData[pageIndex].fieldData[index].value
-    
-    }
-    
-    else
-        return ""
-    
-
-}
-
-     
     render() {
- const {innerPageData} =this.state;
-
         return (
             <React.Fragment>
                 <div className="row mx-0" style={{ marginTop: 25 }}>
                     <div className="col-12">
-                        <h4 style={{ fontWeight: 'bold' }}> {  this.return_content(2,1)  }  </h4>
+                        <h4 style={{ fontWeight: 'bold' }}> {this.return_content(2, 1)}  </h4>
                     </div>
                 </div>
 
@@ -57,7 +48,7 @@ return_content(pageIndex,index)
                     <div className="col-12">
                         <div class="fontpassword">
                             <input type="password"
-                                placeholder={  this.return_content(2,2)  }
+                                placeholder={this.return_content(2, 2)}
                                 name="psw" onChange={(e) => {
                                     this.setState({ Password: e.target.value })
                                 }} />
@@ -69,17 +60,16 @@ return_content(pageIndex,index)
                 <div className="row mx-0">
                     <div className="col-12">
                         <button style={{ borderColor: '#18191F', borderRadius: 10 }} type="submit" onClick={() => {
-                          
-                          
-                          if(window.location.href.match(/lego/))
-                                {
-                                    this.props.history.push('/'+MyConstant.keyList.projectUrl+'/lego/Parenthome')
-                                }
-                                else{
-                                    this.props.history.push('/' + MyConstant.keyList.projectUrl +'/Parenthome')
-                                }
-                          
-                        }} >  {  this.return_content(2,3)  }  </button>
+
+
+                            if (window.location.href.match(/lego/)) {
+                                this.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/Parenthome')
+                            }
+                            else {
+                                this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parenthome')
+                            }
+
+                        }} >  {this.return_content(2, 3)}  </button>
                     </div>
                 </div>
 
@@ -94,15 +84,15 @@ return_content(pageIndex,index)
 
 const mapStateToProps = (state) => {
     return {
-    
-      innnerGroupLanguageBaseData: state.languageReducer.innnerGroupLanguageBaseData,
-      innerGroupLanguageMappingData: state.languageReducer.innerGroupLanguageMappingData,
+
+        innnerGroupLanguageBaseData: state.languageReducer.innnerGroupLanguageBaseData,
+        innerGroupLanguageMappingData: state.languageReducer.innerGroupLanguageMappingData,
     };
-  };
-  const mapDispatchToProps = (dispatch) => {
+};
+const mapDispatchToProps = (dispatch) => {
     return {
-     
+
     };
-  };
-  export default connect(mapStateToProps, mapDispatchToProps)(ParentScreen);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ParentScreen);
 

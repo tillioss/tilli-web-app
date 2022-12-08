@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import MyConstant from '../../config/MyConstant';
 import Boy from "../../images/tilli-game-web/Boy_1.png"
 import Girl from "../../images/tilli-game-web/Girl_1.png"
 
@@ -32,10 +31,10 @@ class SplashScreen extends React.Component {
             </div>
             <div className='img-box-width'>
                 <div className='boy-image pl-5'>
-                    <img src={Girl} />
+                    <img src={Girl} alt={"GirlImg"} />
                 </div>
                 <div className='girl-image pr-5'>
-                    <img src={Boy} />
+                    <img src={Boy} alt={"BoyImg"} />
                 </div>
             </div>
         </React.Fragment>

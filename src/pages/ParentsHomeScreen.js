@@ -1,34 +1,28 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import LeftIcon from '../images/outlineBackIcon.png';
 import PlayIcon from '../images/triangle.png';
 import MyConstant from '../config/MyConstant';
 import { connect } from 'react-redux';
 
 
-
 class ParentsHomeScreen extends React.Component {
     constructor(props) {
-        super(props)
-        {
-            this.state = { innerPageData: false }
-        }
+        super(props);
+            this.state = { 
+                innerPageData: false 
+            }
     }
 
-
     async componentDidMount() {
-
 
         if (localStorage.getItem("getInnerPageData")) {
 
             await this.setState({ innerPageData: JSON.parse(localStorage.getItem("getInnerPageData")) })
 
         }
-
-
     }
 
     return_content(pageIndex, index) {
-        const { innerPageData } = this.state;
 
         const { innerGroupLanguageMappingData, innnerGroupLanguageBaseData } = this.props
         if (innerGroupLanguageMappingData && innerGroupLanguageMappingData[pageIndex] && innerGroupLanguageMappingData[pageIndex].fieldData[index]) {
@@ -43,17 +37,11 @@ class ParentsHomeScreen extends React.Component {
 
         else
             return ""
-
-
     }
 
     render() {
-        const { innerPageData } = this.state;
-
         return (
             <React.Fragment>
-
-
                 <div className="row mt-4 ml-0">
                     <div className="col-2" onClick={() => {
                         if (window.location.href.match(/lego/)) {
@@ -63,7 +51,7 @@ class ParentsHomeScreen extends React.Component {
                             this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent')
                         }
 
-                    }}> <img src={LeftIcon} style={{ height: 48, width: 48 }} /> </div>
+                    }}> <img src={LeftIcon} style={{ height: 48, width: 48 }} alt={"LeftIcon"}/> </div>
                     <div className="col-8"> <h4 style={{ fontWeight: 800, fontFamily: 'montserrat-bold', fontSize: 27 }}> {this.return_content(3, 1)}  </h4> </div>
                     <div className="col-2"> </div>
                 </div>
@@ -91,7 +79,7 @@ class ParentsHomeScreen extends React.Component {
                                     else {
                                         this.props.history.push('/' + MyConstant.keyList.projectUrl + '/ParentOnboarding')
                                     }
-                                }}>  <img src={PlayIcon} style={{ width: 30, height: 30 }} /> </span>
+                                }}>  <img src={PlayIcon} style={{ width: 30, height: 30 }} alt={"PlayIcon"} /> </span>
                             </div>
                         </div>
 
@@ -117,7 +105,7 @@ class ParentsHomeScreen extends React.Component {
                         <div className="row">
                             <div className="col-10">  </div>
                             <div className="col-2">
-                                <span style={{ backgroundColor: '#FFFFFF', width: 30, height: 30, borderRadius: 15 }}>  <img src={PlayIcon} style={{ width: 30, height: 30 }} /> </span>
+                                <span style={{ backgroundColor: '#FFFFFF', width: 30, height: 30, borderRadius: 15 }}><img src={PlayIcon} style={{ width: 30, height: 30 }} alt={"PlayIcon"}/> </span>
                             </div>
                         </div>
                     </div>
@@ -140,7 +128,7 @@ class ParentsHomeScreen extends React.Component {
                         <div className="row">
                             <div className="col-10">  </div>
                             <div className="col-2">
-                                <span style={{ backgroundColor: '#FFFFFF', width: 30, height: 30, borderRadius: 15 }}>  <img src={PlayIcon} style={{ width: 30, height: 30 }} /> </span>
+                                <span style={{ backgroundColor: '#FFFFFF', width: 30, height: 30, borderRadius: 15 }}><img src={PlayIcon} style={{ width: 30, height: 30 }} alt={"PlayIcon"}/> </span>
                             </div>
                         </div>
                     </div>

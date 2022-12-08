@@ -46,7 +46,7 @@ function GamePlay(props) {
                     elem.style.display = 'none';
                 });
                 animationCallbacks = animationCallbacks.filter(function (value) {
-                    return (value != animateStatusIndeterminate);
+                    return (value !== animateStatusIndeterminate);
                 });
                 switch (mode) {
                     case 'progress':
@@ -69,7 +69,7 @@ function GamePlay(props) {
 
             function animateStatusIndeterminate(ms) {
                 var i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
-                if (statusIndeterminate.children[i].style.borderTopColor == '') {
+                if (statusIndeterminate.children[i].style.borderTopColor === '') {
                     Array.prototype.slice.call(statusIndeterminate.children).forEach(child => {
                         child.style.borderTopColor = '';
                     });
