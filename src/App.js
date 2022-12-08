@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import { createBrowserHistory } from 'history'
 import Login from './Screens/Login';
 import ForgotPassword from './Screens/ForgotPassword';
@@ -10,14 +9,12 @@ import HomeScreen from './pages/HomeScreen';
 import ParentScreen from './pages/ParentScreen';
 import Footer from './pages/Footer';
 import ModuleScreen from './pages/ModuleScreen';
-
 import LevelScreen from "./pages/LevelScreen";
 import ProfileScreen from "./pages/ProfileScreen";
 import ParentsHomeScreen from "./pages/ParentsHomeScreen";
 import ParentOnboardingScreen from "./pages/ParentOnboardingScreen";
 import AudioRecognize from "./Component/AudioRecognize";
 import EmpathyScreen from "./pages/EmpathyScreen";
-
 import './App.css';
 import MyConstant from './config/MyConstant';
 import SignUp from "./Screens/SignUp";
