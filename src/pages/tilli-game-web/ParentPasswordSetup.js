@@ -42,7 +42,7 @@ class ParentPasswordSetup extends React.Component {
             let responseData = await doConnect("createGameUser", "POST", postJson);
             // console.log("responseData", responseData)
             let responseMsg = responseData.response;
-            if (responseMsg == "Success") {
+            if (responseMsg === "Success") {
                 toast.success("Register Successfully!", {
                     position: "top-center",
                     autoClose: 3000,
@@ -72,7 +72,7 @@ class ParentPasswordSetup extends React.Component {
 
     }
     render() {
-        let { createParentPassCode, path } = this.props;
+        let { createParentPassCode } = this.props;
         return <div className='page-setup'>
             <h2 className='text-center mt-2 site-color' > Dear Parent, </h2>
             <h5 className='text-center mt-2' > Please enter your year of birth </h5>

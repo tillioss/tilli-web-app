@@ -47,6 +47,7 @@ const languageReducer = (state = initialState, action) => {
               };
           }
       }
+      break;
       case FETCH_GET_INNER_GROUP_LANGUAGE_MAPPING_SUCCESS:{
           var json = action.payload.response;
           var response1 = json.dataMap;

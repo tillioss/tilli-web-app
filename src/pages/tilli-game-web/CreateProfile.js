@@ -4,7 +4,6 @@ import Boy_2 from "../../images/tilli-game-web/Boy_2.png"
 import Girl_2 from "../../images/tilli-game-web/Girl_2.png"
 import DropDown from "../../Component/TilliGameWebDropDown"
 import { readJsonFile, keyReadData } from "../../config/Common"
-import MyConstant from '../../config/MyConstant';
 import { connect } from 'react-redux';
 import { setGameAuthData, setGameMultipleAuthData, reSetGameAuthData } from '../../redux/actions';
 
@@ -29,7 +28,6 @@ class CreateProfile extends React.Component {
         this.validateForm()
     }
 
-
     async readJson() {
         let jsonData = await readJsonFile("childprofilescreen")
         this.setState({ jsonData }, () => {
@@ -43,17 +41,20 @@ class CreateProfile extends React.Component {
         let responseAge = await keyReadData(jsonData.eventContext.eventList, "age")
         responseAge.value.map((value) => {
             ageOptions.push({ label: value, value: value })
+            return ageOptions
         })
         let schoolOptions = []
         let responseSchool = await keyReadData(jsonData.eventContext.eventList, "school")
         responseSchool.value.map((value) => {
             schoolOptions.push({ label: value, value: value })
+            return schoolOptions
         })
 
         let classOptions = []
         let responseOptions = await keyReadData(jsonData.eventContext.eventList, "class")
         responseOptions.value.map((value) => {
             classOptions.push({ label: value, value: value })
+            return responseOptions
         })
 
         this.setState({ ageOptions, schoolOptions, classOptions, classOptionsCopy: classOptions })
@@ -88,7 +89,7 @@ class CreateProfile extends React.Component {
                             this.validateForm()
                         }}>
                             <div className='' style={{ textAlign: "center" }} >
-                                <img className={"create-pro-girl"} src={Girl_2} />
+                                <img className={"create-pro-girl"} src={Girl_2} alt={"Girl_2"} />
                                 <div className='site-color fnt-style mb-3'>
                                     Girl
                                 </div>
@@ -104,7 +105,7 @@ class CreateProfile extends React.Component {
                             this.validateForm()
                         }}>
                             <div className='' style={{ textAlign: "center" }} >
-                                <img src={Boy_2} className="create-pro-boy" />
+                                <img src={Boy_2} className="create-pro-boy" alt={"Boy_2"} />
                                 <div className='site-color fnt-style mb-3'>
                                     Boy
                                 </div>
@@ -165,7 +166,7 @@ class CreateProfile extends React.Component {
                                 onChange={async (e) => {
                                     let classSelected = ""
                                     classOptions = this.state.classOptionsCopy
-                                    if (e.value == "Other") {
+                                    if (e.value === "Other") {
                                         classSelected = e
                                         classOptions = [e]
                                     }

@@ -41,22 +41,21 @@ export const fetchGetLanguageMappingFailure = error => ({
 export function fetchGetLanguageMapping(postJson) {
    
     return async (dispatch) => {
-        let startTime = Date.now();
         dispatch(fetchGetLanguageMappingBegin());
 
         let responseData = await doConnect("getLanguageMappingDataWithBaseData", "POST", postJson);
         let json = responseData;
-        if(postJson.grouptype=="innerPageGroup")
+        if(postJson.grouptype === "innerPageGroup")
         {
             dispatch(fetchGetInnerGroupLanguageMappingSuccess(json));
 
         }
-        else if(postJson.grouptype=="outerPageGroup")
+        else if(postJson.grouptype === "outerPageGroup")
         {
             dispatch(fetchGetOuterGroupLanguageMappingSuccess(json));
 
         }
-        else if(postJson.grouptype=="commonPageGroup")
+        else if(postJson.grouptype === "commonPageGroup")
         {
             dispatch(fetchGetCommonGroupLanguageMappingSuccess(json));
 
@@ -88,7 +87,6 @@ export const fetchGetLevelNameLanguageMappingFailure = error => ({
 export function fetchGetLevelNameLanguageMapping(postJson) {
 
     return async (dispatch) => {
-        let startTime = Date.now();
         dispatch(fetchGetLevelNameLanguageMappingBegin());
         let json = await doConnect("getLevelsNameLanguageMapping", "POST", postJson);
         dispatch(fetchGetLevelNameLanguageMappingSuccess(json));

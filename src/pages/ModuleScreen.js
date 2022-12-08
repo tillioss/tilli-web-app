@@ -16,7 +16,7 @@ import StoryCardScreen from '../Component/Themes/StoryCardScreen';
 import backImage from '../images/outlineBackIcon.png';
 import nextImage from '../images/outlineRightIcon.png';
 import MyConstant from '../config/MyConstant';
-import { checkNullAndReturnString, doConnect } from "../config/Common";
+import { doConnect } from "../config/Common";
 
 export default class ModuleScreen extends React.Component {
     constructor(props) {
