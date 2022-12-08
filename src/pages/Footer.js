@@ -4,12 +4,10 @@ import MyConstant from "../config/MyConstant";
 import Star from "../images/Star.png";
 import box from "../images/box.png";
 import Ellipse from "../images/Ellipse.png";
-
 import Starred from "../images/Starred.png";
 import boxred from "../images/Boxred.png";
 import Ellipsered from "../images/Ellipsered.png";
 import { connect } from 'react-redux';
-
 
 
 class Footer extends Component {
@@ -20,8 +18,6 @@ class Footer extends Component {
             innerPageData: false
         }
     }
-
-
 
     componentDidMount() {
         if (this.props.page) {
@@ -38,7 +34,6 @@ class Footer extends Component {
 
 
     return_content(pageIndex, index) {
-        const { innerPageData } = this.state;
         const { innerGroupLanguageMappingData, innnerGroupLanguageBaseData } = this.props
         if (innerGroupLanguageMappingData && innerGroupLanguageMappingData[pageIndex] && innerGroupLanguageMappingData[pageIndex].fieldData[index]) {
             return innerGroupLanguageMappingData[pageIndex].fieldData[index].value
@@ -55,7 +50,6 @@ class Footer extends Component {
     }
 
     render() {
-        const { innerPageData } = this.state;
 
         return (
             <React.Fragment>
@@ -79,18 +73,17 @@ class Footer extends Component {
                             else {
                                 this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/home')
                             }
-
                         }}>
                             <div >
                                 {/* <i style={{fontSize:28}} className={`fa fa-circle fa-3x ${this.state.currentPage==='home' ? 'checked' : ''}`}></i> */}
                                 {this.state.currentPage === 'home' ?
                                     <div>
-                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} />
+                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""}/>
                                     </div>
                                     :
                                     <div>
 
-                                        <img src={Ellipse} style={{ width: 24, height: 24, }} />
+                                        <img src={Ellipse} style={{ width: 24, height: 24, }} alt={""}/>
                                     </div>
                                 }
                             </div>
@@ -111,19 +104,17 @@ class Footer extends Component {
                             }
                         }}>
                             <div>
-                                {/* <span style={{fontSize:28}} className={`fa fa-star fa-3x ${this.state.currentPage==='levels' ? 'checked': ''}`} ></span> */}
 
                                 {this.state.currentPage === 'levels' ?
                                     <div>
-                                        <img src={Starred} style={{ width: 24, height: 24 }} />
+                                        <img src={Starred} style={{ width: 24, height: 24 }} alt={""}/>
                                     </div>
                                     :
                                     <div>
 
-                                        <img src={Star} style={{ width: 24, height: 24, }} />
+                                        <img src={Star} style={{ width: 24, height: 24, }} alt={""}/>
                                     </div>
                                 }
-
 
                             </div>
                             <div className="mt-1">
@@ -145,20 +136,15 @@ class Footer extends Component {
                             }
                         }}>
                             <div>
-                                {/* <span  style={{fontSize:28}} className={`fa fa-square fa-3x ${this.state.currentPage==='parents' ? 'checked': ''}`}></span> */}
-
                                 {this.state.currentPage === 'Parent' ?
                                     <div>
-                                        <img src={boxred} style={{ width: 24, height: 24, }} />
+                                        <img src={boxred} style={{ width: 24, height: 24, }} alt={""}/>
                                     </div>
                                     :
                                     <div>
-
-                                        <img src={box} style={{ width: 24, height: 24, }} />
+                                        <img src={box} style={{ width: 24, height: 24, }} alt={""}/>
                                     </div>
                                 }
-
-
                             </div>
                             <div className="mt-1">
 
@@ -179,22 +165,15 @@ class Footer extends Component {
                             }
                         }}>
                             <div>
-                                {/* <span style={{fontSize:28}} className={`fa fa-circle fa-3x ${this.state.currentPage==='profile' ? 'checked': ''}`}></span> */}
-
                                 {this.state.currentPage === 'profile' ?
                                     <div>
-                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} />
+                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""}/>
                                     </div>
                                     :
                                     <div>
-
-                                        <img src={Ellipse} style={{ width: 24, height: 24, }} />
+                                        <img src={Ellipse} style={{ width: 24, height: 24, }} alt={""} />
                                     </div>
                                 }
-
-
-
-
                             </div>
                             <div className="mt-1">
 

@@ -2,12 +2,9 @@ import React from 'react'
 import surface1 from '../images/surface1.png'
 import Group1849 from '../images/Group1849.png'
 import sun from '../images/sun.png'
-import Artboard7 from '../images/Artboard7.png'
-
 import AvengerImage from '../images/AvengerImage.png'
 import ChampionImage from '../images/ChampionImage.png'
-import NinjaImage from '../images/NinjaImage.png'
-
+import NinjaImage from '../images/NinjaImage.png';
 import MyConstant from '../config/MyConstant';
 import { connect } from 'react-redux';
 import { checkNullAndReturnString } from "../config/Common";
@@ -107,10 +104,10 @@ class WinningPage2 extends React.Component {
 
             let countData = 0
             moduleJson.stages.map((kval, k) => {
-                if (kval.theme == "StoryCard" && !kval.demoPage) {
+                if (kval.theme === "StoryCard" && !kval.demoPage) {
                     var imageChange = surface1
-                    if (kval.storyPoints || kval.storyPoints == 0) {
-                        var filterJson = kval.content.filter((mval) => { if (mval.theme == "DropToSelection") return true })
+                    if (kval.storyPoints || kval.storyPoints === 0) {
+                        var filterJson = kval.content.filter((mval) => { if (mval.theme === "DropToSelection") return true })
 
                         if (filterJson) {
                             imageChange = MyConstant.keyList.apiURL + 'vp?action=module&key=' + filterJson[0].content.image.fileName + '&id=' + filterJson[0].content.image.fileType
@@ -124,27 +121,27 @@ class WinningPage2 extends React.Component {
                         style={{ marginLeft: "8%", marginTop: "5%" }}>
                         <div className="" style={{ width: 85, height: 85, }}>
                             <div style={{
-                                backgroundColor: kval.storyPoints || kval.storyPoints == 0 ? "#D6FCF7" : "#9FA4B4", border: "2px solid black", borderRadius: 24, width: "80px", height: "80px",
+                                backgroundColor: kval.storyPoints || kval.storyPoints === 0 ? "#D6FCF7" : "#9FA4B4", border: "2px solid black", borderRadius: 24, width: "80px", height: "80px",
                                 paddingTop: kval.storyPoints ? 10 : 15
                             }} onClick={() => {
-                                if (scoreCurrentStage == k) {
+                                if (scoreCurrentStage === k) {
                                     this.props.scorePointMove()
                                 }
 
                             }}>
 
-                                <img src={kval.storyPoints || kval.storyPoints == 0 ? imageChange : scoreCurrentStage == k ? sun : imageChange} style={{ width: 50, height: 45 }} />
+                                <img src={kval.storyPoints || kval.storyPoints === 0 ? imageChange : scoreCurrentStage === k ? sun : imageChange} style={{ width: 50, height: 45 }} alt={""} />
 
-                                {kval.storyPoints || kval.storyPoints == 0 ? <div style={{ fontSize: 10, fontWeight: "700" }}> {kval.storyPoints} Points </div> : ""}
+                                {kval.storyPoints || kval.storyPoints === 0 ? <div style={{ fontSize: 10, fontWeight: "700" }}> {kval.storyPoints} Points </div> : ""}
                             </div>
                             <div className=""
-                          
-                            style={{ paddingTop: 10, color: "#474A57", fontSize: "12px" }}> {contentFetch} {countData}</div>
+
+                                style={{ paddingTop: 10, color: "#474A57", fontSize: "12px" }}> {contentFetch} {countData}</div>
                         </div>
                     </div>)
                 }
 
-
+                return DataPushArray
             })
 
         }
@@ -164,19 +161,19 @@ class WinningPage2 extends React.Component {
                 {DataPushArray}
             </div>
 
-            {moduleJson.stages.length == scoreCurrentStage ?
+            {moduleJson.stages.length === scoreCurrentStage ?
                 <>
                     <div style={{ width: "90%", height: "auto", backgroundColor: "#FFBD12", marginLeft: "5%", marginTop: "5%", border: "2px solid black", borderRadius: 24, paddingBottom: "5%" }}>
 
                         <div className="row ml-0" style={{ display: "flex", alignItems: "center" }}>
                             <div className="col-7 col-sm-6">
                                 <p style={{
-                                    fontSize: "24px", fontWeight: "900", marginTop: "10%", marginTop: "10%"
+                                    fontSize: "24px", fontWeight: "900",marginTop: "10%"
                                     , fontFamily: "montserrat-medium"
                                 }}>{playingBodyText}</p>
                             </div>
                             <div className="col-5 col-sm-6">
-                                <img src={PlayingImage} style={{ width: "100px", height: "97px", marginTop: "10%" }} />
+                                <img src={PlayingImage} style={{ width: "100px", height: "97px", marginTop: "10%" }} alt={""}/>
                             </div>
 
                             <div className="col-8 col-sm-6" onClick={() => {
@@ -194,7 +191,7 @@ class WinningPage2 extends React.Component {
                 </> : null}
 
             <div className="row mt-2 mb-2 pt-4"
-                style={moduleJson.stages.length != scoreCurrentStage ? {
+                style={moduleJson.stages.length !== scoreCurrentStage ? {
                     position: deviceHeight < 700 ? "" : "absolute",
                     bottom: deviceHeight - deviceHeight
                 } : {}} >
@@ -202,7 +199,7 @@ class WinningPage2 extends React.Component {
                     {totalPoint > 0 && currentJson && currentJson.storyPoints > 0 ? <span>
                         <img className="rocket-image" src={Rocket_Launch} style={{
                             width: 80, height: 60,
-                        }} />
+                        }} alt={""} />
                     </span> : null}
 
                     <span style={{
