@@ -17,6 +17,7 @@ import backImage from '../images/outlineBackIcon.png';
 import nextImage from '../images/outlineRightIcon.png';
 import MyConstant from '../config/MyConstant';
 import { doConnect } from "../config/Common";
+import { Link } from "react-router-dom";
 
 export default class ModuleScreen extends React.Component {
     constructor(props) {
@@ -30,14 +31,11 @@ export default class ModuleScreen extends React.Component {
     componentDidMount() {
         this.getLevelMappingData(this.props.match.params.id)
         this.languagechangeTheme()
-
-
         localStorage.setItem('levelPoints', 0)
         this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel })
     }
     async getLevelMappingData(levelId) {
         let postJson = { levelId: levelId, sessionId: '1223' };
-        let that = this;
         let responseData = await doConnect("getLevelMappingData", "POST", postJson);
         var json = responseData;
         var response = JSON.parse(json.response);
@@ -50,10 +48,10 @@ export default class ModuleScreen extends React.Component {
     changeStage = (action, currentStage) => {
 
 
-        if (action == 'Next') {
+        if (action === 'Next') {
             let { moduleJson } = this.state;
             let stages = moduleJson.stages;
-            if (currentStage == stages.length) {
+            if (currentStage === stages.length) {
 
                 console.log('Final stage');
                 console.log('currentStage --> ' + currentStage);
@@ -63,8 +61,8 @@ export default class ModuleScreen extends React.Component {
             } else {
                 this.setState({ stage: currentStage + 1 });
             }
-        } else if (action == 'Previous') {
-            if (currentStage == 1) {
+        } else if (action === 'Previous') {
+            if (currentStage === 1) {
                 // navigation.navigate('Home');
                 this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
             } else {
@@ -73,16 +71,12 @@ export default class ModuleScreen extends React.Component {
         }
     };
 
-
     async completeFinalStage() {
         const { levelIndex, progressingLevel, moduleJson } = this.state;
 
+        if (progressingLevel === levelIndex) {
 
-
-
-        if (progressingLevel == levelIndex) {
-
-            var userpoint = localStorage.getItem("levelPoints") ? parseInt(localStorage.getItem("levelPoints")) : 1;
+            // var userpoint = localStorage.getItem("levelPoints") ? parseInt(localStorage.getItem("levelPoints")) : 1;
             //this.props.setUserInfo('progressingLevel', progressingLevel + 1);
 
             //alert(userpoint)
@@ -138,7 +132,7 @@ export default class ModuleScreen extends React.Component {
 
         let displayPage = this.state.moduleJson && this.state.moduleJson.stages.map((stage, index) => {
             let stageIndex = parseInt(index) + 1;
-            if (this.state.stage == stageIndex) {
+            if (this.state.stage === stageIndex) {
                 let theme = stage.theme;
 
                 console.log('theme', theme)
@@ -277,22 +271,20 @@ export default class ModuleScreen extends React.Component {
                             />
                         );
 
-
-
                     default:
                         return (<React.Fragment>{theme}
 
                             (<React.Fragment>{theme}
 
                                 <div style={{ position: 'absolute', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
-                                    <a onClick={() => this.changeStage('Next', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} />
-                                    </a>
+                                    <Link onClick={() => this.changeStage('Next', this.state.stage)}>
+                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""} />
+                                    </Link>
                                 </div>
                                 <div className="col-2">
-                                    <a onClick={() => this.changeStage('Previous', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 10 }} src={backImage} />
-                                    </a>
+                                    <Link onClick={() => this.changeStage('Previous', this.state.stage)}>
+                                        <img style={{ width: window.innerHeight / 10 }} src={backImage} alt={""} />
+                                    </Link>
                                 </div>
                             </React.Fragment>
 
@@ -300,6 +292,7 @@ export default class ModuleScreen extends React.Component {
 
                 }
             }
+            return true
         });
         return (
             <div className="mobile-responsive">
