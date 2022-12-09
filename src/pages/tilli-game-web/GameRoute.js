@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    useRouteMatch, withRouter, BrowserRouter as Router,
+    useRouteMatch, withRouter,
     Switch,
     Route,
 } from 'react-router-dom';
@@ -12,10 +12,9 @@ import ParentPasswordSetup from "./ParentPasswordSetup";
 import CreateProfile from "./CreateProfile";
 import GamePlay from './GamePlay';
 import { useEffect } from 'react';
-import MyConstant from '../../config/MyConstant';
 
 function GameRoute(props) {
-    let { path, url } = useRouteMatch();
+    let { path } = useRouteMatch();
     useEffect(() => {
         let loggedIn = localStorage.getItem("TilliGameLoggedIn");
         if (!loggedIn) {

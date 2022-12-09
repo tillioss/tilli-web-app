@@ -1,13 +1,9 @@
 import React from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
-import nextImage from '../../../images/outlineRightIcon.png';
 import MyConstant from '../../../config/MyConstant';
-import textbox from '../../../images/textbox.png'
 import textboxyellow from '../../../images/combined.png'
-import Lilly_1 from '../../../images/Lilly_1.png';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
-
+import { Link } from 'react-router-dom';
 
 
 class SingleTextImage extends React.Component {
@@ -51,6 +47,7 @@ class SingleTextImage extends React.Component {
                 if (i.length > 1) {
                     imagestyle[i[0]] = JSON.parse(i[1]);
                 }
+                return true
             })
         }
 
@@ -93,9 +90,9 @@ class SingleTextImage extends React.Component {
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className={"row ml-0  "+( deviceHeight < 640  ? "pt-2 ": "pt-4") }>
                             <div className="col-2">
-                                <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                </Link>
                             </div>
                             <div className="col-10" style={{ alignSelf: 'center' }}>
                                 <p style={{
@@ -113,7 +110,7 @@ class SingleTextImage extends React.Component {
                                 <div className="img-single" style={{
                                     backgroundImage: `url(${textboxyellow})`, backgroundSize: 'contain',
                                     height: deviceHeight > 800 ? 300 : deviceHeight < 680 ? 180 :  225, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', display: 'flex', justifyContent: 'center', alignItems: 'center',
-                                    padding: browser == "Microsoft Edge" && deviceWidth > 600 ? 100 : 0,
+                                    padding: browser === "Microsoft Edge" && deviceWidth > 600 ? 100 : 0,
                                     width: deviceWidth < 370 ? 300 : "",
                                 }}>
                                     <p style={{ width: deviceWidth < 400 ? '90%' : deviceHeight > 800 ? '50%' : '70%', fontSize: deviceHeight > 800 ? 19 : 15, }}>
@@ -128,7 +125,7 @@ class SingleTextImage extends React.Component {
                                 <img className={`${content.imageclassname}`} style={{
                                     width: '100%',
                                     height: deviceHeight < 680 ? deviceHeight / 3.8 : deviceHeight / 3.3, objectFit: 'contain', ...imagestyle
-                                }} src={textimg} />
+                                }} src={textimg} alt={""} />
                             </div>
                             <div className="col-2" />
                         </div>

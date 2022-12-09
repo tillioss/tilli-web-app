@@ -4,7 +4,6 @@ import DropDown from "../../Component/TilliGameWebDropDown"
 import Sri_Lanka_Flag from "../../images/tilli-game-web/Sri_Lanka_Flag.png"
 import UK_Flag from "../../images/tilli-game-web/UK_Flag.png"
 import TickImg from "../../images/tilli-game-web/WhiteTick.png"
-import MyConstant from '../../config/MyConstant';
 import { readJsonFile, keyReadData } from "../../config/Common"
 import US_Flag from "../../images/tilli-game-web/US_Flag.png"
 
@@ -35,7 +34,7 @@ class LanguageScreen extends React.Component {
         let responseLanguage = await keyReadData(jsonData.eventContext.eventList, "language")
         let countryOptions = []
         let selectedCountry = {}
-        responseLanguage.value.map((value) => {
+            responseLanguage.value.map((value) => {
             let ukImg = ["United Kingdom- English",]
             let selectImg = ["United States- English"]
             let img = ""
@@ -54,8 +53,8 @@ class LanguageScreen extends React.Component {
             if (selectImg.includes(value)) {
                 selectedCountry = obj
             }
-
             countryOptions.push(obj)
+            return countryOptions
         })
         this.setState({ countryOptions, selectedCountry })
     }
@@ -104,18 +103,18 @@ class LanguageScreen extends React.Component {
                                     let showTickIcon = false
                                     if (selectedCountry) {
                                         let select_val = selectedCountry.value;
-                                        if (select_val == value) {
+                                        if (select_val === value) {
                                             showTickIcon = true
                                         }
                                     }
 
                                     return <div style={{ display: "flex", }}>
                                         <div style={{ width: 30 }}>
-                                            <img style={{ width: 25, height: 25, }} src={extra.image} />
+                                            <img style={{ width: 25, height: 25, }} src={extra.image} alt={""}/>
                                         </div>
                                         <div style={{ flex: 1, fontSize: 18, fontWeight: 300, color: showTickIcon ? "#FFFFF1" : "#333333" }}>{label}</div>
                                         {showTickIcon && <div style={{ width: 20 }}>
-                                            <img style={{ width: 20, height: 20 }} src={TickImg} />
+                                            <img style={{ width: 20, height: 20 }} src={TickImg} alt={""}/>
                                         </div>}
 
                                     </div>;

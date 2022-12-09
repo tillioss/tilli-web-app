@@ -1,9 +1,5 @@
 import React from 'react';
-import image from "../../src/images/tilli.jpg";
 import MyConstant from '../config/MyConstant';
-import lockPng from '../images/lock.png';
-import userPng from '../images/user.png';
-import { Style } from "react-style-tag";
 import { checkNullAndReturnString, doConnect } from "../config/Common";
 import { connect } from 'react-redux';
 import Input from "../Component/Input";
@@ -40,7 +36,7 @@ class SignUp extends React.Component {
 
   user_create = async () => {
 
-    if (this.state.firstSubmit == false) {
+    if (this.state.firstSubmit === false) {
       for (var key in this.state.errors) {
         let value = typeof this.state[key] === "undefined" ? "" : this.state[key];
         let errors = this.validation(key, value);
@@ -75,12 +71,12 @@ class SignUp extends React.Component {
     };
 
     console.log(postJson);
-    let that = this;
+    
     if (Object.keys(this.state.errors).length === 0) {
       let responseData = await doConnect("createUser", "POST", postJson);
       let json = responseData;
       let response1 = json.response;
-      if (response1 == 'Success') {
+      if (response1 === 'Success') {
         //that.props.navigation.navigate('SignIn');
         window.location = '/' + MyConstant.keyList.projectUrl + '/'
       }
@@ -105,7 +101,7 @@ class SignUp extends React.Component {
     switch (name) {
       case "email":
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        if (reg.test(value) == false) {
+        if (reg.test(value) === false) {
           errors[name] = "Please enter valid email address.";
         } else {
           delete errors[name]
@@ -122,7 +118,7 @@ class SignUp extends React.Component {
         break;
       case "verifyPassword":
         let password = this.state.password;
-        if (value != password) {
+        if (value !== password) {
           errors[name] = "Password and Verify Password does not match.";
         } else {
           delete errors[name]
@@ -138,7 +134,7 @@ class SignUp extends React.Component {
       case "ageOfTheChild":
         if (value.trim() === '') {
           errors[name] = "Please enter age of the child.";
-        } else if (/^\+?(0|[1-9]\d*)$/.test(value) == false) {
+        } else if (/^\+?(0|[1-9]\d*)$/.test(value) === false) {
           errors[name] = "Please enter valid age.";
         } else {
           delete errors[name]
@@ -163,7 +159,7 @@ class SignUp extends React.Component {
       case "zipcode":
         if (value.trim() === '') {
           errors[name] = "Please enter zipcode.";
-        } else if (/^\+?(0|[1-9]\d*)$/.test(value) == false) {
+        } else if (/^\+?(0|[1-9]\d*)$/.test(value) === false) {
           errors[name] = "Please enter valid zipcode.";
         } else {
           delete errors[name]
@@ -176,7 +172,7 @@ class SignUp extends React.Component {
 
   loginCheck() {
 
-    if (this.state.Uservalue == this.state.Username && this.state.Passvalue == this.state.Password) {
+    if (this.state.Uservalue === this.state.Username && this.state.Passvalue === this.state.Password) {
 
       window.location = '/' + MyConstant.keyList.projectUrl + '/Dashbord'
     }
@@ -189,8 +185,6 @@ class SignUp extends React.Component {
   returnContent(index) {
 
     var pageIndex = 2
-    const { languageMappingData, languageBaseData } = this.state;
-
     const { outerGroupLanguageMappingData, outerGroupLanguageBaseData } = this.props
 
     if (checkNullAndReturnString(outerGroupLanguageMappingData) && checkNullAndReturnString(outerGroupLanguageMappingData[pageIndex]) && checkNullAndReturnString(outerGroupLanguageMappingData[pageIndex].fieldData[index])) {
@@ -215,9 +209,7 @@ class SignUp extends React.Component {
   }
 
   render() {
-
-    let { email, password, verifyPassword, name, ageOfTheChild, nameOfTheChild, passcode, errors } = this.state;
-
+    let {errors } = this.state;
     return (
       <React.Fragment>
 
@@ -243,11 +235,11 @@ class SignUp extends React.Component {
               <div className="fontuser">
                 <Input
                   type="text"
-                  className={(typeof errors['email'] != "undefined" && errors['email'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['email'] !== "undefined" && errors['email'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(2)} style={{ paddingLeft: 15 }}
                   name="email"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['email'] != "undefined" && errors['email'] != "") ? errors['email'] : ""}
+                  error={(typeof errors['email'] !== "undefined" && errors['email'] !== "") ? errors['email'] : ""}
                   onBlur={this.checkemail}
                 />
               </div>
@@ -265,11 +257,11 @@ class SignUp extends React.Component {
               <div className="fontpassword">
                 <Input
                   type="password"
-                  className={(typeof errors['password'] != "undefined" && errors['password'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['password'] !== "undefined" && errors['password'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(3)} style={{ paddingLeft: 15 }}
                   name="password"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['password'] != "undefined" && errors['password'] != "") ? errors['password'] : ""}
+                  error={(typeof errors['password'] !== "undefined" && errors['password'] !== "") ? errors['password'] : ""}
                 />
 
               </div>
@@ -286,11 +278,11 @@ class SignUp extends React.Component {
               <div className="fontuser">
                 <Input
                   type="password"
-                  className={(typeof errors['verifyPassword'] != "undefined" && errors['verifyPassword'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['verifyPassword'] !== "undefined" && errors['verifyPassword'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(4)} style={{ paddingLeft: 15 }}
                   name="verifyPassword"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['verifyPassword'] != "undefined" && errors['verifyPassword'] != "") ? errors['verifyPassword'] : ""}
+                  error={(typeof errors['verifyPassword'] !== "undefined" && errors['verifyPassword'] !== "") ? errors['verifyPassword'] : ""}
                 />
               </div>
 
@@ -304,11 +296,11 @@ class SignUp extends React.Component {
               <div className="fontuser">
                 <Input
                   type="text"
-                  className={(typeof errors['name'] != "undefined" && errors['name'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['name'] !== "undefined" && errors['name'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(5)} style={{ paddingLeft: 15 }}
                   name="name"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['name'] != "undefined" && errors['name'] != "") ? errors['name'] : ""}
+                  error={(typeof errors['name'] !== "undefined" && errors['name'] !== "") ? errors['name'] : ""}
                 />
               </div>
 
@@ -323,11 +315,11 @@ class SignUp extends React.Component {
               <div className="fontuser">
                 <Input
                   type="text"
-                  className={(typeof errors['ageOfTheChild'] != "undefined" && errors['ageOfTheChild'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['ageOfTheChild'] !== "undefined" && errors['ageOfTheChild'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(6)} style={{ paddingLeft: 15 }}
                   name="ageOfTheChild"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['ageOfTheChild'] != "undefined" && errors['ageOfTheChild'] != "") ? errors['ageOfTheChild'] : ""}
+                  error={(typeof errors['ageOfTheChild'] !== "undefined" && errors['ageOfTheChild'] !== "") ? errors['ageOfTheChild'] : ""}
                 />
               </div>
             </div>
@@ -342,11 +334,11 @@ class SignUp extends React.Component {
               <div className="fontuser">
                 <Input
                   type="text"
-                  className={(typeof errors['nameOfTheChild'] != "undefined" && errors['nameOfTheChild'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['nameOfTheChild'] !== "undefined" && errors['nameOfTheChild'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(7)} style={{ paddingLeft: 15 }}
                   name="nameOfTheChild"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['nameOfTheChild'] != "undefined" && errors['nameOfTheChild'] != "") ? errors['nameOfTheChild'] : ""}
+                  error={(typeof errors['nameOfTheChild'] !== "undefined" && errors['nameOfTheChild'] !== "") ? errors['nameOfTheChild'] : ""}
                 />
 
               </div>
@@ -364,11 +356,11 @@ class SignUp extends React.Component {
 
                 <Input
                   type="password"
-                  className={(typeof errors['passcode'] != "undefined" && errors['passcode'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['passcode'] !== "undefined" && errors['passcode'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(8)} style={{ paddingLeft: 15 }}
                   name="passcode"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['passcode'] != "undefined" && errors['passcode'] != "") ? errors['passcode'] : ""}
+                  error={(typeof errors['passcode'] !== "undefined" && errors['passcode'] !== "") ? errors['passcode'] : ""}
                 />
 
               </div>
@@ -383,11 +375,11 @@ class SignUp extends React.Component {
 
                 <Input
                   type="text"
-                  className={(typeof errors['zipcode'] != "undefined" && errors['zipcode'] != "") ? "custom-invalid" : ""}
+                  className={(typeof errors['zipcode'] !== "undefined" && errors['zipcode'] !== "") ? "custom-invalid" : ""}
                   placeholder={this.returnContent(12)} style={{ paddingLeft: 15 }}
                   name="zipcode"
                   handleInputChange={this.handleInputChange}
-                  error={(typeof errors['zipcode'] != "undefined" && errors['zipcode'] != "") ? errors['zipcode'] : ""}
+                  error={(typeof errors['zipcode'] !== "undefined" && errors['zipcode'] !== "") ? errors['zipcode'] : ""}
                 />
 
               </div>

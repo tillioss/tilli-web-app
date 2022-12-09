@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import QrReader from 'react-qr-reader'
-import MyConstant from '../config/MyConstant';
-
+import QrReader from 'react-qr-reader';
 
 
 class QrCodeScan extends React.Component {

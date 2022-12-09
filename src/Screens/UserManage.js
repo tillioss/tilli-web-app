@@ -23,7 +23,7 @@ class UserManage extends React.Component {
       language
     })
 
-    if (landingFrom == "demo") {
+    if (landingFrom === "demo") {
       this.gotoModule()
     }
 
@@ -51,7 +51,7 @@ class UserManage extends React.Component {
     let { landingFrom } = this.props;
     localStorage.setItem("landingFrom", landingFrom);
 
-    if (landingFrom == "demo") {
+    if (landingFrom === "demo") {
       this.props.history.push('/' + MyConstant.keyList.projectUrl + '/redirect-demo')
     }
     else {
@@ -69,7 +69,7 @@ class UserManage extends React.Component {
 
     return <div className="manage-container">
       <div className="logo mt-2 mb-5">
-        <img className="" src={logos} />
+        <img className="" src={logos} alt={""} />
       </div>
       <div className="my-2">
         <div className="header-text">Gender</div>

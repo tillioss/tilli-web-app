@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../tilligameweb.css';
 
 function TilliGameWeb(pageProps) {
-    let { path, url } = useRouteMatch();
+    let { path} = useRouteMatch();
     return (
         <div className="main-container tilligw">
             <ToastContainer />

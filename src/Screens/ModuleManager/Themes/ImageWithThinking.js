@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import spashes1 from '../../../images/spashes1.png';
 import PeopleIcons4 from '../../../images/PeopleIcons4.png';
 import nextImage from '../../../images/outlineRightIcon.png';
-import MyConstant from '../../../config/MyConstant';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
 
 
 class ImageWithThinking extends React.Component {

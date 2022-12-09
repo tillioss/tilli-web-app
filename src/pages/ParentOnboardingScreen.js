@@ -23,13 +23,9 @@ class ParentOnboardingScreen extends React.Component {
 
     async componentDidMount() {
 
-
-
-        ///console.log('this state',this.state.innerPageData)
     }
 
     return_content(pageIndex, index) {
-        const { innerPageData } = this.state;
 
         const { innerGroupLanguageMappingData, innnerGroupLanguageBaseData } = this.props
         if (innerGroupLanguageMappingData && innerGroupLanguageMappingData[pageIndex] && innerGroupLanguageMappingData[pageIndex].fieldData[index]) {
@@ -47,8 +43,6 @@ class ParentOnboardingScreen extends React.Component {
 
     }
     render() {
-
-        const { innerPageData } = this.state;
         return (< React.Fragment>
 
             <div className="row mt-4 ml-0">
@@ -61,31 +55,29 @@ class ParentOnboardingScreen extends React.Component {
                     }
 
 
-                }}> <img src={LeftIcon} style={{ height: 48, width: 48 }} /> </div>
+                }}> <img src={LeftIcon} style={{ height: 48, width: 48 }} alt={"LeftIcon"} /> </div>
                 <div className="col-8"> <h4 style={{ fontWeight: 800, fontSize: 24, fontFamily: 'montserrat-bold', }}>
                     {this.return_content(4, 1)}  </h4> </div>
                 <div className="col-2"> </div>
             </div>
 
-
             <div className="row mt-4">
-                
-                <div className="col-2" style={{paddingLeft:30}} >
-                    <img src={YellowRectangle} style={{ height: 119, width: 116, }} />
-                    <img src={Family} style={{ height: 74, width: 86, marginTop: -100, marginLeft: 15, position: 'absolute',display:"flex", }} />
+
+                <div className="col-2" style={{ paddingLeft: 30 }} >
+                    <img src={YellowRectangle} style={{ height: 119, width: 116, }} alt={"YellowRectangle"} />
+                    <img src={Family} style={{ height: 74, width: 86, marginTop: -100, marginLeft: 15, position: 'absolute', display: "flex", }} alt={"Family"} />
                 </div>
                 <div className="col-1" />
                 <div className="col-8">
-                    <p style={{ fontWeight: 800, fontFamily: 'montserrat-bold', color: '#18191F', fontSize: 25, fontWeight: 800, paddingLeft: 50 }}>
+                    <p style={{ fontWeight: 800, fontFamily: 'montserrat-bold', color: '#18191F', fontSize: 25, paddingLeft: 50 }}>
                         {this.return_content(4, 2)}  </p>
                 </div>
             </div>
 
-
             <div className="row mt-4">
                 <div className="col-1">  </div>
                 <div className="col-1">
-                    <img src={OrangeFrame} style={{ width: 48, height: 48 }} />
+                    <img src={OrangeFrame} style={{ width: 48, height: 48 }} alt={"OrangeFrame"} />
                 </div>
                 <div className="col-9 ml-4">
                     <div style={{ fontSize: 21, fontWeight: '800', fontFamily: 'montserrat-bold', color: '#18191F', textAlign: 'start', marginLeft: 10 }}>
@@ -100,7 +92,7 @@ class ParentOnboardingScreen extends React.Component {
             <div className="row mt-4">
                 <div className="col-1">  </div>
                 <div className="col-1">
-                    <img src={PinkFrame} style={{ width: 48, height: 48 }} />
+                    <img src={PinkFrame} style={{ width: 48, height: 48 }} alt={"PinkFrame"} />
                 </div>
                 <div className="col-9 ml-4">
                     <div style={{ fontSize: 21, fontWeight: '800', fontFamily: 'montserrat-bold', color: '#18191F', textAlign: 'start', marginLeft: 10 }}>
@@ -114,7 +106,7 @@ class ParentOnboardingScreen extends React.Component {
             <div className="row mt-4">
                 <div className="col-1">  </div>
                 <div className="col-1">
-                    <img src={LightFrame} style={{ width: 48, height: 48 }} />
+                    <img src={LightFrame} style={{ width: 48, height: 48 }} alt={"LightFrame"} />
                 </div>
                 <div className="col-9  ml-4" onClick={() => {
                     if (window.location.href.match(/lego/)) {
@@ -138,7 +130,7 @@ class ParentOnboardingScreen extends React.Component {
             <div className="row mt-4">
                 <div className="col-1">  </div>
                 <div className="col-1">
-                    <img src={YellowFrame} style={{ width: 48, height: 48 }} />
+                    <img src={YellowFrame} style={{ width: 48, height: 48 }} alt={"YellowFrame"} />
                 </div>
                 <div className="col-9 ml-4">
                     <div style={{ fontSize: 21, fontWeight: '800', fontFamily: 'montserrat-bold', color: '#18191F', textAlign: 'start', marginLeft: 10 }}>

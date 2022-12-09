@@ -1,8 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import MyConstant from '../../config/MyConstant';
-
 
 
 class Login extends React.Component {
@@ -38,7 +36,7 @@ class Login extends React.Component {
                 progress: undefined,
             });
 
-        } else if (reg.test(emailId) == false) {
+        } else if (reg.test(emailId) === false) {
             errors["email"] = "Please Enter Your Correct Mail!";
             toast.error("Please Enter Your Correct MailId!", {
                 position: "top-center",
@@ -64,7 +62,7 @@ class Login extends React.Component {
         this.setState({ errors })
 
 
-        if (Object.keys(errors).length == 0) {
+        if (Object.keys(errors).length === 0) {
             if (testUserName === emailId && testPassword === password) {
                 let { path } = this.props
                 setTimeout(() => {
@@ -87,7 +85,7 @@ class Login extends React.Component {
     }
 
     render() {
-        let { emailId, password, errors, hiddenType } = this.state
+        let { emailId, password,hiddenType } = this.state
         return (
             <div className='page-setup'>
                 <h2 className='text-center mt-2 site-color' > Welcome! </h2>

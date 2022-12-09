@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import logos from "../../src/images/logos.png";
-import MyConstant from '../config/MyConstant';
-import { v4 as uuidv4 } from 'uuid';
 
 
 var QRCode = require('qrcode.react');
@@ -28,8 +26,7 @@ class QrCode extends React.Component {
 
   render() {
     let { deviceWidth } = this.state
-    var uid = uuidv4();
-    var baseUrl = "https://teqbahn.com"
+    
     // var baseUrl = "http://192.168.43.110:3001"
     // let detailsUser = baseUrl+"/" + MyConstant.keyList.projectUrl+ "/demouserlogin?sessionId="+uid
     let detailsUser="https://bit.ly/tilli-play-manage"
@@ -40,7 +37,7 @@ class QrCode extends React.Component {
         <div className={deviceWidth > 500 ? "row mx-0 pt-3 mb-2 mt-5" : "row mx-0 pt-3 mb-2 mt-3"} >
           <div className="col-sm-2"> </div>
           <div className="col-sm-8">
-            <img style={{ width: 150, height: 150 }} src={logos} />
+            <img style={{ width: 150, height: 150 }} src={logos} alt={""}/>
           </div>
           <div className="col-sm-2"> </div>
         </div>

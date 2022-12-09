@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
 import '../error.css'
 import tilli from '../images/logos.png';
 import teqbahn from '../images/teqbahn.png';
@@ -11,7 +14,7 @@ const NotFoundPage = () => {
           <div className="content">
             <div className="row mx-0">
               <div className="col-12">
-                <img className="img-fluid tilli" src={tilli} />
+                <img className="img-fluid tilli" src={tilli} alt={""}/>
               </div>
             </div>
             <h1> 404 - Page Not Found.</h1>
@@ -21,9 +24,9 @@ const NotFoundPage = () => {
           <div className="footer" style={{ borderTop: '1px dashed #7a7d7f', width: '100%', padding: '20px 0' }}>
             <div className="row mx-0 my-2">
               <div className="col-12">
-                <a href="http://teqbahn.com/" target="_blank">
-                  <img className="img-fluid teqbahn" src={teqbahn} />
-                </a>
+                <Link href="http://teqbahn.com/" target="_blank">
+                  <img className="img-fluid teqbahn" src={teqbahn} alt={""} />
+                </Link>
               </div>
             </div>
           </div>

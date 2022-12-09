@@ -1,8 +1,6 @@
 import MyConstant from './MyConstant';
 import inputJson from "../pages/tilli-game-web/json/input.json"
 
-
-
 export function doGetConnect(subUrl) {
     return fetch(MyConstant.keyList.apiURL + subUrl, {
         method: "GET",
@@ -34,7 +32,7 @@ export function removeValueFromArray(arr) {
 }
 
 export function checkNullAndReturnString(str) {
-    if(str!=null && str!=undefined && str!="")
+    if(str!== null && str !== undefined && str!=="")
     {
         return true
     }
@@ -45,7 +43,7 @@ export function checkNullAndReturnString(str) {
 export async function doFileConnect(dataJson) {
 
    // alert(JSON.stringify(dataJson))
-    if( dataJson != "{}" && Object.keys(dataJson).length>0){
+    if( dataJson !== "{}" && Object.keys(dataJson).length>0){
         var i =0
         const postFileUpload = new FormData();
         postFileUpload.append('file' + (i+1), dataJson.file);
@@ -113,12 +111,8 @@ export function timeConverter(ts){
 export function getMonthAndDate(UNIX_timestamp,fullmonth=false){
     var a = new Date(UNIX_timestamp);
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
     var month = months[a.getMonth()];
     var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
     //var time = month + ' ' + date;
     let day=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var time = fullmonth ?day[a.getDay()] + ', ' +  month + ' ' + date:month + ' ' + date;
@@ -147,7 +141,7 @@ export async function userTrack(page, action, ipAddress) {
             }
         }
         console.log("---------------->",postJson)
-        let responseData = await doConnect("captureLogs", "POST", postJson);
+        // let responseData = await doConnect("captureLogs", "POST", postJson);
         console.log("Logged")
        
     }

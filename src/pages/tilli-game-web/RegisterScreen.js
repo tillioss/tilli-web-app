@@ -1,12 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Gmail from "../../images/tilli-game-web/Gmail.png"
-import MyConstant from '../../config/MyConstant';
 import { connect } from 'react-redux';
 import { setGameAuthData, setGameMultipleAuthData, reSetGameAuthData } from '../../redux/actions';
 import { toast } from 'react-toastify';
 import { doConnect } from "../../config/Common";
-
 
 
 class RegisterScreen extends React.Component {
@@ -36,7 +34,7 @@ class RegisterScreen extends React.Component {
             });
             return false
         }
-        else if (reg.test(createEmailId) == false) {
+        else if (reg.test(createEmailId) === false) {
             toast.error("Please Enter Your Correct MailId!", {
                 position: "top-center",
                 autoClose: 3000,
@@ -154,7 +152,7 @@ class RegisterScreen extends React.Component {
                             // }
                         }} >
                             <div className='gmail-img-div' >
-                                <img className='gmail-img' src={Gmail} />
+                                <img className='gmail-img' src={Gmail} alt={""}/>
                             </div>
                             <div className='gmail-text-div'>
                                 <p className='bold-text-style div-vertical-center'> Continue With Gmail</p>

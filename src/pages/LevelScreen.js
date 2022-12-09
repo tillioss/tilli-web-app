@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 class LevelScreen extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      
+    }
   }
 
   render() {
