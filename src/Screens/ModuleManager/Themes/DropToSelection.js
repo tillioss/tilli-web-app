@@ -1,10 +1,8 @@
-import React, { Component, useRef, useEffect, useState } from 'react';
+import React, {} from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
 import MyConstant from '../../../config/MyConstant';
-import Draggable from 'react-draggable'; // The default
-import people_set from '../../../images/people_set.png';
 import drag_drop from '../../../images/drag_drop.png';
 import Awesome_JobImg from '../../../images/Awesome_Job.gif';
 import Rocket_Launch from '../../../images/Rocket_Launch.gif';
@@ -35,13 +33,11 @@ class CircleWithInfoAnimations extends React.Component {
 
     async componentDidMount() {
         window.addEventListener('resize', this.handleResize)
-        const { data, match } = this.props;
-        const { selectColor_1, selectColor_2, selectColor_3 } = this.state;
+        const {match } = this.props;
         let levelIndex = match.params.levelIndex;
         var btn = document.querySelector('#drag1');
 
         // attaching each event listener
-        var dropZone = ('drop_zone');
         var activeEvent = '';
         var originalX = '';
         var originalY = '';
@@ -61,8 +57,7 @@ class CircleWithInfoAnimations extends React.Component {
             e.preventDefault();
             e.stopPropagation();
             if (activeEvent === 'move') {
-                var pageX = (parseInt(e.target.style.left) - 50);
-                var pageY = (parseInt(e.target.style.top) - 50);
+               
                 e.target.style.position = "initial";
                 var changedTouch = e.changedTouches[0];
                 var element = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
@@ -100,7 +95,6 @@ class CircleWithInfoAnimations extends React.Component {
                 window.scrollTo(window.innerHeight / 2, window.innerHeight / 2);
             }
             let height = btn.offsetHeight;
-            let width = btn.offsetWidth;
             var touchLocation = e.targetTouches[0];
             let x = window.innerWidth > 768 ? 0 : 60;
             let y = window.innerWidth > 768 ? 0 : 70;

@@ -32,16 +32,13 @@ class ProfileScreen extends React.Component {
 
         else
             return ""
-
-
     }
 
    async Logout() {
 
-
         let postJson = { sessionId: '1223', userId: localStorage.getItem("loggedUserId") };
         console.log('logout=>', postJson)
-        let responseData = await doConnect("logout", "POST", postJson);
+        // let responseData = await doConnect("logout", "POST", postJson);
         //removed choosecheckboxselected 
         localStorage.removeItem("0_selectedData");
         localStorage.removeItem("loggedUserId");
