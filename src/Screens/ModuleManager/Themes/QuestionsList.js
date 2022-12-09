@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, {} from 'react';
+import { Link } from 'react-router-dom';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
-
 import qus_image_1 from '../../../images/qus_image_1.png';
 import qus_image_2 from '../../../images/qus_image_2.png';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
 
 
 
@@ -18,7 +17,7 @@ class QuestionsList extends React.Component {
         }
     }
     componentDidMount() {
-        let { stage, data } = this.props;
+        let {data } = this.props;
         var questionVisible = this.state.questionVisible
         let content = data.content;
         console.log(content.questionList.length)
@@ -29,11 +28,11 @@ class QuestionsList extends React.Component {
 
                 await this.setState({ questionVisible: questionVisible })
 
-                if (index + 1 == content.questionList.length) {
+                if (index + 1 === content.questionList.length) {
                     await this.setState({ viewState: true })
                 }
             }.bind(this), 900 * (index))
-
+return true
         })
         this.handleResize();
         window.addEventListener('resize', this.handleResize)
@@ -70,9 +69,9 @@ class QuestionsList extends React.Component {
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                             <div className="col-2">
-                                <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={"img"}/>
+                                </Link>
                             </div>
                             <div className="col-10">
 
@@ -85,7 +84,7 @@ class QuestionsList extends React.Component {
                                     backgroundImage: `url(${qus_image_1})`, backgroundRepeat: "no-repeat", backgroundSize: "contain",
                                     height: 36, width: 38, display: 'flex', justifyContent: 'center', alignItems: 'center'
                                 }} >
-                                    <img src={qus_image_2} style={{ width: 16, height: 23, }} />
+                                    <img src={qus_image_2} style={{ width: 16, height: 23, }} alt={"img"}/>
                                 </div>
 
                             </div>
@@ -127,9 +126,9 @@ class QuestionsList extends React.Component {
 
                 <div className="bottom-style">
                     <div style={{ textAlign: "right" }}>
-                        <a onClick={() => this.props.changeStage('Next', stage)}>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} />
-                        </a>
+                        <Link onClick={() => this.props.changeStage('Next', stage)}>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={"img"}/>
+                        </Link>
                     </div>
                     <div className="progress-div">
                         <div style={{ flex: 1 }} >

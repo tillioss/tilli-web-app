@@ -1,8 +1,4 @@
 import React from "react";
-import backImage from '../../images/outlineBackIcon.png';
-import nextImage from '../../images/outlineRightIcon.png';
-import MyConstant from "../../config/MyConstant";
-import { Style } from "react-style-tag";
 import AudioQuizScreen from './AudioQuizScreen';
 import DropToSelection from './DropToSelection';
 import MeetSinglePerson from './MeetSinglePerson';

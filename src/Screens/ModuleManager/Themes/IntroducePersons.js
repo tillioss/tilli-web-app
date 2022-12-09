@@ -4,8 +4,7 @@ import nextImage from '../../../images/outlineRightIcon.png';
 import MyConstant from "../../../config/MyConstant";
 import { Style } from "react-style-tag";
 import { connect } from 'react-redux';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
-
+import { Link } from 'react-router-dom';
 
 
 class IntroducePersons extends React.Component {
@@ -30,7 +29,6 @@ class IntroducePersons extends React.Component {
     });
 
     return_content(pageIndex, index) {
-        const { commonPageData } = this.state;
         const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } = this.props
         if (commonGroupLanguageMappingData && commonGroupLanguageMappingData[pageIndex] && commonGroupLanguageMappingData[pageIndex].fieldData[index]) {
             return commonGroupLanguageMappingData[pageIndex].fieldData[index].value
@@ -46,7 +44,7 @@ class IntroducePersons extends React.Component {
         let { stage, data } = this.props;
         let { trustPointText, totalPoint, PercentageTotal } = this.props
         let UWPview = window.navigator && window.navigator.appVersion.toLowerCase().includes("webview")
-        const { commonPageData, deviceHeight } = this.state
+        const {deviceHeight } = this.state
         let content = data.content;
         let imagestyle = {};
         if (content.imagestyle)
@@ -57,6 +55,7 @@ class IntroducePersons extends React.Component {
                 if (i.length > 1) {
                     imagestyle[i[0]] = JSON.parse(i[1]);
                 }
+                return true
             })
         }
 
@@ -73,7 +72,7 @@ class IntroducePersons extends React.Component {
 
         let changeLang = ""
         if (languageChoose) {
-            if (languageChoose.label == "Tamil") {
+            if (languageChoose.label === "Tamil") {
                 changeLang = "tamilintro"
             }
 
@@ -91,9 +90,9 @@ class IntroducePersons extends React.Component {
             <div className="module-parent">
                 <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                     <div className="col-2">
-                        <a onClick={() => this.props.changeStage('Previous', stage)}>
-                            <img style={{ width: 48, height: 48 }} src={backImage} />
-                        </a>
+                        <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                            <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                        </Link>
                     </div>
                     <div className="col-10">
                         <p style={{
@@ -124,7 +123,7 @@ class IntroducePersons extends React.Component {
                                     'vp?action=module&key=' +
                                     ival.image.fileName +
                                     '&id=' +
-                                    ival.image.fileType} style={{ ...imagestyle }} />
+                                    ival.image.fileType} style={{ ...imagestyle }} alt={""}/>
 
                             </div>
 
@@ -133,7 +132,7 @@ class IntroducePersons extends React.Component {
                                 , paddingBottom: 20, paddingTop: 15
                             }}>
                                 <p className='ml-4 mb-0'>
-                                    <div className={`${ival.nameClassName}` + " intro-header"} dangerouslySetInnerHTML={{ __html: ival.name }} />
+                                    <div className={`${ival.nameClassName}` | "intro-header"} dangerouslySetInnerHTML={{ __html: ival.name }} />
                                 </p>
 
                                 <p className="says-content" style={{}}>
@@ -149,9 +148,9 @@ class IntroducePersons extends React.Component {
             </div>
             <div className={"bottom-style " + changeLang}>
                 <div style={{ textAlign: "right" }}>
-                    <a onClick={() => this.props.changeStage('Next', stage)}>
-                        <img style={{ width: 44, height: 44 }} src={nextImage} />
-                    </a>
+                    <Link onClick={() => this.props.changeStage('Next', stage)}>
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                    </Link>
                 </div>
                 <div className="progress-div">
                     <div style={{ flex: 1 }} >
