@@ -28,6 +28,7 @@ const languageReducer = (state = initialState, action) => {
         [action.key]: action.value,
       }
     }
+    
       case FETCH_GET_LANGUAGE_MAPPING_BEGIN: {
           return {
               ...state,
@@ -36,8 +37,8 @@ const languageReducer = (state = initialState, action) => {
           };
       }
       case FETCH_GET_OUTER_GROUP_LANGUAGE_MAPPING_SUCCESS:{
-          var json = action.payload.response;
-          var response1 = json.dataMap;
+          let json = action.payload.response;
+          let response1 = json.dataMap;
           if (response1) {
               return {
                   ...state,
@@ -49,8 +50,8 @@ const languageReducer = (state = initialState, action) => {
       }
       break;
       case FETCH_GET_INNER_GROUP_LANGUAGE_MAPPING_SUCCESS:{
-          var json = action.payload.response;
-          var response1 = json.dataMap;
+          let json = action.payload.response;
+          let response1 = json.dataMap;
           if (response1) {
               return {
                   ...state,
@@ -60,9 +61,10 @@ const languageReducer = (state = initialState, action) => {
               };
           }
       }
+      break;
       case FETCH_GET_COMMON_GROUP_LANGUAGE_MAPPING_SUCCESS:{
-          var json = action.payload.response;
-          var response1 = json.dataMap;
+          let json = action.payload.response;
+          let response1 = json.dataMap;
           if (response1) {
               return {
                   ...state,
@@ -72,6 +74,7 @@ const languageReducer = (state = initialState, action) => {
               };
           }
       }
+      break;
       case FETCH_GET_LANGUAGE_MAPPING_FAILURE:{
           // console.log("Step 3" + JSON.stringify(action.payload))
           return {
@@ -88,7 +91,7 @@ const languageReducer = (state = initialState, action) => {
           };
       }
       case FETCH_GET_LEVEL_NAME_LANGUAGE_MAPPING_SUCCESS:{
-          var json = action.payload.response;
+          let json = action.payload.response;
           if(json.response!=null) {
            //   alert(json.response)
               return {
@@ -99,6 +102,7 @@ const languageReducer = (state = initialState, action) => {
           }
 
       }
+      break;
       case FETCH_GET_LEVEL_NAME_LANGUAGE_MAPPING_FAILURE:{
           // console.log("Step 3" + JSON.stringify(action.payload))
           return {

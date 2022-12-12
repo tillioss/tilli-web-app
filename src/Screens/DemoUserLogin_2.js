@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import logos from "../../src/images/logos.png";
 import MyConstant from '../config/MyConstant';
-import { v4 as uuidv4 } from 'uuid';
 import { fetchGetLanguageMapping, fetchGetLevelNameLanguageMapping } from '../redux/actions/languageActions';
 import { doConnect, userTrack } from '../config/Common'
 
@@ -35,7 +34,7 @@ class DemoUserLogin_2 extends React.Component {
     // var deviceInfo = window.navigator.userAgent;
     // var ipAddress = ""
     // that.UserLogin(ipAddress, deviceInfo)
-    if (landingFrom == "nenesa") {
+    if (landingFrom === "nenesa") {
       userTrack("nenesa", "Landing")
     }
   }
@@ -68,21 +67,22 @@ class DemoUserLogin_2 extends React.Component {
 
         let equalSplit = ival.split("=")
         console.log(equalSplit[0])
-        if (equalSplit[0] == "gender") {
+        if (equalSplit[0] === "gender") {
           gender = equalSplit[1]
         }
-        else if (equalSplit[0] == "age") {
+        else if (equalSplit[0] === "age") {
           age = equalSplit[1]
         }
-        else if (equalSplit[0] == "demoUserId") {
+        else if (equalSplit[0] === "demoUserId") {
           demoUserId = equalSplit[1]
         }
-        else if (equalSplit[0] == "language") {
+        else if (equalSplit[0] === "language") {
           languageChange = equalSplit[1]
         }
-        else if (equalSplit[0] == "userType") {
+        else if (equalSplit[0] === "userType") {
           userType = equalSplit[1]
         }
+        return true
       })
 
     }
@@ -103,7 +103,7 @@ class DemoUserLogin_2 extends React.Component {
     let landingFormPage = localStorage.getItem("landingFrom")
     console.log(landingFormPage)
 
-    if (landingFormPage && landingFormPage != "demo") {
+    if (landingFormPage && landingFormPage !== "demo") {
       eventtType = "createDemo2User"
       postJson = { sessionId: "123", age, gender, demoUserId, userType, ip: ipAddress, deviceInfo: deviceInfo, language: languageChange }
     }
@@ -111,13 +111,13 @@ class DemoUserLogin_2 extends React.Component {
     console.log("postJson-->", postJson)
     console.log("eventtType-->", eventtType)
 
-    if (languageChange.toLowerCase() == "tamil") {
+    if (languageChange.toLowerCase() === "tamil") {
       this.getLangugeBaseData({ "label": "Tamil", "value": "0c037198-c7c4-4b2d-8388-9045fdd75f73" })
     }
-    else if (languageChange.toLowerCase() == "english") {
+    else if (languageChange.toLowerCase() === "english") {
       this.getLangugeBaseData({ "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" })
 
-    } else if (languageChange.toLowerCase() == "sinhala") {
+    } else if (languageChange.toLowerCase() === "sinhala") {
       this.getLangugeBaseData({ "label": "Sinhala", "value": "6f37e56c-d81a-456b-98a7-dad0a61d1667" })
     }
     else {
@@ -130,14 +130,14 @@ class DemoUserLogin_2 extends React.Component {
         console.log("json", json)
         var response1 = json.response;
         console.log(responseData)
-        if (response1 == 'Success') {
-          if (json.id != '') {
+        if (response1 === 'Success') {
+          if (json.id !== '') {
             this.setState({ getResponce: false })
             localStorage.setItem("nameOfChild", json.name);
             // localStorage.setItem("loggedUserId", json.id)
             localStorage.setItem("demoUserId", json.id)
 
-            if (landingFormPage && landingFormPage != "demo") {
+            if (landingFormPage && landingFormPage !== "demo") {
 
               localStorage.setItem("userAge", age)
               localStorage.setItem("userGender", gender)
@@ -184,17 +184,16 @@ class DemoUserLogin_2 extends React.Component {
   render() {
 
     let { getResponce, deviceWidth } = this.state;
-    var uid = uuidv4();
-    var baseUrl = "https://teqbahn.com"
+    // var baseUrl = "https://teqbahn.com"
     //var baseUrl = "http://192.168.43.110:3000"
-    let detailsUser = baseUrl + "/" + MyConstant.keyList.projectUrl + "/demouserlogin2?sessionId=123&gender=male&age=7"
+    // let detailsUser = baseUrl + "/" + MyConstant.keyList.projectUrl + "/demouserlogin2?sessionId=123&gender=male&age=7"
     return (
       <div>
 
         <div className={deviceWidth > 500 ? "row mx-0 pt-3 mb-2 mt-5" : "row mx-0 pt-3 mb-2 mt-3"} >
           <div className="col-sm-2"> </div>
           <div className="col-sm-8">
-            <img style={{ width: 150, height: 150 }} src={logos} />
+            <img style={{ width: 150, height: 150 }} src={logos} alt={""}/>
           </div>
           <div className="col-sm-2"> </div>
         </div>

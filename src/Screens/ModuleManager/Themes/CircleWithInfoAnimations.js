@@ -1,16 +1,12 @@
-import React, { Component, useRef, useEffect, useState } from 'react';
+import React, {} from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
-import TrustImage from '../../../images/trustImage.png';
 import MyConstant from '../../../config/MyConstant';
-import Draggable from 'react-draggable'; // The default
 import image_4 from '../../../images/image_4.png';
 import image_5 from '../../../images/image_5.png';
 import image_7 from '../../../images/image_7.png';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
-
-
+import { Link } from 'react-router-dom';
 
 
 class CircleWithInfoAnimations extends React.Component {
@@ -86,9 +82,9 @@ class CircleWithInfoAnimations extends React.Component {
                 <div className="col-12" style={{ margin: 0, padding: 0 }}>
                     <div className={this.state.deviceHeight < 750 ? "row mt-3 ml-0" : "row mt-4 ml-0"}>
                         <div className="col-2">
-                            <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                <img style={{ width: 48, height: 48 }} src={backImage} />
-                            </a>
+                            <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""} />
+                            </Link>
                         </div>
                         <div className="col-10">
                             {/* <p style={{
@@ -132,9 +128,9 @@ class CircleWithInfoAnimations extends React.Component {
                                         padding: 0,
                                     }}>
                                         <div style={{ backgroundColor: content.circles[0].color, borderRadius: 100000, height: UWPidentity ? innerWidth * 0.9 / (1.9 * 1.9) : innerWidth * 0.9 / (1.5 * 1.5), width: UWPidentity ? innerWidth * 0.9 / (1.9 * 1.9) : innerWidth * 0.9 / (1.5 * 1.5), marginTop: UWPidentity ? '70px' : '21%', }}>
-                                            {this.state.currentIndex == 1 ?
+                                            {this.state.currentIndex === 1 ?
                                                 <div style={{ paddingTop: '25%' }} className={"questionDivShow"} >
-                                                    <img src={image_4} style={{ width: 50, height: 40, marginBottom: 8 }} />
+                                                    <img src={image_4} style={{ width: 50, height: 40, marginBottom: 8 }} alt={""}/>
                                                     <div style={{ margin: "0px 10px 0px 10px" }}
                                                         onClick={() => {
                                                             // this.setState({selectColor_1:'white',selectColor_2:"",selectColor_3:''})
@@ -152,11 +148,11 @@ class CircleWithInfoAnimations extends React.Component {
                                         fontSize: 8, display: 'inline',
                                         marginBottom: deviceWidth > 645 ? "76%" : '100%', marginLeft: "48%", marginTop: UWPidentity ? "-88%" : innerWidth > 650 ? '-38%' : '-33%'
                                     }}>
-                                        {this.state.currentIndex == 1 ?
+                                        {this.state.currentIndex === 1 ?
                                             <React.Fragment>
                                                 <img src={image_7} style={{
                                                     width: 40, height: 40, marginBottom: 10, marginLeft: 30, marginTop: -30
-                                                }} />
+                                                }} alt={""}/>
                                                 <div className="row col-12" style={{
                                                     margin: UWPidentity ? "0px 10px 0px 25px" : innerWidth < 600 ? "0px 10px 0px 25px" : "0px 10px 0px 70px", paddingLeft: 0, whiteSpace: 'nowrap'
                                                 }}>
@@ -167,8 +163,8 @@ class CircleWithInfoAnimations extends React.Component {
                                             : null
                                         }
                                     </div>
-                                    {this.state.ImageView == 1 && this.state.showIcon ?
-                                        <a onClick={() => this.setState({ showIcon: false })} style={{ zIndex: 2 }}>
+                                    {this.state.ImageView === 1 && this.state.showIcon ?
+                                        <Link onClick={() => this.setState({ showIcon: false })} style={{ zIndex: 2 }}>
                                             <div style={{
                                                 backgroundColor: '#ADD8E6', boxShadow: ' 0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: 15, marginTop: -240,
                                                 marginLeft: deviceHeight < 680 ? 80 : 150, width: deviceWidth / 2, height: deviceWidth / 2, maxWidth: 270, maxHeight: 225,
@@ -193,7 +189,7 @@ class CircleWithInfoAnimations extends React.Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                         // <React.Fragment>
                                         //     <a onClick={() => this.setState({ showIcon: false })}>
                                         //         <p style={{ width: 25, height: 25, marginTop: -250, marginLeft: 285, fontSize: 25, borderRadius: 25, zIndex: 5, fontWeight: 800, backgroundColor: '#FFF', paddingLeft: 5, paddingRight: 5, lineHeight: 1 }}>X</p>
@@ -209,10 +205,10 @@ class CircleWithInfoAnimations extends React.Component {
                         </div>
 
                         <div style={{ marginTop: '38%' }} className="col-3">
-                            {this.state.currentIndex == 1 ?
+                            {this.state.currentIndex === 1 ?
                                 <React.Fragment>
-                                    <img src={image_5} style={{ width: 40, height: 40, marginBottom: 10 }} />
-                                    <div style={{ width: '100%', whiteSpace: 'nowrap' }}>
+                                    <img src={image_5} style={{ width: 40, height: 40, marginBottom: 10 }} alt={""} />
+                                    <div style={{ width: '100%', whiteSpace: 'nowrap' }} alt={""}>
                                         {/* <span style={{ backgroundColor: this.state.selectColor_3, color: 'white', fontWeight: '700', fontSize: 13, fontFamily: 'montserrat-medium' }}>  {content.circles[2].name}  </span> */}
                                         <div className={content.circles[2].nameClassName ? content.circles[2].nameClassName : ''} style={{ marginLeft: innerWidth > 768 ? 0 : '-7px' }} dangerouslySetInnerHTML={{ __html: content.circles[2].name }} />
                                     </div>
@@ -227,15 +223,15 @@ class CircleWithInfoAnimations extends React.Component {
             <div className="bottom-style">
                 <div style={{ textAlign: "right" }}>
 
-                    {this.state.currentIndex == 1 ?
-                        <a onClick={() => {
+                    {this.state.currentIndex === 1 ?
+                        <Link onClick={() => {
                             if (this.state.ImageView) {
                                 this.props.changeStage('Next', stage)
                             }
                             this.setState({ ImageView: true })
                         }}>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} />
-                        </a> : null}
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                        </Link> : null}
 
                 </div>
                 <div className="progress-div">

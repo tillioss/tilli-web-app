@@ -2,8 +2,8 @@ import React from 'react';
 
 export default class GroupedInput extends React.Component {
     render() {
-        let { layer, index, layerHover, layerActive, deviceHeight } = this.props;
-        let { inputs, inputType } = layer;
+        let { layer, index,deviceHeight } = this.props;
+        let { inputs,} = layer;
         return <div key={index} style={{
             visibility: layer.visibility,
         }}>

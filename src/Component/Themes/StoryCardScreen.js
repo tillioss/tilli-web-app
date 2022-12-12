@@ -20,11 +20,11 @@ export default class StoryCardScreen extends React.Component{
     {
          console.log(Type)
          console.log(index)
-         if( Type=="Next")
+         if( Type==="Next")
          {
             this.setState({checkindex:index+1})
          }
-         else if(Type=="Previous")
+         else if(Type==="Previous")
          {
             this.setState({checkindex:index-1})
          }
@@ -32,7 +32,7 @@ export default class StoryCardScreen extends React.Component{
     }
     render()
     {
-        const {data,stage,key} =this.props;
+        const {data} =this.props;
         const {checkindex}= this.state
 
         let arraypush=[];
@@ -40,7 +40,7 @@ export default class StoryCardScreen extends React.Component{
 
             
           
-            if(data.content[index].theme == "MeetSinglePerson"  && index == checkindex  )
+            if(data.content[index].theme === "MeetSinglePerson"  && index === checkindex  )
             {
                     arraypush.push(<MeetSinglePerson
                         {...this.props}
@@ -52,13 +52,9 @@ export default class StoryCardScreen extends React.Component{
                         changeindex={this.changeindex}
                         parentindex={this.props.stage}
                     />)
-
-                   
-                
-               
             }
 
-            if(data.content[index].theme == "AudioQuizScreen"  && index == checkindex  )
+            if(data.content[index].theme === "AudioQuizScreen"  && index === checkindex  )
             {
                 
                     arraypush.push(
@@ -75,7 +71,7 @@ export default class StoryCardScreen extends React.Component{
                
             }
 
-            if(data.content[index].theme == "DropToSelection"  && index == checkindex  )
+            if(data.content[index].theme === "DropToSelection"  && index === checkindex  )
             {
            
                     arraypush.push(
@@ -92,7 +88,7 @@ export default class StoryCardScreen extends React.Component{
                 
                
             }
-            
+            return true
         });
      
 

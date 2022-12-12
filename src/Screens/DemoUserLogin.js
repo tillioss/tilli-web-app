@@ -20,8 +20,7 @@ class DemoUserLogin extends React.Component {
     let { number } = this.state
 
 
-    if (number == 1) {
-      let that = this;
+    if (number === 1) {
       //let postJson = { loginId: data.split(":::")[0], password: data.split(":::")[1], sessionId: '1223' };
       let postJson = { sessionId: '1223' };
       console.log("postJson", postJson)
@@ -29,8 +28,8 @@ class DemoUserLogin extends React.Component {
       var json = responseData;
       var response1 = json.response;
       console.log(responseData)
-      if (response1 == 'Success') {
-        if (json.id != '') {
+      if (response1 === 'Success') {
+        if (json.id !== '') {
           this.setState({ getResponce: false })
           localStorage.setItem("nameOfChild", json.name);
           localStorage.setItem("loggedUserId", json.id);

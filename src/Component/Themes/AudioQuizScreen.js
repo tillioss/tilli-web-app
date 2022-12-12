@@ -1,20 +1,15 @@
 import React, { useState } from "react";
 import backImage from '../../images/fillIconOnly.png';
 import nextImage from '../../images/outlineRightIcon.png';
-
-import shuffleImage from '../../images/shuffle.png';
-import rewindImage from '../../images/rewind.png';
 import repeatImage from '../../images/repeat.png';
-import fastForwardImage from '../../images/fastForward.png';
 import outlineIconOnlyImage from '../../images/outlineIconOnly.png';
 import outlineIconRedImage from '../../images/outlineIconRed.png';
-
 import nounVoiceRecordImage from '../../images/nounVoiceRecord.png';
-import heartImage from '../../images/heart.png';
-import pitchPng from '../../images/pitch.png';
 import people_set from '../../images/people_set.png';
 import down_black from '../../images/down_black.png';
 import { connect } from 'react-redux';
+import {Link} from "react-router-dom";
+
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
@@ -32,13 +27,9 @@ class AudioQuizScreen extends React.Component {
 
     componentDidMount() {
 
-
-
     }
 
     return_content(pageIndex, index) {
-
-        const { commonPageData } = this.state;
 
         const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } = this.props
 
@@ -58,13 +49,13 @@ class AudioQuizScreen extends React.Component {
     }
 
     render() {
-        const { stage, stageIndex, data } = this.props
-        const { index_value, bg_color, pitchArray, commonPageData } = this.state;
+        const { stage, data } = this.props
+        const { index_value, bg_color,} = this.state;
 
 
 
         const AudioRecognize1 = () => {
-            const { transcript, resetTranscript } = useSpeechRecognition()
+            const { transcript,} = useSpeechRecognition()
             const [datavalue, setCount] = useState(data.content.feelingsDataList[index_value].results);
 
             if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -86,20 +77,20 @@ class AudioQuizScreen extends React.Component {
 
                     <div className="row" style={{ marginTop: 40 }} >
                         <div className="col-5"  > </div>
-                        <a onClick={async () => {
+                        <Link onClick={async () => {
 
                             if (data.content.feelingsDataList[index_value].results.length) {
                                 //console.log('data.content',data.content.feelingsDataList[index_value])
-                                if (data.content.feelingsDataList.length != index_value + 1) {
+                                if (data.content.feelingsDataList.length !== index_value + 1) {
                                     this.setState({ index_value: index_value + 1 })
                                 }
-                                else if (data.content.feelingsDataList.length == index_value + 1) {
+                                else if (data.content.feelingsDataList.length === index_value + 1) {
                                     await this.setState({ Viewstate: true })
                                 }
                             }
                         }}>
                             <button type="button" class="btn btn-success">Next</button>
-                        </a>
+                        </Link>
                         <div className="col-4">  </div>
                     </div>
 
@@ -122,10 +113,10 @@ class AudioQuizScreen extends React.Component {
                             <div className="col-2" />
 
                             <div className="col-3">
-                                <img src={people_set} style={{ width: 97, height: 159, marginBottom: -50, marginLeft: '25%' }} />
+                                <img src={people_set} style={{ width: 97, height: 159, marginBottom: -50, marginLeft: '25%' }} alt={""}/>
                             </div>
 
-                            {bg_color == "#FF89BB" ?
+                            {bg_color === "#FF89BB" ?
                                 <React.Fragment>
                                     <div className="col-7" style={{ display: "flex", alignItems: 'center', alignSelf: 'center' }}>
                                         <p style={{ fontFamily: 'montserrat-medium', fontWeight: '500', fontSize: 15, paddingLeft: 10, height: 0 }}>
@@ -150,11 +141,10 @@ class AudioQuizScreen extends React.Component {
                             borderRadius: 16,
                             alignItems: 'center',
                             justifyContent: 'center', borderStyle: 'solid',
-                            display: bg_color == '#FFBD12' ? 'flex' : "inline-block",
-                            alignItems: 'center'
+                            display: bg_color === '#FFBD12' ? 'flex' : "inline-block",
                         }}>
                             {/* FF89BB */}
-                            {bg_color == '#FFBD12' ?
+                            {bg_color === '#FFBD12' ?
 
                                 <p style={{
                                     fontFamily: 'montserrat-medium',
@@ -224,15 +214,15 @@ class AudioQuizScreen extends React.Component {
                         </div>
                     </div>
 
-                    { bg_color == '#FFBD12' ?
+                    { bg_color === '#FFBD12' ?
                         <React.Fragment>
-                            <p style={{ fontSize: 26, color: '#FF9692', fontSize: 17, fontWeight: 700, fontFamily: 'montserrat-medium', }}>
+                            <p style={{ fontSize: 26, color: '#FF9692',fontWeight: 700, fontFamily: 'montserrat-medium', }}>
                                 {this.return_content(1, 2)}
                             </p>
                             <div className="row" style={{ marginBottom: 15, marginTop: -10, marginLeft: 1 }}>
                                 <div className="col-3" />
                                 <div className="col-6" style={{ textAlign: 'center' }}>
-                                    <img src={down_black} style={{ width: 30, height: 15 }} />
+                                    <img src={down_black} style={{ width: 30, height: 15 }} alt={""}/>
                                 </div>
                                 <div className="col-3" />
                             </div>
@@ -242,193 +232,87 @@ class AudioQuizScreen extends React.Component {
                     <div className="row" style={{ marginBottom: 15, marginTop: -10, marginLeft: 1 }}>
                         <div className="col-3" />
                         <div className="col-6" style={{ textAlign: 'center' }}>
-                            {bg_color == '#FFBD12' ?
+                            {bg_color === '#FFBD12' ?
                                 <React.Fragment>
                                     <div >
-                                        <a className="col-2" onClick={() => {
-                                            { SpeechRecognition.startListening({ continuous: true }) }
-                                            if (bg_color == '#FF89BB') {
+                                        <Link className="col-2" onClick={() => {
+                                            SpeechRecognition.startListening({ continuous: true })
+                                            if (bg_color === '#FF89BB') {
                                                 this.setState({ bg_color: '#FFBD12' })
                                             }
                                             else {
                                                 this.setState({ bg_color: '#FF89BB' })
                                             }
                                         }}>
-                                            <img src={outlineIconOnlyImage} style={{ width: 60, height: 60 }} />
-                                            <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} />
-                                        </a>
+                                            <img src={outlineIconOnlyImage} style={{ width: 60, height: 60 }} alt={""}/>
+                                            <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} alt={""}/>
+                                        </Link>
                                     </div>
                                 </React.Fragment> :
                                 <React.Fragment>
 
                                     <div style={{ marginTop: "14%" }} onClick={async () => {
-                                        { SpeechRecognition.stopListening({ continuous: false }) }
-                                        {
-                                            if (bg_color == '#FF89BB') {
+                                         SpeechRecognition.stopListening({ continuous: false })
+                                            if (bg_color === '#FF89BB') {
                                                 this.setState({ bg_color: '#FFBD12' })
                                             }
                                             else {
                                                 this.setState({ bg_color: '#FF89BB' })
                                             }
-
-
-                                            if (document.getElementById("Speak") && document.getElementById("Speak").textContent.length != 0) {
+                                            if (document.getElementById("Speak") && document.getElementById("Speak").textContent.length !== 0) {
                                                 data.content.feelingsDataList[index_value].results = document.getElementById("Speak").textContent;
                                                 this.setState({ data })
 
                                                 if (data.content.feelingsDataList[index_value].results.length) {
                                                     //console.log('data.content',data.content.feelingsDataList[index_value])
-                                                    if (data.content.feelingsDataList.length != index_value + 1) {
+                                                    if (data.content.feelingsDataList.length !== index_value + 1) {
                                                         this.setState({ index_value: index_value + 1, bg_color: "#FFBD12" })
                                                     }
-                                                    else if (data.content.feelingsDataList.length == index_value + 1) {
+                                                    else if (data.content.feelingsDataList.length === index_value + 1) {
                                                         await this.setState({ Viewstate: true, bg_color: "#FFBD12" })
                                                         console.log('Viewstate', this.state.Viewstate)
                                                     }
                                                 }
 
                                             }
-
-
-                                        }
                                     }} >
-                                        <a className="col-2">
-                                            <img src={outlineIconRedImage} style={{ width: 60, height: 60, }} />
-                                            <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} />
-                                        </a>
+                                        <Link className="col-2">
+                                            <img src={outlineIconRedImage} style={{ width: 60, height: 60, }} alt={""}/>
+                                            <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} alt={""} />
+                                        </Link>
                                     </div>
 
                                 </React.Fragment>}
                         </div>
                         <div className="col-3" >
-                            {bg_color == '#FF89BB' ?
+                            {bg_color === '#FF89BB' ?
                                 <div className="col-2" onClick={(e) => {
                                     data.content.feelingsDataList[index_value].results = "";
                                     this.setState({ data, })
                                 }}>
-                                    <img src={repeatImage} style={{ width: 42, height: 40 }} />
+                                    <img src={repeatImage} style={{ width: 42, height: 40 }} alt={""}/>
                                 </div>
-
                                 : null}
                         </div>
                     </div>
-
-                    {/* <div className={window.innerWidth > 400 ? " ml-0 row" : "row"} >
-<<<<<<< HEAD
-                    <div className="col-5"/>
-=======
-                        <div className="col-5" />
->>>>>>> e94b459091b5ab235d5345cb97225259eff2df81
-                        {bg_color == '#FFBD12' ?
-                            <React.Fragment>
-                                <div >
-                                    <a className="col-2" onClick={() => {
-                                        { SpeechRecognition.startListening({ continuous: true }) }
-                                        if (bg_color == '#FF89BB') {
-                                            this.setState({ bg_color: '#FFBD12' })
-                                        }
-                                        else {
-                                            this.setState({ bg_color: '#FF89BB' })
-                                        }
-                                    }}>
-                                        <img src={outlineIconOnlyImage} style={{ width: 60, height: 60 }} />
-                                        <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} />
-                                    </a>
-                                </div>
-                            </React.Fragment> :
-                            <React.Fragment>
-
-                                <div style={{ marginTop: "14%" }} onClick={async () => {
-                                    { SpeechRecognition.stopListening({ continuous: false }) }
-                                    {
-                                        if (bg_color == '#FF89BB') {
-                                            this.setState({ bg_color: '#FFBD12' })
-                                        }
-                                        else {
-                                            this.setState({ bg_color: '#FF89BB' })
-                                        }
-
-
-                                        if (document.getElementById("Speak") && document.getElementById("Speak").textContent.length != 0) {
-                                            data.content.feelingsDataList[index_value].results = document.getElementById("Speak").textContent;
-                                            this.setState({ data })
-
-                                            if (data.content.feelingsDataList[index_value].results.length) {
-                                                //console.log('data.content',data.content.feelingsDataList[index_value])
-                                                if (data.content.feelingsDataList.length != index_value + 1) {
-                                                    this.setState({ index_value: index_value + 1, bg_color: "#FFBD12" })
-                                                }
-                                                else if (data.content.feelingsDataList.length == index_value + 1) {
-                                                    await this.setState({ Viewstate: true, bg_color: "#FFBD12" })
-                                                    console.log('Viewstate', this.state.Viewstate)
-                                                }
-                                            }
-
-                                        }
-
-
-                                    }
-                                }} >
-                                    <a className="col-2">
-                                        <img src={outlineIconRedImage} style={{ width: 60, height: 60, }} />
-                                        <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} />
-                                    </a>
-                                </div>
-
-                            </React.Fragment>}
-
-                        <div className="col-2"></div>
-
-                        {bg_color == '#FF89BB' ?
-                            <div className="col-2" onClick={(e) => {
-                                data.content.feelingsDataList[index_value].results = "";
-                                this.setState({ data, })
-                            }}>
-                                <img src={repeatImage} style={{ width: 42, height: 40 }} />
-                            </div>
-
-                            : null}
-
-
-                        <div className="col-1"> </div>
-
-                    </div> */}
-
                 </React.Fragment>
             )
         }
 
-        // let returncontent = data.content.feelingsDataList.map((ival, index) => {
-        //     return (<React.Fragment>
-        //         <div className="row">
-        //             <div className="col-6">  {ival.questions} </div>
-        //             <div className="col-6">  <input type={'text'} onChange={() => {
-
-        //             }} /> </div>
-        //         </div>
-
-        //     </React.Fragment>)
-
-        // })
-
-
-
-
-
         return (<div>
-
 
             <div className="row ml-0 mt-4" >
                 <div className="col-2">
-
-                    {this.props.themeType == "StoryCard" ?
-                        <a onClick={() => { { SpeechRecognition.stopListening({ continuous: false }) } this.props.changeindex('Previous', stage) }}>
-                            <img style={{ width: 48, height: 48 }} src={backImage} />
-                        </a>
+                    {this.props.themeType === "StoryCard" ?
+                        <Link onClick={() => { SpeechRecognition.stopListening({ continuous: false });
+                         this.props.changeindex('Previous', stage) }}>
+                            <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                        </Link>
                         :
-                        <a onClick={() => { { SpeechRecognition.stopListening({ continuous: false }) } this.props.changeStage('Previous', stage) }}>
-                            <img style={{ width: 48, height: 48 }} src={backImage} />
-                        </a>}
+                        <Link onClick={() => {SpeechRecognition.stopListening({ continuous: false }) ;
+                         this.props.changeStage('Previous', stage) }}>
+                            <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                        </Link>}
 
                 </div>
                 <div className="col-8" style={{ alignSelf: 'center' }}> <h4 style={{
@@ -470,33 +354,24 @@ class AudioQuizScreen extends React.Component {
                 <React.Fragment>
                     <div style={{ position: 'absolute', marginTop: '2%', right: '5%', zIndex: 3 }} >
 
-                        {this.props.themeType == "StoryCard" ?
-                            <a onClick={() => {
-                                { SpeechRecognition.stopListening({ continuous: false }) }
+                        {this.props.themeType === "StoryCard" ?
+                            <Link onClick={() => {
+                                 SpeechRecognition.stopListening({ continuous: false });
                                 this.props.changeindex('Next', stage)
                             }} >
-                                <img style={{ width: 44, height: 44 }} src={nextImage} />
-                            </a>
-                            : <a onClick={() => { { SpeechRecognition.stopListening({ continuous: false }) } this.props.changeStage('Next', stage) }} >
-                                <img style={{ width: 44, height: 44 }} src={nextImage} />
-                            </a>}
+                                <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                            </Link>
+                            : <Link onClick={() => { SpeechRecognition.stopListening({ continuous: false });this.props.changeStage('Next', stage) }} >
+                                <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                            </Link>}
 
                     </div>
                 </React.Fragment>
                 : null}
-
-
-
-
-
-
-
         </div>)
     }
 
 }
-
-
 
 const mapStateToProps = (state) => {
     return {

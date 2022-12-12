@@ -1,18 +1,17 @@
 import React from "react";
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
-import TrustImage from '../../images/trustImage.png';
 import MyConstant from '../../config/MyConstant';
+import {Link} from "react-router-dom";
 
 class PersonWithTextAnimation extends React.Component {
 
     constructor(props) {
         super(props)
-        {
+            this.state = {
 
-            this.state = {};
+            };
 
-        }
     }
 
 
@@ -32,9 +31,9 @@ class PersonWithTextAnimation extends React.Component {
             <div className="row mt-3">
                 <div className="col-1"></div>
                 <div className="col-2">
-                    <a onClick={() => this.props.changeStage('Previous', stage)}>
-                        <img style={{ width: window.innerHeight / 10 }} src={backImage} />
-                    </a>
+                    <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                        <img style={{ width: window.innerHeight / 10 }} src={backImage} alt={""} />
+                    </Link>
                 </div>
                 <div className="col-8 ">
                     <p style={{
@@ -56,30 +55,22 @@ class PersonWithTextAnimation extends React.Component {
                         'vp?action=module&key=' +
                         data.content.image.fileName +
                         '&id=' +
-                        data.content.image.fileType} style={{ width: '65%', height: '100%' }} />
+                        data.content.image.fileType} style={{ width: '65%', height: '100%' }}  alt={""}/>
                 </div>
                 <div className="col-2"></div>
 
             </div>
-
-
             <div className="row scrolldiv">
                 <div className="col-12"> 
                 <p style={{...data.content.text[0].style,marginLeft:10,fontWeight:"bold"}}>{data.content.text[0].value}</p> </div>
             </div>
-
-
-            
-
             {this.state.viewState ?
             <div style={{ position: 'absolute', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
-            <a onClick={() => this.props.changeStage('Next', stage)}>
-                <img style={{ width: window.innerHeight / 15 }} src={nextImage} />
-            </a>
+            <Link onClick={() => this.props.changeStage('Next', stage)}>
+                <img style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""}/>
+            </Link>
             </div>
             : null}
-
-
         </React.Fragment>)
 
     }

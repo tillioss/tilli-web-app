@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class LabelAnimation extends React.Component {
     render() {
-        let { layer, index, layerHover, layerActive, deviceHeight } = this.props;
+        let { layer, index,deviceHeight } = this.props;
         let { label } = layer;
         return <div
             className={`layer`}

@@ -20,7 +20,7 @@ export default class DragAndDrop extends React.Component {
     }
 
     render() {
-        let { layer, index, layerHover, layerActive, deviceHeight } = this.props;
+        let { layer, index,deviceHeight } = this.props;
         let { drag, drop } = layer;
         return <React.Fragment>
             <div
@@ -39,7 +39,7 @@ export default class DragAndDrop extends React.Component {
                 id="drag1"
                 draggable="true"
                 onDragStart={(e) => this.drag(e)}>
-                <img style={{ width: "100%", height: "100%" }} src={drag.image ? drag.image : drag_drop} />
+                <img style={{ width: "100%", height: "100%" }} src={drag.image ? drag.image : drag_drop} alt={""}/>
             </div>
             {
                 drop.map((row, rowIndex) => {

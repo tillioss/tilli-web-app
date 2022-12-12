@@ -96,8 +96,7 @@ class SignUp extends React.Component {
     let length = value.length;
     switch (name) {
       case "email":
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        if (reg.test(value) === false) {
+        if (/(.+)@(.+){2,}\.(.+){2,}/.test(value) === false) {
           errors[name] = "Please enter valid email address.";
         } else {
           delete errors[name]

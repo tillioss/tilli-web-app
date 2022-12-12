@@ -3,8 +3,6 @@ import { checkNullAndReturnString, doConnect } from "../config/Common";
 import { connect } from 'react-redux';
 import MyConstant from '../config/MyConstant';
 
-
-
 class ForgotPassword extends React.Component {
 
     constructor(props) {
@@ -43,7 +41,7 @@ class ForgotPassword extends React.Component {
         console.log('json', json)
         var response1 = json.responseMessage;
         console.log(response1);
-        if (response1 == 'Success') {
+        if (response1 === 'Success') {
             this.setState({ show: true })
         } else {
         }
