@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
-
 import qus_image_1 from '../../images/qus_image_1.png';
 import qus_image_2 from '../../images/qus_image_2.png';
+import {Link} from "react-router-dom";
 
 
 class QuestionsList extends React.Component {
@@ -15,7 +15,7 @@ class QuestionsList extends React.Component {
         }
     }
     componentDidMount() {
-        let { stage, data } = this.props;
+        let {data } = this.props;
         var questionVisible = this.state.questionVisible
         let content = data.content;
         console.log(content.questionList.length)
@@ -26,11 +26,11 @@ class QuestionsList extends React.Component {
 
                 await this.setState({ questionVisible: questionVisible })
 
-                if (index + 1 == content.questionList.length) {
+                if (index + 1 === content.questionList.length) {
                     await this.setState({ viewState: true })
                 }
             }.bind(this), 1200 * (index))
-
+return true
         })
 
 
@@ -52,9 +52,9 @@ class QuestionsList extends React.Component {
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className="row mt-4 ml-0 ">
                             <div className="col-2">
-                                <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                </Link>
                             </div>
                             <div className="col-10">
                                 <p style={{
@@ -75,7 +75,7 @@ class QuestionsList extends React.Component {
                                     backgroundImage: `url(${qus_image_1})`, backgroundRepeat: "no-repeat", backgroundSize: "contain",
                                     height: 36, width: 38,display: 'flex', justifyContent: 'center',alignItems:'center'
                                 }} >
-                                    <img src={qus_image_2} style={{ width: 16, height: 23, }} />
+                                    <img src={qus_image_2} style={{ width: 16, height: 23, }} alt={""}/>
                                 </div>
 
                             </div>
@@ -86,7 +86,7 @@ class QuestionsList extends React.Component {
                                     color: '#221E1F',
                                     fontSize: 17,
                                     fontFamily: 'montserrat-medium',
-                                    lineHeight: 1.0, fontWeight: 600, color: '#221E1F',marginTop:0, paddingLeft: 10
+                                    lineHeight: 1.0, fontWeight: 600,marginTop:0, paddingLeft: 10
                                 }}>
                                     {content.questionTitle}
 
@@ -128,9 +128,9 @@ class QuestionsList extends React.Component {
                     </div>
                 </div>
                 <div className="forward-step">
-                    {this.state.viewState ? <a onClick={() => this.props.changeStage('Next', stage)}>
-                        <img style={{ width: 44, height: 44 }} src={nextImage} />
-                    </a> : null}
+                    {this.state.viewState ? <Link onClick={() => this.props.changeStage('Next', stage)}>
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                    </Link> : null}
                 </div>
             </React.Fragment>
         )

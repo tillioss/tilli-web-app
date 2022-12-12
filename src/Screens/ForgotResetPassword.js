@@ -2,6 +2,7 @@ import React from 'react';
 import { checkNullAndReturnString, doConnect } from "../config/Common";
 import { connect } from 'react-redux';
 import MyConstant from '../config/MyConstant';
+import { Link } from "react-router-dom";
 
 class ForgotResetPassword extends React.Component {
 
@@ -74,9 +75,9 @@ class ForgotResetPassword extends React.Component {
         var json = responseData;
         console.log('json', json)
         var response1 = json.response;
-        if (response1 == 'Success') {
+        if (response1 === 'Success') {
             this.setState({
-                success: <p>Password has been updated.Click <a href="javascript:void(0)" onClick={() => this.props.history.push('/' + MyConstant.keyList.projectUrl + '/')}>here</a> to login</p>
+                success: <p>Password has been updated.Click <Link  onClick={() => this.props.history.push('/' + MyConstant.keyList.projectUrl + '/')}>here</Link> to login</p>
             });
         } else {
         }

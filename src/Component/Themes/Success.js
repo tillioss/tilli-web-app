@@ -1,17 +1,18 @@
 import React from "react";
 import nextPng from '../../images/next.png';
-import MyConstant from "../../config/MyConstant";
 
 class Success extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state={
+
+        }
     }
 
     componentDidMount() {
 
         console.log(this.props.data.content)
-
 
     }
 
@@ -55,7 +56,7 @@ class Success extends React.Component {
                  //this.props.history.push('/'+MyConstant.keyList.projectUrl+'/home/')
             }}>
                
-                <img   src={nextPng}  style={{width: '100%', height: '100%'}} />
+                <img src={nextPng}  style={{width: '100%', height: '100%'}} alt={""}/>
                  
             </div>
 

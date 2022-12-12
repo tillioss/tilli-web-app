@@ -1,5 +1,4 @@
 import React from 'react';
-import LillyImg from '../images/Lilly_1.png';
 import Tilly_2 from '../images/Tilli_3.png';
 import atomImg from '../images/noun_atom.png';
 import heartImg from '../images/noun_Heart.png';
@@ -12,7 +11,6 @@ import outlineRoundIconOnly from '../images/outlineRoundIconOnly.png';
 import MyConstant from "../config/MyConstant";
 import { Style } from "react-style-tag";
 import { checkNullAndReturnString, doConnect } from "../config/Common";
-import spashes1 from "../images/spashes1.png";
 import { connect } from 'react-redux';
 import { fetchGetLanguageMapping, fetchGetLevelNameLanguageMapping } from '../redux/actions/languageActions';
 
@@ -50,7 +48,6 @@ class Dashbord extends React.Component {
     var language = localStorage.getItem("currentLanguage")
 
     let postJson = { languageId: language, sessionId: "1223" }
-    let that = this;
     let responseData = await doConnect("getLevelsNameLanguageMapping", "POST", postJson);
 
 
@@ -70,9 +67,7 @@ class Dashbord extends React.Component {
 
       let postJson = { grouptype: "innerPageGroup", languageId: localStorage.getItem("currentLanguage"), sessionId: "1223" }
       let responseData = await doConnect("getLanguageMappingDataWithBaseData", "POST", postJson);
-      var json = responseData;
       var response1 = responseData.dataMap;
-      var that = this;
       if (response1) {
         this.setState({ languageMappingData: JSON.parse(response1.mappingData), languageBaseData: JSON.parse(response1.baseData) })
       } else {
@@ -84,8 +79,6 @@ class Dashbord extends React.Component {
   returnContent(index) {
 
     var pageIndex = 1
-    const { languageMappingData, languageBaseData } = this.state;
-
     const { innerGroupLanguageMappingData, innnerGroupLanguageBaseData } = this.props
 
 
@@ -119,7 +112,6 @@ class Dashbord extends React.Component {
     let responseData = await doConnect("getUserGameStatus", "POST", postJson);
     // alert(JSON.stringify(responseData))
     //console.log('postJson get level==>', postJson)
-    let that = this;
     let json = responseData;
     if (json.response == null) {
       // this.props.setUserInfo('progressingLevel', 0)
@@ -147,8 +139,8 @@ class Dashbord extends React.Component {
     // console.log('json level', json)
     if (
       Object.keys(json).length > 0 &&
-      json.levelsMap != null &&
-      json.levelsMap != undefined
+      json.levelsMap !== null &&
+      json.levelsMap !== undefined
     ) {
       let levelsMap = json.levelsMap;
       let levelsDataList = [];
@@ -184,7 +176,6 @@ class Dashbord extends React.Component {
     this.props.fetchGetLanguageMappingData(postJson_5)
 
     let postJson_4 = { languageId: e.value, sessionId: "1223" }
-    let that = this;
     let responseData = await doConnect("getLevelsNameLanguageMapping", "POST", postJson_4);
     if (responseData.response != null) {
       this.setState({ levelLanguageMappingData: JSON.parse(responseData.response) })
@@ -208,7 +199,7 @@ class Dashbord extends React.Component {
           style={{
             borderRadius: 26,
             backgroundColor: '#00C6AE', border: '2px solid #00C6AE',
-            width: '100%', whiteSpace: 'nowrap', width: 82, height: 31, color: "#18191F"
+            width: '100%', whiteSpace: 'nowrap', height: 31, color: "#18191F"
           }} > <span className="ffmedium" style={{ fontWeight: 700, fontSize: 14 }}>{this.returnContent(5)} {index + 1} </span>
         </div>)
       }
@@ -217,9 +208,8 @@ class Dashbord extends React.Component {
           <span className="ffmedium" style={{ paddingTop: 6, width: '100%', fontWeight: 700, fontSize: 14, whiteSpace: 'nowrap', }}>{this.returnContent(5)} {index + 1} </span>
         </div>)
       }
-
+      return retrunData
     })
-    return retrunData
 
   }
 
@@ -228,8 +218,6 @@ class Dashbord extends React.Component {
 
     let retrunData = []
     //new code
-    let changeIndex = 0;
-    {
       Object.keys(this.state.bodydata).map((val, index) => {
         let image = this.state.bodydata[val].image;
         let nameModule = this.state.bodydata[val].name
@@ -243,7 +231,7 @@ class Dashbord extends React.Component {
                   // console.log(index, "***", this.state.progressingLevel)
                   if (index < this.state.progressingLevel) {
                     let progressLevel = index + 1
-                    if (index == this.state.progressingLevel) {
+                    if (index === this.state.progressingLevel) {
                       progressLevel = this.state.progressingLevel
                     }
                     // console.log("progressLevel", progressLevel)
@@ -274,7 +262,7 @@ class Dashbord extends React.Component {
                     'vp?action=module&key=' +
                     image.fileName +
                     '&id=' +
-                    image.fileType} />
+                    image.fileType} alt={""}/>
                 </div>
                 <div style={{ paddingTop: 5 }} >
                   <p className="ffmedium" style={{ fontSize: 13, fontWeight: 500 }}>
@@ -286,11 +274,10 @@ class Dashbord extends React.Component {
             </div>
           </React.Fragment >
         )
-        changeIndex++;
+        return retrunData
       })
-    }
+    
 
-    return retrunData
   }
 
   render() {
@@ -330,7 +317,7 @@ class Dashbord extends React.Component {
                   //left: '10%',
                   fontFamily: 'schoolbell-regular',
                 }}>
-                  <img src={image_13} style={{ width: 40, height: 40, position: 'absolute', left: '-20%', top: '18%', marginTop: -2 }} />
+                  <img src={image_13} style={{ width: 40, height: 40, position: 'absolute', left: '-20%', top: '18%', marginTop: -2 }} alt={""}/>
 
                 </div>
               </div>
@@ -352,7 +339,7 @@ class Dashbord extends React.Component {
                   left: '7%', top: '35%'
                   , fontFamily: 'schoolbell-regular',
                 }}>
-                  <img src={image_14} style={{ width: 20, height: 10, position: 'absolute', left: '10%', marginTop: -1 }} />
+                  <img src={image_14} style={{ width: 20, height: 10, position: 'absolute', left: '10%', marginTop: -1 }} alt={""} />
 
                 </div>
               </div>
@@ -365,7 +352,7 @@ class Dashbord extends React.Component {
 
               <div style={{ backgroundImage: `url(${outlineRoundIconOnly})`, width: 30, height: 30, backgroundSize: 'cover', position: 'absolute', justifyContent: 'center', alignSelf: 'center', textAlign: 'center' }}>
                 <div style={{ width: '100%', position: 'absolute', left: '10%', top: '30%', fontFamily: 'schoolbell-regular', }}>
-                  <img src={image_15} style={{ width: 15, height: 12, position: 'absolute', left: '15%' }} />
+                  <img src={image_15} style={{ width: 15, height: 12, position: 'absolute', left: '15%' }} alt={""}/>
 
                 </div>
               </div>
@@ -374,7 +361,7 @@ class Dashbord extends React.Component {
             </div>
             <div className="col-5" />
             <div className="col-2">
-              <img src={outline_forward} style={{ width: 48, height: 48, marginTop: 10 }} />
+              <img src={outline_forward} style={{ width: 48, height: 48, marginTop: 10 }} alt={""}/>
             </div>
           </div>
 
@@ -382,7 +369,7 @@ class Dashbord extends React.Component {
           <div className="row vertical-align mx-0">
             <div className="col-4">
               <span className="dashboard-img" style={{ backgroundColor: "#FFD465 !important" }} >
-                <img className={"lego_profile"} src={Tilly_2} />
+                <img className={"lego_profile"} src={Tilly_2} alt={""} />
               </span>
             </div>
             <div className="col-8">
@@ -390,7 +377,7 @@ class Dashbord extends React.Component {
                 fontFamily: "montserrat-extrabold", fontWeight: 800, fontSize: 32, textAlign: "initial", paddingLeft: 10
               }}>{this.returnContent(1)} </p>
               <p className="ffmedium char-limit" style={{ color: "#18191F", fontSize: 21, fontWeight: 500, marginTop: -20, textAlign: "initial", paddingLeft: 10 }} >
-                {this.state.nameOfChild != "user" ? <span> @ {this.state.nameOfChild} </span> : ""}  </p>
+                {this.state.nameOfChild !== "user" ? <span> @ {this.state.nameOfChild} </span> : ""}  </p>
             </div>
           </div>
 
@@ -411,7 +398,7 @@ class Dashbord extends React.Component {
                       <table style={{ margin: 'auto' }}>
                         <tbody>
                           <tr>
-                            <td><img src={atomImg} /></td>
+                            <td><img src={atomImg} alt={""}/></td>
                             <td style={{ padding: '0 2px' }}>
                               <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.points}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, }}>
@@ -426,7 +413,7 @@ class Dashbord extends React.Component {
                       <table style={{ margin: 'auto' }}>
                         <tbody>
                           <tr>
-                            <td><img src={heartImg} /></td>
+                            <td><img src={heartImg} alt={""}/></td>
                             <td style={{ padding: '0 2px' }}>
                               <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.feellingsTool}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, marginLeft: this.state.deviceHeight < 330 ? -15 : 0 }}>
@@ -441,7 +428,7 @@ class Dashbord extends React.Component {
                       <table style={{ margin: 'auto' }}>
                         <tbody>
                           <tr>
-                            <td><img src={winImg} /></td>
+                            <td><img src={winImg} alt={""} /></td>
                             <td style={{ padding: '0 2px' }}>
                               <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.progressingLevel}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, }}>
@@ -470,7 +457,6 @@ class Dashbord extends React.Component {
             borderColor: '#000000',
             borderRadius: 26,
             border: '4px solid #000000',
-            borderRadius: 26
           }}>
             <div className="row" style={{ marginLeft: 0 }}>
               {this.returnLevelContent()}
