@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
-var SupportedBrowser = !SpeechRecognition.browserSupportsSpeechRecognition()
+import React, {useEffect } from "react";
+import { useSpeechRecognition } from 'react-speech-recognition'
 
 const AudioRecognize = (props) => {
     const { transcript, resetTranscript } = useSpeechRecognition()
@@ -9,7 +8,7 @@ const AudioRecognize = (props) => {
         if (transcript !== "") {
             props.setRecord(transcript)
         }
-    }, [transcript]);
+    }, [transcript,props]);
 
     React.useEffect(() => {
         if (props.resetTextState) {

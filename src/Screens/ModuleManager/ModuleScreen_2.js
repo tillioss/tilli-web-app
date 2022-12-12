@@ -14,7 +14,7 @@ import StoryCardScreen from './Themes/StoryCardScreen';
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
 import MyConstant from '../../config/MyConstant';
-import { checkNullAndReturnString, doConnect } from "../../config/Common";
+import {doConnect } from "../../config/Common";
 import DoubleBoxUnderWithImage from './Themes/DoubleBoxUnderWithImage';
 import SingleTextImage from './Themes/SingleTextImage';
 import StartingDashBord from '../EndScreen/StartingDashBord';
@@ -24,7 +24,7 @@ import { userTrack } from '../../config/Common';
 import AskGender from './Themes/AskGender';
 import AskAge from './Themes/AskAge';
 import ThemeViewer from './ThemeViewer';
-
+import { Link } from "react-router-dom";
 
 
 class ModuleScreen_2 extends React.Component {
@@ -57,7 +57,6 @@ class ModuleScreen_2 extends React.Component {
     }
     async getLevelMappingData(levelId) {
         let postJson = { levelId: levelId, sessionId: '1223' };
-        let that = this;
         let responseData = await doConnect("getLevelMappingData", "POST", postJson);
         var json = responseData;
         var response = JSON.parse(json.response);
@@ -69,15 +68,12 @@ class ModuleScreen_2 extends React.Component {
     }
     changeStage = (action, currentStage, Type) => {
 
-        let getUserGender = localStorage.getItem("userGender")
-        let getUserAge = localStorage.getItem("userAge")
-
-        if (action == 'Next') {
+        if (action === 'Next') {
             let { moduleJson } = this.state;
             let stages = moduleJson.stages;
             let scoreBordScreen = false
 
-            if (stages && stages[currentStage] && stages[currentStage].theme && stages[currentStage].theme == "StoryCard") {
+            if (stages && stages[currentStage] && stages[currentStage].theme && stages[currentStage].theme === "StoryCard") {
                 console.log("story next", currentStage, stages[currentStage])
                 stages[currentStage].startTime = new Date().getTime()
                 stages[currentStage].EndTIme = ""
@@ -85,21 +81,21 @@ class ModuleScreen_2 extends React.Component {
 
             if (!Type) {
                 if (stages && stages[currentStage] && stages[currentStage].theme) {
-                    if (stages[currentStage].theme == "Ask Age" || stages[currentStage].theme == "Ask Gender") {
+                    if (stages[currentStage].theme === "Ask Age" || stages[currentStage].theme === "Ask Gender") {
                         currentStage = currentStage + 1
                     }
                 }
 
             }
 
-            if (Type && Type == "scorepoint") {
+            if (Type && Type === "scorepoint") {
                 scoreBordScreen = true
             }
 
 
 
             console.log("stage", currentStage)
-            if (currentStage == stages.length) {
+            if (currentStage === stages.length) {
                 console.log('Final stage');
                 console.log('currentStage --> ' + currentStage);
                 console.log('stages --> ' + stages.length);
@@ -113,7 +109,7 @@ class ModuleScreen_2 extends React.Component {
                     this.setState({ stage: currentStage + 1, PreviousPages: false });
                 }
             }
-        } else if (action == 'Previous') {
+        } else if (action === 'Previous') {
             console.log("log-->", currentStage)
             let { moduleJson } = this.state;
             let stages = moduleJson.stages;
@@ -142,7 +138,7 @@ class ModuleScreen_2 extends React.Component {
             }
 
 
-            if (currentStage == 1) {
+            if (currentStage === 1) {
                 // navigation.navigate('Home');
                 if (localStorage.getItem("loggedUserId")) {
                     this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
@@ -180,9 +176,10 @@ class ModuleScreen_2 extends React.Component {
         console.log("moduleJson -->time-->", moduleJson)
         var userpoint = 0
         this.state.moduleJson.stages && this.state.moduleJson.stages.map((ival, i) => {
-            if (ival.theme == "StoryCard" && ival.storyPoints) {
+            if (ival.theme === "StoryCard" && ival.storyPoints) {
                 userpoint = userpoint + ival.storyPoints
             }
+            return true
         })
 
         var deviceInfo = window.navigator.userAgent;
@@ -202,7 +199,7 @@ class ModuleScreen_2 extends React.Component {
         };
 
         console.log('updateAttempt-->', postJson)
-        let responseData = await doConnect("updateLevelAttempt", "POST", postJson);
+        await doConnect("updateLevelAttempt", "POST", postJson);
 
     }
 
@@ -217,9 +214,10 @@ class ModuleScreen_2 extends React.Component {
             //url wise condtion
             if (!localStorage.getItem("loggedUserId")) {
                 this.state.moduleJson.stages.map((kval, k) => {
-                    if (kval.theme == "StoryCard") {
+                    if (kval.theme === "StoryCard") {
                         delete kval.storyPoints
                     }
+                    return true
                 })
                 this.setState({ scoreCurrentStage: 0, stage: 1, viewScreen: false, moduleJson: this.state.moduleJson })
             }
@@ -284,17 +282,17 @@ class ModuleScreen_2 extends React.Component {
             let findNextThemeIndex = cstage
             let getUserGender = await localStorage.getItem("userGender")
             let getUserAge = await localStorage.getItem("userAge")
-            if (stages[findNextThemeIndex].theme == "Ask Age" || stages[findNextThemeIndex].theme == "Ask Gender") {
+            if (stages[findNextThemeIndex].theme === "Ask Age" || stages[findNextThemeIndex].theme === "Ask Gender") {
                 console.log("getUserGender", getUserGender)
                 console.log("getUserAge", getUserAge)
-                if (action != "Previous" && getUserAge == "" || getUserGender == "") {
+                if (action !== "Previous" && (getUserAge === "" || getUserGender === "")) {
                     scorePoint = false
                     this.changeStage("Next", cstage, true)
                 }
-                if (action == "Next") {
+                if (action === "Next") {
                     cstage = cstage + 1
                 }
-                else if (action == "Previous") {
+                else if (action === "Previous") {
                     // cstage = cstage - 1
                     scorePoint = true
                 }
@@ -303,7 +301,7 @@ class ModuleScreen_2 extends React.Component {
             // console.log("stages[findNextThemeIndex]", stages[cstage])
             // console.log("stages[findNextThemeIndex]", stages[findNextThemeIndex])
         }
-        await this.setState({ scoreCurrentStage: action == "Previous" ? cstage - 1 : cstage, scorePointsView: scorePoint })
+        await this.setState({ scoreCurrentStage: action === "Previous" ? cstage - 1 : cstage, scorePointsView: scorePoint })
         this.updateStatusBasedOnStory()
     }
 
@@ -341,14 +339,14 @@ class ModuleScreen_2 extends React.Component {
             moduleJson.stages[this.state.scoreCurrentStage - 1].EndTIme = new Date().getTime()
         }
 
-        if (moduleJson.stages.length == this.state.scoreCurrentStage) {
+        if (moduleJson.stages.length === this.state.scoreCurrentStage) {
             moduleJson.EndTIme = new Date().getTime()
         }
 
         let stroyJSon = {}
         stroyJSon.stroyJSon = moduleJson
         stroyJSon.nexstory = this.state.scoreCurrentStage
-        stroyJSon.status = moduleJson.stages.length == this.state.scoreCurrentStage ? "Complete" : "Paused"
+        stroyJSon.status = moduleJson.stages.length === this.state.scoreCurrentStage ? "Complete" : "Paused"
         stroyJSon.language = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
 
         console.log("post stroyJSon", stroyJSon)
@@ -357,9 +355,10 @@ class ModuleScreen_2 extends React.Component {
 
         var userpoint = 0
         moduleJson.stages && this.state.moduleJson.stages.map((ival, i) => {
-            if (ival.theme == "StoryCard" && ival.storyPoints) {
+            if (ival.theme === "StoryCard" && ival.storyPoints) {
                 userpoint = userpoint + ival.storyPoints
             }
+            return true
         })
 
         var deviceInfo = window.navigator.userAgent;
@@ -377,10 +376,9 @@ class ModuleScreen_2 extends React.Component {
         };
         console.log("postJson update*", postJson)
         let responseData = await doConnect("updateStatusBasedOnStory", "POST", postJson);
-        var json = responseData;
         console.log("responseData", responseData)
 
-        if (moduleJson.stages.length == this.state.scoreCurrentStage) {
+        if (moduleJson.stages.length === this.state.scoreCurrentStage) {
             console.log("**story is complete***")
             await this.updateAttemptData()
         }
@@ -401,7 +399,7 @@ class ModuleScreen_2 extends React.Component {
         if (json && json.response) {
             console.log("getStoryBasedStatus--->", JSON.parse(json.response))
             let responseData = JSON.parse(json.response)
-            if (responseData.status == "Paused" && responseData.language && responseData.language.label == languageType.label) {
+            if (responseData.status === "Paused" && responseData.language && responseData.language.label === languageType.label) {
                 this.setState({ moduleJson: responseData.stroyJSon, stage: responseData.nexstory + 1, scorePointsView: true, scoreCurrentStage: responseData.nexstory, viewScreen: true, loading: false })
 
             }
@@ -435,7 +433,6 @@ class ModuleScreen_2 extends React.Component {
 
     async updateUserDetailsInfo(postdata) {
         var postJson = postdata;
-        let that = this;
         let responseData = await doConnect("updateUserDetails", "POST", postJson);
         console.log("responseData", responseData)
 
@@ -443,11 +440,6 @@ class ModuleScreen_2 extends React.Component {
 
     previousScorePagefun(type, index) {
 
-        let { moduleJson } = this.state;
-        let stages = moduleJson.stages;
-        let previousIndex = false
-        let getUserGender = localStorage.getItem("userGender")
-        let getUserAge = localStorage.getItem("userAge")
 
         this.setState({ scorePointsView: true, })
 
@@ -455,7 +447,7 @@ class ModuleScreen_2 extends React.Component {
     }
     render() {
 
-        let { viewScreen, scorePointsView, scoreCurrentStage, deviceHeight } = this.state
+        let { viewScreen, scorePointsView, scoreCurrentStage } = this.state
 
         var horizontalScreen = ""
 
@@ -471,10 +463,10 @@ class ModuleScreen_2 extends React.Component {
 
         let changeLang = ""
         if (languageChoose) {
-            if (languageChoose.label == "Tamil") {
+            if (languageChoose.label === "Tamil") {
                 changeLang = "tamil"
             }
-            else if (languageChoose.label == "Sinhala") {
+            else if (languageChoose.label === "Sinhala") {
                 changeLang = "singala"
             }
 
@@ -492,22 +484,22 @@ class ModuleScreen_2 extends React.Component {
         if (this.state.moduleJson) {
             console.log(this.state.moduleJson.stages)
             this.state.moduleJson.stages.map((kval, k) => {
-                if (kval.theme == "StoryCard") {
+                if (kval.theme === "StoryCard") {
                     storyCount = storyCount + 1
                 }
 
                 if (kval.storyPoints) {
                     totalPoint = totalPoint + kval.storyPoints
                 }
+                return false
             })
         }
-
 
         let trustPointText = this.return_content(1, 3)
 
         let displayPage = this.state.moduleJson && this.state.moduleJson.stages.map((stage, index) => {
             let stageIndex = parseInt(index) + 1;
-            if (this.state.stage == stageIndex) {
+            if (this.state.stage === stageIndex) {
                 let theme = stage.theme;
                 console.log('theme', theme,)
                 let total = totalPoint / parseInt(storyCount * 200)
@@ -530,6 +522,7 @@ class ModuleScreen_2 extends React.Component {
                                 />
                             </div>
                         );
+                        default:
                 }
 
                 switch (theme) {
@@ -812,14 +805,14 @@ class ModuleScreen_2 extends React.Component {
                             (<React.Fragment>{theme}
 
                                 <div style={{ position: 'absolute', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
-                                    <a onClick={() => this.changeStage('Next', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} />
-                                    </a>
+                                    <Link onClick={() => this.changeStage('Next', this.state.stage)}>
+                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""}/>
+                                    </Link>
                                 </div>
                                 <div className="col-2">
-                                    <a onClick={() => this.changeStage('Previous', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 10 }} src={backImage} />
-                                    </a>
+                                    <Link onClick={() => this.changeStage('Previous', this.state.stage)}>
+                                        <img style={{ width: window.innerHeight / 10 }} src={backImage} alt={""} />
+                                    </Link>
                                 </div>
                             </React.Fragment>
 
@@ -827,6 +820,7 @@ class ModuleScreen_2 extends React.Component {
 
                 }
             }
+            return true
         });
 
         if (this.state.loading) {
