@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../images/outlineBackIcon.png';
 import spashes1 from '../../images/spashes1.png';
 import PeopleIcons4 from '../../images/PeopleIcons4.png';
 import nextImage from '../../images/outlineRightIcon.png';
-import MyConstant from '../../config/MyConstant';
+import {Link} from "react-router-dom";
+
 
 class ImageWithThinking extends React.Component {
     constructor(props) {
         super(props);
+        this.state={}
     }
     render() {
         let { stage, data } = this.props;
@@ -24,9 +26,9 @@ class ImageWithThinking extends React.Component {
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className="row mt-4 ml-0">
                             <div className="col-2">
-                                <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48,height:48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48,height:48 }} src={backImage} alt={""}/>
+                                </Link>
                             </div>
                             <div className="col-10"  style={{alignSelf:'center'}}>
                                 <p style={{
@@ -49,16 +51,16 @@ class ImageWithThinking extends React.Component {
                         </div>
                         <div className="row mt-4 mx-0">
                             <div style={{backgroundColor:'#FFC7DE',borderRadius: innerWidth/1.6,width: innerWidth/1.6 ,height: innerWidth/1.6,borderStyle:'solid', marginLeft: '5%'}}>
-                                <img style={{ width: innerWidth/1.3,marginTop:20,marginLeft:20 }} src={PeopleIcons4} />
+                                <img style={{ width: innerWidth/1.3,marginTop:20,marginLeft:20 }} src={PeopleIcons4} alt={""}/>
                             </div>
                         </div>
                     </div>
                    
                 </div>
                 <div className="forward-step" >
-                    <a onClick={() => this.props.changeStage('Next', stage)}>
-                        <img style={{ width: 44,height:44}} src={nextImage} />
-                    </a>
+                    <Link onClick={() => this.props.changeStage('Next', stage)}>
+                        <img style={{ width: 44,height:44}} src={nextImage} alt={""}/>
+                    </Link>
                 </div>
             </React.Fragment>
         )

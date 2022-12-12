@@ -20,7 +20,7 @@ function GameRoute(props) {
         if (!loggedIn) {
             props.history.push(path + "/login")
         }
-    }, [])
+    }, [path,props.history])
     return <Switch>
         <Route exact path={path + "/"}>
             <SplashScreen history={props.history} path={path} />

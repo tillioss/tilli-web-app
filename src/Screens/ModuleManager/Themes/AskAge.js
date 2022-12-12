@@ -4,12 +4,8 @@ import nextImage from '../../../images/outlineRightIcon.png';
 import MyConstant from "../../../config/MyConstant";
 import { Style } from "react-style-tag";
 import { connect } from 'react-redux';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
-import TilliImg from '../../../images/EndDashTilli.png';
 import down_black from '../../../images/down_black.png';
-
-
-
+import { Link } from "react-router-dom";
 
 
 class AskAge extends React.Component {
@@ -37,7 +33,6 @@ class AskAge extends React.Component {
     });
 
     return_content(pageIndex, index) {
-        const { commonPageData } = this.state;
         const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } = this.props
         if (commonGroupLanguageMappingData && commonGroupLanguageMappingData[pageIndex] && commonGroupLanguageMappingData[pageIndex].fieldData[index]) {
             return commonGroupLanguageMappingData[pageIndex].fieldData[index].value
@@ -79,9 +74,8 @@ class AskAge extends React.Component {
     render() {
 
         let { stage, data } = this.props;
-        let { trustPointText, totalPoint, PercentageTotal } = this.props
-        let UWPview = window.navigator && window.navigator.appVersion.toLowerCase().includes("webview")
-        const { commonPageData, deviceHeight } = this.state
+        // let UWPview = window.navigator && window.navigator.appVersion.toLowerCase().includes("webview")
+        const {deviceHeight } = this.state
         let content = data.content;
         let imagestyle = {};
         if (content.imagestyle)
@@ -92,23 +86,22 @@ class AskAge extends React.Component {
                 if (i.length > 1) {
                     imagestyle[i[0]] = JSON.parse(i[1]);
                 }
+                return true
             })
         }
 
 
-        var horizontalScreen = false
         if (window.innerHeight > window.innerWidth || window.innerHeight > 768) {
         }
         else {
 
-            horizontalScreen = true
         }
 
         let languageChoose = JSON.parse(localStorage.getItem("ChooseLanguage"))
 
         let changeLang = ""
         if (languageChoose) {
-            if (languageChoose.label == "Tamil") {
+            if (languageChoose.label === "Tamil") {
                 changeLang = "tamilintro"
             }
         }
@@ -140,7 +133,7 @@ class AskAge extends React.Component {
                     <p id={i.toString()} style={{ marginTop: "30%", fontWeight: "800", fontFamily: "montserrat-extrabold", fontSize: 16, color: "#000000" }}>{i}</p>
                 </div>
             </div>)
-            if (testIndex == 4) {
+            if (testIndex === 4) {
                 testIndex = 0
                 row_Array.push(<div className="row  mt-2 mb-2 ml-0" >
                     <div className="col-sm-2 col-2"></div>
@@ -150,7 +143,6 @@ class AskAge extends React.Component {
                 columnArray = []
             }
         }
-        let chooseOlder = "grater than 12"
 
         return (<React.Fragment>
             <Style>
@@ -163,7 +155,7 @@ class AskAge extends React.Component {
             <div className="module-parent">
                 <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                     <div className="col-2">
-                        <a onClick={() => {
+                        <Link onClick={() => {
                             // this.props.previousScorePage('Previous', stage,)
                             if (this.state.chooseAge) {
 
@@ -172,8 +164,8 @@ class AskAge extends React.Component {
                                 this.setState({ errorText: "Please Choose Age" })
                             }
                         }}>
-                            <img style={{ width: 48, height: 48 }} src={backImage} />
-                        </a>
+                            <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                        </Link>
                     </div>
                     <div className="col-10">
                         <p style={{
@@ -188,7 +180,7 @@ class AskAge extends React.Component {
 
                 <div className="row ml-0 askAge-divHeight" style={{ height: 400 }}>
                     <div className="col-sm-2 col-3" style={{ width: 219, height: 142 }} >
-                        <img className="img-size-askAge" style={{ width: 220, height: 420 }} src={imagePath} />
+                        <img className="img-size-askAge" style={{ width: 220, height: 420 }} src={imagePath} alt={""}/>
                     </div>
                     <div className="col-sm-8 col-8" style={{ backgroundColor: "#15CED5", width: "auto", height: 133, position: "inherit", borderRadius: 10, marginTop: "8%", paddingTop: "7%" }}>
                         <div dangerouslySetInnerHTML={{ __html: content.question }}></div>
@@ -202,7 +194,7 @@ class AskAge extends React.Component {
                 <div className="row  mt-2 mb-2" >
                     <div className="col-3" />
                     <div className="col-6" style={{ textAlign: 'center' }}>
-                        <img src={down_black} style={{ width: 30, height: 15 }} />
+                        <img src={down_black} style={{ width: 30, height: 15 }} alt={""} />
                     </div>
                     <div className="col-3" />
                 </div>
@@ -235,7 +227,7 @@ class AskAge extends React.Component {
             </div>
             <div className={"bottom-style " + changeLang}>
                 <div style={{ textAlign: "right" }}>
-                    <a onClick={() => {
+                    <Link onClick={() => {
                         if (this.state.chooseAge) {
                             this.updateDetails_Info(this.state.chooseAge)
                             this.props.changeStage('Next', stage, "scorepoint")
@@ -245,8 +237,8 @@ class AskAge extends React.Component {
                         }
 
                     }}>
-                        <img style={{ width: 44, height: 44 }} src={nextImage} />
-                    </a>
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                    </Link>
                 </div>
                 {/* <div className="progress-div">
                     <div style={{ flex: 1 }} >

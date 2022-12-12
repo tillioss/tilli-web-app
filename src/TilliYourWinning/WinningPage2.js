@@ -65,34 +65,28 @@ class WinningPage2 extends React.Component {
         var currentJson = moduleJson.stages[scoreCurrentStage - 1]
         console.log("currentJson", currentJson.storyPoints)
 
-
         let playingSubmitText = this.return_content(3)
         let playingBodyText = this.return_content(4)
-        let urlWiseCondition = ""
         let PlayingImage = Group1849
         if (totalPoint < 800) {
             playingSubmitText = this.return_content(3)
             playingBodyText = this.return_content(4)
             PlayingImage = Group1849
-            urlWiseCondition = "playagain"
         }
         else if (totalPoint < 1200) {
             playingSubmitText = this.return_content(5)
             playingBodyText = this.return_content(6)
             PlayingImage = NinjaImage
-            urlWiseCondition = "playagain"
         }
         else if (totalPoint < 2400) {
             playingSubmitText = this.return_content(7)
             playingBodyText = this.return_content(8)
             PlayingImage = AvengerImage
-            urlWiseCondition = "playagain"
         }
         else if (totalPoint >= 2400) {
             playingSubmitText = this.return_content(9)
             playingBodyText = this.return_content(10)
             PlayingImage = ChampionImage
-            urlWiseCondition = "playwait"
         }
 
         // console.log("moduleJson", moduleJson, scoreCurrentStage)
@@ -107,11 +101,10 @@ class WinningPage2 extends React.Component {
                 if (kval.theme === "StoryCard" && !kval.demoPage) {
                     var imageChange = surface1
                     if (kval.storyPoints || kval.storyPoints === 0) {
-                        var filterJson = kval.content.filter((mval) => { if (mval.theme === "DropToSelection") return true })
-
+                        var filterJson = kval.content.filter((mval) => { return (mval.theme === "DropToSelection") ? true : false
+                    })
                         if (filterJson) {
                             imageChange = MyConstant.keyList.apiURL + 'vp?action=module&key=' + filterJson[0].content.image.fileName + '&id=' + filterJson[0].content.image.fileType
-
                         }
 
                     }

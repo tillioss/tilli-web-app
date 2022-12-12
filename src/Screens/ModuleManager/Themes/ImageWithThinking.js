@@ -4,6 +4,7 @@ import backImage from '../../../images/outlineBackIcon.png';
 import spashes1 from '../../../images/spashes1.png';
 import PeopleIcons4 from '../../../images/PeopleIcons4.png';
 import nextImage from '../../../images/outlineRightIcon.png';
+import { Link } from 'react-router-dom';
 
 
 class ImageWithThinking extends React.Component {
@@ -37,6 +38,7 @@ class ImageWithThinking extends React.Component {
                 if (i.length > 1) {
                     imagestyle[i[0]] = JSON.parse(i[1]);
                 }
+                return true
             })
         }
         if (window.innerHeight > window.innerWidth || window.innerHeight > 768) {
@@ -79,9 +81,9 @@ class ImageWithThinking extends React.Component {
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className= {"row ml-0 "+( deviceHeight < 640  ? "pt-2 ": "pt-4") }>
                             <div className="col-2">
-                                <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                </Link>
                             </div>
                             <div className="col-10" style={{ alignSelf: 'center' }}>
 
@@ -98,7 +100,7 @@ class ImageWithThinking extends React.Component {
                         </div>
                         <div className="row mx-0">
                             <div style={{ backgroundColor: '#FFC7DE', borderRadius: innerWidth / 1.8, width: imageinnerwidth, height: imageinnerheight, borderStyle: 'solid', marginLeft: '5%' }}>
-                                <img className={`${content.imageclassname}`} style={{ width: imgheight, ...imagestyle }} src={PeopleIcons4} />
+                                <img className={`${content.imageclassname}`} style={{ width: imgheight, ...imagestyle }} src={PeopleIcons4} alt={""} />
                             </div>
 
 
@@ -109,9 +111,9 @@ class ImageWithThinking extends React.Component {
 
                 <div className="bottom-style">
                     <div style={{ textAlign: "right" }}>
-                        <a onClick={() => this.props.changeStage('Next', stage)}>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} />
-                        </a>
+                        <Link onClick={() => this.props.changeStage('Next', stage)}>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                        </Link>
                     </div>
                     <div className="progress-div">
                         <div style={{ flex: 1 }} >

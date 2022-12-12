@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
 import questionIcon from '../../../images/questionIcon.png';
 import tickMarkIcon from '../../../images/tickMarkIcon.png';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
-
+import { Link } from 'react-router-dom';
 
 
 class ChooseCheckboxQuestions extends React.Component {
@@ -81,7 +80,7 @@ class ChooseCheckboxQuestions extends React.Component {
             }
             return (
                 <div className="col-6 box-margin" style={{ margin: 0, padding: 0, paddingLeft: 10, marginTop: UWPview ? '65px' : '10px', }} key={index}>
-                    <a onClick={() => this.pushData(checkBox.content)}>
+                    <Link onClick={() => this.pushData(checkBox.content)}>
                         <div style={{
                             backgroundColor: exist
                                 ? content.colors.checked
@@ -100,10 +99,11 @@ class ChooseCheckboxQuestions extends React.Component {
                                     src={tickMarkIcon}
                                     style={{ width: 28, height: 23 }}
                                     resizeMode={'contain'}
+                                    alt={""}
                                 />
                             ) : null}
                         </div>
-                    </a>
+                    </Link>
                     <div className="box_width" style={{
                         backgroundColor: exist ? content.colors.box : checkBox.bgcolor, borderRadius: 16, borderWidth: 2, borderStyle: 'solid', marginLeft: 22, marginTop: 20
                         , display: 'flex', alignItems: 'center'
@@ -145,12 +145,12 @@ class ChooseCheckboxQuestions extends React.Component {
                 <div className="col-12" style={{ margin: 0, padding: 0 }}>
                     <div className= {"row ml-0 "+( deviceHeight < 640  ? "pt-2 ": "pt-4") } >
                         <div className="col-2">
-                            <a onClick={() => {
+                            <Link onClick={() => {
                                 this.checkedData()
                                 this.props.changeStage('Previous', stage)
                             }}>
-                                <img style={{ width: 48, height: 48 }} src={backImage} />
-                            </a>
+                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                            </Link>
                         </div>
                         <div className="col-10">
                             <p style={{
@@ -163,7 +163,7 @@ class ChooseCheckboxQuestions extends React.Component {
                         </div>
                     </div>
                     <div style={{ textAlign: 'left', paddingLeft: 15 }}>
-                        <img style={{ width: 50, marginLeft: 10 }} src={questionIcon} />
+                        <img style={{ width: 50, marginLeft: 10 }} src={questionIcon} alt={""}/>
                     </div>
                     <div className={(window.innerWidth < 330 ? "mt-2" : " mt-4")} >
                         <p style={{
@@ -184,9 +184,9 @@ class ChooseCheckboxQuestions extends React.Component {
 
             <div className="bottom-style">
                 <div style={{ textAlign: "right" }}>
-                    <a onClick={() => this.props.changeStage('Next', stage)}>
-                        <img style={{ width: 44, height: 44 }} src={nextImage} />
-                    </a>
+                    <Link onClick={() => this.props.changeStage('Next', stage)}>
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                    </Link>
                 </div>
                 <div className="progress-div">
                     <div style={{ flex: 1 }} >

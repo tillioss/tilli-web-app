@@ -21,7 +21,6 @@ class RegisterScreen extends React.Component {
 
     async validationCheck() {
         let { createPassword, createEmailId } = this.props;
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         if (createEmailId.trim() === '') {
             toast.error("Please Enter Mail!", {
                 position: "top-center",
@@ -34,7 +33,7 @@ class RegisterScreen extends React.Component {
             });
             return false
         }
-        else if (reg.test(createEmailId) === false) {
+        else if (/(.+)@(.+){2,}\.(.+){2,}/.test(createEmailId) === false) {
             toast.error("Please Enter Your Correct MailId!", {
                 position: "top-center",
                 autoClose: 3000,

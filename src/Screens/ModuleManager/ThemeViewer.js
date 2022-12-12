@@ -5,7 +5,6 @@ import GroupedInput from './ThemeView/GroupedInput';
 import LabelAnimation from './ThemeView/LabelAnimation';
 import AudioRecognize from './ThemeView/AudioRecognize';
 import SpeechRecognition from 'react-speech-recognition'
-import MyConstant from '../../config/MyConstant';
 
 
 export default class ThemeViewer extends React.Component {
@@ -63,9 +62,12 @@ export default class ThemeViewer extends React.Component {
                 hidden = layer.layers.hidden;
                 visible.map((row) => {
                     layers[row].visibility = "visible";
+                    return visible
                 })
                 hidden.map((row) => {
                     layers[row].visibility = "hidden";
+                    return hidden
+
                 })
                 break;
             case "Record":
@@ -74,9 +76,11 @@ export default class ThemeViewer extends React.Component {
                 audioRecognize = layer.layers.recordValue[0];
                 visible.map((row) => {
                     layers[row].visibility = "visible";
+                    return visible
                 })
                 hidden.map((row) => {
                     layers[row].visibility = "hidden";
+                    return hidden
                 })
                 this.setState({
                     audioRecognize
@@ -112,12 +116,12 @@ export default class ThemeViewer extends React.Component {
                     this.setState({ recordText: "", resetTextState: true })
                 }
                 break;
+                default:
         }
 
         // console.log("action", action)
         // console.log("layers", layers)
         // console.log("index", index)
-        let { navigation } = this.props
         this.setState({ layers }, () => {
             // if (action == "Next" && layers.length - 1 == index) {
             //     console.log("action-->", action)
@@ -146,7 +150,7 @@ export default class ThemeViewer extends React.Component {
     }
     layerBuildRecord(layer, index, recordText) {
         let builder;
-        let { deviceHeight, deviceWidth } = this.state;
+        let { deviceHeight } = this.state;
         switch (layer.type) {
             case "rectangle":
                 builder = <div
@@ -173,6 +177,7 @@ export default class ThemeViewer extends React.Component {
                     {recordText}
                 </div>
                 break;
+                default:
         }
 
         return builder;
@@ -296,7 +301,7 @@ export default class ThemeViewer extends React.Component {
                         this.dynamicThemeAction(layer, index)
                     }}
                 >
-                    <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} />
+                    <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} alt={""}/>
                 </div>
                 break;
             case "video":
@@ -320,6 +325,7 @@ export default class ThemeViewer extends React.Component {
                     </video>
                 </div>
                 break;
+                default:
         }
         return builder;
     }
@@ -332,7 +338,7 @@ export default class ThemeViewer extends React.Component {
         // console.log("layers", layers)
 
         let audioFileFind = ""
-        if (data && data.backgroundAudio && data.backgroundAudio != "") {
+        if (data && data.backgroundAudio && data.backgroundAudio !== "") {
             audioFileFind = data.backgroundAudio
         }
 
@@ -353,7 +359,7 @@ export default class ThemeViewer extends React.Component {
                     })
                 }
             </div>
-            {audioFileFind && audioFileFind != "" && <div
+            {audioFileFind && audioFileFind !== "" && <div
                 style={{ display: "none" }}
             >
                 <audio controls autoPlay >

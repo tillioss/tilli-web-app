@@ -68,14 +68,12 @@ class SingleTextImage extends React.Component {
             }
         })();
 
-        let Orientation = false
         if (window.innerHeight > window.innerWidth || window.innerHeight > 768) {
 
         }
         else {
             deviceHeight = 680
             deviceWidth = 360
-            Orientation = true
         }
         let { trustPointText, totalPoint, PercentageTotal } = this.props
 

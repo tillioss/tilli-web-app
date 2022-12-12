@@ -18,12 +18,12 @@ import EmpathyScreen from "./pages/EmpathyScreen";
 import './App.css';
 import MyConstant from './config/MyConstant';
 import SignUp from "./Screens/SignUp";
-import ModuleScreen_2 from './Screens/ModuleManager/ModuleScreen_2';
+import ModuleScreenTwo from './Screens/ModuleManager/ModuleScreen_2';
 import SignUpWithZip from './Screens/SignUpWithZip';
 import QrCode from './Screens/QrCode';
 import QrCodeScan from './Screens/QrCodeScan';
 import DemoUserLogin from './Screens/DemoUserLogin';
-import DemoUserLogin_2 from './Screens/DemoUserLogin_2';
+import DemoUserLoginTwo from './Screens/DemoUserLogin_2';
 
 import StartingDashBord from './Screens/EndScreen/StartingDashBord';
 import WinningPage2 from './TilliYourWinning/WinningPage2';
@@ -89,7 +89,7 @@ function App() {
                         <ModuleScreen {...props} />
                     } />
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/module/:id?/:levelIndex?/:progressingLevel?"} render={(props) =>
-                        <ModuleScreen_2 {...props} />
+                        <ModuleScreenTwo {...props} />
                     } />
 
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/Parent"} history={history} render={(props) =>
@@ -179,7 +179,7 @@ function App() {
                     } />
 
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/lego/module/:id?/:levelIndex?/:progressingLevel?"} render={(props) =>
-                        <ModuleScreen_2 {...props} />
+                        <ModuleScreenTwo {...props} />
                     } />
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/lego/levels"} history={history} render={(props) =>
                         <React.Fragment>
@@ -253,7 +253,7 @@ function App() {
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/demoflow/:gender?/:age?/:demoUserId?/:language?"} history={history} render={(props) =>
                         <React.Fragment>
                             <div className={classNameForDevice}>
-                                <DemoUserLogin_2 {...props} />
+                                <DemoUserLoginTwo {...props} />
                             </div>
                         </React.Fragment>
                     } />
@@ -261,14 +261,14 @@ function App() {
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/demo"} search='?gender=male&age=7&language=english&userType=normal' history={history} render={(props) =>
                         <React.Fragment>
                             <div className={classNameForDevice}>
-                                <DemoUserLogin_2 {...props} landingFrom={"nenesa"} />
+                                <DemoUserLoginTwo {...props} landingFrom={"nenesa"} />
                             </div>
                         </React.Fragment>
                     } />
                     <Route exact path={"/" + MyConstant.keyList.projectUrl + "/redirect-demo"} search='?gender=male&age=7&language=english&userType=normal' history={history} render={(props) =>
                         <React.Fragment>
                             <div className={classNameForDevice}>
-                                <DemoUserLogin_2 {...props} />
+                                <DemoUserLoginTwo {...props} />
                             </div>
                         </React.Fragment>
                     } />
@@ -276,7 +276,7 @@ function App() {
                         <React.Fragment>
                             <div className={classNameForDevice}>
                                 <UserManage {...props} landingFrom="test" />
-                                {/* <DemoUserLogin_2 {...props} landingFrom="test"/> */}
+                                {/* <DemoUserLoginTwo {...props} landingFrom="test"/> */}
                             </div>
                         </React.Fragment>
                     } />
@@ -284,7 +284,7 @@ function App() {
                         <React.Fragment>
                             <div className={classNameForDevice}>
                                 <UserManage {...props} landingFrom="demo" />
-                                {/* <DemoUserLogin_2 {...props} landingFrom="demo"/> */}
+                                {/* <DemoUserLoginTwo {...props} landingFrom="demo"/> */}
                             </div>
                         </React.Fragment>
                     } />

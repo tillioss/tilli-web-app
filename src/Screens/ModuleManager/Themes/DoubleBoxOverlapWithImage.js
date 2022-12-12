@@ -3,7 +3,7 @@ import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
 import MyConstant from '../../../config/MyConstant';
-import Rocket_Launch from '../../../images/Rocket_Launch.gif';
+import { Link } from 'react-router-dom';
 
 class DoubleBoxOverlapWithImage extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
     render() {
         var { stage, data } = this.props;
         let { trustPointText, totalPoint, PercentageTotal } = this.props
-        let { deviceHeight, deviceWidth } = this.state
+        let { deviceHeight } = this.state
         var content = data.content;
         var imagestyle = {};
         if (content.imagestyle)
@@ -35,6 +35,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
                 if (i.length > 1) {
                     imagestyle[i[0]] = JSON.parse(i[1]);
                 }
+                return true
             })
         }
 
@@ -87,9 +88,9 @@ class DoubleBoxOverlapWithImage extends React.Component {
                     <div className="col-12">
                         <div className={"row " + (deviceHeight < 640 ? "pt-2 " : "pt-4")} >
                             <div className="col-2">
-                                <a onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                </Link>
                             </div>
                             <div className="col-10" style={{ alignSelf: 'center' }}>
                                 <div dangerouslySetInnerHTML={{ __html: data.title }} />
@@ -121,13 +122,13 @@ class DoubleBoxOverlapWithImage extends React.Component {
                             'vp?action=module&key=' +
                             content.image.fileName +
                             '&id=' +
-                            content.image.fileType} />
+                            content.image.fileType} alt={""}/>
                     </div>
                 </div>
 
                 <div className="bottom-style">
                     <div style={{ textAlign: "right" }}>
-                        <a onClick={() => {
+                        <Link onClick={() => {
                             if (detectHorizontal) {
                                 var elements = document.getElementsByClassName('mobile-responsive'); // get all elements
                                 for (var i = 0; i < elements.length; i++) {
@@ -137,8 +138,8 @@ class DoubleBoxOverlapWithImage extends React.Component {
                             this.props.changeStage('Next', stage)
                         }
                         }>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} />
-                        </a>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                        </Link>
                     </div>
                     <div className="progress-div">
                         <div style={{ flex: 1 }} >
