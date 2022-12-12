@@ -2,7 +2,6 @@ import React from 'react';
 import logos from "../../src/images/logos.png";
 import MyConstant from '../config/MyConstant';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 class Manage extends React.Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class Manage extends React.Component {
 
     return <div className="manage-container">
       <div className="logo my-2">
-        <img className="" src={logos} />
+        <img className="" src={logos} alt={""}/>
       </div>
       <div className="my-2">
         <div className="header-text">Please Select Preferred Language</div>

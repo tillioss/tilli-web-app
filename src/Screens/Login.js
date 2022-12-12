@@ -1,8 +1,6 @@
 import React from 'react';
 import logos from "../../src/images/logos.png";
 import MyConstant from '../config/MyConstant';
-import { Style } from "react-style-tag";
-import DropDown from "../Component/DropDown";
 import LanguageSelect from "../Screens/LanguageSelect";
 import { checkNullAndReturnString, doConnect } from "../config/Common";
 import { connect } from 'react-redux';
@@ -40,13 +38,12 @@ class Login extends React.Component {
   loginCheck = async () => {
     let { Username, Password } = this.state;
     let postJson = { loginId: Username, password: Password, sessionId: '1223' };
-    let that = this;
     let responseData = await doConnect("login", "POST", postJson);
     var json = responseData;
     var response1 = json.response;
 
-    if (response1 == 'Success') {
-      if (json.id != '') {
+    if (response1 === 'Success') {
+      if (json.id !== '') {
         // this.props.lSetAuthData('loggedUserId', json.id);
         // this.props.lSetAuthData('loggedUserName', json.name);
         // this.props.lSetAuthData('loggedSession', json.sessionId);
@@ -66,7 +63,7 @@ class Login extends React.Component {
   onChangeData(e, Jsondata) {
 
     let data = JSON.parse(Jsondata)
-    this.setState({ LanguageData: e.label == "hindi" ? false : data })
+    this.setState({ LanguageData: e.label === "hindi" ? false : data })
 
 
 
@@ -76,7 +73,6 @@ class Login extends React.Component {
   returnContent(index) {
 
     var pageIndex = 1
-    const { languageMappingData, languageBaseData } = this.state;
     const { outerGroupLanguageMappingData, outerGroupLanguageBaseData } = this.props
 
 
@@ -96,8 +92,6 @@ class Login extends React.Component {
 
 
   render() {
-    console.log(this.props);
-    const { LanguageData } = this.state;
     return (
       <React.Fragment>
 
@@ -105,7 +99,7 @@ class Login extends React.Component {
         <div className="row mx-0" >
           <div className="col-sm-2"> </div>
           <div className="col-sm-8">
-            <img style={{ width: 80, height: 80 }} src={logos} />
+            <img style={{ width: 80, height: 80 }} src={logos} alt={""}/>
           </div>
           <div className="col-sm-2"> </div>
         </div>

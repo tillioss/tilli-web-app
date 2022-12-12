@@ -24,7 +24,7 @@ class LanguageSelect extends React.Component {
 
     checklanguageChoose() {
         let { optionsData } = this.state;
-        let getEnglishDetails = optionsData.filter((key) => { return key.label.toLowerCase() == "english" })
+        let getEnglishDetails = optionsData.filter((key) => { return key.label.toLowerCase() === "english" })
         if (!localStorage.getItem("ChooseLanguage")) {
             if (getEnglishDetails.length > 0) {
                 this.getLangugeBaseData(getEnglishDetails[0])
@@ -40,6 +40,7 @@ class LanguageSelect extends React.Component {
         let datavalue = JSON.parse(responseData.response)
         Object.keys(datavalue).map(ival => {
             optionsData.push({ label: datavalue[ival], value: ival })
+            return true
         })
         // selectedOption.push({label:"",value:""})
         this.setState({ "languagesData": JSON.parse(responseData.response), optionsData }, () => {
@@ -76,6 +77,7 @@ class LanguageSelect extends React.Component {
 
                 this.getLangugeBaseData(optionsData[e.target.id])
             }} >{ival.label} </div>)
+            return true
         })
 
         return (

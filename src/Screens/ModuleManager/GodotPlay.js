@@ -11,9 +11,8 @@ function GodotPlay(props) {
         if (match) {
             let { params } = match;
             if (params) {
-                let { themeId, gameId, gameIndex } = params;
-                // getThemeDetails(themeId)
-                if (gameId != "" && gameId) {
+                let {gameId} = params;
+                if (gameId !== "" && gameId) {
                     setGodDotDocsId(gameId)
                     setScript(gameId);
                 }
@@ -41,11 +40,17 @@ function GodotPlay(props) {
             // }, 9000)
 
         }
-
+        function onLoad() {
+            if (godDotDocsId && godDotDocsId !== "") {
+                const GODOT_CONFIG = { "args": [], "canvasResizePolicy": 2, "executable": `${MyConstant.keyList.apiURL}vp-game-file/module/zip/${godDotDocsId}/index`, "experimentalVK": false, "fileSizes": { pck: 1703792, wasm: 17503191 }, "focusCanvas": true, "gdnativeLibs": [] };
+                var engine = window.Engine(GODOT_CONFIG);
+                setEngine(engine)
+            }
+        }
         return () => {
             document.body.removeChild(script)
         }
-    }, [godDotDocsId])
+    }, [godDotDocsId,props])
 
     useEffect(() => {
         if (engine) {
@@ -73,7 +78,7 @@ function GodotPlay(props) {
                     elem.style.display = 'none';
                 });
                 animationCallbacks = animationCallbacks.filter(function (value) {
-                    return (value != animateStatusIndeterminate);
+                    return (value !== animateStatusIndeterminate);
                 });
                 switch (mode) {
                     case 'progress':
@@ -96,7 +101,7 @@ function GodotPlay(props) {
 
             function animateStatusIndeterminate(ms) {
                 var i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
-                if (statusIndeterminate.children[i].style.borderTopColor == '') {
+                if (statusIndeterminate.children[i].style.borderTopColor === '') {
                     Array.prototype.slice.call(statusIndeterminate.children).forEach(child => {
                         child.style.borderTopColor = '';
                     });
@@ -150,13 +155,7 @@ function GodotPlay(props) {
         }
     }, [engine])
 
-    function onLoad() {
-        if (godDotDocsId && godDotDocsId != "") {
-            const GODOT_CONFIG = { "args": [], "canvasResizePolicy": 2, "executable": `${MyConstant.keyList.apiURL}vp-game-file/module/zip/${godDotDocsId}/index`, "experimentalVK": false, "fileSizes": { pck: 1703792, wasm: 17503191 }, "focusCanvas": true, "gdnativeLibs": [] };
-            var engine = window.Engine(GODOT_CONFIG);
-            setEngine(engine)
-        }
-    }
+   
 
     return <div className="game-play">
         <canvas id='canvas'>
