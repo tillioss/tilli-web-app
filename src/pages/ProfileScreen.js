@@ -4,6 +4,7 @@ import LanguageSelect from "../Screens/LanguageSelect";
 import { connect } from 'react-redux';
 import { doConnect } from "../config/Common";
 
+
 class ProfileScreen extends React.Component {
     constructor(props) {
         super(props)
@@ -38,7 +39,7 @@ class ProfileScreen extends React.Component {
 
         let postJson = { sessionId: '1223', userId: localStorage.getItem("loggedUserId") };
         console.log('logout=>', postJson)
-        // let responseData = await doConnect("logout", "POST", postJson);
+        await doConnect("logout", "POST", postJson);
         //removed choosecheckboxselected 
         localStorage.removeItem("0_selectedData");
         localStorage.removeItem("loggedUserId");

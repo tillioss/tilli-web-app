@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
  
 
- export default   (props) => {
+ const DropDown =  (props) => {
 return(
 <Select
         value={props.selectedOption}
@@ -12,3 +12,4 @@ return(
 )  
 
 }
+export default DropDown

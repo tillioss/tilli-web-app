@@ -95,10 +95,7 @@ export default class ModuleScreen extends React.Component {
                 levelNo: parseInt(progressingLevel) + 1,
                 sessionId: "1232323"
             };
-
-
-            let responseData = await doConnect("updateLevelAttempt", "POST", postJson);
-
+            await doConnect("updateLevelAttempt", "POST", postJson);
             this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
         }
         this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')

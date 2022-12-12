@@ -22,7 +22,6 @@ class Login extends React.Component {
 
     loginCheck() {
         let { emailId, password, testUserName, testPassword } = this.state
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
         let errors = {};
         if (emailId.trim() === '') {
             errors["email"] = "Please Enter Your MailId!";
@@ -36,7 +35,7 @@ class Login extends React.Component {
                 progress: undefined,
             });
 
-        } else if (reg.test(emailId) === false) {
+        } else if (/(.+)@(.+){2,}\.(.+){2,}/.test(emailId) === false) {
             errors["email"] = "Please Enter Your Correct Mail!";
             toast.error("Please Enter Your Correct MailId!", {
                 position: "top-center",
