@@ -12,8 +12,6 @@ import outlineRoundIconOnly from '../../images/outlineRoundIconOnly.png';
 import { fetchGetLanguageMapping, fetchGetLevelNameLanguageMapping } from '../../redux/actions/languageActions';
 
 
-
-
 class StartingDashBord extends React.Component {
     constructor(props) {
         super(props);
@@ -57,7 +55,7 @@ class StartingDashBord extends React.Component {
     async LanguageBaseDataget(e) {
 
         let getlanuage = localStorage.getItem("currentLanguage")
-        if (getlanuage != e.value) {
+        if (getlanuage !== e.value) {
             localStorage.setItem("ChooseLanguage", JSON.stringify(e))
             localStorage.setItem("currentLanguage", e.value)
             let postJson = { grouptype: "outerPageGroup", languageId: e.value, sessionId: "1223" };
@@ -69,7 +67,6 @@ class StartingDashBord extends React.Component {
             let postJson_5 = { grouptype: "commonPageGroup", languageId: e.value, sessionId: "1223" };
             this.props.fetchGetLanguageMappingData(postJson_5)
             let postJson_4 = { languageId: e.value, sessionId: "1223" }
-            let that = this;
             this.props.lanuguageJsonUpdate()
 
             let responseData = await doConnect("getLevelsNameLanguageMapping", "POST", postJson_4);
@@ -83,7 +80,6 @@ class StartingDashBord extends React.Component {
     }
 
     render() {
-        let { deviceHeight } = this.state
         let UWPview = window.navigator && window.navigator.appVersion.toLowerCase().includes("webview")
 
         return (<>
@@ -99,7 +95,7 @@ class StartingDashBord extends React.Component {
                                 width: '75%', position: 'absolute',
                                 fontFamily: 'schoolbell-regular',
                             }}>
-                                <img src={image_13} style={{ width: 40, height: 40, position: 'absolute', left: '-20%', top: '18%', marginTop: -2 }} />
+                                <img src={image_13} style={{ width: 40, height: 40, position: 'absolute', left: '-20%', top: '18%', marginTop: -2 }} alt={""} />
 
                             </div>
                         </div>
@@ -117,7 +113,7 @@ class StartingDashBord extends React.Component {
                                 left: '7%', top: '35%'
                                 , fontFamily: 'schoolbell-regular',
                             }}>
-                                <img src={image_14} style={{ width: 20, height: 10, position: 'absolute', left: '10%', marginTop: -1 }} />
+                                <img src={image_14} style={{ width: 20, height: 10, position: 'absolute', left: '10%', marginTop: -1 }} alt={""}/>
                             </div>
                         </div>
                     </div>
@@ -127,7 +123,7 @@ class StartingDashBord extends React.Component {
                     }}>
                         <div style={{ backgroundImage: `url(${outlineRoundIconOnly})`, width: 30, height: 30, backgroundSize: 'cover', position: 'absolute', justifyContent: 'center', alignSelf: 'center', textAlign: 'center' }}>
                             <div style={{ width: '100%', position: 'absolute', left: '10%', top: '30%', fontFamily: 'schoolbell-regular', }}>
-                                <img src={image_15} style={{ width: 15, height: 12, position: 'absolute', left: '15%' }} />
+                                <img src={image_15} style={{ width: 15, height: 12, position: 'absolute', left: '15%' }} alt={""}/>
 
                             </div>
                         </div>
@@ -143,7 +139,7 @@ class StartingDashBord extends React.Component {
                     <div className="row pt-3 mt-2">
                         <div className="col-4 col-sm-4 col-lg-4">
                             <div className="st-img-bg" >
-                                <img className="st-img" src={EndDashTilli} />
+                                <img className="st-img" src={EndDashTilli} alt={""}/>
                             </div>
 
                         </div>
@@ -168,7 +164,7 @@ class StartingDashBord extends React.Component {
                     <div className="col-sm-10 col-10">
                         <div className="row mt-3 row-space">
                             <div className="col-sm-3 col-lg-2 col-3">
-                                <img className="img_1" src={Estart} />
+                                <img className="img_1" src={Estart} alt={""}/>
                             </div>
 
                             <div className="col-sm-9 col-lg-10 col-9">
@@ -181,7 +177,7 @@ class StartingDashBord extends React.Component {
 
                         <div className="row  row-space">
                             <div className="col-sm-3 col-lg-2 col-3">
-                                <img className="img_2" src={EHeart} />
+                                <img className="img_2" src={EHeart} alt={""}/>
                             </div>
                             <div className="col-sm-9 col-lg-10 col-9">
                                 <p className="img_font" style={{ textAlign: UWPview ? 'left' : 'start' }}>
@@ -191,7 +187,7 @@ class StartingDashBord extends React.Component {
 
                         <div className="row row-space">
                             <div className="col-sm-3 col-lg-2 col-3">
-                                <img className="img_3" src={EHappy} />
+                                <img className="img_3" src={EHappy} alt={""}/>
                             </div>
                             <div className="col-sm-9 col-lg-10 col-9">
                                 <p className="img_font" style={{ textAlign: UWPview ? 'left' : 'start' }} >

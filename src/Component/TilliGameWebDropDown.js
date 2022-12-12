@@ -5,7 +5,7 @@ import downArrow from "../images/downArrow.png"
 
 
 
-export default (props) => {
+const TilliGameWebDropDown = (props) => {
 
   // const customStyles = () => ({
   //   control: (styles) => ({
@@ -49,7 +49,7 @@ export default (props) => {
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
-        <img style={{ width: 22, }} src={downArrow} />
+        <img style={{ width: 22, }} src={downArrow} alt={""}/>
         <div style={{ width: 10 }}></div>
       </components.DropdownIndicator>
     );
@@ -72,7 +72,7 @@ export default (props) => {
       <components.SingleValue {...props}>
         <div style={{ display: "flex" }}>
           <div style={{ width: 30 }}>
-            <img style={{ width: 25, height: 25, }} src={selectedOption.extra.image} />
+            <img style={{ width: 25, height: 25, }} src={selectedOption.extra.image} alt={""}/>
           </div>
           <div style={{ flex: 1, fontSize: 18, fontWeight: 300, }}>{selectedOption.label}</div>
         </div>
@@ -94,3 +94,4 @@ export default (props) => {
     />
   )
 }
+export default TilliGameWebDropDown
