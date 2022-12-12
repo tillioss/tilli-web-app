@@ -3,6 +3,8 @@ import { Style } from "react-style-tag";
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
 import MyConstant from '../../config/MyConstant';
+import { Link } from "react-router-dom";
+
 
 class DoubleBoxOverlapWithImage extends React.Component {
     constructor(props) {
@@ -51,11 +53,11 @@ class DoubleBoxOverlapWithImage extends React.Component {
                     <div className="col-12">
                         <div className="row mt-4">
                             <div className="col-2">
-                                <a onClick={()=>this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48,height:48 }} src={backImage} />
-                                </a>
+                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""} />
+                                </Link>
                             </div>
-                            <div className="col-10" style={{alignSelf:'center'}}>
+                            <div className="col-10" style={{ alignSelf: 'center' }}>
                                 <p style={{
                                     //color: '#474A57',
                                     fontSize: 27,
@@ -81,7 +83,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
                                         //color: '#474A57',
                                         fontFamily: 'montserrat-medium',
                                         fontWeight: '600',
-                                        margin: 0,paddingLeft:10,paddingRight:10,textAlign:'center'
+                                        margin: 0, paddingLeft: 10, paddingRight: 10, textAlign: 'center'
                                     }}>
                                     {content.text}
                                 </p>
@@ -100,13 +102,13 @@ class DoubleBoxOverlapWithImage extends React.Component {
                             'vp?action=module&key=' +
                             content.image.fileName +
                             '&id=' +
-                            content.image.fileType} />
+                            content.image.fileType} alt={""} />
                     </div>
                 </div>
                 <div className="forward-step">
-                    <a onClick={() => this.props.changeStage('Next', stage)}>
-                        <img style={{ width: 44,height:44}} src={nextImage} />
-                    </a>
+                    <Link onClick={() => this.props.changeStage('Next', stage)}>
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                    </Link>
                 </div>
             </React.Fragment >
         )

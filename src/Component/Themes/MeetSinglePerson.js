@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
 import MyConstant from '../../config/MyConstant';
-import people_set from '../../images/people_set.png';
 import heart from '../../images/heart.png';
 import { connect } from 'react-redux';
-
-
+import {Link} from "react-router-dom";
 
 
 
@@ -23,13 +21,9 @@ class MeetSinglePerson extends React.Component {
 
     componentDidMount() {
 
-
-
     }
 
     return_content(pageIndex, index) {
-
-        const { commonPageData } = this.state;
 
         const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } = this.props
 
@@ -45,24 +39,13 @@ class MeetSinglePerson extends React.Component {
 
         else
             return ""
-
-
-
     }
-
-
     render() {
-
-
         let { stage, data, themeType } = this.props;
-        const { commonPageData } = this.state;
         let content = data.content;
-        //console.log('content',content)
         return (<React.Fragment>
-
             <Style>
                 {`
-
 .row
 {
     margin-left:0px !important
@@ -75,8 +58,8 @@ class MeetSinglePerson extends React.Component {
                     <div className="row mt-4">
 
                         <div className="col-2">
-                            <a onClick={() => {
-                                if (themeType == "StoryCard") {
+                            <Link onClick={() => {
+                                if (themeType === "StoryCard") {
 
                                     this.props.changeStage('Previous', this.props.parentindex)
                                 }
@@ -84,8 +67,8 @@ class MeetSinglePerson extends React.Component {
                                     this.props.changeStage('Previous', stage)
                                 }
                             }}>
-                                <img style={{ width: 48, height: 48 }} src={backImage} />
-                            </a>
+                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                            </Link>
                         </div>
                         <div className="col-8" style={{ alignSelf: 'center' }}>
                             <p style={{ color: "black", fontFamily: 'montserrat-extrabold',
@@ -105,7 +88,7 @@ class MeetSinglePerson extends React.Component {
                                 'vp?action=module&key=' +
                                 data.content.image.fileName +
                                 '&id=' +
-                                data.content.image.fileType} style={{ width: 140, height: 250 }} />
+                                data.content.image.fileType} style={{ width: 140, height: 250 }} alt={""}/>
 
 
 
@@ -146,7 +129,7 @@ class MeetSinglePerson extends React.Component {
 
                             <p style={{ fontSize: 20, fontWeight: "500", fontFamily: "montserrat-medium", paddingTop: 10 }}>
 
-                                <span style={{ marginRight: 10 }}>  <img style={{ width: 22, height: 20 }} src={heart} /> </span>
+                                <span style={{ marginRight: 10 }}>  <img style={{ width: 22, height: 20 }} src={heart} alt={""} /> </span>
 
 
                                 {content.bottomText}
@@ -155,7 +138,7 @@ class MeetSinglePerson extends React.Component {
                                 <span style={{ marginLeft: 20 }} onClick={() => {
 
 
-                                    if (themeType == "StoryCard") {
+                                    if (themeType === "StoryCard") {
 
                                         this.props.changeindex('Next', stage)
                                     }
@@ -163,7 +146,7 @@ class MeetSinglePerson extends React.Component {
                                         this.props.changeStage('Next', stage)
                                     }
 
-                                }}>  <img style={{ width: 31, height: 31 }} src={nextImage} /> </span>
+                                }}>  <img style={{ width: 31, height: 31 }} src={nextImage} alt={""}/> </span>
                             </p>
                         </div>
                         <div className="col-1" />

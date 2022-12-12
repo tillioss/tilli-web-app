@@ -4,31 +4,24 @@ import nextImage from '../../images/outlineRightIcon.png';
 import MyConstant from "../../config/MyConstant";
 import { Style } from "react-style-tag";
 import { connect } from 'react-redux';
+import {Link} from "react-router-dom";
 
 
 
 class IntroducePersons extends React.Component {
     constructor(props) {
-
         super(props)
-
         this.state = {
             commonPageData: false
         }
 
     }
 
-
     componentDidMount() {
-
-
-
 
     }
 
     return_content(pageIndex, index) {
-
-        const { commonPageData } = this.state;
 
         const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } = this.props
 
@@ -52,11 +45,7 @@ class IntroducePersons extends React.Component {
     render() {
 
         let { stage, data } = this.props;
-        const { commonPageData } = this.state
         let content = data.content;
-
-
-
         console.log(content.persons[0])
 
         return (<React.Fragment>
@@ -70,9 +59,9 @@ class IntroducePersons extends React.Component {
 
             <div className="row mt-3 ml-0">
                 <div className="col-2">
-                    <a onClick={() => this.props.changeStage('Previous', stage)}>
-                        <img style={{ width: 48, height: 48 }} src={backImage} />
-                    </a>
+                    <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                        <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                    </Link>
                 </div>
                 <div className="col-10">
                     <p style={{
@@ -115,14 +104,9 @@ class IntroducePersons extends React.Component {
                                 'vp?action=module&key=' +
                                 ival.image.fileName +
                                 '&id=' +
-                                ival.image.fileType} style={index == 0 ? { width: 100, height: "auto", marginLeft: -15, marginTop: -10 } : { width: 100, height: 90, marginLeft: -15 }} />
+                                ival.image.fileType} style={index === 0 ? { width: 100, height: "auto", marginLeft: -15, marginTop: -10 } : { width: 100, height: 90, marginLeft: -15 }} alt={""}/>
 
                         </div>
-
-
-
-
-
                         <div className="col-8" style={{
                             paddingLeft: '8%', backgroundColor: ival.bg, marginLeft: 104, borderRadius: 20
                             , paddingBottom: 20, paddingTop: 15
@@ -161,9 +145,9 @@ class IntroducePersons extends React.Component {
 
 
             <div className="forward-step">
-                <a onClick={() => this.props.changeStage('Next', stage)}>
-                    <img style={{ width: 44, height: 44 }} src={nextImage} />
-                </a>
+                <Link onClick={() => this.props.changeStage('Next', stage)}>
+                    <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                </Link>
             </div>
 
 
