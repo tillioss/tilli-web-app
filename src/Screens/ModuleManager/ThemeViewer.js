@@ -42,15 +42,33 @@ export default class ThemeViewer extends React.Component {
 
 
     dynamicThemeAction(layer, index) {
-        let { stage } = this.props
+        let { stage,data } = this.props
         let { layers } = this.state;
         let action = layer.action;
         let visible;
         let hidden;
         let audioRecognize;
         let that = this;
+        let themeName = data.theme;
+        let themeType = data.themeType;
+        let currentStageIndex = stage - 1;
+        let infoTheme = { themeName, themeType, chooseLayer: layer, layers: data.layers, stageIndex: currentStageIndex, layerIndex: index }
+        if (data && typeof (data.dynamic) !== "undefined" && typeof (data.dynamic.record) !== "undefined") {
+            infoTheme.speechText = data.dynamic.record.answer;
+            infoTheme.userActionText = data.dynamic.record.answer
+        }
+        if (data && typeof (data.changeLayerIndex) !== "undefined") {
+            infoTheme.changeLayerIndex = data.changeLayerIndex;
+            infoTheme.changeLayer = data.changeLayer
+            if (typeof (data.changeLayer.userActionText) !== "undefined") {
+                infoTheme.userActionText = data.changeLayer.userActionText
+            }
+            delete data.changeLayerIndex
+            delete data.changeLayer
+        }
         switch (action) {
             case "Next":
+                that.captureDetails("Next", infoTheme)
                 this.props.changeStage("Next", stage);
                 break;
             case "Previous":
@@ -330,9 +348,26 @@ export default class ThemeViewer extends React.Component {
         return builder;
     }
 
+    captureDetails(type, infoTheme,) {
+        let { dynamicCaptureInfo } = this.props
+        let { themeType, stageIndex } = infoTheme;
+        dynamicCaptureInfo.themeType = themeType;
 
+        if (typeof (infoTheme.changeLayer) !== "undefined") {
+            infoTheme.changeLayer.layers.hidden.map((row) => {
+                infoTheme.layers[row].visibility = "visible";
+            })
+            infoTheme.changeLayer.layers.visible.map((row) => {
+                infoTheme.layers[row].visibility = "hidden";
+            })
+        }
+
+        dynamicCaptureInfo.dynamic.dynamicThemes[stageIndex] = infoTheme;
+        // console.log("***--->", stageIndex, dynamicCaptureInfo)
+
+    }
     render() {
-        let { layers, audioRecognize, recordText } = this.state;
+        let { layers, audioRecognize, recordText, } = this.state;
         let { data } = this.props
         // console.log("audioRecognize", audioRecognize)
         // console.log("layers", layers)
