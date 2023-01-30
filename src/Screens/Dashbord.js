@@ -59,7 +59,6 @@ class Dashbord extends React.Component {
       this.setState({ levelLanguageMappingData: {} })
     }
 
-
   }
   async getLanguageMappingData() {
 
@@ -136,7 +135,7 @@ class Dashbord extends React.Component {
     let that = this;
     let responseData = await doConnect("getGameLevels", "POST", postJson);
     let json = responseData;
-    // console.log('json level', json)
+    // console.log('json level22', json)
     if (
       Object.keys(json).length > 0 &&
       json.levelsMap !== null &&
@@ -208,8 +207,9 @@ class Dashbord extends React.Component {
           <span className="ffmedium" style={{ paddingTop: 6, width: '100%', fontWeight: 700, fontSize: 14, whiteSpace: 'nowrap', }}>{this.returnContent(5)} {index + 1} </span>
         </div>)
       }
-      return retrunData
+      return true
     })
+    return retrunData
 
   }
 
@@ -274,15 +274,12 @@ class Dashbord extends React.Component {
             </div>
           </React.Fragment >
         )
-        return retrunData
+        return true
       })
-    
-
+      return retrunData
   }
 
   render() {
-
-
     return (
       <React.Fragment>
 
@@ -321,9 +318,6 @@ class Dashbord extends React.Component {
 
                 </div>
               </div>
-
-
-
             </div>
             <div className="col-1 ml-2"
               onClick={() => {
@@ -446,8 +440,6 @@ class Dashbord extends React.Component {
           </div>
 
         </div>
-
-
 
         <div className="row  mx-0 px-2 level-margin"  >
           <div className="col-12 opadding" style={{
