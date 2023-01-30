@@ -37,7 +37,7 @@ To get started, please have a look at our [User and Developer Documentation](htt
 
 # Installing Tilli Web App (For Developers)
 
-Developers can install the Tilli Web App to make changes/optimizations for some of the hard coded screens.
+Developers can install the Tilli Web App to check their modules/features created in the Tilli IDE.
 
 1. Configuration:
 
