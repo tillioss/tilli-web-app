@@ -221,6 +221,10 @@ class AudioQuizScreen extends React.Component {
         let { data, stage } = this.props
         let { index_value } = this.state
 
+        let copyhtmlQuestion = data.content.feelingsDataList[index_value].questions
+        var plainText = copyhtmlQuestion.replace(/<[^>]*>/g, '');
+        plainText = plainText.replace(/^\s+|\s+$/gm, '');
+        data.content.feelingsDataList[index_value].questionText = plainText
 
         if (data.content.feelingsDataList.length !== index_value + 1) {
             this.setState({ index_value: index_value + 1, bg_color: "#FFBD12", viewType: "question" })
