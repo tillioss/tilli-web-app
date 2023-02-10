@@ -1,0 +1,74 @@
+name: Feedback/Doubts Form
+description: Suggest feedback or ask doubts for more clarity with regard to our Tilli-Web-App
+title: "Have a [feedback], [doubt]"
+labels: ["feedback/doubt","documentation"]
+assignees:
+  - Tilliforkids
+  - mynap
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for taking the time to fill out this report!
+- type: input
+  id: contact
+  attributes:
+    label: Contact Details
+    description: How can we get in touch with you if we need more info?
+    placeholder: ex. email@example.com
+  validations:
+    required: false
+- type: textarea
+  id: what-happened
+  attributes:
+    label: What is your Feedback/ Doubt?
+    description: Kindly elaborate the same or what did you expect to happen or what went wrong,  and how can we improve?
+    placeholder: Tell us what you’d like to know or see. Suggestions are welcome
+  validations:
+    required: true
+- type: dropdown
+  id: browsers
+  attributes:
+    label: Browsers
+    description: What browsers are you seeing the problem on ?
+    multiple: true
+    options:
+      - Firefox
+      - Chrome
+      - Safari
+      - Microsoft Edge
+      - Opera
+  validations:
+    required: false
+- type: dropdown
+  id: os
+  attributes:
+    label: OS
+    description: What is the impacted environment ?
+    multiple: true
+    options:
+      - Windows
+      - Linux
+      - Mac
+  validations:
+    required: false
+- type: dropdown
+  id: priority
+  attributes:
+    label: Priority
+    description: "High Priority= must be completed as soon possible, Medium Priority= need to be completed but can wait after high priority items, Low Priority= \"nice to have\" changes."
+    multiple: false
+    options:
+      - High Priority
+      - Medium Priority
+      - Low Priority
+  validations:
+    required: true
+- type: checkboxes
+  id: terms
+  attributes:
+    label: Code of Conduct
+    description: By submitting this issue, you agree to follow our [Code of Conduct](https://tillioss.github.io/docs/code-of-conduct)
+    options:
+      - label: I agree to follow this project's Code of Conduct
+        required: true

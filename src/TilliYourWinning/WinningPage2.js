@@ -61,9 +61,10 @@ class WinningPage2 extends React.Component {
                 elements[i].style.height = "auto"
             }
         }
-
+        if (!moduleJson) {
+            return false
+        }
         var currentJson = moduleJson.stages[scoreCurrentStage - 1]
-        console.log("currentJson", currentJson.storyPoints)
 
         let playingSubmitText = this.return_content(3)
         let playingBodyText = this.return_content(4)
