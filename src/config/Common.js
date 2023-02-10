@@ -172,4 +172,10 @@ export function readJsonFile(screenName) {
     }
     return returnData
 }
-
+export function date_YY_MM_DD(ts) {
+    var date_ob = new Date(parseInt(ts));
+    var year = date_ob.getFullYear();
+    var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    var date = ("0" + date_ob.getDate()).slice(-2);
+    return year + "-" + month + "-" + date 
+}

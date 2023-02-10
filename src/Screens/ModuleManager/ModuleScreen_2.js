@@ -14,13 +14,13 @@ import StoryCardScreen from './Themes/StoryCardScreen';
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
 import MyConstant from '../../config/MyConstant';
-import {doConnect } from "../../config/Common";
+import { doConnect } from "../../config/Common";
 import DoubleBoxUnderWithImage from './Themes/DoubleBoxUnderWithImage';
 import SingleTextImage from './Themes/SingleTextImage';
 import StartingDashBord from '../EndScreen/StartingDashBord';
 import WinningPage2 from '../../TilliYourWinning/WinningPage2';
 import { connect } from 'react-redux';
-import { userTrack } from '../../config/Common';
+import { userTrack, date_YY_MM_DD } from '../../config/Common';
 import AskGender from './Themes/AskGender';
 import AskAge from './Themes/AskAge';
 import ThemeViewer from './ThemeViewer';
@@ -116,24 +116,6 @@ class ModuleScreen_2 extends React.Component {
             let scoreBordScreen = false
             if (!Type) {
                 console.log("***", stages[currentStage])
-                // if (stages && stages[currentStage] && stages[currentStage].theme) {
-                //     if (stages[currentStage].theme == "Ask Age") {
-                //         // currentStage = currentStage - 1
-                //         scoreBordScreen = true
-                //     }
-                //     else if (stages[currentStage].theme == "Ask Gender") {
-                //         // currentStage = currentStage - 1
-                //         scoreBordScreen = true
-                //     }
-
-                // }
-
-                // console.log("scoreBordScreen", scoreBordScreen)
-                // console.log("ct", stages[currentStage - 1])
-
-                // if (getUserAge || getUserGender) {
-                //     scoreBordScreen = true
-                // }
 
             }
 
@@ -158,19 +140,13 @@ class ModuleScreen_2 extends React.Component {
 
 
     completeFinalStage() {
-
         this.updateAttemptData()
         this.redirect_Page()
-        //}
-        // this.redirect_Page()
     }
 
     async updateAttemptData() {
         const { levelIndex, progressingLevel, moduleJson } = this.state;
         localStorage.removeItem(levelIndex + "_selectedData")
-        // if (progressingLevel == levelIndex) {
-        //var userpoint = localStorage.getItem("levelPoints") ? parseInt(localStorage.getItem("levelPoints")) : 0;
-
         let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
 
         console.log("moduleJson -->time-->", moduleJson)
@@ -181,7 +157,7 @@ class ModuleScreen_2 extends React.Component {
             }
             return true
         })
-
+        let convertDate = await date_YY_MM_DD(new Date().getTime())
         var deviceInfo = window.navigator.userAgent;
         var ipAddress = localStorage.getItem("ipAddress");
         var landingFrom = localStorage.getItem("landingFrom");
@@ -195,7 +171,8 @@ class ModuleScreen_2 extends React.Component {
             attemptCount: this.state.attemptCount,
             ip: ipAddress ? ipAddress : "",
             deviceInfo: deviceInfo, userTime: new Date().getTime(),
-            landingFrom: landingFrom ? landingFrom : ""
+            landingFrom: landingFrom ? landingFrom : "",
+            dateString: convertDate,
         };
 
         console.log('updateAttempt-->', postJson)
@@ -395,17 +372,28 @@ class ModuleScreen_2 extends React.Component {
         let languageType = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
         let responseData = await doConnect("getStoryBasedStatus", "POST", postJson);
         var json = responseData;
-
         if (json && json.response) {
-            console.log("getStoryBasedStatus--->", JSON.parse(json.response))
             let responseData = JSON.parse(json.response)
-            if (responseData.status === "Paused" && responseData.language && responseData.language.label === languageType.label) {
-                this.setState({ moduleJson: responseData.stroyJSon, stage: responseData.nexstory + 1, scorePointsView: true, scoreCurrentStage: responseData.nexstory, viewScreen: true, loading: false })
-
+            let dynamicTheme = false
+            if (responseData.stroyJSon) {
+                let findDynamic = responseData.stroyJSon.stages.filter((e) => { return e.themeType === "Dynamic" })
+                if (findDynamic && findDynamic.length > 0) {
+                    dynamicTheme = true
+                }
             }
-            else {
+
+            if (!dynamicTheme) {
+                if (responseData.status == "Paused" && responseData.language && responseData.language.label == languageType.label) {
+                    this.setState({ moduleJson: responseData.stroyJSon, stage: responseData.nexstory + 1, scorePointsView: true, scoreCurrentStage: responseData.nexstory, viewScreen: true, loading: false })
+                }
+                else {
+                    this.setState({ loading: false })
+                }
+            } else {
                 this.setState({ loading: false })
             }
+
+
         } else {
             this.setState({ loading: false })
         }
@@ -522,7 +510,7 @@ class ModuleScreen_2 extends React.Component {
                                 />
                             </div>
                         );
-                        default:
+                    default:
                 }
 
                 switch (theme) {
@@ -806,7 +794,7 @@ class ModuleScreen_2 extends React.Component {
 
                                 <div style={{ position: 'absolute', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
                                     <Link onClick={() => this.changeStage('Next', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""}/>
+                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""} />
                                     </Link>
                                 </div>
                                 <div className="col-2">

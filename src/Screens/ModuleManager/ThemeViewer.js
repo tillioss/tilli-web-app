@@ -42,7 +42,7 @@ export default class ThemeViewer extends React.Component {
 
 
     dynamicThemeAction(layer, index) {
-        let { stage,data } = this.props
+        let { stage, data } = this.props
         let { layers } = this.state;
         let action = layer.action;
         let visible;
@@ -60,7 +60,7 @@ export default class ThemeViewer extends React.Component {
         if (data && typeof (data.changeLayerIndex) !== "undefined") {
             infoTheme.changeLayerIndex = data.changeLayerIndex;
             infoTheme.changeLayer = data.changeLayer
-            if (typeof (data.changeLayer.userActionText) !== "undefined") {
+            if (typeof (data.changeLayer.userActionText) !== "undefined" && data.changeLayer.userActionText !== "") {
                 infoTheme.userActionText = data.changeLayer.userActionText
             }
             delete data.changeLayerIndex
@@ -68,6 +68,9 @@ export default class ThemeViewer extends React.Component {
         }
         switch (action) {
             case "Next":
+                if (typeof (layer.userActionText) !== "undefined" && layer.userActionText !== "") {
+                    infoTheme.userActionText = layer.userActionText
+                }
                 that.captureDetails("Next", infoTheme)
                 this.props.changeStage("Next", stage);
                 break;
@@ -87,6 +90,9 @@ export default class ThemeViewer extends React.Component {
                     return hidden
 
                 })
+                data.changeLayerIndex = index;
+                data.changeLayer = layer;
+                that.captureDetails("Checked Layout", infoTheme)
                 break;
             case "Record":
                 visible = layer.layers.visible;
@@ -134,7 +140,7 @@ export default class ThemeViewer extends React.Component {
                     this.setState({ recordText: "", resetTextState: true })
                 }
                 break;
-                default:
+            default:
         }
 
         // console.log("action", action)
@@ -195,7 +201,7 @@ export default class ThemeViewer extends React.Component {
                     {recordText}
                 </div>
                 break;
-                default:
+            default:
         }
 
         return builder;
@@ -319,7 +325,7 @@ export default class ThemeViewer extends React.Component {
                         this.dynamicThemeAction(layer, index)
                     }}
                 >
-                    <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} alt={""}/>
+                    <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} alt={""} />
                 </div>
                 break;
             case "video":
@@ -343,7 +349,7 @@ export default class ThemeViewer extends React.Component {
                     </video>
                 </div>
                 break;
-                default:
+            default:
         }
         return builder;
     }
