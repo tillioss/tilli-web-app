@@ -19,7 +19,6 @@ describe("UserManage component", () => {
         <UserManage />
       </Provider>
     );
-    // Add assertions if needed
   });
 
   it("sets language state when language is selected", () => {
