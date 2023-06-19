@@ -5,7 +5,7 @@ import configureStore from "redux-mock-store";
 import UserManage from "./UserManage";
 
 describe("UserManage component", () => {
-  const initialState = {}; // Add initial state if needed
+  const initialState = {};
   const mockStore = configureStore();
   let store;
 
