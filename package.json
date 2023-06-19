@@ -178,6 +178,7 @@
     "@babel/plugin-transform-private-property-in-object": "^7.22.5",
     "@babel/plugin-transform-runtime": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
-    "@babel/preset-react": "^7.22.5"
+    "@babel/preset-react": "^7.22.5",
+    "redux-mock-store": "^1.5.4"
   }
 }
