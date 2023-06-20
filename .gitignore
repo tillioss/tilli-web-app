@@ -18,7 +18,6 @@ project/target
 /public/uploads
 .DS_Store
 node_modules/
-package-lock.json
 ./package-lock.json
 .eslintcache
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
