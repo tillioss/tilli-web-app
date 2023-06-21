@@ -52,6 +52,7 @@ export default class ThemeViewer extends React.Component {
         let themeName = data.theme;
         let themeType = data.themeType;
         let currentStageIndex = stage - 1;
+        let apiPredict = data.apiPredict;
         let infoTheme = { themeName, themeType, chooseLayer: layer, layers: data.layers, stageIndex: currentStageIndex, layerIndex: index }
         if (data && typeof (data.dynamic) !== "undefined" && typeof (data.dynamic.record) !== "undefined") {
             infoTheme.speechText = data.dynamic.record.answer;
@@ -70,6 +71,9 @@ export default class ThemeViewer extends React.Component {
             case "Next":
                 if (typeof (layer.userActionText) !== "undefined" && layer.userActionText !== "") {
                     infoTheme.userActionText = layer.userActionText
+                }
+                if (typeof (infoTheme.userActionText) !== "undefined" && infoTheme.userActionText !== "" && typeof (apiPredict) !== "undefined" && apiPredict !== "") {
+                    this.props.predictOnchange(apiPredict, infoTheme.userActionText)
                 }
                 that.captureDetails("Next", infoTheme)
                 this.props.changeStage("Next", stage);
@@ -132,6 +136,14 @@ export default class ThemeViewer extends React.Component {
                 btn.addEventListener('touchcancel', function () {
                     console.log('btn moving cancel');
                 })
+
+                //diff
+                btn.addEventListener("mousedown", (e) => {
+                    this.mouseEnterfunction()
+                }, false);
+                btn.addEventListener("mouseup", (e) => {
+                    this.mouseMouseLeavefunction()
+                }, false);
                 break;
             case "Reset Text":
                 let resetDiv = "layer" + layer.layers.resetText[0];
@@ -171,6 +183,18 @@ export default class ThemeViewer extends React.Component {
         this.setState({
             recordText: text
         })
+    }
+
+    mouseEnterfunction() {
+        var that = this
+        console.log("start web");
+        that.onStartRecord()
+    }
+
+    mouseMouseLeavefunction() {
+        var that = this
+        console.log("end  web")
+        that.onStopRecord()
     }
     layerBuildRecord(layer, index, recordText) {
         let builder;
@@ -362,9 +386,11 @@ export default class ThemeViewer extends React.Component {
         if (typeof (infoTheme.changeLayer) !== "undefined") {
             infoTheme.changeLayer.layers.hidden.map((row) => {
                 infoTheme.layers[row].visibility = "visible";
+                return true
             })
             infoTheme.changeLayer.layers.visible.map((row) => {
                 infoTheme.layers[row].visibility = "hidden";
+                return true
             })
         }
 
@@ -393,6 +419,7 @@ export default class ThemeViewer extends React.Component {
                 {
                     layers.map((layer, index) => {
                         return audioRecognize === index ? <AudioRecognize resetTextState={this.state.resetTextState}
+                            recordText={recordText}
                             updateResetText={() => {
                                 this.setState({ resetTextState: false })
                             }}
