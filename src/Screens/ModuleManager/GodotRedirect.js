@@ -26,12 +26,12 @@ export default class GodotRedirect extends React.Component {
                     // let { params } = match;
                     // let { gameIndex } = params;
                     localStorage.setItem("d_theme_gameIndex", nextModuleIndex)
-                    this.props.history.push(`/+${MyConstant.keyList.projectUrl}+/module-manage/+${id}/${levelIndex}/${progressingLevel}`)
+                    this.props.history.push(`/${MyConstant.keyList.projectUrl}/module-manage/${id}/${levelIndex}/${progressingLevel}`)
                     ///${gameIndex}
                 }
                 else {
                     localStorage.setItem("d_theme_gameIndex", "")
-                    this.props.history.push('/' + MyConstant.keyList.projectUrl + "/home/")
+                    this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
                 }
             }
         }

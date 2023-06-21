@@ -8,6 +8,7 @@ import Starred from "../images/Starred.png";
 import boxred from "../images/Boxred.png";
 import Ellipsered from "../images/Ellipsered.png";
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 
 class Footer extends Component {
@@ -78,12 +79,12 @@ class Footer extends Component {
                                 {/* <i style={{fontSize:28}} className={`fa fa-circle fa-3x ${this.state.currentPage==='home' ? 'checked' : ''}`}></i> */}
                                 {this.state.currentPage === 'home' ?
                                     <div>
-                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""}/>
+                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""} />
                                     </div>
                                     :
                                     <div>
 
-                                        <img src={Ellipse} style={{ width: 24, height: 24, }} alt={""}/>
+                                        <img src={Ellipse} style={{ width: 24, height: 24, }} alt={""} />
                                     </div>
                                 }
                             </div>
@@ -95,24 +96,26 @@ class Footer extends Component {
                     </div>
                     <div className="col-3" style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ flexDirection: 'column' }} onClick={() => {
-                            this.setState({ currentPage: 'levels' })
-                            if (window.location.href.match(/lego/)) {
-                                this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/levels')
-                            }
-                            else {
-                                this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/levels')
-                            }
+                            this.setState({ currentPage: 'levels' }, () => {
+                                if (window.location.href.match(/lego/)) {
+                                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/levels')
+                                }
+                                else {
+                                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/levels')
+                                }
+                            })
+
                         }}>
                             <div>
 
                                 {this.state.currentPage === 'levels' ?
                                     <div>
-                                        <img src={Starred} style={{ width: 24, height: 24 }} alt={""}/>
+                                        <img src={Starred} style={{ width: 24, height: 24 }} alt={""} />
                                     </div>
                                     :
                                     <div>
 
-                                        <img src={Star} style={{ width: 24, height: 24, }} alt={""}/>
+                                        <img src={Star} style={{ width: 24, height: 24, }} alt={""} />
                                     </div>
                                 }
 
@@ -126,23 +129,25 @@ class Footer extends Component {
                     </div>
                     <div className="col-3" style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ flexDirection: 'column' }} onClick={() => {
-                            this.setState({ currentPage: 'Parent' })
+                            this.setState({ currentPage: 'Parent' }, () => {
+                                if (window.location.href.match(/lego/)) {
+                                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/Parent')
+                                }
+                                else {
+                                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent')
+                                }
+                            })
                             //keyList.projectUrl
-                            if (window.location.href.match(/lego/)) {
-                                this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/Parent')
-                            }
-                            else {
-                                this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent')
-                            }
+
                         }}>
                             <div>
                                 {this.state.currentPage === 'Parent' ?
                                     <div>
-                                        <img src={boxred} style={{ width: 24, height: 24, }} alt={""}/>
+                                        <img src={boxred} style={{ width: 24, height: 24, }} alt={""} />
                                     </div>
                                     :
                                     <div>
-                                        <img src={box} style={{ width: 24, height: 24, }} alt={""}/>
+                                        <img src={box} style={{ width: 24, height: 24, }} alt={""} />
                                     </div>
                                 }
                             </div>
@@ -156,18 +161,20 @@ class Footer extends Component {
                     <div className="col-3" style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ flexDirection: 'column' }} onClick={() => {
 
-                            this.setState({ currentPage: 'profile' })
-                            if (window.location.href.match(/lego/)) {
-                                this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/profile')
-                            }
-                            else {
-                                this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/profile')
-                            }
+                            this.setState({ currentPage: 'profile' }, () => {
+                                if (window.location.href.match(/lego/)) {
+                                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/profile')
+                                }
+                                else {
+                                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/profile')
+                                }
+                            })
+
                         }}>
                             <div>
                                 {this.state.currentPage === 'profile' ?
                                     <div>
-                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""}/>
+                                        <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""} />
                                     </div>
                                     :
                                     <div>
@@ -201,7 +208,7 @@ const mapDispatchToProps = (dispatch) => {
 
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Footer));
 
 
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class LevelScreen extends Component {
   constructor(props) {
     super(props);
-    this.state={
-      
+    this.state = {
+
     }
   }
 
@@ -21,4 +22,4 @@ class LevelScreen extends Component {
   }
 }
 
-export default LevelScreen;
+export default withRouter(LevelScreen);
