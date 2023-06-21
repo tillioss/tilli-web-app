@@ -20,11 +20,13 @@ import SingleTextImage from './Themes/SingleTextImage';
 import StartingDashBord from '../EndScreen/StartingDashBord';
 import WinningPage2 from '../../TilliYourWinning/WinningPage2';
 import { connect } from 'react-redux';
-import { userTrack, date_YY_MM_DD } from '../../config/Common';
+import { userTrack, date_YY_MM_DD, doConnectPredict } from '../../config/Common';
 import AskGender from './Themes/AskGender';
 import AskAge from './Themes/AskAge';
 import ThemeViewer from './ThemeViewer';
+import myConfig from '../../config/myConfig';
 import { Link } from "react-router-dom";
+
 
 
 class ModuleScreenMange extends React.Component {
@@ -35,7 +37,6 @@ class ModuleScreenMange extends React.Component {
             stage: 1,
             moduleJson: null,
             PreviousPages: false,
-            viewScreen: true,
             scorePointsView: false,
             scoreCurrentStage: 0,
             attemptCount: 0,
@@ -56,20 +57,17 @@ class ModuleScreenMange extends React.Component {
         localStorage.setItem('levelPoints', 0)
         localStorage.setItem('totalPoints', 0)
 
-        localStorage.setItem("gameStatusInfo", JSON.stringify({}))
         let gameIndex = localStorage.getItem("d_theme_gameIndex")
 
-        let viewScreen = false
         let stage = 1
         // let { params } = this.props.match
         // let { gameIndex } = params
         if (gameIndex && gameIndex !== "") {
             console.log("gameIndex", gameIndex)
             stage = parseInt(gameIndex);
-            viewScreen = true
         }
         localStorage.setItem("d_theme_gameIndex", "")
-        this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel, viewScreen, stage })
+        this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel, stage })
     }
     async getLevelMappingData(levelId) {
         let postJson = { levelId: levelId, sessionId: '1223' };
@@ -104,8 +102,10 @@ class ModuleScreenMange extends React.Component {
                                     tdata.themes = findDynamicTheme[0].theme;
                                 }
                                 dthemeData.push(tdata)
+                                return true;
                             })
                         }
+                        return true;
                     })
 
                     if (dthemeData.length > 0) {
@@ -124,17 +124,30 @@ class ModuleScreenMange extends React.Component {
             }
         }
 
-        if (d_theme_dynamicCaptureInfo && d_theme_dynamicCaptureInfo != "") {
+        if (d_theme_dynamicCaptureInfo && d_theme_dynamicCaptureInfo !== "") {
             viewScreen = true;
             dynamicCaptureInfo = JSON.parse(d_theme_dynamicCaptureInfo);
+            let predictApi_Msg = localStorage.getItem("predictApiMsg");
+            let gameStatus_Info = localStorage.getItem("gameStatusInfo")
+            gameStatus_Info = JSON.parse(gameStatus_Info)
+            let parseIntIndex = (parseInt(gameStatus_Info.nextModuleIndex) - 2);
+            if (dynamicCaptureInfo.dynamic.dynamicThemes && dynamicCaptureInfo.dynamic.dynamicThemes[parseIntIndex] && dynamicCaptureInfo.dynamic.dynamicThemes[parseIntIndex].themeType === "godot") {
+                if (predictApi_Msg && predictApi_Msg !== "") {
+                    dynamicCaptureInfo.dynamic.dynamicThemes[parseIntIndex].userActionText = predictApi_Msg;
+                }
+
+            }
         }
+        moduleJson.stages = response;
         localStorage.setItem("d_theme_dynamicCaptureInfo", "")
-        moduleJson.stages = response
+        localStorage.setItem('predictApiMsg', "")
+        localStorage.setItem("gameStatusInfo", JSON.stringify({}))
+
 
         this.setState({
             moduleJson,
             viewScreen,
-            dynamicCaptureInfo
+            dynamicCaptureInfo,
 
         })
     }
@@ -177,7 +190,7 @@ class ModuleScreenMange extends React.Component {
                 console.log('currentStage --> ' + currentStage);
                 console.log('stages --> ' + stages.length);
 
-                this.completeFinalStage();
+                // this.completeFinalStage();
             } else {
                 if (scoreBordScreen) {
                     this.setState({ scorePointsView: scoreBordScreen })
@@ -218,11 +231,8 @@ class ModuleScreenMange extends React.Component {
 
 
     completeFinalStage() {
-
-        this.updateAttemptData()
         this.redirect_Page()
-        //}
-        // this.redirect_Page()
+
     }
 
     async updateAttemptData() {
@@ -261,6 +271,7 @@ class ModuleScreenMange extends React.Component {
 
         console.log('updateAttempt-->', postJson)
         await doConnect("updateLevelAttempt", "POST", postJson);
+        this.completeFinalStage()
 
     }
 
@@ -301,10 +312,10 @@ class ModuleScreenMange extends React.Component {
         var json = responseData;
         var response = json.response;
         if (response) {
-            if (this.state.moduleJson) {
-                this.state.moduleJson["stages"] = JSON.parse(response)
-                //console.log('responseData', this.state.moduleJson["stages"])
-                this.setState({ moduleJson: this.state.moduleJson })
+            let { moduleJson } = this.state;
+            if (moduleJson) {
+                moduleJson["stages"] = JSON.parse(response)
+                this.setState({ moduleJson: moduleJson })
             }
 
         }
@@ -398,13 +409,13 @@ class ModuleScreenMange extends React.Component {
             moduleJson.stages[this.state.stage - 1].endTime = new Date().getTime()
         }
 
-        if (moduleJson.stages.length == this.state.scoreCurrentStage) {
+        if (moduleJson.stages.length === this.state.scoreCurrentStage) {
             moduleJson.endTime = new Date().getTime()
         }
         let stroyJSon = {}
         stroyJSon.stroyJSon = moduleJson
         stroyJSon.nexstory = parseInt(this.state.stage) + 1
-        stroyJSon.status = moduleJson.stages.length == this.state.stage ? "Complete" : "Paused";
+        stroyJSon.status = moduleJson.stages.length === this.state.stage ? "Complete" : "Paused";
         stroyJSon.levelId = this.props.match.params.id;
         stroyJSon.language = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
         console.log("post stroyJSon", stroyJSon)
@@ -447,10 +458,10 @@ class ModuleScreenMange extends React.Component {
         if (moduleJson.stages.length === this.state.stage) {
             dynamicCaptureInfo.endTime = new Date().getTime()
         }
-        dynamicCaptureInfo.status = moduleJson.stages.length == this.state.stage ? "Complete" : "Paused"
+        dynamicCaptureInfo.status = moduleJson.stages.length === this.state.stage ? "Complete" : "Paused"
         let stroyJSon = {}
         stroyJSon.nexstory = parseInt(this.state.stage) + 1
-        stroyJSon.status = moduleJson.stages.length == this.state.stage ? "Complete" : "Paused";
+        stroyJSon.status = moduleJson.stages.length === this.state.stage ? "Complete" : "Paused";
         stroyJSon.levelId = this.props.match.params.id;
         stroyJSon.language = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
         var userpoint = 0
@@ -507,6 +518,7 @@ class ModuleScreenMange extends React.Component {
 
         console.log('updateAttempt-->', postJson)
         await doConnect("updateLevelAttempt", "POST", postJson);
+        this.completeFinalStage();
 
     }
 
@@ -584,6 +596,17 @@ class ModuleScreenMange extends React.Component {
     checkCallAtOnceState() {
         this.setState({ callAtOnce: false })
     }
+    async predictOnchange(apiPredict, emotion) {
+        if (apiPredict === "emotion" && emotion && emotion !== "") {
+            let postJson = { 'emotion': emotion.toLowerCase(), 'feedback': "satisfied", apiKey: myConfig.apiKey }
+            console.log("postData", postJson)
+            let getResponse = await doConnectPredict("https://tilli.teqbahn.com/predict", "POST", postJson)
+            if (getResponse) {
+                let activityResponse = getResponse.activity;
+                localStorage.setItem('predictApiMsg', activityResponse)
+            }
+        }
+    }
     render() {
 
         let { viewScreen, scorePointsView, scoreCurrentStage, callAtOnce, dynamicCaptureInfo } = this.state
@@ -658,6 +681,7 @@ class ModuleScreenMange extends React.Component {
                                     stage={this.state.stage}
                                     data={stage}
                                     dynamicCaptureInfo={dynamicCaptureInfo}
+                                    predictOnchange={(apiPredict, emotion) => { this.predictOnchange(apiPredict, emotion) }}
 
                                 />
                             </div>
@@ -700,7 +724,20 @@ class ModuleScreenMange extends React.Component {
                                     this.updateStatusDynamicBasedOnStory()
                                 }
                             }
-                            this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}`)
+                            // this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}`)
+                            setTimeout(() => {
+                                let acvityName = "";
+                                let activityResponse = localStorage.getItem('predictApiMsg')
+                                if (activityResponse && activityResponse !== "") {
+                                    acvityName = activityResponse;
+                                }
+                                if (acvityName) {
+                                    this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}?activity=${acvityName}`)
+                                }
+                                else {
+                                    this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}`)
+                                }
+                            }, 3000);
                             ///${stagePlusOne}
                         }
                         // }, 2000)

@@ -1,8 +1,9 @@
 import React from "react";
 import MyConstant from "../config/MyConstant";
 import LanguageSelect from "../Screens/LanguageSelect";
-import { connect } from 'react-redux';
 import { doConnect } from "../config/Common";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 
 class ProfileScreen extends React.Component {
@@ -15,7 +16,7 @@ class ProfileScreen extends React.Component {
 
     }
 
-    async componentDidMount() {
+    componentDidMount() {
 
     }
 
@@ -35,7 +36,7 @@ class ProfileScreen extends React.Component {
             return ""
     }
 
-   async Logout() {
+    async Logout() {
 
         let postJson = { sessionId: '1223', userId: localStorage.getItem("loggedUserId") };
         console.log('logout=>', postJson)
@@ -91,6 +92,6 @@ const mapDispatchToProps = (dispatch) => {
 
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileScreen));
 
 

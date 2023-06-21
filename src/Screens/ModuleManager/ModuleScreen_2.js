@@ -217,10 +217,11 @@ class ModuleScreen_2 extends React.Component {
         var json = responseData;
         var response = json.response;
         if (response) {
-            if (this.state.moduleJson) {
-                this.state.moduleJson["stages"] = JSON.parse(response)
+            let { moduleJson } = this.state;
+            if (moduleJson) {
+                moduleJson["stages"] = JSON.parse(response)
                 //console.log('responseData', this.state.moduleJson["stages"])
-                this.setState({ moduleJson: this.state.moduleJson })
+                this.setState({ moduleJson: moduleJson })
             }
 
         }
@@ -383,7 +384,7 @@ class ModuleScreen_2 extends React.Component {
             }
 
             if (!dynamicTheme) {
-                if (responseData.status == "Paused" && responseData.language && responseData.language.label == languageType.label) {
+                if (responseData.status === "Paused" && responseData.language && responseData.language.label === languageType.label) {
                     this.setState({ moduleJson: responseData.stroyJSon, stage: responseData.nexstory + 1, scorePointsView: true, scoreCurrentStage: responseData.nexstory, viewScreen: true, loading: false })
                 }
                 else {

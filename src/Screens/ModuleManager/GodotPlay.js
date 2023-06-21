@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import MyConstant from "../../config/MyConstant";
+import MyConfig from '../../config/myConfig';
+
 
 let script;
 function GodotPlay(props) {
@@ -26,6 +28,14 @@ function GodotPlay(props) {
             script.async = true
             script.onload = onLoad
             document.body.appendChild(script)
+
+            if (MyConfig.isLocal) {
+                setTimeout(() => {
+                    console.log("Delayed for 4 second.");
+                    window.location.href = '/' + MyConstant.keyList.projectUrl + `/godot-redirect`
+                }, 6000)
+            }
+
 
 
         }
