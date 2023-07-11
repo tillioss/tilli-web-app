@@ -62,10 +62,10 @@ class ParentScreen extends Component {
 
 
                             if (window.location.href.match(/lego/)) {
-                                this.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/Parenthome')
+                                this.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/newparentsscreen')
                             }
                             else {
-                                this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parenthome')
+                                this.props.history.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen')
                             }
 
                         }} >  {this.return_content(2, 3)}  </button>

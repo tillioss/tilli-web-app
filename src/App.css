@@ -1053,4 +1053,297 @@ min-height: 20vh;
   height: 50px;
   background: gray;
 }
+.newParentsBody{
+  width: 100%;
+  height: 100vh;
+  background-color: #FCE880;
+  display: flex;
+  flex-direction:column;
+}
+.newParentsBody .headers{
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.newParentsBody .headtext{
+white-space: nowrap;
+color: #DD3B96;
+font-family: "Fredoka";
+}
+.newParentsBody .backbtn{
+  width: 10%;
+}
+.newParentsBody .headerStr{
+  font-size: 30px;
+}
+.newParentsBody .trackProgress{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.newParentsBody .trackProgressTxt{
+  font-family: "Fredoka";
+  font-size: 22px;
+}
+.trackProgressLineTxt{
+  font-family: "Fredoka";
+  font-size: 16px;
+}
 
+.trackProgBody{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction:column;
+}
+.trackProgBody .emotionChat{
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction:column;
+  background-color: #85A3D3;
+}
+.trackProgBody .strategies{
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction:column;
+  background-color: #FF8D8D;
+  align-items: center;
+  justify-content: center;
+}
+.trackProgBody .headers{
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.trackProgBody .headtext{
+white-space: nowrap;
+color: #060606;
+font-family: "Fredoka";
+}
+.trackProgBody .emotionChatBoxContainer{
+  width: 100%;
+  height: 100%;
+}
+.trackProgBody .emotionChatBox{
+  width: 60%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 20px;
+}
+.trackProgBody .containerOne{
+  width: 100%;
+  height: 43px;
+  background-color: #517BC0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+}
+.trackProgBody .headingemotion{
+  font-size: 23px;
+  color: #fff;
+  font-family: "Fredoka";
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.trackProgBody .latestemotionText{
+  font-family: "Fredoka";
+  color: #4D4D4D;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.trackProgBody .emojicontainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.trackProgBody .emotionType{
+  font-family: "Fredoka";
+  font-size: 22px;
+  color: #4D4D4D;
+}
+.trackProgBody .latestemotions{
+border-top: 2px dashed #C7C7C7;
+position: relative;
+}
+.trackProgBody .emotionscheck{
+  font-family: "Fredoka";
+  color: #4D4D4D;
+}
+@media only screen and (max-width: 800px) {
+  .trackProgBody .emotionChatBox{
+    width: 80% !important;
+  }
+  .trackProgBody .container_strategies{
+    width: 80% !important;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .trackProgBody .emotionChatBox{
+    width: 80%;
+  }
+  .trackProgBody .emotion_emoji{
+    width: 60px !important;
+  }
+  .trackProgBody .emotionType{
+    font-family: "Fredoka";
+    font-size: 18px;
+    color: #4D4D4D;
+  }
+  .trackProgBody .headingemotion{
+    font-size: 20px;
+  }
+  .trackProgBody .emotionscheck{
+font-size: 14px !important;  
+}
+.trackProgBody .emotionChat{
+  width: 100%;
+  height: 55%;
+  display: flex;
+  flex-direction:column;
+  background-color: #85A3D3;
+}
+.trackProgBody .strategies{
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction:column;
+  background-color: #FF8D8D;
+  align-items: center;
+  justify-content: center;
+}
+}
+
+.trackProgBody .emotions_list{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding: 5px;
+}
+.trackProgBody .emo_box{
+  position: absolute;
+  top:3px;
+  width: 100%;
+}
+.trackProgBody .latestseven_Emoji{
+  width:33px !important;
+}
+
+@media only screen and (max-width:384px) {
+  .trackProgBody .emotion_emoji{
+    width: 70px !important;
+  }
+  .trackProgBody .latestseven_Emoji{
+    width:25px !important;
+  }
+}
+@media only screen and (max-width:360px) {
+  .trackProgBody .ABCDE_Strategies_Txt{
+    font-size: 14px !important;
+  }
+
+}
+.trackProgBody .container_strategies{
+  width: 60%;
+  height: auto;
+  background-color: #FF8D8D;
+  border-radius: 20px;
+ 
+}
+.trackProgBody .tabs {
+  display: flex;
+  height: 45px;
+  line-height: 40px;
+  font-weight: bold;
+  overflow: auto;
+}
+
+.trackProgBody .tabs .tab {
+  text-align: center;
+  cursor: pointer;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: none;
+  color: #517BC0;
+  width:100%;
+  background-color: rgba(255, 255, 255, .5);
+  font-family: "Fredoka";
+  font-size: 18px;
+
+}
+
+.trackProgBody .tabs .tab.active {
+  background-color: #ffffff;
+  color: #DD3B96;
+}
+.trackProgBody .stg_games{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-color: #ffffff;
+  width: 100%;
+  height: 37vh;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+ overflow: hidden;
+}
+.trackProgBody .ABCDE_Strategies_Txt{
+  font-family: "Fredoka";
+  font-size: 16px;
+  color: #4D4D4D;
+  padding: 5px;
+}
+.trackProgBody .ABCDE_Strategies_games{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 2px dashed #C7C7C7;
+  height: 12vh;
+margin-bottom: 5px;}
+.trackProgBody .gameTitle{
+  display: flex;
+  flex-direction: column;
+}
+.trackProgBody .gameName{
+  font-family: "Fredoka";
+  font-size: 18px;
+  color: #4D4D4D;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+}
+.trackProgBody .gameLikes{
+  font-family: "Fredoka";
+  font-size: 14px;
+  color: #4D4D4D;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.trackProgBody  .gmHeader{
+  height: 35px;
+  white-space: nowrap;
+}
