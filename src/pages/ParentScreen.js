@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MyConstant from '../config/MyConstant';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 
 class ParentScreen extends Component {
     constructor(props) {
@@ -12,8 +12,7 @@ class ParentScreen extends Component {
         }
     }
 
-    async componentDidMount() {
-
+    componentDidMount() {
     }
 
     return_content(pageIndex, index) {
@@ -46,13 +45,13 @@ class ParentScreen extends Component {
 
                 <div className="row mx-0">
                     <div className="col-12">
-                        <div class="fontpassword">
+                        <div className="fontpassword">
                             <input type="password"
                                 placeholder={this.return_content(2, 2)}
                                 name="psw" onChange={(e) => {
                                     this.setState({ Password: e.target.value })
                                 }} />
-                            <i class="fa fa-lock fa-lg"></i>
+                            <i className="fa fa-lock fa-lg"></i>
                         </div>
                     </div>
                 </div>
@@ -94,5 +93,5 @@ const mapDispatchToProps = (dispatch) => {
 
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ParentScreen);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ParentScreen));
 

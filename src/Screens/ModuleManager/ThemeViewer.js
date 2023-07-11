@@ -42,7 +42,7 @@ export default class ThemeViewer extends React.Component {
 
 
     dynamicThemeAction(layer, index) {
-        let { stage,data } = this.props
+        let { stage, data } = this.props
         let { layers } = this.state;
         let action = layer.action;
         let visible;
@@ -52,6 +52,7 @@ export default class ThemeViewer extends React.Component {
         let themeName = data.theme;
         let themeType = data.themeType;
         let currentStageIndex = stage - 1;
+        let apiPredict = data.apiPredict;
         let infoTheme = { themeName, themeType, chooseLayer: layer, layers: data.layers, stageIndex: currentStageIndex, layerIndex: index }
         if (data && typeof (data.dynamic) !== "undefined" && typeof (data.dynamic.record) !== "undefined") {
             infoTheme.speechText = data.dynamic.record.answer;
@@ -60,7 +61,7 @@ export default class ThemeViewer extends React.Component {
         if (data && typeof (data.changeLayerIndex) !== "undefined") {
             infoTheme.changeLayerIndex = data.changeLayerIndex;
             infoTheme.changeLayer = data.changeLayer
-            if (typeof (data.changeLayer.userActionText) !== "undefined") {
+            if (typeof (data.changeLayer.userActionText) !== "undefined" && data.changeLayer.userActionText !== "") {
                 infoTheme.userActionText = data.changeLayer.userActionText
             }
             delete data.changeLayerIndex
@@ -68,6 +69,12 @@ export default class ThemeViewer extends React.Component {
         }
         switch (action) {
             case "Next":
+                if (typeof (layer.userActionText) !== "undefined" && layer.userActionText !== "") {
+                    infoTheme.userActionText = layer.userActionText
+                }
+                if (typeof (infoTheme.userActionText) !== "undefined" && infoTheme.userActionText !== "" && typeof (apiPredict) !== "undefined" && apiPredict !== "") {
+                    this.props.predictOnchange(apiPredict, infoTheme.userActionText)
+                }
                 that.captureDetails("Next", infoTheme)
                 this.props.changeStage("Next", stage);
                 break;
@@ -87,6 +94,9 @@ export default class ThemeViewer extends React.Component {
                     return hidden
 
                 })
+                data.changeLayerIndex = index;
+                data.changeLayer = layer;
+                that.captureDetails("Checked Layout", infoTheme)
                 break;
             case "Record":
                 visible = layer.layers.visible;
@@ -126,6 +136,14 @@ export default class ThemeViewer extends React.Component {
                 btn.addEventListener('touchcancel', function () {
                     console.log('btn moving cancel');
                 })
+
+                //diff
+                btn.addEventListener("mousedown", (e) => {
+                    this.mouseEnterfunction()
+                }, false);
+                btn.addEventListener("mouseup", (e) => {
+                    this.mouseMouseLeavefunction()
+                }, false);
                 break;
             case "Reset Text":
                 let resetDiv = "layer" + layer.layers.resetText[0];
@@ -134,7 +152,7 @@ export default class ThemeViewer extends React.Component {
                     this.setState({ recordText: "", resetTextState: true })
                 }
                 break;
-                default:
+            default:
         }
 
         // console.log("action", action)
@@ -166,6 +184,18 @@ export default class ThemeViewer extends React.Component {
             recordText: text
         })
     }
+
+    mouseEnterfunction() {
+        var that = this
+        console.log("start web");
+        that.onStartRecord()
+    }
+
+    mouseMouseLeavefunction() {
+        var that = this
+        console.log("end  web")
+        that.onStopRecord()
+    }
     layerBuildRecord(layer, index, recordText) {
         let builder;
         let { deviceHeight } = this.state;
@@ -195,7 +225,7 @@ export default class ThemeViewer extends React.Component {
                     {recordText}
                 </div>
                 break;
-                default:
+            default:
         }
 
         return builder;
@@ -319,7 +349,7 @@ export default class ThemeViewer extends React.Component {
                         this.dynamicThemeAction(layer, index)
                     }}
                 >
-                    <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} alt={""}/>
+                    <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} alt={""} />
                 </div>
                 break;
             case "video":
@@ -343,7 +373,7 @@ export default class ThemeViewer extends React.Component {
                     </video>
                 </div>
                 break;
-                default:
+            default:
         }
         return builder;
     }
@@ -356,9 +386,11 @@ export default class ThemeViewer extends React.Component {
         if (typeof (infoTheme.changeLayer) !== "undefined") {
             infoTheme.changeLayer.layers.hidden.map((row) => {
                 infoTheme.layers[row].visibility = "visible";
+                return true
             })
             infoTheme.changeLayer.layers.visible.map((row) => {
                 infoTheme.layers[row].visibility = "hidden";
+                return true
             })
         }
 
@@ -387,6 +419,7 @@ export default class ThemeViewer extends React.Component {
                 {
                     layers.map((layer, index) => {
                         return audioRecognize === index ? <AudioRecognize resetTextState={this.state.resetTextState}
+                            recordText={recordText}
                             updateResetText={() => {
                                 this.setState({ resetTextState: false })
                             }}

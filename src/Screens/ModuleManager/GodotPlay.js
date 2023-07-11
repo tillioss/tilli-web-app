@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import MyConstant from "../../config/MyConstant";
+import MyConfig from '../../config/myConfig';
+
 
 let script;
 function GodotPlay(props) {
@@ -11,7 +13,7 @@ function GodotPlay(props) {
         if (match) {
             let { params } = match;
             if (params) {
-                let {gameId} = params;
+                let { gameId } = params;
                 if (gameId !== "" && gameId) {
                     setGodDotDocsId(gameId)
                     setScript(gameId);
@@ -26,18 +28,15 @@ function GodotPlay(props) {
             script.async = true
             script.onload = onLoad
             document.body.appendChild(script)
-            //"http://192.168.43.110:8091/tilli-api/vp-game-file/module/zip/7e0fb773-75ac-4f8f-becb-02710bcb7904/index.js"
 
-            // let { match } = props;
-            // let { params } = match;
-            // let { gameIndex } = params;
-            // console.log("gameIndex", gameIndex)
-            //${gameIndex}
-            //static
-            // setTimeout(() => {
-            //     console.log("Delayed for 4 second.");
-            //     window.location.href = '/' + MyConstant.keyList.projectUrl + `/godot-redirect`
-            // }, 9000)
+            if (MyConfig.isLocal) {
+                setTimeout(() => {
+                    console.log("Delayed for 4 second.");
+                    window.location.href = '/' + MyConstant.keyList.projectUrl + `/godot-redirect`
+                }, 6000)
+            }
+
+
 
         }
         function onLoad() {
@@ -50,7 +49,7 @@ function GodotPlay(props) {
         return () => {
             document.body.removeChild(script)
         }
-    }, [godDotDocsId,props])
+    }, [godDotDocsId, props])
 
     useEffect(() => {
         if (engine) {
@@ -155,7 +154,7 @@ function GodotPlay(props) {
         }
     }, [engine])
 
-   
+
 
     return <div className="game-play">
         <canvas id='canvas'>

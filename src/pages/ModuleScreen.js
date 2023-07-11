@@ -113,13 +113,10 @@ export default class ModuleScreen extends React.Component {
         var response = json.response;
 
         if (response) {
-
-
-
-            if (this.state.moduleJson) {
-                this.state.moduleJson["stages"] = JSON.parse(response)
-                //console.log('responseData', this.state.moduleJson["stages"])
-                this.setState({ moduleJson: this.state.moduleJson })
+            let { moduleJson } = this.state;
+            if (moduleJson) {
+                moduleJson["stages"] = JSON.parse(response)
+                this.setState({ moduleJson: moduleJson })
             }
 
         }

@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, { } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
@@ -55,7 +55,7 @@ class CircleWithInfoAnimations extends React.Component {
             e.preventDefault();
             e.stopPropagation();
             if (activeEvent === 'move') {
-               
+
                 e.target.style.position = "initial";
                 var changedTouch = e.changedTouches[0];
                 var element = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
@@ -136,16 +136,16 @@ class CircleWithInfoAnimations extends React.Component {
             circleWidth.push(document.getElementById('Blue').parentNode.clientWidth);
             circleWidth.push(document.getElementById('Yellow').clientWidth);
 
-            let maxWidth = Math.min(...circleWidth); 
+            let maxWidth = Math.min(...circleWidth);
             document.getElementById('Red').style.marginTop = "37%"
-            document.getElementById('Red').style.width = UWPview ? "130px" : checkWidth ? maxWidth+"px" : window.innerWidth * 0.9 / (4.2) + "px"
-            document.getElementById('Red').style.height = UWPview ? "130px" : checkWidth ? maxWidth+"px" : window.innerWidth * 0.9 / (4.2) + "px"
+            document.getElementById('Red').style.width = UWPview ? "130px" : checkWidth ? maxWidth + "px" : window.innerWidth * 0.9 / (4.2) + "px"
+            document.getElementById('Red').style.height = UWPview ? "130px" : checkWidth ? maxWidth + "px" : window.innerWidth * 0.9 / (4.2) + "px"
             document.getElementById('Red').style.borderRadius = checkWidth ? "50%" : window.innerWidth * 0.9 / (4.2) / 2 + "px"
             document.getElementById('Red').style.border = "2px dotted white"
 
             // document.getElementById('Blue').style.marginTop = "30%"
-            document.getElementById('Blue').style.width = UWPview ? "130px" : maxWidth+"px"
-            document.getElementById('Blue').style.height = UWPview ? "130px" : checkWidth ? maxWidth+"px" : window.innerWidth * 0.9 / (4.2) + "px"
+            document.getElementById('Blue').style.width = UWPview ? "130px" : maxWidth + "px"
+            document.getElementById('Blue').style.height = UWPview ? "130px" : checkWidth ? maxWidth + "px" : window.innerWidth * 0.9 / (4.2) + "px"
             document.getElementById('Blue').style.borderRadius = checkWidth ? "50%" : window.innerWidth * 0.9 / (4.2) + "px"
             document.getElementById('Blue').style.border = "2px dotted white"
             if (UWPview) {
@@ -154,8 +154,8 @@ class CircleWithInfoAnimations extends React.Component {
 
             // document.getElementById('Yellow').style.marginTop = "15%"
             document.getElementById('Yellow').style.marginTop = "20%"
-            document.getElementById('Yellow').style.width = UWPview ? "130px" : checkWidth ? maxWidth+"px" : window.innerWidth * 0.9 / (4.2) + "px"
-            document.getElementById('Yellow').style.height = UWPview ? "130px" : checkWidth ? maxWidth+"px" : window.innerWidth * 0.9 / (4.2) + "px"
+            document.getElementById('Yellow').style.width = UWPview ? "130px" : checkWidth ? maxWidth + "px" : window.innerWidth * 0.9 / (4.2) + "px"
+            document.getElementById('Yellow').style.height = UWPview ? "130px" : checkWidth ? maxWidth + "px" : window.innerWidth * 0.9 / (4.2) + "px"
             document.getElementById('Yellow').style.borderRadius = checkWidth ? "50%" : window.innerWidth * 0.9 / (4.2) + "px"
             document.getElementById('Yellow').style.border = "2px dotted white"
 
@@ -227,10 +227,11 @@ class CircleWithInfoAnimations extends React.Component {
             if (content.circles[index].isCorrectanswer === true && content.circles[index].name === trustvalue) {
                 check_value = true
             }
-return true
+            return true
         })
-
-        console.log("check_value", check_value, anotherChoice)
+        
+        data.content.chooseAnswer = check_value ? "Correct" : "Wrong"
+        data.content.circleSelect = choose
 
         // let totalPoints = parseInt(localStorage.getItem("totalPoints")) ? parseInt(localStorage.getItem("totalPoints")) : 0;
 
@@ -321,8 +322,8 @@ return true
 
         const { stage, data, parentindex } = this.props;
         const { true_body, true_header, true_button, change_Content, false_body, false_header, false_button,
-             modelContent } = this.state;
-        let { deviceHeight, imageDraged,} = this.state
+            modelContent } = this.state;
+        let { deviceHeight, imageDraged, } = this.state
         let content = data.content;
         let innerWidth = window.innerWidth > 768 ? 768 : window.innerWidth;
         let UWPview = window.navigator && window.navigator.appVersion.toLowerCase().includes("webview")
@@ -340,7 +341,7 @@ return true
                 if (i.length > 1) {
                     imagestyle[i[0]] = JSON.parse(i[1]);
                 }
-            return true
+                return true
             })
         }
 
@@ -400,7 +401,7 @@ return true
                                 }
 
                             }}>
-                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""} />
                             </Link>
                         </div>
                         <div className="col-8">
@@ -439,7 +440,7 @@ return true
                                 this.setState({ imageBackground_color: this.state.imageBgColor, appendData: e.target, })
 
                             }} src={MyConstant.keyList.apiURL + 'vp?action=module&key=' + data.content.image.fileName + '&id=' + data.content.image.fileType}
-                            style={{ zIndex: 1, width: 90, backgroundColor: this.state.imageBackground_color, borderRadius: 90, }} alt={""}/>
+                            style={{ zIndex: 1, width: 90, backgroundColor: this.state.imageBackground_color, borderRadius: 90, }} alt={""} />
                         {/* </Draggable> */}
 
                     </div>
@@ -480,7 +481,7 @@ return true
                         {modelContent ? <img src={Awesome_JobImg} style={{
                             width: 250, height: 100, left: 0, top: 35, zIndex: 1000,
                             position: "inherit"
-                        }} alt={""}/> : null}
+                        }} alt={""} /> : null}
 
                         <div class={"modal-content box-bgcolor "} style={Orientation ? { top: 0 } : {}} >
                             {this.state.modelContent === true ?
@@ -693,12 +694,12 @@ return true
                         this.props.changeindex();
                         console.log("img was not drageed ")
                     }} >
-                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                     </Link> :
                         <Link data-toggle="modal" data-target="#DragErrorImage" onClick={() => {
                             console.log("img was not drageed ")
                         }} >
-                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                         </Link>}
                 </div>
                 <div className="progress-div">
@@ -707,7 +708,7 @@ return true
                             <span>
                                 <img className="rocket-image" src={Rocket_Launch} style={{
                                     width: 80, height: 60,
-                                }} alt={""}/>
+                                }} alt={""} />
                             </span>
                             : null}
                         {trustPointText} {totalPoint}

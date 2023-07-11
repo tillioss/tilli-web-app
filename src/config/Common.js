@@ -172,4 +172,33 @@ export function readJsonFile(screenName) {
     }
     return returnData
 }
+export function date_YY_MM_DD(ts) {
+    var date_ob = new Date(parseInt(ts));
+    var year = date_ob.getFullYear();
+    var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    var date = ("0" + date_ob.getDate()).slice(-2);
+    return year + "-" + month + "-" + date 
+}
 
+export async function doConnectPredict(subUrl, method, postJson) {
+    let startTime = Date.now();
+    return fetch(subUrl, {
+        method: method,
+        mode: 'cors',
+        redirect: 'follow',
+        body: JSON.stringify(postJson),
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        })
+    }).then(
+        function (response) {
+            // let endTime=Date.now();
+            // console.log(`Time taken to get login submit before parsing--> ${endTime-startTime}ms`)
+            return response.json();
+        }
+    ).then(function (dataresponse) {
+        let endTime = Date.now();
+        console.log(`TimeElapsed on HTTP - login submit - after parse : ${endTime - startTime}ms`)
+        return dataresponse;
+    });
+}
