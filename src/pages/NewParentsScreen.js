@@ -23,7 +23,7 @@ class NewParentScreen extends Component {
                 <div className='newParentsBody'>
                     <div className='headers mt-2'>
                         <div className='d-flex justify-content-start backbtn ml-3' style={{ width: '10%' }}>
-                            <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent') }} />
+                            <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent') }} alt=""/>
                         </div>
                         <div className='d-flex justify-content-center mt-2 mx-4 headtext' style={{ width: '68%' }}>
                             <h3 className='headerStr'>Parent's Corner</h3>
@@ -32,7 +32,7 @@ class NewParentScreen extends Component {
                         </div>
                     </div>
                     <div className='trackProgress mt-4'>
-                        <img src={trackProgress} style={{ width: "35%" }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/trackprogressscreen') }}/>
+                        <img src={trackProgress} style={{ width: "35%" }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/trackprogressscreen') }} alt=""/>
                     </div>
                     <div className='trackProgress mt-2'>
                         <p className='trackProgressTxt'>Track Progress</p>
@@ -40,9 +40,9 @@ class NewParentScreen extends Component {
                     <div className='trackProgress' style={{ height: "15px" }}>
                         <p className='trackProgressLineTxt p-4 mt-1'>Get a snapshot of your child’s emotions and strategies they use to feel better</p>
                     </div>
-                    <a href="https://www.tillikids.com/blog" target="_blank">
-                    <div className='trackProgress mt-5'>
-                        <img src={tipandtricks} style={{ width: "32%" }} />
+                    <a href="https://www.tillikids.com/blog" target="_blank" rel="noreferrer">
+                    <div className='trackProgress mt-5' >
+                        <img src={tipandtricks} style={{ width: "32%" }} alt="" />
                     </div>
                     </a>
                     <div className='trackProgress mt-2'>

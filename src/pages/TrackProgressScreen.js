@@ -67,7 +67,7 @@ class TrackProgressScreen extends Component {
     }
 
     async feedBackList() {
-        let { userLoginId, levelId, listData, loopLikedCount, loopNeutralCount, loopDislikedCount, themeId } = this.state;
+        let { userLoginId, levelId, loopLikedCount, loopNeutralCount, loopDislikedCount, themeId } = this.state;
         var postJson = {
             "userId": userLoginId,
             "levelId": levelId,
@@ -121,8 +121,7 @@ class TrackProgressScreen extends Component {
 
     }
     render() {
-        let { tabTxt, listData, loopLikedCount, loopLikedArr, loopNeutralArr, loopDislikedArr, emojiData, latestEmotion } = this.state
-        let emojArray = new Array(7)
+        let { tabTxt, listData,loopLikedArr, loopNeutralArr, loopDislikedArr, emojiData, latestEmotion } = this.state
         return (
             <React.Fragment>
                 <div className='trackProgBody'>
@@ -130,7 +129,7 @@ class TrackProgressScreen extends Component {
                         {/* <--------------Header----------------> */}
                         <div className='headers mt-2'>
                             <div className='d-flex justify-content-start backbtn ml-3' style={{ width: '10%' }}>
-                                <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen') }} />
+                                <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen') }} alt=""/>
                             </div>
                             <div className='d-flex justify-content-center mt-2 mx-4 headtext' style={{ width: '68%' }}>
                                 <h3 className='headerStr'>Track Progress</h3>
@@ -146,7 +145,7 @@ class TrackProgressScreen extends Component {
                                 <p className='mt-1 latestemotionText'>Latest Emotion :</p>
                                 {latestEmotion.length > 0 && latestEmotion[0].value !== "empty" && <>
                                     <div className='emojicontainer'>
-                                        <img src={latestEmotion[0].image} style={{ width: '100px' }} className='emotion_emoji' />
+                                        <img src={latestEmotion[0].image} style={{ width: '100px' }} className='emotion_emoji' alt=""/>
                                     </div>
                                     <p className='emotionType'>{latestEmotion[0].label}</p>
                                 </>
@@ -158,7 +157,7 @@ class TrackProgressScreen extends Component {
                                             var emojiSeven = emotionsData.filter((e) => {
                                                 return emojies === e.value
                                             })
-                                            return <img src={emojiSeven[0].image} style={{ width: '37px' }} className='mx-1 latestseven_Emoji' />
+                                            return <img src={emojiSeven[0].image} style={{ width: '37px' }} className='mx-1 latestseven_Emoji' alt=""/>
                                         })
                                         }
                                     </div>
@@ -169,11 +168,11 @@ class TrackProgressScreen extends Component {
                     <div className='strategies'>
                         <div className='container_strategies'>
                             <div className="tabs">
-                                <div className={`tab ${tabTxt == "likes" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "likes" }) }}>LIKES</div>
-                                <div className={`tab ${tabTxt == "neutral" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "neutral" }) }}>NEUTRAL</div>
-                                <div className={`tab ${tabTxt == "dislikes" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "dislikes" }) }}>DISLIKES</div>
+                                <div className={`tab ${tabTxt === "likes" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "likes" }) }}>LIKES</div>
+                                <div className={`tab ${tabTxt === "neutral" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "neutral" }) }}>NEUTRAL</div>
+                                <div className={`tab ${tabTxt === "dislikes" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "dislikes" }) }}>DISLIKES</div>
                             </div>
-                            {tabTxt == "likes" &&
+                            {tabTxt === "likes" &&
                                 <div className='stg_games'>
                                     <div className='mt-1 gmHeader'>
                                         <p className='ABCDE_Strategies_Txt'>
@@ -186,7 +185,7 @@ class TrackProgressScreen extends Component {
                                             return e.value.toLowerCase() === activity
                                         })
                                         return <div className='ABCDE_Strategies_games'>
-                                            <img src={imgFilter[0].image} style={{ width: '60px' }} className='mx-2' />
+                                            <img src={imgFilter[0].image} style={{ width: '60px' }} className='mx-2' alt=""/>
                                             <div className='gameTitle mx-3'>
                                                 <div className='gameName mt-1'>{imgFilter[0].label}</div>
                                                 <div className='gameLikes'>Likes : {count}</div>
@@ -196,7 +195,7 @@ class TrackProgressScreen extends Component {
                                     {
                                         loopLikedArr.map((e) => {
                                             return <div className='ABCDE_Strategies_games'>
-                                                <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' />
+                                                <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' alt=""/>
                                                 <div className='gameTitle mx-3'>
                                                     <div className='gameName mt-1'>Not Applicable</div>
                                                     <div className='gameLikes'>Likes: 0</div>
@@ -206,7 +205,7 @@ class TrackProgressScreen extends Component {
                                     }
                                 </div>
                             }
-                            {tabTxt == "neutral" &&
+                            {tabTxt === "neutral" &&
                                 <div className='stg_games'>
                                     <div>
                                         <p className='ABCDE_Strategies_Txt mt-1'>
@@ -219,7 +218,7 @@ class TrackProgressScreen extends Component {
                                             return e.value.toLowerCase() === activity
                                         })
                                         return <div className='ABCDE_Strategies_games'>
-                                            <img src={imgFilter[0].image} style={{ width: '60px' }} className='mx-2' />
+                                            <img src={imgFilter[0].image} style={{ width: '60px' }} className='mx-2' alt=""/>
                                             <div className='gameTitle mx-3'>
                                                 <div className='gameName mt-1'>{imgFilter[0].label}</div>
                                                 <div className='gameLikes'>Neutral : {count}</div>
@@ -229,7 +228,7 @@ class TrackProgressScreen extends Component {
                                     {
                                         loopNeutralArr.map((e) => {
                                             return <div className='ABCDE_Strategies_games'>
-                                                <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' />
+                                                <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' alt=""/>
                                                 <div className='gameTitle mx-3'>
                                                     <div className='gameName mt-1'>Not Applicable</div>
                                                     <div className='gameLikes'>Neutral: 0</div>
@@ -239,7 +238,7 @@ class TrackProgressScreen extends Component {
                                     }
                                 </div>
                             }
-                            {tabTxt == "dislikes" &&
+                            {tabTxt === "dislikes" &&
                                 <div className='stg_games'>
                                     {listData.disliked && Object.keys(listData.disliked).map((e) => {
                                         let { activity, count } = listData.disliked[e];
@@ -247,7 +246,7 @@ class TrackProgressScreen extends Component {
                                             return e.value.toLowerCase() === activity
                                         })
                                         return <div className='ABCDE_Strategies_games'>
-                                            <img src={imgFilter[0].image} style={{ width: '60px' }} className='mx-2' />
+                                            <img src={imgFilter[0].image} style={{ width: '60px' }} className='mx-2' alt=""/>
                                             <div className='gameTitle mx-3'>
                                                 <div className='gameName mt-1'>{imgFilter[0].label}</div>
                                                 <div className='gameLikes'>Disliked : {count}</div>
@@ -257,7 +256,7 @@ class TrackProgressScreen extends Component {
                                     {
                                         loopDislikedArr.map((e) => {
                                             return <div className='ABCDE_Strategies_games'>
-                                                <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' />
+                                                <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' alt=""/>
                                                 <div className='gameTitle mx-3'>
                                                     <div className='gameName mt-1'>Not Applicable</div>
                                                     <div className='gameLikes'>Disliked: 0</div>
