@@ -36,7 +36,8 @@ import TilliGameWeb from './pages/TilliGameWeb';
 import ModuleScreenMange from './Screens/ModuleManager/ModuleScreenMange';
 import GodotPlay from './Screens/ModuleManager/GodotPlay';
 import GodotRedirect from './Screens/ModuleManager/GodotRedirect';
-
+import NewParentsScreen from './pages/NewParentsScreen';
+import TrackProgressScreen from './pages/TrackProgressScreen'
 
 
 const history = createBrowserHistory();
@@ -339,6 +340,20 @@ function App() {
                     <Route path={"/" + MyConstant.keyList.projectUrl + "/games"} history={history} render={(props) =>
                         <React.Fragment>
                             <TilliGameWeb />
+                        </React.Fragment>
+                    } />
+                    <Route exact path={"/" + MyConstant.keyList.projectUrl + "/newparentsscreen"} history={history} render={(props) =>
+                        <React.Fragment>
+                            <div className={classNameForDevice}>
+                                <NewParentsScreen {...props} /> 
+                            </div>
+                        </React.Fragment>
+                    } />
+                    <Route exact path={"/" + MyConstant.keyList.projectUrl + "/trackprogressscreen"} history={history} render={(props) =>
+                        <React.Fragment>
+                            <div className={classNameForDevice}>
+                                <TrackProgressScreen {...props}  />
+                            </div>
                         </React.Fragment>
                     } />
                     <Route component={NotFoundPage} />
