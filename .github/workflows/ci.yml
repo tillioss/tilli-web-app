@@ -1,4 +1,4 @@
-name: Unit tests
+name: CI
 
 on:
   push:
@@ -7,8 +7,28 @@ on:
     branches: [master]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build project
+        run: npm build
+
   test:
     runs-on: ubuntu-latest
+
+    needs: build
 
     steps:
       - name: Checkout repository
