@@ -23,7 +23,7 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Build project
-        run: npm build
+        run: npm run build
 
   test:
     runs-on: ubuntu-latest
