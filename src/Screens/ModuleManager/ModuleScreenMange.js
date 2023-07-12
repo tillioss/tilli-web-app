@@ -44,6 +44,9 @@ class ModuleScreenMange extends React.Component {
             viewScreen: false,
             dynamicCaptureInfo: { dynamic: { dynamicThemes: {} }, },
             callAtOnce: true,
+            trackModuleScreen: false,
+            userLoginId: "",
+            moduleLevelId: "",
 
         }
         this.scorePointMove = this.scorePointMove.bind(this);
@@ -56,7 +59,7 @@ class ModuleScreenMange extends React.Component {
         userTrack("ModuleScreen", "Landing")
         localStorage.setItem('levelPoints', 0)
         localStorage.setItem('totalPoints', 0)
-
+        let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
         let gameIndex = localStorage.getItem("d_theme_gameIndex")
 
         let stage = 1
@@ -67,11 +70,11 @@ class ModuleScreenMange extends React.Component {
             stage = parseInt(gameIndex);
         }
         localStorage.setItem("d_theme_gameIndex", "")
-        this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel, stage })
+        this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel, stage, userLoginId: loginId, moduleLevelId: this.props.match.params.id })
     }
     async getLevelMappingData(levelId) {
         let postJson = { levelId: levelId, sessionId: '1223' };
-        let { viewScreen, dynamicCaptureInfo } = this.state
+        let { viewScreen, dynamicCaptureInfo, trackModuleScreen } = this.state
         let moduleJson = {};
         let responseData = await doConnect("getLevelMappingData", "POST", postJson);
         var json = responseData;
@@ -83,6 +86,7 @@ class ModuleScreenMange extends React.Component {
                 let getStageData = response
                 response = getStageData.stage;
                 let welcomeScreen = getStageData.welcomeScreen;
+                trackModuleScreen = getStageData.trackModuleScreen;
                 viewScreen = !welcomeScreen;
             }
             let findDynamic = response.filter((e) => { return e.themeType === "Dynamic" })
@@ -148,11 +152,12 @@ class ModuleScreenMange extends React.Component {
             moduleJson,
             viewScreen,
             dynamicCaptureInfo,
+            trackModuleScreen
 
         })
     }
     changeStage = (action, currentStage, Type) => {
-
+        let { trackModuleScreen } = this.state;
         if (action === 'Next') {
             let { moduleJson } = this.state;
             let stages = moduleJson.stages;
@@ -180,6 +185,16 @@ class ModuleScreenMange extends React.Component {
             if (stages && stages[currentStage - 1] && stages[currentStage - 1].themeType && stages[currentStage - 1].themeType === "Dynamic") {
                 console.log("dyamic next story capture")
                 this.updateStatusDynamicBasedOnStory()
+                if (trackModuleScreen) {
+                    if (stages[currentStage - 1].pageType && stages[currentStage - 1].pageType === "emotion") {
+                        let themeId = stages[currentStage - 1].themeId;
+                        this.emotionDataCapture(themeId)
+                    }
+                    if (stages[currentStage - 1].pageType && stages[currentStage - 1].pageType === "feedback") {
+                        let themeId = stages[currentStage - 1].themeId;
+                        this.feedBackDataCapture(themeId)
+                    }
+                }
             }
             /* dynamic each story capture*/
 
@@ -597,6 +612,8 @@ class ModuleScreenMange extends React.Component {
         this.setState({ callAtOnce: false })
     }
     async predictOnchange(apiPredict, emotion) {
+        let { userLoginId, } = this.state;
+        let key = userLoginId
         if (apiPredict === "emotion" && emotion && emotion !== "") {
             let postJson = { 'emotion': emotion.toLowerCase(), 'feedback': "satisfied", apiKey: myConfig.apiKey }
             console.log("postData", postJson)
@@ -604,9 +621,55 @@ class ModuleScreenMange extends React.Component {
             if (getResponse) {
                 let activityResponse = getResponse.activity;
                 localStorage.setItem('predictApiMsg', activityResponse)
+                localStorage.setItem(key, activityResponse)
             }
         }
     }
+
+    async emotionDataCapture(themeId) {
+        let { userLoginId, moduleLevelId, attemptCount, dynamicCaptureInfo, stage } = this.state;
+
+        let userTrackKeyText = "";
+        if (dynamicCaptureInfo && dynamicCaptureInfo.dynamic && dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1]) {
+            userTrackKeyText = dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1].userTrackKey
+        }
+
+
+        if (userTrackKeyText === "" || userTrackKeyText === undefined || userTrackKeyText === "undefined") {
+            return false
+        }
+
+        var postJson = { userId: userLoginId, levelId: moduleLevelId, themeId: themeId, emotionKey: userTrackKeyText, attemptCount: parseInt(attemptCount) };
+        console.log("postJson", postJson)
+
+        let responseData = await doConnect("emotionCapture", "POST", postJson);
+        console.log("responseData", responseData)
+    }
+
+
+
+    async feedBackDataCapture(themeId) {
+        let { userLoginId, moduleLevelId, attemptCount, dynamicCaptureInfo, stage,
+        } = this.state;
+        let key = userLoginId
+
+        let userTrackKeyText = "";
+        if (dynamicCaptureInfo && dynamicCaptureInfo.dynamic && dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1]) {
+            userTrackKeyText = dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1].userTrackKey
+        }
+
+        let predict_key = localStorage.getItem(key)
+        if (userTrackKeyText === "" || userTrackKeyText === undefined || userTrackKeyText === "undefined" || (predict_key === "" || predict_key === undefined || predict_key === "undefined")) {
+            return false
+        }
+
+        var postJson = { userId: userLoginId, levelId: moduleLevelId, themeId: themeId, feedBackKey: userTrackKeyText.toLowerCase(), activity: predict_key.toLowerCase(), attemptCount: parseInt(attemptCount) };
+        console.log(postJson)
+        let responseData = await doConnect("feedbackCapture", "POST", postJson);
+        console.log("responseData", responseData);
+    }
+
+
     render() {
 
         let { viewScreen, scorePointsView, scoreCurrentStage, callAtOnce, dynamicCaptureInfo } = this.state
