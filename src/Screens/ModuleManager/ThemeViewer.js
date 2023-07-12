@@ -64,6 +64,11 @@ export default class ThemeViewer extends React.Component {
             if (typeof (data.changeLayer.userActionText) !== "undefined" && data.changeLayer.userActionText !== "") {
                 infoTheme.userActionText = data.changeLayer.userActionText
             }
+
+            if (typeof (data.changeLayer.userTrackKey) !== "undefined" && data.changeLayer.userTrackKey !== "") {
+                infoTheme.userTrackKey = data.changeLayer.userTrackKey
+            }
+
             delete data.changeLayerIndex
             delete data.changeLayer
         }
@@ -75,6 +80,11 @@ export default class ThemeViewer extends React.Component {
                 if (typeof (infoTheme.userActionText) !== "undefined" && infoTheme.userActionText !== "" && typeof (apiPredict) !== "undefined" && apiPredict !== "") {
                     this.props.predictOnchange(apiPredict, infoTheme.userActionText)
                 }
+
+                if (typeof (layer.userTrackKey) !== "undefined" && layer.userTrackKey !== "") {
+                    infoTheme.userTrackKey = layer.userTrackKey
+                }
+
                 that.captureDetails("Next", infoTheme)
                 this.props.changeStage("Next", stage);
                 break;
