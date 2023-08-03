@@ -20,7 +20,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build project
         run: npm run build
@@ -40,7 +40,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run unit tests
         run: npm test
