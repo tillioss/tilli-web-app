@@ -42,6 +42,7 @@
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
+    "react-data-table-component": "^7.5.3",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
     "react-qr-reader": "^2.2.1",
@@ -72,7 +73,7 @@
   "scripts": {
     "start": "PORT=3023  node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -147,5 +148,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "redux-mock-store": "^1.5.4"
   }
 }
