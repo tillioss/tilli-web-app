@@ -1,3 +1,5 @@
+[![CI](https://github.com/tillioss/tilli-web-app/actions/workflows/ci.yml/badge.svg)](https://github.com/tillioss/tilli-web-app/actions/workflows/ci.yml)
+
 # Tilli Web App:
 
 Tilli Safety Tool Box comprises of 3 modules:
