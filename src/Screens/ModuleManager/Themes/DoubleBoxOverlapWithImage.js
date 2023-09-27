@@ -88,8 +88,8 @@ class DoubleBoxOverlapWithImage extends React.Component {
                     <div className="col-12">
                         <div className={"row " + (deviceHeight < 640 ? "pt-2 " : "pt-4")} >
                             <div className="col-2">
-                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                <Link to="#" onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={""} />
                                 </Link>
                             </div>
                             <div className="col-10" style={{ alignSelf: 'center' }}>
@@ -122,13 +122,13 @@ class DoubleBoxOverlapWithImage extends React.Component {
                             'vp?action=module&key=' +
                             content.image.fileName +
                             '&id=' +
-                            content.image.fileType} alt={""}/>
+                            content.image.fileType} alt={""} />
                     </div>
                 </div>
 
                 <div className="bottom-style">
                     <div style={{ textAlign: "right" }}>
-                        <Link onClick={() => {
+                        <Link to="#" onClick={() => {
                             if (detectHorizontal) {
                                 var elements = document.getElementsByClassName('mobile-responsive'); // get all elements
                                 for (var i = 0; i < elements.length; i++) {
@@ -138,7 +138,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
                             this.props.changeStage('Next', stage)
                         }
                         }>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                         </Link>
                     </div>
                     <div className="progress-div">

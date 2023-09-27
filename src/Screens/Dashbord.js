@@ -107,19 +107,14 @@ class Dashbord extends React.Component {
 
 
     let postJson = { sessionId: '1223', userId: localStorage.getItem("loggedUserId") };
-    // alert(JSON.stringify(postJson))
     let responseData = await doConnect("getUserGameStatus", "POST", postJson);
-    // alert(JSON.stringify(responseData))
-    //console.log('postJson get level==>', postJson)
+
     let json = responseData;
     if (json.response == null) {
-      // this.props.setUserInfo('progressingLevel', 0)
       this.setState({ progressingLevel: 1 })
     }
     else {
-      // console.log('postJson get==>', JSON.parse(responseData.response))
-      //this.props.setUserInfo('progressingLevel', JSON.parse(responseData.response).level)
-      // let a = false ? JSON.parse(responseData.response).level : 0
+
       let a = JSON.parse(responseData.response) ? JSON.parse(responseData.response).level : 1
       this.setState({
         progressingLevel: a,
@@ -215,68 +210,66 @@ class Dashbord extends React.Component {
 
 
   returnBodyContent() {
-
+    let { progressingLevel } = this.state
     let retrunData = []
     //new code
-      Object.keys(this.state.bodydata).map((val, index) => {
-        let image = this.state.bodydata[val].image;
-        let nameModule = this.state.bodydata[val].name
-        retrunData.push(
-          <React.Fragment key={index.toString()}>
-            <div className="col-3" >
-              <div>
-                <div className="dashboard-level" style={{ backgroundColor: this.state.bodydata[val].color }} onClick={() => {
-                  // console.log(index)
-                  // if (index == 0) {
-                  // console.log(index, "***", this.state.progressingLevel)
-                  if (index < this.state.progressingLevel) {
-                    let progressLevel = index + 1
-                    if (index === this.state.progressingLevel) {
-                      progressLevel = this.state.progressingLevel
-                    }
-                    // console.log("progressLevel", progressLevel)
-                    this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module-manage/' + this.state.bodydata[val].id + '/' + index + '/' + progressLevel)
-                    //this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/lego/module/' + this.state.bodydata[val].id + '/' + 0 + '/' + this.state.progressingLevel)
+    Object.keys(this.state.bodydata).map((val, index) => {
+      let image = this.state.bodydata[val].image;
+      let nameModule = this.state.bodydata[val].name
+      retrunData.push(
+        <React.Fragment key={index.toString()}>
+          <div className="col-3" >
+            <div>
+              <div className="dashboard-level" style={{ backgroundColor: this.state.bodydata[val].color }} onClick={() => {
+
+                if (index < progressingLevel) {
+                  let progressLevel = progressingLevel;
+                  if (index + 1 === progressingLevel) {
+                    progressLevel = progressingLevel
+                  } else {
+                    progressLevel = progressLevel - 1
                   }
-                }}>
-                  {/* {index > 0 ? */}
-                  {index + 1 > this.state.progressingLevel ?
-                    <React.Fragment>
-                      <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        opacity: 0.8,
-                        backgroundColor: '#BCBFCA',
-                        height: 60,
-                        zIndex: 2,
-                        borderRadius: 16,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '90%',
-                        margin: '5%'
-                      }}> <i className="fa fa-lock" style={{ fontSize: 30, marginTop: 16, color: 'black' }} aria-hidden="true"></i>
-                      </div>
-                    </React.Fragment>
-                    : null}
-                  <img style={{ width: '90%', height: 43, marginTop: 11, maxWidth: 70 }} src={MyConstant.keyList.apiURL +
-                    'vp?action=module&key=' +
-                    image.fileName +
-                    '&id=' +
-                    image.fileType} alt={""}/>
-                </div>
-                <div style={{ paddingTop: 5 }} >
-                  <p className="ffmedium" style={{ fontSize: 13, fontWeight: 500 }}>
-                    {this.languageRefillData(this.state.bodydata[val].id) ?
-                      this.languageRefillData(this.state.bodydata[val].id) : nameModule}
-                  </p>
-                </div>
+                  this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module-manage/' + this.state.bodydata[val].id + '/' + index + '/' + progressLevel)
+                }
+              }}>
+                {/* {index > 0 ? */}
+                {index + 1 > this.state.progressingLevel ?
+                  <React.Fragment>
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      opacity: 0.8,
+                      backgroundColor: '#BCBFCA',
+                      height: 60,
+                      zIndex: 2,
+                      borderRadius: 16,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '90%',
+                      margin: '5%'
+                    }}> <i className="fa fa-lock" style={{ fontSize: 30, marginTop: 16, color: 'black' }} aria-hidden="true"></i>
+                    </div>
+                  </React.Fragment>
+                  : null}
+                <img style={{ width: '90%', height: 43, marginTop: 11, maxWidth: 70 }} src={MyConstant.keyList.apiURL +
+                  'vp?action=module&key=' +
+                  image.fileName +
+                  '&id=' +
+                  image.fileType} alt={""} />
+              </div>
+              <div style={{ paddingTop: 5 }} >
+                <p className="ffmedium" style={{ fontSize: 13, fontWeight: 500 }}>
+                  {this.languageRefillData(this.state.bodydata[val].id) ?
+                    this.languageRefillData(this.state.bodydata[val].id) : nameModule}
+                </p>
               </div>
             </div>
-          </React.Fragment >
-        )
-        return true
-      })
-      return retrunData
+          </div>
+        </React.Fragment >
+      )
+      return true
+    })
+    return retrunData
   }
 
   render() {
@@ -314,7 +307,7 @@ class Dashbord extends React.Component {
                   //left: '10%',
                   fontFamily: 'schoolbell-regular',
                 }}>
-                  <img src={image_13} style={{ width: 40, height: 40, position: 'absolute', left: '-20%', top: '18%', marginTop: -2 }} alt={""}/>
+                  <img src={image_13} style={{ width: 40, height: 40, position: 'absolute', left: '-20%', top: '18%', marginTop: -2 }} alt={""} />
 
                 </div>
               </div>
@@ -346,7 +339,7 @@ class Dashbord extends React.Component {
 
               <div style={{ backgroundImage: `url(${outlineRoundIconOnly})`, width: 30, height: 30, backgroundSize: 'cover', position: 'absolute', justifyContent: 'center', alignSelf: 'center', textAlign: 'center' }}>
                 <div style={{ width: '100%', position: 'absolute', left: '10%', top: '30%', fontFamily: 'schoolbell-regular', }}>
-                  <img src={image_15} style={{ width: 15, height: 12, position: 'absolute', left: '15%' }} alt={""}/>
+                  <img src={image_15} style={{ width: 15, height: 12, position: 'absolute', left: '15%' }} alt={""} />
 
                 </div>
               </div>
@@ -355,7 +348,7 @@ class Dashbord extends React.Component {
             </div>
             <div className="col-5" />
             <div className="col-2">
-              <img src={outline_forward} style={{ width: 48, height: 48, marginTop: 10 }} alt={""}/>
+              <img src={outline_forward} style={{ width: 48, height: 48, marginTop: 10 }} alt={""} />
             </div>
           </div>
 
@@ -392,7 +385,7 @@ class Dashbord extends React.Component {
                       <table style={{ margin: 'auto' }}>
                         <tbody>
                           <tr>
-                            <td><img src={atomImg} alt={""}/></td>
+                            <td><img src={atomImg} alt={""} /></td>
                             <td style={{ padding: '0 2px' }}>
                               <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.points}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, }}>
@@ -407,7 +400,7 @@ class Dashbord extends React.Component {
                       <table style={{ margin: 'auto' }}>
                         <tbody>
                           <tr>
-                            <td><img src={heartImg} alt={""}/></td>
+                            <td><img src={heartImg} alt={""} /></td>
                             <td style={{ padding: '0 2px' }}>
                               <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.feellingsTool}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, marginLeft: this.state.deviceHeight < 330 ? -15 : 0 }}>

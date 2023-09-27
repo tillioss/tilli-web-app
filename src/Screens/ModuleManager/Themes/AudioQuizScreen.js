@@ -362,7 +362,7 @@ class AudioQuizScreen extends React.Component {
                 {viewType === 'question' ?
                     <React.Fragment>
                         <div className="audiospeak-img" >
-                            <Link className="col-2" onClick={() => {
+                            <Link to="#" className="col-2" onClick={() => {
                                 if (detectHorizontal) {
                                     window.scrollTo(0, 0);
                                 }
@@ -384,7 +384,7 @@ class AudioQuizScreen extends React.Component {
                             onClick={async () => {
                             }} > <p style={{ fontSize: deviceHeight < 570 ? 10 : 12 }}>{this.return_content(1, 7)}</p>
 
-                            <Link className="col-2">
+                            <Link to="#" className="col-2">
                                 <img src={viewType === 'answer' ? outlineIconOnlyImage : outlineIconRedImage} style={{ width: 60, height: 60, }} alt={""} />
                                 <img src={nounVoiceRecordImage} style={{ width: 47, height: 42, position: "absolute", bottom: -10, left: 22 }} alt={""} />
                             </Link>
@@ -405,7 +405,7 @@ class AudioQuizScreen extends React.Component {
                 {viewType === 'question' ?
                     <React.Fragment>
                         <div  >
-                            <Link className="col-2" onClick={() => {
+                            <Link to="#" className="col-2" onClick={() => {
                                 if (detectHorizontal) {
                                     window.scrollTo(0, 0);
                                 }
@@ -422,7 +422,7 @@ class AudioQuizScreen extends React.Component {
                             this.bgColorChg()
 
                         }} >
-                            <Link className="col-2">
+                            <Link to="#" className="col-2">
                                 <button className="btn btn-warning" style={{ background: "gainsboro", border: "gainsboro", width: "85%", fontWeight: 700, fontFamily: 'montserrat-medium', }} >{this.return_content(1, 6)}</button>
                             </Link>
                         </div>
@@ -595,7 +595,7 @@ class AudioQuizScreen extends React.Component {
                 <div className="row ml-0 mt-4" >
                     <div className="col-2">
                         {this.props.themeType === "StoryCard" ?
-                            <Link
+                            <Link to="#"
                                 onClick={() => {
                                     SpeechRecognition.stopListening({ continuous: false });
                                     this.props.changeindex('Previous', stage)
@@ -603,7 +603,7 @@ class AudioQuizScreen extends React.Component {
                                 <img style={{ width: 48, height: 48 }} src={backImage} alt={""} />
                             </Link>
                             :
-                            <Link onClick={() => {
+                            <Link to="#" onClick={() => {
                                 SpeechRecognition.stopListening({ continuous: false });
                                 this.props.changeStage('Previous', stage)
                             }}>
@@ -640,14 +640,14 @@ class AudioQuizScreen extends React.Component {
                     {this.state.Viewstate ?
                         <React.Fragment>
                             {this.props.themeType === "StoryCard" ?
-                                <Link onClick={() => {
+                                <Link to="#" onClick={() => {
                                     SpeechRecognition.stopListening({ continuous: false });
                                     this.props.changeindex('Next', stage)
 
                                 }} >
                                     <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                                 </Link>
-                                : <Link onClick={() => {
+                                : <Link to="#" onClick={() => {
                                     SpeechRecognition.stopListening({ continuous: false })
                                     this.props.changeStage('Next', stage)
                                 }} >
@@ -660,7 +660,7 @@ class AudioQuizScreen extends React.Component {
                     {!this.state.Viewstate ?
                         <React.Fragment>
                             {this.props.themeType === "StoryCard" ?
-                                <Link onClick={() => {
+                                <Link to="#" onClick={() => {
                                     SpeechRecognition.stopListening({ continuous: false });
                                     this.changeInnerIndex()
                                     if (detectHorizontal) {
@@ -670,7 +670,7 @@ class AudioQuizScreen extends React.Component {
                                 }} >
                                     <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                                 </Link>
-                                : <Link onClick={() => {
+                                : <Link to="#" onClick={() => {
                                     SpeechRecognition.stopListening({ continuous: false });
                                     this.changeInnerIndex()
                                 }} >
