@@ -90,7 +90,7 @@ class IntroducePersons extends React.Component {
             <div className="module-parent">
                 <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                     <div className="col-2">
-                        <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                        <Link to="#" onClick={() => this.props.changeStage('Previous', stage)}>
                             <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
                         </Link>
                     </div>
@@ -148,7 +148,7 @@ class IntroducePersons extends React.Component {
             </div>
             <div className={"bottom-style " + changeLang}>
                 <div style={{ textAlign: "right" }}>
-                    <Link onClick={() => this.props.changeStage('Next', stage)}>
+                    <Link to="#" onClick={() => this.props.changeStage('Next', stage)}>
                         <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                     </Link>
                 </div>

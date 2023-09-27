@@ -144,7 +144,7 @@ class AskGender extends React.Component {
             <div className="module-parent">
                 <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                     <div className="col-2">
-                        <Link onClick={() => {
+                        <Link to="#" onClick={() => {
                             // this.props.previousScorePage('Previous', stage,)
                             if (chooseGender) {
                             }
@@ -232,7 +232,7 @@ class AskGender extends React.Component {
             </div>
             <div className={"bottom-style " + changeLang}>
                 <div style={{ textAlign: "right" }}>
-                    <Link onClick={() => {
+                    <Link  to="#" onClick={() => {
                         if (chooseGender) {
                             this.updateDetails_Info(chooseGender)
                             this.props.changeStage('Next', stage, "scorepoint")

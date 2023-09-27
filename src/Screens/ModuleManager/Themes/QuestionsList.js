@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, { } from 'react';
 import { Link } from 'react-router-dom';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
@@ -17,7 +17,7 @@ class QuestionsList extends React.Component {
         }
     }
     componentDidMount() {
-        let {data } = this.props;
+        let { data } = this.props;
         var questionVisible = this.state.questionVisible
         let content = data.content;
         console.log(content.questionList.length)
@@ -32,7 +32,7 @@ class QuestionsList extends React.Component {
                     await this.setState({ viewState: true })
                 }
             }.bind(this), 900 * (index))
-return true
+            return true
         })
         this.handleResize();
         window.addEventListener('resize', this.handleResize)
@@ -69,8 +69,8 @@ return true
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                             <div className="col-2">
-                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
-                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={"img"}/>
+                                <Link to="#" onClick={() => this.props.changeStage('Previous', stage)}>
+                                    <img style={{ width: 48, height: 48 }} src={backImage} alt={"img"} />
                                 </Link>
                             </div>
                             <div className="col-10">
@@ -84,7 +84,7 @@ return true
                                     backgroundImage: `url(${qus_image_1})`, backgroundRepeat: "no-repeat", backgroundSize: "contain",
                                     height: 36, width: 38, display: 'flex', justifyContent: 'center', alignItems: 'center'
                                 }} >
-                                    <img src={qus_image_2} style={{ width: 16, height: 23, }} alt={"img"}/>
+                                    <img src={qus_image_2} style={{ width: 16, height: 23, }} alt={"img"} />
                                 </div>
 
                             </div>
@@ -126,8 +126,8 @@ return true
 
                 <div className="bottom-style">
                     <div style={{ textAlign: "right" }}>
-                        <Link onClick={() => this.props.changeStage('Next', stage)}>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={"img"}/>
+                        <Link to="#" onClick={() => this.props.changeStage('Next', stage)}>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={"img"} />
                         </Link>
                     </div>
                     <div className="progress-div">

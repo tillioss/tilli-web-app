@@ -114,7 +114,7 @@ class MeetSinglePerson extends React.Component {
                         <div className={"row ml-0  " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
 
                             <div className="col-2">
-                                <Link onClick={() => {
+                                <Link to="#" onClick={() => {
 
                                     let preStageData = this.props.moduleJson.stages[this.props.parentindex - 1]
                                     let preStageData_2 = this.props.moduleJson.stages[this.props.parentindex - 2]

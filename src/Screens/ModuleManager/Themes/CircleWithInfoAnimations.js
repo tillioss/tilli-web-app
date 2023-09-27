@@ -82,7 +82,7 @@ class CircleWithInfoAnimations extends React.Component {
                 <div className="col-12" style={{ margin: 0, padding: 0 }}>
                     <div className={this.state.deviceHeight < 750 ? "row mt-3 ml-0" : "row mt-4 ml-0"}>
                         <div className="col-2">
-                            <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                            <Link to="#" onClick={() => this.props.changeStage('Previous', stage)}>
                                 <img style={{ width: 48, height: 48 }} src={backImage} alt={""} />
                             </Link>
                         </div>
@@ -164,7 +164,7 @@ class CircleWithInfoAnimations extends React.Component {
                                         }
                                     </div>
                                     {this.state.ImageView === 1 && this.state.showIcon ?
-                                        <Link onClick={() => this.setState({ showIcon: false })} style={{ zIndex: 2 }}>
+                                        <Link to="#" onClick={() => this.setState({ showIcon: false })} style={{ zIndex: 2 }}>
                                             <div style={{
                                                 backgroundColor: '#ADD8E6', boxShadow: ' 0px 4px 4px rgba(0, 0, 0, 0.25)', borderRadius: 15, marginTop: -240,
                                                 marginLeft: deviceHeight < 680 ? 80 : 150, width: deviceWidth / 2, height: deviceWidth / 2, maxWidth: 270, maxHeight: 225,
@@ -224,7 +224,7 @@ class CircleWithInfoAnimations extends React.Component {
                 <div style={{ textAlign: "right" }}>
 
                     {this.state.currentIndex === 1 ?
-                        <Link onClick={() => {
+                        <Link to="#" onClick={() => {
                             if (this.state.ImageView) {
                                 this.props.changeStage('Next', stage)
                             }

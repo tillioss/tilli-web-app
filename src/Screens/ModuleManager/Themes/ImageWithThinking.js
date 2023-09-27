@@ -81,7 +81,7 @@ class ImageWithThinking extends React.Component {
                     <div className="col-12" style={{ margin: 0, padding: 0 }}>
                         <div className= {"row ml-0 "+( deviceHeight < 640  ? "pt-2 ": "pt-4") }>
                             <div className="col-2">
-                                <Link onClick={() => this.props.changeStage('Previous', stage)}>
+                                <Link to="#" onClick={() => this.props.changeStage('Previous', stage)}>
                                     <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
                                 </Link>
                             </div>
@@ -111,7 +111,7 @@ class ImageWithThinking extends React.Component {
 
                 <div className="bottom-style">
                     <div style={{ textAlign: "right" }}>
-                        <Link onClick={() => this.props.changeStage('Next', stage)}>
+                        <Link to="#" onClick={() => this.props.changeStage('Next', stage)}>
                             <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
                         </Link>
                     </div>

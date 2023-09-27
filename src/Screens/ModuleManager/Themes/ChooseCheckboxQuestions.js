@@ -80,7 +80,7 @@ class ChooseCheckboxQuestions extends React.Component {
             }
             return (
                 <div className="col-6 box-margin" style={{ margin: 0, padding: 0, paddingLeft: 10, marginTop: UWPview ? '65px' : '10px', }} key={index}>
-                    <Link onClick={() => this.pushData(checkBox.content)}>
+                    <Link to="#" onClick={() => this.pushData(checkBox.content)}>
                         <div style={{
                             backgroundColor: exist
                                 ? content.colors.checked
@@ -145,7 +145,7 @@ class ChooseCheckboxQuestions extends React.Component {
                 <div className="col-12" style={{ margin: 0, padding: 0 }}>
                     <div className= {"row ml-0 "+( deviceHeight < 640  ? "pt-2 ": "pt-4") } >
                         <div className="col-2">
-                            <Link onClick={() => {
+                            <Link to="#" onClick={() => {
                                 this.checkedData()
                                 this.props.changeStage('Previous', stage)
                             }}>
@@ -184,7 +184,7 @@ class ChooseCheckboxQuestions extends React.Component {
 
             <div className="bottom-style">
                 <div style={{ textAlign: "right" }}>
-                    <Link onClick={() => this.props.changeStage('Next', stage)}>
+                    <Link to="#" onClick={() => this.props.changeStage('Next', stage)}>
                         <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                     </Link>
                 </div>

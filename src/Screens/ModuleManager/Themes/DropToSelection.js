@@ -229,7 +229,7 @@ class CircleWithInfoAnimations extends React.Component {
             }
             return true
         })
-        
+
         data.content.chooseAnswer = check_value ? "Correct" : "Wrong"
         data.content.circleSelect = choose
 
@@ -392,7 +392,7 @@ class CircleWithInfoAnimations extends React.Component {
                 <div className="col-12" style={{ margin: 0, padding: 0 }}>
                     <div className={"row mt-4 ml-0"} >
                         <div className="col-2">
-                            <Link onClick={() => {
+                            <Link to="#" onClick={() => {
                                 if (this.props.themeType === "StoryCard") {
                                     this.props.changeindex('Previous', stage)
                                 }
@@ -476,7 +476,7 @@ class CircleWithInfoAnimations extends React.Component {
                 </div>
 
                 <div class={"modal fade bd-example-modal-lg " + this.state.show_con} style={{ display: this.state.display_view, top: deviceHeight < 700 ? "20%" : modelContent ? "30%" : "30%" }} tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div className="modal-dialog modal-lg">
 
                         {modelContent ? <img src={Awesome_JobImg} style={{
                             width: 250, height: 100, left: 0, top: 35, zIndex: 1000,
@@ -522,8 +522,8 @@ class CircleWithInfoAnimations extends React.Component {
                                             })
 
                                         }} >
-                                            {localStorage.getItem("loggedUserId") || localStorage.getItem("demoUserId") ? <button style={{ color: "inherit" }} className={"lego-box-btnbg"}
-                                                type="button" data-dismiss="modal" aria-label="Close" class="btn btn-warning">{true_button}</button> : <button type="button" class="lego-box-btnbg"
+                                            {localStorage.getItem("loggedUserId") || localStorage.getItem("demoUserId") ? <button style={{ color: "inherit" }} className={"lego-box-btnbg btn btn-warning"}
+                                                type="button" data-dismiss="modal" aria-label="Close" >{true_button}</button> : <button type="button" className="lego-box-btnbg"
                                                     data-toggle={this.state.succesMsgCount > 1 ? "modal" : ""} data-target="#myModal"> {false_button}</button>}
 
                                         </div>
@@ -568,8 +568,8 @@ class CircleWithInfoAnimations extends React.Component {
                                             window.scroll(10, 10)
                                         }} >
 
-                                            {localStorage.getItem("loggedUserId") ? <button className={"lego-box-btnbg "}
-                                                type="button" data-dismiss="modal" aria-label="Close" class="btn btn-warning">{false_button} </button> : <button type="button" class="lego-box-btnbg"
+                                            {localStorage.getItem("loggedUserId") ? <button className={"lego-box-btnbg btn btn-warning"}
+                                                type="button" data-dismiss="modal" aria-label="Close" >{false_button} </button> : <button type="button" className="lego-box-btnbg"
                                                     data-toggle={this.state.anotherChoice > 2 ? "modal" : ""} data-target="#myModal"> {false_button}</button>}
 
                                         </div>
@@ -583,13 +583,13 @@ class CircleWithInfoAnimations extends React.Component {
                 </div>
 
 
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title text-center">Show Message</h4>
+                <div className="modal fade" id="myModal" role="dialog">
+                    <div className="modal-dialog modal-md">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title text-center">Show Message</h4>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <p>SuccessFully Submited.</p>
                             </div>
 
@@ -597,22 +597,22 @@ class CircleWithInfoAnimations extends React.Component {
                     </div>
                 </div>
 
-                <div class="modal fade" id="DragErrorImage" role="dialog" style={{ top: "40%" }}>
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                <div className="modal fade" id="DragErrorImage" role="dialog" style={{ top: "40%" }}>
+                    <div className="modal-dialog modal-md">
+                        <div className="modal-content">
+                            <div className="modal-header">
                                 <div className="row">
                                     <div className="col-sm-10 col-10">
-                                        <h4 class="modal-title text-center"> {this.return_content(8)}</h4>
+                                        <h4 className="modal-title text-center"> {this.return_content(8)}</h4>
                                     </div>
                                     <div className="col-sm-2 col-2">
-                                        <span class="close" data-dismiss="modal" aria-label="Close" style={{ cursor: "pointer" }}>
+                                        <span className="close" data-dismiss="modal" aria-label="Close" style={{ cursor: "pointer" }}>
                                             <span aria-hidden="true">&times;</span>
                                         </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <p>{this.return_content(9)}</p>
                             </div>
 
@@ -689,14 +689,14 @@ class CircleWithInfoAnimations extends React.Component {
             </div>
             <div className="bottom-style" style={{ background: "inherit", position: deviceHeight < 720 ? "unset" : "" }}>
                 <div style={{ textAlign: "right" }}>
-                    {imageDraged ? <Link data-toggle="modal" data-target="#DragErrorImage" onClick={() => {
+                    {imageDraged ? <Link to="#" data-toggle="modal" data-target="#DragErrorImage" onClick={() => {
                         this.setState({ modelView: true, show_con: "show", display_view: "block", })
                         this.props.changeindex();
                         console.log("img was not drageed ")
                     }} >
                         <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                     </Link> :
-                        <Link data-toggle="modal" data-target="#DragErrorImage" onClick={() => {
+                        <Link to="#" data-toggle="modal" data-target="#DragErrorImage" onClick={() => {
                             console.log("img was not drageed ")
                         }} >
                             <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
@@ -716,8 +716,8 @@ class CircleWithInfoAnimations extends React.Component {
 
                 </div>
                 <div>
-                    <div class="progress  barDesign">
-                        <div class="progress-bar"
+                    <div className="progress  barDesign">
+                        <div className="progress-bar"
                             role="progressbar" style={{
                                 width: PercentageTotal + "%", backgroundColor: "#FFBD12",
                                 border: totalPoint ? "1px solid #18191F" : ""
