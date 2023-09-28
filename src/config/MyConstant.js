@@ -3,5 +3,6 @@ module.exports = {
     projectName: 'Tilli',
     projectUrl: 'tilli-web',
     apiURL: 'http://localhost:8093/tilli-api/',
+    predictUrl: "http://localhost:8093/"
   },
 };
