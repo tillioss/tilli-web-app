@@ -617,7 +617,7 @@ class ModuleScreenMange extends React.Component {
         if (apiPredict === "emotion" && emotion && emotion !== "") {
             let postJson = { 'emotion': emotion.toLowerCase(), 'feedback': "satisfied", apiKey: myConfig.apiKey }
             console.log("postData", postJson)
-            let getResponse = await doConnectPredict("https://tilli.teqbahn.com/predict", "POST", postJson)
+            let getResponse = await doConnectPredict(MyConstant.keyList.predictUrl + "predict", "POST", postJson)
             if (getResponse) {
                 let activityResponse = getResponse.activity;
                 localStorage.setItem('predictApiMsg', activityResponse)
