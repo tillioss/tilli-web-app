@@ -79,8 +79,6 @@ class AudioQuizScreen extends React.Component {
                     data.content.feelingsDataList[index_value].results =
                       e.target.value;
                     setCount(e.target.value);
-                    //console.log('e',datavalue)
-                    //this.setState({ data:count })
                   }}
                 />
               </div>
@@ -93,7 +91,6 @@ class AudioQuizScreen extends React.Component {
                   if (
                     data.content.feelingsDataList[index_value].results.length
                   ) {
-                    //console.log('data.content',data.content.feelingsDataList[index_value])
                     if (
                       data.content.feelingsDataList.length !==
                       index_value + 1
@@ -118,15 +115,9 @@ class AudioQuizScreen extends React.Component {
         );
       }
 
-      //#FF89BB -->pink color
-
-      //FYI-->  //#FFBD12 -->yellow color  -->above the two color using change render value
       return (
         <React.Fragment>
-          {/* <button onClick={SpeechRecognition.startListening}>Start</button>
-                    <button onClick={SpeechRecognition.stopListening}>Stop</button>
-                    <button onClick={resetTranscript}>Reset</button>
-                    <p>{transcript}</p> */}
+          {}
 
           <div className="row">
             <div className="row ">
@@ -190,7 +181,7 @@ class AudioQuizScreen extends React.Component {
                 display: bg_color === "#FFBD12" ? "flex" : "inline-block",
               }}
             >
-              {/* FF89BB */}
+              {}
               {bg_color === "#FFBD12" ? (
                 <p
                   style={{
@@ -200,7 +191,6 @@ class AudioQuizScreen extends React.Component {
                     lineHeight: 1.2,
                     textAlign: "center",
                     color: "#FFFFFF",
-                    // marginTop: 20
                   }}
                 >
                   {" "}
@@ -235,25 +225,10 @@ class AudioQuizScreen extends React.Component {
                   </div>
 
                   <div className="row">
-                    {/* <img src={pitchPng} style={{ width: '100%', height: '9%',
- //marginTop: '40%' ,objectPosition:'bottom'
- }} /> */}
+                    {}
                   </div>
 
-                  {/* {pitchArray.map(ival =>{
-                                        console.log('sd',ival)
-                                    return(
-                                        <span style={{
-                                            height: parseFloat(ival) * 8,
-                                            width: 2,
-                                            backgroundColor: '#000',
-                                            paddingLeft: 3,
-                                            marginLeft: 5,
-                                            alignItems: 'center',
-                                        }} > </span>
-                                    )
-
-                                    })}                      */}
+                  {}
                 </React.Fragment>
               )}
             </div>
@@ -263,7 +238,7 @@ class AudioQuizScreen extends React.Component {
           <div className="row mt-4">
             <div className="col-10"> </div>
             <div className="col-2">
-              {/* <img src={heartImage} style={{ width: 32, height: 30 }} /> */}
+              {}
             </div>
           </div>
 
@@ -358,7 +333,6 @@ class AudioQuizScreen extends React.Component {
                           data.content.feelingsDataList[index_value].results
                             .length
                         ) {
-                          //console.log('data.content',data.content.feelingsDataList[index_value])
                           if (
                             data.content.feelingsDataList.length !==
                             index_value + 1
@@ -478,24 +452,7 @@ class AudioQuizScreen extends React.Component {
           <AudioRecognize1 datavalue={this.props.data} />
         </div>
 
-        {/*<div className="row" >
-                    <div className="col-5"> </div>
-                    <a onClick={async () => {
-                        
-                        if (data.content.feelingsDataList[index_value].results.length) {
-                            //console.log('data.content',data.content.feelingsDataList[index_value])
-                            if (data.content.feelingsDataList.length != index_value + 1) {
-                               this.setState({ index_value: index_value + 1 })
-                            }
-                            else if (data.content.feelingsDataList.length == index_value + 1) {
-                                await this.setState({ Viewstate: true })
-                            }  
-                        }
-                    }}>
-                         
-                    </a>
-                    <div className="col-4"> </div>
-                </div> */}
+        {}
 
         {this.state.Viewstate ? (
           <React.Fragment>
