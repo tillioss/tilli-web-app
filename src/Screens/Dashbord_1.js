@@ -7,10 +7,6 @@ import MyConstant from "../config/MyConstant";
 import { doConnect } from '../config/Common';
 
 
-
-
-
-
 class Dashbord_1 extends React.Component {
 
   constructor(props) {
@@ -34,11 +30,9 @@ class Dashbord_1 extends React.Component {
     let responseData = await doConnect("getUserGameStatus", "POST", postJson);
         let json = responseData;
         if (json.response == null) {
-          // this.props.setUserInfo('progressingLevel', 0)
           this.setState({ progressingLevel: 0 })
         }
         else {
-          //this.props.setUserInfo('progressingLevel', JSON.parse(responseData.response).level)
           this.setState({ progressingLevel: JSON.parse(responseData.response).level })
         }
 
@@ -49,7 +43,6 @@ class Dashbord_1 extends React.Component {
     let that = this;
     let responseData = await doConnect("getGameLevels", "POST", postJson);
         let json = responseData;
-        //console.log('json level',json)
         if (
           Object.keys(json).length > 0 &&
           json.levelsMap != null &&
@@ -211,7 +204,6 @@ class Dashbord_1 extends React.Component {
 
 
           {Object.keys(this.state.bodydata).map((val, index) => {
-            // console.log('val', this.state.bodydata[val])
             let image = this.state.bodydata[val].image
             return (
               <React.Fragment>
@@ -229,8 +221,6 @@ class Dashbord_1 extends React.Component {
                 }} onClick={() => {
 
                   this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/module/' + this.state.bodydata[val].id + '/' + index+'/'+this.state.progressingLevel)
-                  // console.log(this.state.bodydata[val].id)
-                  //MyConstant.keyList.projectUrl + "/module/?:id
                 }} >
 
                   {index > this.state.progressingLevel ?
