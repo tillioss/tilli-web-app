@@ -42,7 +42,6 @@ export function checkNullAndReturnString(str) {
 
 export async function doFileConnect(dataJson) {
 
-   // alert(JSON.stringify(dataJson))
     if( dataJson !== "{}" && Object.keys(dataJson).length>0){
         var i =0
         const postFileUpload = new FormData();
@@ -50,9 +49,7 @@ export async function doFileConnect(dataJson) {
         postFileUpload.append('fileName' + (i+1), dataJson.fileName);
         postFileUpload.append('processType' + (i+1), dataJson.processType);
         postFileUpload.append('docsId' + (i+1), dataJson.docsId);
-      //  postFileUpload.append('userId', dataJson.userId);
-       // alert(MyConstant.keyList.apiURL + "uploads/" + dataJson.processType + "/" + dataJson.fileType + "/" + dataJson.fileName)
-
+      
         fetch(MyConstant.keyList.apiURL + "uploads/" + dataJson.processType + "/" + dataJson.fileType + "/" + dataJson.fileName, {
             method: "POST",
             mode: 'cors',
@@ -84,8 +81,6 @@ export async function doConnect(subUrl, method, postJson) {
         })
     }).then(
         function (response) {
-            // let endTime=Date.now();
-            // console.log(`Time taken to get login submit before parsing--> ${endTime-startTime}ms`)
             return response.json();
         }
     ).then(function (dataresponse) {
@@ -113,7 +108,6 @@ export function getMonthAndDate(UNIX_timestamp,fullmonth=false){
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var month = months[a.getMonth()];
     var date = a.getDate();
-    //var time = month + ' ' + date;
     let day=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var time = fullmonth ?day[a.getDay()] + ', ' +  month + ' ' + date:month + ' ' + date;
     return time;
@@ -141,7 +135,6 @@ export async function userTrack(page, action, ipAddress) {
             }
         }
         console.log("---------------->",postJson)
-        // let responseData = await doConnect("captureLogs", "POST", postJson);
         console.log("Logged")
        
     }
@@ -192,8 +185,6 @@ export async function doConnectPredict(subUrl, method, postJson) {
         })
     }).then(
         function (response) {
-            // let endTime=Date.now();
-            // console.log(`Time taken to get login submit before parsing--> ${endTime-startTime}ms`)
             return response.json();
         }
     ).then(function (dataresponse) {
