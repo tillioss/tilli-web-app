@@ -3,35 +3,7 @@ import Select, { components, } from 'react-select';
 import downArrow from "../images/downArrow.png"
 
 
-
-
 const TilliGameWebDropDown = (props) => {
-
-  // const customStyles = () => ({
-  //   control: (styles) => ({
-  //     ...styles,
-  //     background: "red",
-  //     backgroundColor: "red",
-  //   }),
-  //   menu: (base) => ({
-  //     ...base,
-  //     background: "#FFF",
-  //     color: "#000",
-  //     backgroundColor: "red",
-  //   }),
-  //   option: (provided, state) => ({
-  //     ...provided,
-  //     color: 'black',
-  //     backgroundColor: state.isSelected ? "rgba(189,197,209,.3)" : "white",
-  //   }),
-  //   singleValue: provided => ({
-  //     ...provided,
-  //     height: '100%',
-  //     color: '#08699B',
-  //     paddingTop: '3px',
-  //   }),
-  // });
-
 
   const customStyles = () => ({
     control: (styles) => ({
