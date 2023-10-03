@@ -33,7 +33,6 @@ class AudioQuizScreen extends React.Component {
     };
   }
 
-  componentDidMount() {}
 
   return_content(pageIndex, index) {
     const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } =
@@ -225,7 +224,7 @@ class AudioQuizScreen extends React.Component {
                   </div>
 
                   <div className="row">
-                    {}
+                    
                   </div>
 
                   {}
@@ -238,7 +237,7 @@ class AudioQuizScreen extends React.Component {
           <div className="row mt-4">
             <div className="col-10"> </div>
             <div className="col-2">
-              {}
+              
             </div>
           </div>
 
@@ -452,7 +451,7 @@ class AudioQuizScreen extends React.Component {
           <AudioRecognize1 datavalue={this.props.data} />
         </div>
 
-        {}
+        
 
         {this.state.Viewstate ? (
           <React.Fragment>
