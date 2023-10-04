@@ -53,7 +53,7 @@ class Success extends React.Component {
 
             <div className="row ml-0"  onClick={()=>{
                  this.props.changeStage('Next', stage)
-                 //this.props.history.push('/'+MyConstant.keyList.projectUrl+'/home/')
+                 
             }}>
                
                 <img src={nextPng}  style={{width: '100%', height: '100%'}} alt={""}/>
