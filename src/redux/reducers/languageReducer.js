@@ -76,7 +76,6 @@ const languageReducer = (state = initialState, action) => {
         }
             break;
         case FETCH_GET_LANGUAGE_MAPPING_FAILURE: {
-            // console.log("Step 3" + JSON.stringify(action.payload))
             return {
                 ...state,
                 loading: false,
@@ -101,7 +100,6 @@ const languageReducer = (state = initialState, action) => {
         }
 
         case FETCH_GET_LEVEL_NAME_LANGUAGE_MAPPING_FAILURE: {
-            // console.log("Step 3" + JSON.stringify(action.payload))
             return {
                 ...state,
                 loading: false,
