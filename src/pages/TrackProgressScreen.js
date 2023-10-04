@@ -77,7 +77,7 @@ class TrackProgressScreen extends Component {
 
         let responseData = await doConnect("getfeedbackCaptureList", "POST", postJson);
         if (responseData) {
-            // console.log("ordered",loopLikedCount - Object.keys(responseData.response.liked).length)
+            
             console.log(responseData)
             let count = loopLikedCount - Object.keys(responseData.response.liked).length
             let loopLikedArr = []
@@ -126,8 +126,8 @@ class TrackProgressScreen extends Component {
             <React.Fragment>
                 <div className='trackProgBody'>
                     <div className='emotionChat'>
-                        {/* <--------------Header----------------> */}
-                        <div className='headers mt-2'>
+            
+                       <div className='headers mt-2'>
                             <div className='d-flex justify-content-start backbtn ml-3' style={{ width: '10%' }}>
                                 <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen') }} alt=""/>
                             </div>
@@ -135,7 +135,7 @@ class TrackProgressScreen extends Component {
                                 <h3 className='headerStr'>Track Progress</h3>
                             </div>
                         </div>
-                        {/* <--------------Header----------------> */}
+
 
                         <div className='emotionChatBoxContainer d-flex justify-content-center align-items-center'>
                             <div className='emotionChatBox'>
