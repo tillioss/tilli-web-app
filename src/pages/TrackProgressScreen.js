@@ -78,7 +78,7 @@ class TrackProgressScreen extends Component {
         let responseData = await doConnect("getfeedbackCaptureList", "POST", postJson);
         if (responseData) {
             
-            console.log(responseData)
+            
             let count = loopLikedCount - Object.keys(responseData.response.liked).length
             let loopLikedArr = []
             for (let i = 0; i < count; i++) {
