@@ -133,7 +133,6 @@ class TrackProgressScreen extends Component {
                             </div>
                         </div>
 
-
                         <div className='emotionChatBoxContainer d-flex justify-content-center align-items-center'>
                             <div className='emotionChatBox'>
                                 <div className='containerOne'>
