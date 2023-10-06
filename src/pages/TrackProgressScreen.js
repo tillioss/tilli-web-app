@@ -124,7 +124,6 @@ class TrackProgressScreen extends Component {
             <React.Fragment>
                 <div className='trackProgBody'>
                     <div className='emotionChat'>
-            
                        <div className='headers mt-2'>
                             <div className='d-flex justify-content-start backbtn ml-3' style={{ width: '10%' }}>
                                 <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen') }} alt=""/>
