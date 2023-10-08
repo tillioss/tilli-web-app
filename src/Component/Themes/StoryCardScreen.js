@@ -44,9 +44,7 @@ export default class StoryCardScreen extends React.Component{
             {
                     arraypush.push(<MeetSinglePerson
                         {...this.props}
-                       // changeStage={this.changeStage}
                         stage={index}
-                       // key={stageIndex}
                         data={data.content[index]}
                         themeType={data.theme}
                         changeindex={this.changeindex}
@@ -59,10 +57,8 @@ export default class StoryCardScreen extends React.Component{
                 
                     arraypush.push(
                          <AudioQuizScreen  
-                         {...this.props}
-                         // changeStage={this.changeStage}
+                         {...this.props}                     
                           stage={index}
-                         // key={stageIndex}
                           data={data.content[index]}
                           themeType={data.theme}
                           changeindex={this.changeindex}
@@ -76,10 +72,8 @@ export default class StoryCardScreen extends React.Component{
            
                     arraypush.push(
                          <DropToSelection  
-                         {...this.props}
-                         // changeStage={this.changeStage}
-                          stage={index}
-                         // key={stageIndex}
+                         {...this.props}                     
+                          stage={index}                       
                           data={data.content[index]}
                           themeType={data.theme}
                           changeindex={this.changeindex}
@@ -93,7 +87,7 @@ export default class StoryCardScreen extends React.Component{
      
 
         return(<React.Fragment>
-            {/* {JSON.stringify(data.content)} */}
+            
             {arraypush}
             </React.Fragment>)
     }
