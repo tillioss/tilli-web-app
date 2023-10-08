@@ -76,7 +76,6 @@ class Footer extends Component {
                             }
                         }}>
                             <div >
-                                {/* <i style={{fontSize:28}} className={`fa fa-circle fa-3x ${this.state.currentPage==='home' ? 'checked' : ''}`}></i> */}
                                 {this.state.currentPage === 'home' ?
                                     <div>
                                         <img src={Ellipsered} style={{ width: 24, height: 24 }} alt={""} />
@@ -137,7 +136,6 @@ class Footer extends Component {
                                     this.props.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent')
                                 }
                             })
-                            //keyList.projectUrl
 
                         }}>
                             <div>

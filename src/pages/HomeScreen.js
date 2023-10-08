@@ -1,5 +1,4 @@
 import React from 'react';
-// import { connect } from 'react-redux';
 import Footer from './Footer';
 import Dashbord from "../Screens/Dashbord";
 export default class HomeScreen extends React.Component {
@@ -26,14 +25,3 @@ export default class HomeScreen extends React.Component {
         )
     }
 }
-// const mapStateToProps = (state) => {
-//     return {
-
-//     };
-// };
-// const mapDispatchToProps = {
-
-// };
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
