@@ -65,7 +65,6 @@ class IntroducePersons extends React.Component {
                 </div>
                 <div className="col-10">
                     <p style={{
-                        // color: '#474A57',
                         fontSize: 27,
                         fontFamily: 'montserrat-extrabold',
                         fontWeight: '800',
@@ -117,12 +116,10 @@ class IntroducePersons extends React.Component {
                                 fontFamily: 'montserrat-medium',
                                 fontWeight: '700',
                                 textAlign: 'center',
-                                //paddingTop: 15
 
                             }} >  {this.return_content(1, 1)}  {ival.name}</p>
 
                             <p style={{
-                                // color: '#000000',
                                 fontSize: 16,
                                 fontFamily: 'montserrat-regular',
                                 fontWeight: '400',
