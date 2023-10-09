@@ -38,7 +38,6 @@ return true
     render() {
         let { stage, data } = this.props;
         let content = data.content;
-        //console.log("content",content )
         return (
             <React.Fragment>
                 <Style>
@@ -118,10 +117,6 @@ return true
                         <div className="row mt-3">
                             <div className="col-9" />
                             <div className="col-3" style={{ padding: 0, textAlign: 'end', marginLeft: 0, marginRight: 0, paddingRight: '5%' }}>
-                                {/* {this.state.viewState ?    <a onClick={() => this.props.changeStage('Next', stage)}>
-                                    <img style={{ width: 44,height:44}} src={nextImage} />
-                                </a> : null} */}
-
 
                             </div>
                         </div>
