@@ -3,7 +3,6 @@ import { Style } from "react-style-tag";
 import backImage from '../../images/outlineBackIcon.png';
 import nextImage from '../../images/outlineRightIcon.png';
 import MyConstant from '../../config/MyConstant';
-//import Draggable from 'react-draggable'; // The default
 import people_set from '../../images/people_set.png';
 import { Draggable, Droppable } from 'react-drag-and-drop'
 
@@ -45,7 +44,6 @@ class DropToSelectionNew extends React.Component {
     onDrop(data) {
         alert(JSON.stringify(data))
         console.log(data)
-        // => banana 
     }
 
     selectedView() {
@@ -91,26 +89,6 @@ class DropToSelectionNew extends React.Component {
         const { stage, data } = this.props;
         let content = data.content;
 
-
-
-        // let textList = content.text.map((text, index) => {
-        //     return (
-        //         <div
-        //             key={index}
-        //             style={
-        //                 {
-        //                     color: '#474A57',
-        //                     fontSize: 27,
-        //                     fontFamily: 'montserrat-bold',
-        //                     fontWeight: '800',
-        //                     textAlign: 'left',
-        //                     marginLeft: 10,
-        //                     ...text.style,
-        //                 }}>
-        //             {text.value}
-        //         </div>
-        //     );
-        // });
         return (<React.Fragment>
             <Style>
                 {`
@@ -134,7 +112,6 @@ class DropToSelectionNew extends React.Component {
                         </div>
                         <div className="col-8">
                             <p style={{
-                                //color: '#474A57',
                                 fontSize: 27,
                                 fontFamily: 'montserrat-bold',
                                 fontWeight: '800',
@@ -144,15 +121,9 @@ class DropToSelectionNew extends React.Component {
                             </p>
                         </div>
                     </div>
-                    {/* {textList} */}
 
                     <div style={{ textAlign: 'right', position: 'relative', zIndex: 1 }}>
-                        {/* <Draggable>   
-                        <img
-                            src={MyConstant.keyList.apiURL + 'vp?action=module&key=' + content.image.fileName + '&id=' + content.image.fileType}
-                            style={{ width: 133, height: 127 }}
-                        />
-                     </Draggable> */}
+
                     </div>
 
                 </div>
@@ -172,9 +143,7 @@ class DropToSelectionNew extends React.Component {
                     }}>
                         <Draggable  type="fruit" data="banana" onStop={() => {
                             this.setState({ imageBackground_color: "#61E4C5" })
-                            // setTimeout(() => {
-                            //    this.setState({modelView:true ,show_con:"show" ,display_view:"block",imageBackground_color:"#61E4C5" })
-                            //  }, 1000);
+
                         }} >
                             <img src={people_set} style={{ width: 70, height: 70, marginTop: 10, marginBottom: 10, marginLeft: -10, backgroundColor: this.state.imageBackground_color, borderRadius: 40 }} />
                         </Draggable>
@@ -266,13 +235,8 @@ class DropToSelectionNew extends React.Component {
                                         <div style={{ marginTop: '21%', backgroundColor: content.circles[0].color, height: window.innerWidth * 0.9 / (1.5 * 1.5), width: window.innerWidth * 0.9 / (1.5 * 1.5), borderRadius: 100000 }}>
                                             <div style={{ paddingTop: '45%' }} >
                                                 <div style={{ margin: "0px 10px 0px 10px" }}
-                                                    onClick={() => {
-                                                        //  this.setState({selectColor_1:'white',selectColor_2:"",selectColor_3:''})
-                                                    }}>
-                                                    {/* <span  style={{}}> {content.circles[0].name}</span> */}
-
+                                                    onClick={() => {}}>
                                                 </div>
-                                                {/* {this.state.selectColor_1.length !=0 ?  <span style={{fontSize:10,color:'white',whiteSpace:'nowrap',marginLeft:20}}> Selected {content.circles[0].name}  </span> : null } */}
 
                                             </div>
                                         </div>
@@ -282,14 +246,9 @@ class DropToSelectionNew extends React.Component {
 
                                     <div className="col-5" style={{ fontSize: 8, display: 'inline', marginBottom: '60%', marginLeft: "48%", marginTop: '-48%' }}>
                                         <div className="row col-12" style={{ margin: "0px 10px 4% 25px", paddingLeft: 10, whiteSpace: 'nowrap' }}
-                                            onClick={() => {
-                                                //this.setState({ selectColor_2 :'white',selectColor_1:'',selectColor_3:"" })
-                                            }}>
-                                            {/* <span style={{}}>  {content.circles[1].name}  </span> */}
+                                            onClick={() => {}}>
 
                                         </div>
-
-                                        {/* {this.state.selectColor_2.length !=0 ?  <span style={{color:'white',whiteSpace:'nowrap',marginLeft:20}}> Selected {content.circles[1].name}  </span> : null } */}
 
 
                                     </div>
@@ -300,11 +259,8 @@ class DropToSelectionNew extends React.Component {
                         </div>
                         <div style={{ marginTop: '47%' }} className="col-3">
                             <div style={{ width: '100%', whiteSpace: 'nowrap' }} onClick={() => {
-                                //  this.setState({ selectColor_3 :'white',selectColor_1:'' ,selectColor_2:""})
                             }}>
-                                {/* <span style={{}}>  {content.circles[2].name}  </span> */}
                             </div>
-                            {/* {this.state.selectColor_3.length !=0 ?  <span style={{fontSize:10,color:'white'}}> Selected {content.circles[2].name}  </span> : null } */}
                         </div>
                     </div>
                 </div>
@@ -312,8 +268,7 @@ class DropToSelectionNew extends React.Component {
                     <div className="col-9" />
                     <div className="col-3">
                         <a onClick={() => {
-                            // this.selectedView()  
-                            // this.props.changeStage('Next', stage)
+
                             this.setState({ modelView: true, show_con: "show", display_view: "block", })
 
                         }} >
