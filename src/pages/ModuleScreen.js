@@ -8,9 +8,7 @@ import PersonWithTextAnimation from '../Component/Themes/PersonWithTextAnimation
 import Success from "../Component/Themes/Success";
 import IntroducePersons from '../Component/Themes/IntroducePersons';
 import AudioQuizScreen from '../Component/Themes/AudioQuizScreen';
-
 import DropToSelection from '../Component/Themes/DropToSelection';
-//import DropToSelection from '../Component/Themes/DropToSelectionNew';
 import MeetSinglePerson from '../Component/Themes/MeetSinglePerson';
 import StoryCardScreen from '../Component/Themes/StoryCardScreen';
 import backImage from '../images/outlineBackIcon.png';
@@ -63,7 +61,6 @@ export default class ModuleScreen extends React.Component {
             }
         } else if (action === 'Previous') {
             if (currentStage === 1) {
-                // navigation.navigate('Home');
                 this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
             } else {
                 this.setState({ stage: currentStage - 1 });
@@ -76,17 +73,6 @@ export default class ModuleScreen extends React.Component {
 
         if (progressingLevel === levelIndex) {
 
-            // var userpoint = localStorage.getItem("levelPoints") ? parseInt(localStorage.getItem("levelPoints")) : 1;
-            //this.props.setUserInfo('progressingLevel', progressingLevel + 1);
-
-            //alert(userpoint)
-            /* let postJson = {
-               userId:  localStorage.getItem("loggedUserId"),
-               points:userpoint,
-               feelingTool: Math.floor(Math.random() * 10),
-               level: parseInt(progressingLevel) + 1,
-               sessionId: '1223',
-             };*/
             let postJson = {
                 userId: localStorage.getItem("loggedUserId"),
                 levelId: this.props.match.params.id,
@@ -106,7 +92,6 @@ export default class ModuleScreen extends React.Component {
             levelId: this.props.match.params.id,
             languageId: localStorage.getItem("currentLanguage"), sessionId: '1223'
         };
-        //console.log('postJson==>', postJson)	
 
         let responseData = await doConnect("getModuleLanguageMapping", "POST", postJson);
         var json = responseData;
