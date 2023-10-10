@@ -57,7 +57,6 @@ return true
                             </div>
                             <div className="col-10">
                                 <p style={{
-                                    //color: '#474A57',
                                     fontSize: 27,
                                     fontFamily: 'montserrat-extrabold',
                                     fontWeight: '800',
