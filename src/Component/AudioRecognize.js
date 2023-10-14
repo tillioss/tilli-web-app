@@ -61,7 +61,6 @@ class AudioRecognize extends React.Component {
   }
 
   onChangeData(value) {
-    console.log("value", value);
     this.setState({ laSelect: value });
   }
   render() {
