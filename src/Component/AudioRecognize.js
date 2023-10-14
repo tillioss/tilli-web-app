@@ -42,8 +42,7 @@ const AudioRecognize1 = (props) => {
       <div className="row">
         <div className="col-sm-1"> </div>
         <div className="col-sm-10">
-          {" "}
-          <p>{transcript}</p>{" "}
+          <p>{transcript}</p>
         </div>
         <div className="col-sm-1"> </div>
       </div>
@@ -81,12 +80,11 @@ class AudioRecognize extends React.Component {
               ]}
               value={[]}
               onChange={(value) => this.onChangeData(value)}
-            />{" "}
+            />
           </div>
           <div className="col-sm-4"> </div>
         </div>
         <div>
-          {" "}
           <AudioRecognize1 laSelect={laSelect} />
         </div>
       </>
