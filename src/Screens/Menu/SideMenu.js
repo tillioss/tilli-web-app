@@ -55,28 +55,6 @@ return(
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 <div class="menu_section">
   <h3>General</h3>
-  {/* <ul class="nav side-menu">
-    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
-        <li><a  onClick={()=>{
-          this.setState({pageDisplay:'Level' })
-        }}>Level</a></li>
-        <li><a
-        onClick={()=>{
-          this.setState({pageDisplay:'Theme' })
-        }} >Theme</a></li>
-        <li><a
-        onClick={()=>{
-          this.setState({pageDisplay:'LevelManager' })
-        }}>LevelManager</a></li>
-        <li><a
-        onClick={()=>{
-          this.setState({pageDisplay:'ImageManager' })
-        }}>ImageManager</a></li>
-
-      </ul>
-    </li>
-  </ul> */}
 
   <ul class="nav side-menu">
     <li >
@@ -88,12 +66,6 @@ return(
     <li ><Link to={"/"+ MyConstant.keyList.projectUrl +"/Theme"}  ><i class="fa fa-home" ></i> Theme <span class=""></span></Link>
     </li>
   </ul>
-
-{/*
-  <ul class="nav side-menu">
-    <li ><Link  to="/LevelManager" ><i class="fa fa-home"></i> Level Manager <span class=""></span></Link>
-    </li>
-  </ul> */}
 
   <ul class="nav side-menu">
     <li><Link to={"/"+ MyConstant.keyList.projectUrl +"/ImageManager"} ><i class="fa fa-home"></i> Image Manager <span class=""></span></Link>
