@@ -128,12 +128,6 @@ class Theme extends React.Component {
             a.id === this.state.idvalue
         );
 
-        /*
-                let Anotherarray = [...this.state.themeValue]
-                Anotherarray[found].name = this.state.themeName
-
-                this.setState({idvalue: '', data: Anotherarray, themeValue: Anotherarray, themeName: ''})
-        */
         console.log('Previous data=>',this.state.selectedOption)
         let postJson = { themeId: this.state.idvalue,name: themeName , image: this.state.selectedOption.json,sessionId: '1223' };
         console.log('postJson==>',postJson)
@@ -190,7 +184,6 @@ class Theme extends React.Component {
                         <div style={{fontWeight: 700}}></div>
                         <button  id={row.id} class="btn btn-info"  onClick={(e) => {
                              console.log('e', e.target.id)
-                             //console.log(this.state.themesList)
                              var found = Object.keys(this.state.themesList).findIndex((a) =>
                              this.state.themesList[e.target.id] === e.target.id
                              )
@@ -200,7 +193,6 @@ class Theme extends React.Component {
                             object.label=this.state.themesList[e.target.id].image.title;
                             object.json=this.state.themesList[e.target.id].image
 
-                            // console.log(object)
                              let themeName = this.state.themesList[e.target.id].name
 
                              this.setState({selectedOption:object,typeSelect: 'Edit', idvalue: e.target.id, themeName,submitButtton:'Update'})
@@ -239,14 +231,9 @@ class Theme extends React.Component {
 <div class="container body">
   <div class="main_container">
 
-      {/* <!-- Side Menu--> */}
         <SideMenu/>
-     {/* <!-- Side Menu --> */}
-    {/* <!-- top navigation --> */}
-      <TopMenu/>
-    {/* <!-- top navigation --> */}
 
-    {/* <!-- page content --> */}
+      <TopMenu/>
     <div class="right_col" role="main">
       <div class="">
 
@@ -273,7 +260,6 @@ class Theme extends React.Component {
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                  {/*Content*/}
 
                   <div className="row item form-group" style={{marginTop: 20}}>
                     <div className="col-sm-3"></div>
@@ -381,7 +367,6 @@ class Theme extends React.Component {
 
 
 
-            {/*Image View*/}
 <div id="myModal" class="modal_image" style={{display:displayImage }} >
   <span class="close" onClick={()=>{
       this.setState({displayImage:"none"})
@@ -394,25 +379,18 @@ class Theme extends React.Component {
 
   <div id="caption">  </div>
 </div>
-     {/*Image View*/}
 
-                {/*Content*/}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    {/* <!-- /page content --> */}
-
-    {/* <!-- footer content --> */}
     <footer>
       <div class="pull-right">
-        {/* Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> */}
       </div>
       <div class="clearfix"></div>
     </footer>
-    {/* <!-- /footer content --> */}
   </div>
 </div>
 
