@@ -161,9 +161,7 @@ class Level extends React.Component {
         let found = this.state.levelArray.findIndex((a) =>
             a.id === this.state.idvalue
         )
-       /* let Anotherarray = [...this.state.levelArray]
-        Anotherarray[found].name = this.state.levelName
-        Anotherarray[found].color = this.state.levelColor*/
+
 
         if (levelName && levelName.length != 0 && levelColor.length != 0) {
 
@@ -288,19 +286,14 @@ class Level extends React.Component {
   <div class="container body">
   <div class="main_container">
 
-      {/* <!-- Side Menu--> */}
-        <SideMenu/>
-     {/* <!-- Side Menu --> */}
-    {/* <!-- top navigation --> */}
-      <TopMenu/>
-    {/* <!-- top navigation --> */}
 
-    {/* <!-- page content --> */}
+        <SideMenu/>
+      <TopMenu/>
+
     <div class="right_col" role="main">
       <div class="">
 
         <div class="clearfix"></div>
-{/* <!--content --> */}
 
         <div class="row">
           <div class="col-md-12 col-sm-12  ">
@@ -449,20 +442,15 @@ class Level extends React.Component {
           </div>
         </div>
 
-{/* <!--content --> */}
 
       </div>
     </div>
-    {/* <!-- /page content --> */}
 
-    {/* <!-- footer content --> */}
     <footer>
       <div class="pull-right">
-        {/* Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> */}
       </div>
       <div class="clearfix"></div>
     </footer>
-    {/* <!-- /footer content --> */}
   </div>
 </div>
 
