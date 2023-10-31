@@ -49,7 +49,6 @@ class ImageManager extends React.Component {
     async submitFunction() {
 
         const { selectedOption, title } = this.state;
-        //console.log(selectedOption ,title,this.state.fileObj )
 
         if (title.trim() == "") {
             this.setState({ titleValidatation: 'Please Enter Title ' })
@@ -83,7 +82,6 @@ class ImageManager extends React.Component {
         var Extension = filename.split(".").pop();
 
         let extension_Type_Image = ['png', 'jpg', 'jpeg', 'bmp']
-        //  console.log('checking',extension_Type_Image.includes(Extension))
 
 
         if (this.state.selectedOption.value == "image") {
@@ -161,17 +159,6 @@ class ImageManager extends React.Component {
 
 
 
-        /*
-                let ImageFieldPost={
-                    levelid:this.state.selectedOption.value,
-                    docsid:this.state.selectedOption.value,
-                    fileName:this.state.FileName,
-                    fileType:this.state.fileType
-                }
-                console.log(ImageFieldPost)
-        
-                this.setState({ImageFieldPost})*/
-        //alert(1)
     }
     async editFunction() {
 
@@ -318,14 +305,8 @@ class ImageManager extends React.Component {
                 <div class="container body">
                     <div class="main_container">
 
-                        {/* <!-- Side Menu--> */}
                         <SideMenu />
-                        {/* <!-- Side Menu --> */}
-                        {/* <!-- top navigation --> */}
                         <TopMenu />
-                        {/* <!-- top navigation --> */}
-
-                        {/* <!-- page content --> */}
                         <div class="right_col" role="main">
                             <div class="">
 
@@ -352,7 +333,6 @@ class ImageManager extends React.Component {
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class="x_content">
-                                                {/* content*/}
 
 
                                                 <ToastContainer />
@@ -401,9 +381,7 @@ class ImageManager extends React.Component {
                                                                             var file = files[i];
                                                                             var filename = file.name;
                                                                             var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
-                                                                            // if(file.type == "image/jpeg"){
-                                                                            //     ext = "jpeg";
-                                                                            // }
+                                                                            
                                                                             urlfile = fileUrl
                                                                             var uid = uuidv4();
                                                                             var fileObj = {
@@ -434,7 +412,7 @@ class ImageManager extends React.Component {
                                                         <div className="row item form-group" style={{ marginTop: 20 }}>
                                                             <div className="col-sm-1"> </div>
                                                             <div className="col-sm-3">
-                                                                <button class="buttonload" type="button" class="btn btn-primary" disabled={this.state.enableLoader} onClick={() => this.submitFunction()} >
+                                                                <button class="buttonload" type="button" className="btn btn-primary" disabled={this.state.enableLoader} onClick={() => this.submitFunction()} >
                                                                     {this.state.enableLoader ? <i class="fa fa-spinner fa-spin"></i> : null} Submit</button>
                                                             </div>
                                                             <div className="col-sm-8"> </div>
@@ -490,7 +468,6 @@ class ImageManager extends React.Component {
                                                 </div>
 
 
-                                            {/*Image View*/}
                                             <div id="myModal" class="modal_image" style={{display:this.state.displayImage }} >
                                             <span class="close" onClick={()=>{
                                                 this.setState({displayImage:"none"})
@@ -503,9 +480,6 @@ class ImageManager extends React.Component {
 
                                             <div id="caption">  </div>
                                             </div>
-                                                {/*Image View*/}
-
-                                                {/*content*/}
 
                                             </div>
                                         </div>
@@ -513,16 +487,11 @@ class ImageManager extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        {/* <!-- /page content --> */}
-
-                        {/* <!-- footer content --> */}
                         <footer>
                             <div class="pull-right">
-                                {/* Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> */}
                             </div>
                             <div class="clearfix"></div>
                         </footer>
-                        {/* <!-- /footer content --> */}
                     </div>
                 </div>
 
