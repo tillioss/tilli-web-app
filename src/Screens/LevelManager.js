@@ -297,7 +297,6 @@ async getImages() {
       let select_Level={}
       select_Level.value=level_Id;
       select_Level.label=levelsMap[level_Id].name;
-     // console.log('levelsMap',levelsMap[level_Id])
       that.setState({levelsJson: levelsMap,levelSelect:select_Level })
        this.getLevelMappingData(level_Id)
 
@@ -312,13 +311,10 @@ async getImages() {
     let json = responseData;
     if (Object.keys(json).length > 0 && json['themesMap'] != null && json['themesMap'] != undefined) {
         let themesMap = json['themesMap'];
-        //console.log('themesList ==>',themesMap)
       let options=[]
         Object.keys(themesMap).forEach(value=>{
-       //   console.log('themesList ==>',themesMap[value].name)
           options.push({label:themesMap[value].name, value :themesMap[value].name,json:themesMap[value] })
         })
-        //console.log('options',options)
         that.setState({options: options})
     }
     
@@ -333,7 +329,6 @@ async getLevelMappingData(levelId)
     let that = this;
     let responseData = await doConnect("getLevelMappingData", "POST", postJson);
     let json = responseData;
-       // alert(JSON.stringify(responseData))
        let contentdata=responseData.response;
       if(contentdata)
       {
@@ -344,7 +339,6 @@ async getLevelMappingData(levelId)
       imageView[index]=this.state.options[found_index]
       
         })
-        //console.log('Contentdata',JSON.parse(contentdata))
        console.log('image data ',imageView)
 
         that.setState({Contentdata:JSON.parse(contentdata),imageView })
@@ -396,7 +390,6 @@ if(!dummyOptionSelect[index])
 {
 
   ImageValidate[index]="Please Select Image";
-  //return false
 
 }else
 {
@@ -411,7 +404,6 @@ if(ival.theme =="DoubleBoxOverlapWithImage"  || ival.theme == "ImageWithThinking
   if(ival.content.text.trim() === '')
   {
   contentTextValidate[index]="Please Enter Text";
-  //return false
   }else
   {
     contentTextValidate[index]="";
@@ -429,7 +421,6 @@ ival.content.questionList.map((value,index_1)=>{
   if(value.question.trim() === '')
   {
     value.qustionlist_error="Please Enter Text";
-  //return false
   }else
   {
      delete value.qustionlist_error
@@ -438,7 +429,6 @@ ival.content.questionList.map((value,index_1)=>{
   if(value.color.trim() === '')
   {
     value.qustion_color_error="Please Enter Text";
-  //return false
   }else
   {
      delete value.qustion_color_error
@@ -447,7 +437,6 @@ ival.content.questionList.map((value,index_1)=>{
 })
 
   }
-//console.log(ival.content.questionList)
 
 
 
@@ -455,18 +444,8 @@ ival.content.questionList.map((value,index_1)=>{
 
 
 
-    // let Changesvalue = [];
-    // SelectedValue.map((ival, index) => {
-    //   var found_index = LevelStage.findIndex((a) =>
-    //     a.theme === ival.value
-    //   )
-    //   Changesvalue.push(LevelStage[found_index])
-
-    // })
-
      levelContent[0].name = levelSelect.value
     levelContent[0].structure = Contentdata
-   // levelId:String, stagesData : List[StageJson], sessionId: String
    this.setState({enableLoader:true})
     let postJson = {levelId: levelSelect.value, stagesData: JSON.stringify(Contentdata), sessionId: '1223'};
     let responseData = await doConnect("updateLevelMapping", "POST", postJson);
@@ -490,7 +469,6 @@ this.setState({enableLoader:false})
 
 
 
-    //this.setState({ titleValue: "", selectedOption: "", contentText: "", levelContent })
   }
 
   handleChange = (e, index) => {
@@ -596,9 +574,7 @@ else
  let checkindex = imageOptions.findIndex(x => x.json.id ==Contentdata[index_1].content.image.id);   
  if(checkindex && imageOptions[checkindex])
  {
-  //console.log('checkindex',imageOptions[checkindex])
   dummyOptionSelect[index_1]=imageOptions[checkindex]
-  // console.log(dummyOptionSelect)
  }
 
     return <DoubleBoxOverlapWithImage
@@ -658,7 +634,6 @@ else
     });
     Contentdata[index_1].content.persons=remove_undef
 
-    //bg,imageBg,name,says
     return <IntroducePersons
     LevelStage={LevelStage}
     found_index={found_index}
@@ -709,9 +684,7 @@ else
  let checkindex = imageOptions.findIndex(x => x.json.id ==Contentdata[index_1].content.image.id);   
  if(checkindex && imageOptions[checkindex])
  {
-  //console.log('checkindex',imageOptions[checkindex])
   dummyOptionSelect[index_1]=imageOptions[checkindex]
-  // console.log(dummyOptionSelect)
  }
  let remove_undef = Contentdata[index_1].content.text.filter(function( element ) {
   return element !== null;
@@ -853,14 +826,8 @@ if(type=="Up")
 <div class="container body">
   <div class="main_container">
 
-      {/* <!-- Side Menu--> */}
         <SideMenu/>
-     {/* <!-- Side Menu --> */}
-    {/* <!-- top navigation --> */}
       <TopMenu/>
-    {/* <!-- top navigation --> */}
-
-    {/* <!-- page content --> */}
     <div class="right_col" role="main">
       <div class="">
 
@@ -887,7 +854,6 @@ if(type=="Up")
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                  {/* inside View*/}
 
                   <div className="row item form-group" style={{ marginTop: 20 }}>
         <div className="col-sm-1">Level</div>
@@ -1146,7 +1112,6 @@ alt={'No Image'} class="img-responsive" onClick={()=>{
       </div>
 
 
- {/*Image View*/}
  <div id="myModal" class="modal_image" style={{display:this.state.displayImage }} >
   <span class="close" onClick={()=>{
       this.setState({displayImage:"none"})
@@ -1159,27 +1124,21 @@ alt={'No Image'} class="img-responsive" onClick={()=>{
 
   <div id="caption"></div>
 </div>
-     {/*Image View*/}
 
 
 
-                   {/* inside View*/}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    {/* <!-- /page content --> */}
 
-    {/* <!-- footer content --> */}
     <footer>
       <div class="pull-right">
-        {/* Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> */}
       </div>
       <div class="clearfix"></div>
     </footer>
-    {/* <!-- /footer content --> */}
   </div>
 </div>
 
@@ -1194,4 +1153,4 @@ alt={'No Image'} class="img-responsive" onClick={()=>{
 
 }
 
-export default LevelManager
+export default LevelManager;
