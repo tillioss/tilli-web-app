@@ -18,7 +18,6 @@ var SupportedBrowser = !SpeechRecognition.browserSupportsSpeechRecognition()
 
 const AudioRecognize1 = ({ data, index_value, deviceHeight, imagePath, viewType, bg_color, matchString, detectHorizontal, return_content, returnButtonContent, resetInput, onTranscriptChange }) => {
     const { transcript, resetTranscript } = useSpeechRecognition()
-    // const [datavalue, setCount] = useState(data.content.feelingsDataList[index_value].results);
     useEffect(() => {
         if (transcript !== "") {
             data.content.feelingsDataList[index_value].results = transcript
@@ -64,7 +63,6 @@ const AudioRecognize1 = ({ data, index_value, deviceHeight, imagePath, viewType,
                     justifyContent: 'center', borderStyle: 'solid',
                     display: bg_color === '#FFBD12' ? 'flex' : "inline-block",
                 }}>
-                    {/* FF89BB */}
                     {viewType === 'question' ?
 
                         <p className={"audio-font " + (matchString ? "lego-font" : "")}  >
@@ -94,7 +92,6 @@ const AudioRecognize1 = ({ data, index_value, deviceHeight, imagePath, viewType,
             <div className="row">
                 <div className="col-10"> </div>
                 <div className="col-2">
-                    {/* <img src={heartImage} style={{ width: 32, height: 30 }} /> */}
                 </div>
             </div>
 
@@ -285,35 +282,6 @@ class AudioQuizScreen extends React.Component {
         }
         else {
             this.setState({ bg_color: '#FF89BB' })
-        }
-    }
-    componentDidUpdate() {
-
-        if (!SupportedBrowser) {
-            /*var btn = document.querySelector('#onSpeaking');
-
-            if (btn) {
-
-                var that = this
-                btn.addEventListener('touchstart', function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    that.onStartRecord()
-                })
-
-                btn.addEventListener('touchend', function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    that.onStopRecord()
-
-                })
-                btn.addEventListener('touchleave', function () {
-                    console.log('btn moving end');
-                })
-                btn.addEventListener('touchcancel', function () {
-                    console.log('btn moving cancel');
-                })
-            }*/
         }
     }
 
@@ -551,7 +519,6 @@ class AudioQuizScreen extends React.Component {
             <div className="row">
                 <div className="col-10"> </div>
                 <div className="col-2">
-                    {/* <img src={heartImage} style={{ width: 32, height: 30 }} /> */}
                 </div>
             </div>
 
@@ -615,7 +582,6 @@ class AudioQuizScreen extends React.Component {
                         fontFamily: 'montserrat-extrabold', fontWeight: "800",
                         textAlign: 'center',
                     }}>  <div dangerouslySetInnerHTML={{ __html: data.title }} />
-                        {/* {data.title} */}
                     </h4> </div>
                     <div className="col-2">  </div>
                 </div>
@@ -684,14 +650,6 @@ class AudioQuizScreen extends React.Component {
                 </div>
                 <div className="progress-div">
                     <div style={{ flex: 1 }} >
-                        {/*  {totalPoint && totalPoint > 0 ?
-                            <span>
-                                <img className="rocket-image" src={Rocket_Launch} style={{
-                                    width: 80, height: 60,
-                                }} />
-                            </span>
-                            : null}
-                            */}
                         {trustPointText} {totalPoint}
                     </div>
                 </div>
