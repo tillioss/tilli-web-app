@@ -54,14 +54,9 @@ class MeetSinglePerson extends React.Component {
 
 
     render() {
-
-
         let { stage, data, themeType } = this.props;
         let { deviceHeight } = this.state;
         let content = data.content;
-        // console.log('content', content)
-        // console.log(this.props)
-
 
         var imagePath = "";
         var getType = ""
@@ -121,7 +116,6 @@ class MeetSinglePerson extends React.Component {
                                                               
                                     //score point view condition 
                                     if (themeType === "StoryCard") {
-                                        //this.props.changeStage('Previous', this.props.parentindex)
                                         if (preStageData.theme === preStageData_2.theme) {
                                             this.props.changeScreen('Previous', this.props.parentindex)
                                         }
@@ -133,7 +127,6 @@ class MeetSinglePerson extends React.Component {
                                         }
                                     }
                                     else {
-                                        // this.props.changeStage('Previous', stage)
                                         if (preStageData.theme === preStageData_2.theme) {
                                             this.props.changeScreen('Previous', stage)
                                         }                                       
@@ -250,15 +243,6 @@ class MeetSinglePerson extends React.Component {
             <div className="bottom-style">
                 <div className="progress-div">
                     <div style={{ flex: 1 }} >
-                        {/* 
-                        {totalPoint && totalPoint > 0 ?
-                            <span>
-                                <img className="rocket-image" src={Rocket_Launch} style={{
-                                    width: 80, height: 60,
-                                }} />
-                            </span>
-                            : null}
-                            */}
                         {trustPointText} {totalPoint}
                     </div>
                 </div>
