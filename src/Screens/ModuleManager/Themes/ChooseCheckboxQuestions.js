@@ -57,7 +57,6 @@ class ChooseCheckboxQuestions extends React.Component {
 
         const { match } = this.props
         let levelIndex = match.params.levelIndex;
-        // console.log(levelIndex+'_selectedData' )
 
         if (this.state.selectedData.length > 0) {
             localStorage.removeItem(levelIndex + '_selectedData');
@@ -110,7 +109,6 @@ class ChooseCheckboxQuestions extends React.Component {
                         , paddingLeft: 10, paddingRight: 10
                     }}>
                         <p style={{ marginTop: 10, marginBottom: 0, fontSize: 16, fontFamily: 'montserrat-medium', lineHeight: 1.0, fontWeight: 400 }}>
-                            {/* {checkBox.content} */}
                             <div dangerouslySetInnerHTML={{ __html: checkBox.content }} />
                         </p>
                     </div>
@@ -154,10 +152,8 @@ class ChooseCheckboxQuestions extends React.Component {
                         </div>
                         <div className="col-10">
                             <p style={{
-                                //color: '#474A57',
                                 alignSelf: 'center',
                             }}>
-                                {/* {data.title} */}
                                 <div dangerouslySetInnerHTML={{ __html: data.title }} />
                             </p>
                         </div>
@@ -171,7 +167,6 @@ class ChooseCheckboxQuestions extends React.Component {
                             padding: 0,
                             marginBottom: 0, lineHeight: 1.1, paddingLeft: 24, paddingRight: 10
                         }}>
-                            {/* {content.questionTitle} */}
                             <div className="question-title" dangerouslySetInnerHTML={{ __html: content.questionTitle }} />
                         </p>
                     </div>
