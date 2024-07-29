@@ -21,7 +21,7 @@ Tilli Safety Tool Box comprises of 3 modules:
 
 Our 3 modules (and even the modules you create in the Tilli IDE) can be accessed or reviewed with a Web browser over the World Wide Web on any mobile device. Unlike classical game software, browser-based games can be played instantly and do not require a prior installation!
 
-You can play/test our game here: https://tilli.teqbahn.com/tilli-web
+You can play/test our game here: https://web.tillikids.com/tilli-web/
 
 ---
 
