@@ -1,42 +1,39 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
-import Login from "./Screens/Login";
+import React from "react";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
+import AudioRecognize from "./Component/AudioRecognize";
+import MyConstant from "./config/MyConstant";
+import EmpathyScreen from "./pages/EmpathyScreen";
+import Footer from "./pages/Footer";
+import HomeScreen from "./pages/HomeScreen";
+import LevelScreen from "./pages/LevelScreen";
+import ModuleScreen from "./pages/ModuleScreen";
+import NewParentsScreen from "./pages/NewParentsScreen";
+import ParentOnboardingScreen from "./pages/ParentOnboardingScreen";
+import ParentScreen from "./pages/ParentScreen";
+import ParentsHomeScreen from "./pages/ParentsHomeScreen";
+import ProfileScreen from "./pages/ProfileScreen";
+import TilliGameWeb from "./pages/TilliGameWeb";
+import TrackProgressScreen from "./pages/TrackProgressScreen";
+import Dashbord from "./Screens/Dashbord";
+import DemoUserLoginTwo from "./Screens/DemoUserLogin_2";
+import StartingDashBord from "./Screens/EndScreen/StartingDashBord";
 import ForgotPassword from "./Screens/ForgotPassword";
 import ForgotResetPassword from "./Screens/ForgotResetPassword";
-import Dashbord from "./Screens/Dashbord";
-import HomeScreen from "./pages/HomeScreen";
-import ParentScreen from "./pages/ParentScreen";
-import Footer from "./pages/Footer";
-import ModuleScreen from "./pages/ModuleScreen";
-import LevelScreen from "./pages/LevelScreen";
-import ProfileScreen from "./pages/ProfileScreen";
-import ParentsHomeScreen from "./pages/ParentsHomeScreen";
-import ParentOnboardingScreen from "./pages/ParentOnboardingScreen";
-import AudioRecognize from "./Component/AudioRecognize";
-import EmpathyScreen from "./pages/EmpathyScreen";
-import "./App.css";
-import MyConstant from "./config/MyConstant";
-import SignUp from "./Screens/SignUp";
-import ModuleScreenTwo from "./Screens/ModuleManager/ModuleScreen_2";
-import SignUpWithZip from "./Screens/SignUpWithZip";
-import QrCode from "./Screens/QrCode";
-import DemoUserLogin from "./Screens/DemoUserLogin";
-import DemoUserLoginTwo from "./Screens/DemoUserLogin_2";
-
-import StartingDashBord from "./Screens/EndScreen/StartingDashBord";
-import WinningPage2 from "./TilliYourWinning/WinningPage2";
-
-import NotFoundPage from "./Screens/NotFoundPage";
+import Login from "./Screens/Login";
 import Manage from "./Screens/Manage";
-import UserManage from "./Screens/UserManage";
-import TilliGameWeb from "./pages/TilliGameWeb";
-
-import ModuleScreenMange from "./Screens/ModuleManager/ModuleScreenMange";
 import GodotPlay from "./Screens/ModuleManager/GodotPlay";
 import GodotRedirect from "./Screens/ModuleManager/GodotRedirect";
-import NewParentsScreen from "./pages/NewParentsScreen";
-import TrackProgressScreen from "./pages/TrackProgressScreen";
+import ModuleScreenTwo from "./Screens/ModuleManager/ModuleScreen_2";
+import ModuleScreenMange from "./Screens/ModuleManager/ModuleScreenMange";
+import NotFoundPage from "./Screens/NotFoundPage";
+import QrCode from "./Screens/QrCode";
+import SignUp from "./Screens/SignUp";
+import UserManage from "./Screens/UserManage";
+import WinningPage2 from "./TilliYourWinning/WinningPage2";
+
+import "./App.css";
 
 const history = createBrowserHistory();
 
@@ -81,19 +78,6 @@ function App() {
               </React.Fragment>
             )}
           />
-          <Route
-            exact
-            path={"/" + MyConstant.keyList.projectUrl + "/signup-with-zip"}
-            history={history}
-            render={(props) => (
-              <React.Fragment>
-                <div className={classNameForDevice}>
-                  <SignUpWithZip {...props} />
-                </div>
-              </React.Fragment>
-            )}
-          />
-
           <Route
             exact
             path={"/" + MyConstant.keyList.projectUrl + "/Dashbord"}
@@ -353,18 +337,6 @@ function App() {
               <React.Fragment>
                 <div className={classNameForDevice}>
                   <QrCode {...props} />
-                </div>
-              </React.Fragment>
-            )}
-          />
-          <Route
-            exact
-            path={"/" + MyConstant.keyList.projectUrl + "/demouserlogin"}
-            history={history}
-            render={(props) => (
-              <React.Fragment>
-                <div className={classNameForDevice}>
-                  <DemoUserLogin {...props} />
                 </div>
               </React.Fragment>
             )}
