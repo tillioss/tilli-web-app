@@ -14,7 +14,6 @@ import ParentOnboardingScreen from "./pages/ParentOnboardingScreen";
 import ParentScreen from "./pages/ParentScreen";
 import ParentsHomeScreen from "./pages/ParentsHomeScreen";
 import ProfileScreen from "./pages/ProfileScreen";
-import TilliGameWeb from "./pages/TilliGameWeb";
 import TrackProgressScreen from "./pages/TrackProgressScreen";
 import Dashbord from "./Screens/Dashbord";
 import DemoUserLoginTwo from "./Screens/DemoUserLogin_2";
@@ -386,39 +385,12 @@ function App() {
           />
           <Route
             exact
-            path={"/" + MyConstant.keyList.projectUrl + "/test"}
-            history={history}
-            render={(props) => (
-              <React.Fragment>
-                <div className={classNameForDevice}>
-                  <UserManage {...props} landingFrom="test" />
-                  {/* <DemoUserLoginTwo {...props} landingFrom="test"/> */}
-                </div>
-              </React.Fragment>
-            )}
-          />
-          <Route
-            exact
             path={"/" + MyConstant.keyList.projectUrl + "/internal-demo"}
             history={history}
             render={(props) => (
               <React.Fragment>
                 <div className={classNameForDevice}>
                   <UserManage {...props} landingFrom="demo" />
-                  {/* <DemoUserLoginTwo {...props} landingFrom="demo"/> */}
-                </div>
-              </React.Fragment>
-            )}
-          />
-
-          <Route
-            exact
-            path={"/" + MyConstant.keyList.projectUrl + "/edash"}
-            history={history}
-            render={(props) => (
-              <React.Fragment>
-                <div className={classNameForDevice}>
-                  <StartingDashBord {...props} />
                 </div>
               </React.Fragment>
             )}
@@ -498,17 +470,6 @@ function App() {
           />
 
           {/* godot */}
-
-          {/* tilli-game-web */}
-          <Route
-            path={"/" + MyConstant.keyList.projectUrl + "/games"}
-            history={history}
-            render={(props) => (
-              <React.Fragment>
-                <TilliGameWeb />
-              </React.Fragment>
-            )}
-          />
           <Route
             exact
             path={"/" + MyConstant.keyList.projectUrl + "/newparentsscreen"}
