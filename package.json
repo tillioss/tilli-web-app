@@ -73,7 +73,7 @@
   "scripts": {
     "start": "PORT=3023  node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "eslintConfig": {
     "extends": [

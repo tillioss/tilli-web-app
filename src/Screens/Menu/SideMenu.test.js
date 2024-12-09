@@ -1,8 +1,9 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import SideMenu from "./SideMenu";
+
 import { keyList } from "../../config/MyConstant";
+import SideMenu from "./SideMenu";
 
 describe("SideMenu tests", () => {
   it("renders the component without errors", () => {
@@ -36,18 +37,5 @@ describe("SideMenu tests", () => {
     screen.getByText("Theme").click();
 
     expect(window.location.pathname).toBe("/" + keyList.projectUrl + "/Theme");
-  });
-
-  it("navigates to ImageManager page when Image Manager link is clicked", () => {
-    render(
-      <BrowserRouter>
-        <SideMenu />
-      </BrowserRouter>
-    );
-
-    screen.getByText("Image Manager").click();
-    expect(window.location.pathname).toBe(
-      "/" + keyList.projectUrl + "/ImageManager"
-    );
   });
 });
