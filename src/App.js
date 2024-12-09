@@ -17,7 +17,6 @@ import ProfileScreen from "./pages/ProfileScreen";
 import TrackProgressScreen from "./pages/TrackProgressScreen";
 import Dashbord from "./Screens/Dashbord";
 import DemoUserLoginTwo from "./Screens/DemoUserLogin_2";
-import StartingDashBord from "./Screens/EndScreen/StartingDashBord";
 import ForgotPassword from "./Screens/ForgotPassword";
 import ForgotResetPassword from "./Screens/ForgotResetPassword";
 import Login from "./Screens/Login";
