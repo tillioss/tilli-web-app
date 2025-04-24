@@ -266,7 +266,6 @@ export default class ModuleScreen extends React.Component {
                                     </Link>
                                 </div>
                             </React.Fragment>
-
                         </React.Fragment>)
 
                 }
