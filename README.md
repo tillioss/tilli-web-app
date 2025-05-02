@@ -4,22 +4,16 @@
 
 Tilli Safety Tool Box comprises of 3 modules:
 
-## Module 1: Feelings and Emotions (Launched)
+## Module 1: Feelings and Emotions
 
 - Learn to identify, label and express emotions and feelings
 - Develop healthy coping strategies to manage big feelings
 
-## Module 2: Trust (Launched)
+## Module 2: Trust
 
 - At the core of staying safe is knowing who and what to trust
 - Understand what trust means, looks, and feels like
 - Practice tools like the trust circle to make safer choices
-
-## Module 3: Digital Safety (WIP)
-
-- Understanding internet safety and developing positive habits around safe sharing, noticing red flags, being kind and reaching out to a trusted adult
-
-Our 3 modules (and even the modules you create in the Tilli IDE) can be accessed or reviewed with a Web browser over the World Wide Web on any mobile device. Unlike classical game software, browser-based games can be played instantly and do not require a prior installation!
 
 You can play/test our game here: https://web.tillikids.com/tilli-web/
 
@@ -43,28 +37,52 @@ To get started, please have a look at our [User and Developer Documentation](htt
 
 ---
 
-# Installing Tilli Web App (For Developers)
+## Developer Setup
 
-Developers can install the Tilli Web App to check their modules/features created in the Tilli IDE.
+### Prerequisites
 
-1. Configuration:
+- Node.js v20.x or higher
+- npm v6.x or higher (or yarn)
+- Git
+- A running Tilli backend API (defaults to http://localhost:8093/tilli-api/)
 
-   Need to change IP address of Your Server IP and Port in config/Myconstant.js :
+### Local Setup
 
-Ex:apiURL: 'http://192.yyy.1.xxx:8093/tilli-api/'
+1. Clone the repository:
 
-2. How to run? Yarn/npm/..
+   git clone https://github.com/tillioss/tilli-web-app.git
+   cd tilli-web-app
 
-a. Use below CMD to install modules :
+2. Configure the API endpoint:
 
-`npm install`
+   Edit `src/config/MyConstant.js` and set `keyList.apiURL` to your backend URL. Example:
 
-b. Enter below CMD to start :
+   ```js
+   module.exports = {
+     keyList: {
+       projectName: "Tilli",
+       projectUrl: "tilli-web",
+       apiURL: "http://localhost:8093/tilli-api/",
+       predictUrl: "http://localhost:8093/",
+     },
+   };
+   ```
 
-`npm start`
+3. Install dependencies:
 
-Running Url:
-http://localhost:3023/tilli-web/
+   npm install
+
+4. Start the development server:
+
+   npm start
+
+   The app will be available at http://localhost:3023/tilli-web/
+
+### Available Scripts
+
+- `npm start`: Runs the app in development mode
+- `npm run build`: Builds the app for production
+- `npm test`: Runs tests with coverage
 
 ---
 
