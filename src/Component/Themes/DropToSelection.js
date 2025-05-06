@@ -96,15 +96,13 @@ class CircleWithInfoAnimations extends React.Component {
 
         var btn = document.querySelector('#drag1');
 
-        // attaching each event listener
+        
         var activeEvent = '';
         var originalX = '';
         var originalY = '';
         var that = this
         btn.addEventListener('touchstart', function (e) {
             e.preventDefault();
-            //console.log('btn touched');
-            //console.log(btn)
             e.target.getAttribute('id');
             originalX = (e.target.offsetLeft - 10) + "px";
             originalY = (e.target.offsetTop - 10) + "px";
@@ -117,8 +115,6 @@ class CircleWithInfoAnimations extends React.Component {
             e.preventDefault();
             e.stopPropagation();
             if (activeEvent === 'move') {
-                // var pageX = (parseInt(e.target.style.left) - 50);
-                // var pageY = (parseInt(e.target.style.top) - 50);
 
                 e.target.style.position = "initial";
                 var changedTouch = e.changedTouches[0];
@@ -128,19 +124,18 @@ class CircleWithInfoAnimations extends React.Component {
                     that.checkAnswer(element.id)
                 }
                 else {
-                    // e.target.style.left = originalX;
-                    // e.target.style.top = originalY;   
+                    
                 }
 
             }
             that.setState({ imageBackground_color: "#61E4C5", originalX, originalY, appendData: e.target, check: element.id })
 
-            //console.log('btn leaved',e);
+            
         })
 
 
         btn.addEventListener('touchmove', function (e) {
-            //console.log('btn leaved',ev);
+            
 
             var touchLocation = e.targetTouches[0];
             let x = window.innerWidth > 768 ? 0 : 70;
@@ -168,11 +163,11 @@ class CircleWithInfoAnimations extends React.Component {
         })
 
         btn.addEventListener('touchleave', function () {
-            //console.log('btn moving end');
+            
 
         })
         btn.addEventListener('touchcancel', function () {
-            //console.log('btn moving cancel');
+           
         })
 
     }
@@ -180,20 +175,19 @@ class CircleWithInfoAnimations extends React.Component {
 
 
     allowDrop(ev) {
-        //alert(JSON.stringify(ev.target.id))
+        
         ev.preventDefault();
     }
 
 
     drag(ev) {
-        //alert(JSON.stringify(ev.target.id))
         ev.dataTransfer.setData("text", ev.target.id);
     }
 
 
     drop(ev) {
 
-        //alert(JSON.stringify(ev.target.id))
+    
         console.log('div', JSON.stringify(ev.target.id).length, JSON.stringify(ev.target.id))
         ev.preventDefault();
         this.setState({ check: ev.target.id })
@@ -211,7 +205,7 @@ class CircleWithInfoAnimations extends React.Component {
     checkAnswer(choose) {
         const { data } = this.props;
         let content = data.content;
-        //console.log("content",content.circles)
+        
         let check_value = false
         let trustvalue = "";
 
@@ -262,7 +256,6 @@ return true
         const { true_body, true_header, true_button, change_Content, false_body, false_header, false_button } = this.state;
         let content = data.content;
         let innerWidth = window.innerWidth > 768 ? 768 : window.innerWidth;
-        //console.log(content)
         return (<React.Fragment>
             <Style>
                 {`
@@ -303,7 +296,6 @@ return true
                         </div>
                         <div className="col-8">
                             <p style={{
-                                //color: '#474A57',
                                 fontSize: 27,
                                 fontFamily: 'montserrat-bold',
                                 fontWeight: '800',
@@ -313,15 +305,10 @@ return true
                             </p>
                         </div>
                     </div>
-                    {/* {textList} */}
+                    
 
                     <div style={{ textAlign: 'right', position: 'relative', zIndex: 1 }}>
-                        {/* <Draggable>   
-                        <img
-                            src={MyConstant.keyList.apiURL + 'vp?action=module&key=' + content.image.fileName + '&id=' + content.image.fileType}
-                            style={{ width: 133, height: 127 }}
-                        />
-                     </Draggable> */}
+                        
                     </div>
 
                 </div>
@@ -339,19 +326,14 @@ return true
                         zIndex: 2,
                         marginLeft: 50, position: 'absolute',
                     }}>
-                        {/* <Draggable onStop={() => {
-                            this.setState({ imageBackground_color: "#61E4C5" })
-                            // setTimeout(() => {
-                            //    this.setState({modelView:true ,show_con:"show" ,display_view:"block",imageBackground_color:"#61E4C5" })
-                            //  }, 1000);
-                        }} > */}
+                        
                         <img id="drag1" draggable="true"
                             onDragStart={(e) => { 
                                 console.log(e)
                                 this.drag(e) }} onDragEnd={(e) => { 
                                     this.setState({imageBackground_color: "#61E4C5", appendData: e.target,})
                                     console.log(e) }} src={people_set} style={{ zIndex: 1, width: 70, height: 70, marginTop: 10, marginBottom: 10, marginLeft: -10, backgroundColor: this.state.imageBackground_color, borderRadius: 40 }} alt={""} />
-                        {/* </Draggable> */}
+                        
 
                     </div>
                     <div className="col-8 boder_radius" style={{ height: "auto", width: 300, paddingLeft: '8%', backgroundColor: '#53dce294', marginLeft: 104, borderRadius: 20 }}>  <p style={{
@@ -378,7 +360,7 @@ return true
 
                 </div>
 
-                {/* {JSON.stringify(this.state.check)} */}
+                
 
                 <div class={"modal fade bd-example-modal-lg " + this.state.show_con} style={{ display: this.state.display_view }} tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -518,34 +500,34 @@ return true
                                         margin: 0,
                                         padding: 0
                                     }}>
-                                        {/*div1 yellow*/}
+                                        
                                         <div id="Yellow" style={{
                                             marginTop: '21%', backgroundColor: content.circles[0].color,
                                             height: innerWidth * 0.9 / (1.5 * 1.5), width: innerWidth * 0.9 / (1.5 * 1.5), borderRadius: 100000
                                         }}>
                                             {this.state.boderView ? <div style={{ border: "2px dotted white", position: "absolute", marginLeft: 5, marginTop: "10%", width: 90, height: 90, borderRadius: 90 / 2 }}> </div> : null}
                                         </div>
-                                        {/*div1 yellow*/}
+                                      
 
                                     </div>
-                                    {/*div2 Blue*/}
+                                    
                                     <div id="Blue" className="col-4" >
                                         {this.state.boderView ? <div style={{ border: "2px dotted white", position: "absolute", marginLeft: -10, marginTop: "100%", width: 90, height: 90, borderRadius: 90 / 2 }}> </div>
                                             : null}
                                     </div>
-                                    {/*div2 Blue*/}
+                                    
 
                                 </div>
                             </div>
                         </div>
-                        {/*div3 Red*/}
+                       
                         <div id="Red" onDrop={(event) => { this.drop(event) }} onDragOver={(event) => { this.allowDrop(event) }} style={{ marginTop: '30%' }} className="col-3">
                             {this.state.boderView ?
                                 <div style={{ border: "2px dotted white", position: "absolute", marginLeft: -10, marginTop: "45%", width: 75, height: 80, borderRadius: 75 / 2 }}> </div>
                                 : null}
                             <div className="col-12" > </div>
                         </div>
-                        {/*div3 Red*/}
+                        
                     </div>
                 </div>
 
