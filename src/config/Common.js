@@ -32,16 +32,11 @@ export function removeValueFromArray(arr) {
 }
 
 export function checkNullAndReturnString(str) {
-    if(str!== null && str !== undefined && str!=="")
-    {
-        return true
-    }
-    return false
+    return str !== null && str !== undefined && str !== "";
 }
 
 
 export async function doFileConnect(dataJson) {
-
     if( dataJson !== "{}" && Object.keys(dataJson).length>0){
         var i =0
         const postFileUpload = new FormData();
@@ -63,11 +58,7 @@ export async function doFileConnect(dataJson) {
             return json.response;
         }).catch(error => console.warn(error));
     }
-
-
 }
-
-
 
 export async function doConnect(subUrl, method, postJson) {
     let startTime=Date.now();
@@ -134,7 +125,7 @@ export async function userTrack(page, action, ipAddress) {
                 timestamp: new Date().getTime()
             }
         }
-        console.log("---------------->",postJson)
+        console.log("---------------->" + postJson)
         console.log("Logged")
        
     }
@@ -142,10 +133,12 @@ export async function userTrack(page, action, ipAddress) {
 }
 
 export async function getMyIp() {
-    return await fetch(MyConstant.keyList.ipURL + "myIP").then((res) => res.json()).then((json) => {
-        var ipAddress = json.ip
-        return ipAddress;
-    });
+    return await fetch(MyConstant.keyList.apiURL)
+        .then((res) => res.json())
+        .then((json) => {
+            var ipAddress = json.ip
+            return ipAddress;
+        });
 }
 
 export function keyReadData(eventList, keyName) {
