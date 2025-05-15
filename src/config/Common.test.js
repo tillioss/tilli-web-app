@@ -231,7 +231,7 @@ describe('timeConverter', () => {
     it('should convert a timestamp to the correct date and time format', () => {
         const timestamp = 1672531200000; // Jan 1, 2023, 00:00:00 UTC
         const result = timeConverter(timestamp);
-        expect(result).toBe('2023-01-01 05:30:00');
+        expect(result).toBe('2023-01-01 00:00:00');
     });
 
     it('should handle invalid timestamps gracefully', () => {
