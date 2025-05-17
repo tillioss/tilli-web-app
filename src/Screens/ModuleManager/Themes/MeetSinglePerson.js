@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, { forwardRef } from 'react';
 import { Style } from "react-style-tag";
 import backImage from '../../../images/outlineBackIcon.png';
 import nextImage from '../../../images/outlineRightIcon.png';
@@ -279,5 +279,5 @@ const mapDispatchToProps = (dispatch) => {
 
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(MeetSinglePerson);
+export default connect(mapStateToProps, mapDispatchToProps, null, {forwardRef: true})(MeetSinglePerson);
 

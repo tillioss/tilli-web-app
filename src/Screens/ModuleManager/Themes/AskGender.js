@@ -94,7 +94,17 @@ class AskGender extends React.Component {
 
         }
 
-        let languageChoose = JSON.parse(localStorage.getItem("ChooseLanguage"))
+        let languageChoose = null;
+
+        const languageString = localStorage.getItem("ChooseLanguage");
+
+        if(languageString){
+            try{
+                languageChoose = JSON.parse(languageString);
+            }catch(e){
+                console.error("Invalid JSON in ChooseLanguage:", e);
+            }
+        }
 
         let changeLang = ""
         if (languageChoose) {

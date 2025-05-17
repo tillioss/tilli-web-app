@@ -1,8 +1,7 @@
 import React from "react";
-import backImage from '../../images/outlineBackIcon.png';
-import nextImage from '../../images/outlineRightIcon.png';
-import TrustImage from '../../images/trustImage.png';
-import MyConstant from '../../config/MyConstant';
+import backImage from '../../../images/outlineBackIcon.png';
+import nextImage from '../../../images/outlineRightIcon.png';
+import MyConstant from '../../../config/MyConstant';
 
 class PersonWithTextAnimation extends React.Component {
 
@@ -52,7 +51,7 @@ class PersonWithTextAnimation extends React.Component {
             <div className="row mt-3 ">
                 <div className="col-2"></div>
                 <div className="col-8 center">
-                    <img src={MyConstant.keyList.apiURL +
+                    <img data-testid="image" src={MyConstant.keyList.apiURL +
                         'vp?action=module&key=' +
                         data.content.image.fileName +
                         '&id=' +
@@ -74,7 +73,7 @@ class PersonWithTextAnimation extends React.Component {
             {this.state.viewState ?
             <div style={{ position: 'absolute', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
             <a onClick={() => this.props.changeStage('Next', stage)}>
-                <img style={{ width: window.innerHeight / 15 }} src={nextImage} />
+                <img data-testid="next" style={{ width: window.innerHeight / 15 }} src={nextImage} />
             </a>
             </div>
             : null}
