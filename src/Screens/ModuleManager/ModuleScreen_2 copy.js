@@ -20,16 +20,14 @@ import SingleTextImage from './Themes/SingleTextImage';
 import StartingDashBord from '../EndScreen/StartingDashBord';
 import WinningPage2 from '../../TilliYourWinning/WinningPage2';
 import { connect } from 'react-redux';
-import { userTrack, date_YY_MM_DD, doConnectPredict } from '../../config/Common';
+import { userTrack, date_YY_MM_DD } from '../../config/Common';
 import AskGender from './Themes/AskGender';
 import AskAge from './Themes/AskAge';
 import ThemeViewer from './ThemeViewer';
-import myConfig from '../../config/myConfig';
 import { Link } from "react-router-dom";
 
 
-
-class ModuleScreenMange extends React.Component {
+class ModuleScreen_2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,16 +35,11 @@ class ModuleScreenMange extends React.Component {
             stage: 1,
             moduleJson: null,
             PreviousPages: false,
+            viewScreen: true,
             scorePointsView: false,
             scoreCurrentStage: 0,
             attemptCount: 0,
             deviceHeight: window.innerHeight,
-            viewScreen: false,
-            dynamicCaptureInfo: { dynamic: { dynamicThemes: {} }, },
-            callAtOnce: true,
-            trackModuleScreen: false,
-            userLoginId: "",
-            moduleLevelId: "",
 
         }
         this.scorePointMove = this.scorePointMove.bind(this);
@@ -57,107 +50,24 @@ class ModuleScreenMange extends React.Component {
         this.getLevelMappingData(this.props.match.params.id)
         this.languagechangeTheme()
         userTrack("ModuleScreen", "Landing")
+
         localStorage.setItem('levelPoints', 0)
         localStorage.setItem('totalPoints', 0)
-        let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
-        let gameIndex = localStorage.getItem("d_theme_gameIndex")
-
-        let stage = 1
-        // let { params } = this.props.match
-        // let { gameIndex } = params
-        if (gameIndex && gameIndex !== "") {
-            console.log("gameIndex", gameIndex)
-            stage = parseInt(gameIndex);
-        }
-        localStorage.setItem("d_theme_gameIndex", "")
-        this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel, stage, userLoginId: loginId, moduleLevelId: this.props.match.params.id })
+        this.setState({ levelIndex: this.props.match.params.levelIndex, progressingLevel: this.props.match.params.progressingLevel })
     }
     async getLevelMappingData(levelId) {
         let postJson = { levelId: levelId, sessionId: '1223' };
-        let { viewScreen, dynamicCaptureInfo, trackModuleScreen } = this.state
-        let moduleJson = {};
         let responseData = await doConnect("getLevelMappingData", "POST", postJson);
         var json = responseData;
         var response = JSON.parse(json.response);
-        let d_theme_dynamicCaptureInfo = localStorage.getItem("d_theme_dynamicCaptureInfo");
-
-        if (response) {
-            if (typeof (response.stage) !== "undefined") {
-                let getStageData = response
-                response = getStageData.stage;
-                let welcomeScreen = getStageData.welcomeScreen;
-                trackModuleScreen = getStageData.trackModuleScreen;
-                viewScreen = !welcomeScreen;
-            }
-            let findDynamic = response.filter((e) => { return e.themeType === "Dynamic" })
-            if (findDynamic && findDynamic.length > 0) {
-                let findDynamicTheme = response.filter((e) => { return e.theme === "Dynamic Theme" })
-                let findIndex = response.findIndex((e) => { return e.theme === "Dynamic Theme" })
-                if (findDynamicTheme && findDynamicTheme.length > 0) {
-                    let dthemeData = []
-                    findDynamicTheme.map((cthem, cindex) => {
-                        if (cthem.content.themes) {
-                            cthem.content.themes.map((tdata, index) => {
-                                if (tdata.themeType === "godot") {
-                                    tdata.themes = ""
-                                    tdata.themeType = "godot"
-                                } else {
-                                    tdata.themeType = findDynamicTheme[0].themeType
-                                    tdata.themes = findDynamicTheme[0].theme;
-                                }
-                                dthemeData.push(tdata)
-                                return true;
-                            })
-                        }
-                        return true;
-                    })
-
-                    if (dthemeData.length > 0) {
-                        let removeStage = response.splice(0, findIndex);
-                        let merageData = [...removeStage, ...dthemeData]
-
-                        response = merageData;
-                    }
-                }
-                if (!dynamicCaptureInfo.startTime) {
-                    dynamicCaptureInfo.startTime = new Date().getTime();
-                    dynamicCaptureInfo.endTime = ""
-                }
-            } else {
-                moduleJson.startTime = new Date().getTime();
-            }
-        }
-
-        if (d_theme_dynamicCaptureInfo && d_theme_dynamicCaptureInfo !== "") {
-            viewScreen = true;
-            dynamicCaptureInfo = JSON.parse(d_theme_dynamicCaptureInfo);
-            let predictApi_Msg = localStorage.getItem("predictApiMsg");
-            let gameStatus_Info = localStorage.getItem("gameStatusInfo")
-            gameStatus_Info = JSON.parse(gameStatus_Info)
-            let parseIntIndex = (parseInt(gameStatus_Info.nextModuleIndex) - 2);
-            if (dynamicCaptureInfo.dynamic.dynamicThemes && dynamicCaptureInfo.dynamic.dynamicThemes[parseIntIndex] && dynamicCaptureInfo.dynamic.dynamicThemes[parseIntIndex].themeType === "godot") {
-                if (predictApi_Msg && predictApi_Msg !== "") {
-                    dynamicCaptureInfo.dynamic.dynamicThemes[parseIntIndex].userActionText = predictApi_Msg;
-                }
-
-            }
-        }
-        moduleJson.stages = response;
-        localStorage.setItem("d_theme_dynamicCaptureInfo", "")
-        localStorage.setItem('predictApiMsg', "")
-        localStorage.setItem("gameStatusInfo", JSON.stringify({}))
-
-
         this.setState({
-            moduleJson,
-            viewScreen,
-            dynamicCaptureInfo,
-            trackModuleScreen
-
+            moduleJson: {
+                stages: response
+            }
         })
     }
     changeStage = (action, currentStage, Type) => {
-        let { trackModuleScreen } = this.state;
+
         if (action === 'Next') {
             let { moduleJson } = this.state;
             let stages = moduleJson.stages;
@@ -166,7 +76,7 @@ class ModuleScreenMange extends React.Component {
             if (stages && stages[currentStage] && stages[currentStage].theme && stages[currentStage].theme === "StoryCard") {
                 console.log("story next", currentStage, stages[currentStage])
                 stages[currentStage].startTime = new Date().getTime()
-                stages[currentStage].endTime = ""
+                stages[currentStage].EndTIme = ""
             }
 
             if (!Type) {
@@ -181,22 +91,7 @@ class ModuleScreenMange extends React.Component {
             if (Type && Type === "scorepoint") {
                 scoreBordScreen = true
             }
-            /*dynamic each story capture */
-            if (stages && stages[currentStage - 1] && stages[currentStage - 1].themeType && stages[currentStage - 1].themeType === "Dynamic") {
-                console.log("dyamic next story capture")
-                this.updateStatusDynamicBasedOnStory()
-                if (trackModuleScreen) {
-                    if (stages[currentStage - 1].pageType && stages[currentStage - 1].pageType === "emotion") {
-                        let themeId = stages[currentStage - 1].themeId;
-                        this.emotionDataCapture(themeId)
-                    }
-                    if (stages[currentStage - 1].pageType && stages[currentStage - 1].pageType === "feedback") {
-                        let themeId = stages[currentStage - 1].themeId;
-                        this.feedBackDataCapture(themeId)
-                    }
-                }
-            }
-            /* dynamic each story capture*/
+
 
 
             console.log("stage", currentStage)
@@ -205,7 +100,7 @@ class ModuleScreenMange extends React.Component {
                 console.log('currentStage --> ' + currentStage);
                 console.log('stages --> ' + stages.length);
 
-                // this.completeFinalStage();
+                this.completeFinalStage();
             } else {
                 if (scoreBordScreen) {
                     this.setState({ scorePointsView: scoreBordScreen })
@@ -221,7 +116,6 @@ class ModuleScreenMange extends React.Component {
             let scoreBordScreen = false
             if (!Type) {
                 console.log("***", stages[currentStage])
-
 
             }
 
@@ -246,16 +140,13 @@ class ModuleScreenMange extends React.Component {
 
 
     completeFinalStage() {
+        this.updateAttemptData()
         this.redirect_Page()
-
     }
 
     async updateAttemptData() {
         const { levelIndex, progressingLevel, moduleJson } = this.state;
         localStorage.removeItem(levelIndex + "_selectedData")
-        // if (progressingLevel == levelIndex) {
-        //var userpoint = localStorage.getItem("levelPoints") ? parseInt(localStorage.getItem("levelPoints")) : 0;
-
         let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
 
         console.log("moduleJson -->time-->", moduleJson)
@@ -286,7 +177,6 @@ class ModuleScreenMange extends React.Component {
 
         console.log('updateAttempt-->', postJson)
         await doConnect("updateLevelAttempt", "POST", postJson);
-        this.completeFinalStage()
 
     }
 
@@ -330,6 +220,7 @@ class ModuleScreenMange extends React.Component {
             let { moduleJson } = this.state;
             if (moduleJson) {
                 moduleJson["stages"] = JSON.parse(response)
+                //console.log('responseData', this.state.moduleJson["stages"])
                 this.setState({ moduleJson: moduleJson })
             }
 
@@ -354,7 +245,7 @@ class ModuleScreenMange extends React.Component {
         let { moduleJson } = this.state
 
         moduleJson.startTime = new Date().getTime()
-        moduleJson.endTime = ""
+        moduleJson.EndTIme = ""
         console.log("moduleJson time->", moduleJson)
         this.setState({ viewScreen: true, moduleJson })
     }
@@ -417,24 +308,29 @@ class ModuleScreenMange extends React.Component {
     }
 
     async updateStatusBasedOnStory() {
-        let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
-        let { moduleJson, progressingLevel, } = this.state
 
-        if (moduleJson.stages && moduleJson.stages[this.state.stage - 1]) {
-            moduleJson.stages[this.state.stage - 1].endTime = new Date().getTime()
+        let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
+
+        let { moduleJson, progressingLevel } = this.state
+
+        if (moduleJson.stages && moduleJson.stages[this.state.scoreCurrentStage - 1]) {
+            moduleJson.stages[this.state.scoreCurrentStage - 1].EndTIme = new Date().getTime()
         }
 
         if (moduleJson.stages.length === this.state.scoreCurrentStage) {
-            moduleJson.endTime = new Date().getTime()
+            moduleJson.EndTIme = new Date().getTime()
         }
+
         let stroyJSon = {}
         stroyJSon.stroyJSon = moduleJson
-        stroyJSon.nexstory = parseInt(this.state.stage) + 1
-        stroyJSon.status = moduleJson.stages.length === this.state.stage ? "Complete" : "Paused";
-        stroyJSon.levelId = this.props.match.params.id;
+        stroyJSon.nexstory = this.state.scoreCurrentStage
+        stroyJSon.status = moduleJson.stages.length === this.state.scoreCurrentStage ? "Complete" : "Paused"
         stroyJSon.language = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
+
         console.log("post stroyJSon", stroyJSon)
         //userId: String, levelId: String, attemptCount: Integer, statusJson:String,levelPoints: Integer, leveljson: String, levelNo: Integer,ip: String, deviceInfo: String, userTime: Long, landingFrom: String
+
+
         var userpoint = 0
         moduleJson.stages && this.state.moduleJson.stages.map((ival, i) => {
             if (ival.theme === "StoryCard" && ival.storyPoints) {
@@ -460,81 +356,10 @@ class ModuleScreenMange extends React.Component {
         let responseData = await doConnect("updateStatusBasedOnStory", "POST", postJson);
         console.log("responseData", responseData)
 
-        if (moduleJson.stages.length === this.state.stage) {
+        if (moduleJson.stages.length === this.state.scoreCurrentStage) {
             console.log("**story is complete***")
             await this.updateAttemptData()
         }
-    }
-
-    async updateStatusDynamicBasedOnStory() {
-
-        let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
-        let { moduleJson, progressingLevel, dynamicCaptureInfo } = this.state
-        if (moduleJson.stages.length === this.state.stage) {
-            dynamicCaptureInfo.endTime = new Date().getTime()
-        }
-        dynamicCaptureInfo.status = moduleJson.stages.length === this.state.stage ? "Complete" : "Paused"
-        let stroyJSon = {}
-        stroyJSon.nexstory = parseInt(this.state.stage) + 1
-        stroyJSon.status = moduleJson.stages.length === this.state.stage ? "Complete" : "Paused";
-        stroyJSon.levelId = this.props.match.params.id;
-        stroyJSon.language = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
-        var userpoint = 0
-        var deviceInfo = window.navigator.userAgent;
-        var ipAddress = localStorage.getItem("ipAddress");
-        var landingFrom = localStorage.getItem("landingFrom");
-
-        let postJson = {
-            userId: loginId, levelId: this.props.match.params.id,
-            attemptCount: this.state.attemptCount, statusJson: JSON.stringify(stroyJSon),
-            levelPoints: userpoint, leveljson: JSON.stringify(dynamicCaptureInfo),
-            levelNo: parseInt(progressingLevel) + 1, ip: ipAddress ? ipAddress : "",
-            deviceInfo: deviceInfo ? deviceInfo : "", userTime: new Date().getTime(),
-            landingFrom: landingFrom ? landingFrom : ""
-        };
-        await doConnect("updateStatusBasedOnStory", "POST", postJson);
-        if (moduleJson.stages.length === this.state.stage) {
-            console.log("**story is dtheme complete***")
-            await this.updateAttemptDataDynamic();
-
-        }
-    }
-
-    async updateAttemptDataDynamic() {
-        const { levelIndex, progressingLevel, moduleJson } = this.state;
-        let { dynamicCaptureInfo } = this.state;
-        localStorage.removeItem(levelIndex + "_selectedData")
-        let loginId = localStorage.getItem("loggedUserId") ? localStorage.getItem("loggedUserId") : localStorage.getItem("demoUserId")
-        console.log("moduleJson -->time-->", moduleJson)
-        var userpoint = 0
-        this.state.moduleJson.stages && this.state.moduleJson.stages.map((ival, i) => {
-            if (ival.theme === "StoryCard" && ival.storyPoints) {
-                userpoint = userpoint + ival.storyPoints
-            }
-            return true
-        })
-        let convertDate = await date_YY_MM_DD(new Date().getTime())
-        var deviceInfo = window.navigator.userAgent;
-        var ipAddress = localStorage.getItem("ipAddress");
-        var landingFrom = localStorage.getItem("landingFrom");
-        let postJson = {
-            userId: loginId,
-            levelId: this.props.match.params.id,
-            levelPoints: userpoint,
-            leveljson: JSON.stringify(dynamicCaptureInfo),
-            levelNo: parseInt(progressingLevel) + 1,
-            sessionId: "1232323",
-            attemptCount: this.state.attemptCount,
-            ip: ipAddress ? ipAddress : "",
-            deviceInfo: deviceInfo, userTime: new Date().getTime(),
-            landingFrom: landingFrom ? landingFrom : "",
-            dateString: convertDate,
-        };
-
-        console.log('updateAttempt-->', postJson)
-        await doConnect("updateLevelAttempt", "POST", postJson);
-        this.completeFinalStage();
-
     }
 
     async getStoryBasedStatus() {
@@ -548,12 +373,10 @@ class ModuleScreenMange extends React.Component {
         let languageType = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
         let responseData = await doConnect("getStoryBasedStatus", "POST", postJson);
         var json = responseData;
-
         if (json && json.response) {
-            console.log("getStoryBasedStatus--->", JSON.parse(json.response))
             let responseData = JSON.parse(json.response)
             let dynamicTheme = false
-            if (responseData.stroyJSon && typeof (responseData.stroyJSon) !== "undefined") {
+            if (responseData.stroyJSon) {
                 let findDynamic = responseData.stroyJSon.stages.filter((e) => { return e.themeType === "Dynamic" })
                 if (findDynamic && findDynamic.length > 0) {
                     dynamicTheme = true
@@ -561,15 +384,17 @@ class ModuleScreenMange extends React.Component {
             }
 
             if (!dynamicTheme) {
-                if (responseData.status === "Paused" && responseData.language && responseData.language.label === languageType.label && typeof (responseData.stroyJSon) !== "undefined") {
+                if (responseData.status === "Paused" && responseData.language && responseData.language.label === languageType.label) {
                     this.setState({ moduleJson: responseData.stroyJSon, stage: responseData.nexstory + 1, scorePointsView: true, scoreCurrentStage: responseData.nexstory, viewScreen: true, loading: false })
-                } else {
+                }
+                else {
                     this.setState({ loading: false })
                 }
-            }
-            else {
+            } else {
                 this.setState({ loading: false })
             }
+
+
         } else {
             this.setState({ loading: false })
         }
@@ -604,76 +429,18 @@ class ModuleScreenMange extends React.Component {
 
     previousScorePagefun(type, index) {
 
+
         this.setState({ scorePointsView: true, })
 
 
     }
-    checkCallAtOnceState() {
-        this.setState({ callAtOnce: false })
-    }
-    async predictOnchange(apiPredict, emotion) {
-        let { userLoginId, } = this.state;
-        let key = userLoginId
-        if (apiPredict === "emotion" && emotion && emotion !== "") {
-            let postJson = { 'emotion': emotion.toLowerCase(), 'feedback': "satisfied", apiKey: myConfig.apiKey }
-            console.log("postData", postJson)
-            let getResponse = await doConnectPredict(MyConstant.keyList.predictUrl + "predict", "POST", postJson)
-            if (getResponse) {
-                let activityResponse = getResponse.activity;
-                localStorage.setItem('predictApiMsg', activityResponse)
-                localStorage.setItem(key, activityResponse)
-            }
-        }
-    }
-
-    async emotionDataCapture(themeId) {
-        let { userLoginId, moduleLevelId, attemptCount, dynamicCaptureInfo, stage } = this.state;
-
-        let userTrackKeyText = "";
-        if (dynamicCaptureInfo && dynamicCaptureInfo.dynamic && dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1]) {
-            userTrackKeyText = dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1].userTrackKey
-        }
-
-
-        if (userTrackKeyText === "" || userTrackKeyText === undefined || userTrackKeyText === "undefined") {
-            return false
-        }
-
-        var postJson = { userId: userLoginId, levelId: moduleLevelId, themeId: themeId, emotionKey: userTrackKeyText, attemptCount: parseInt(attemptCount) };
-        console.log("postJson", postJson)
-
-        let responseData = await doConnect("emotionCapture", "POST", postJson);
-        console.log("responseData", responseData)
-    }
-
-
-
-    async feedBackDataCapture(themeId) {
-        let { userLoginId, moduleLevelId, attemptCount, dynamicCaptureInfo, stage,
-        } = this.state;
-        let key = userLoginId
-
-        let userTrackKeyText = "";
-        if (dynamicCaptureInfo && dynamicCaptureInfo.dynamic && dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1]) {
-            userTrackKeyText = dynamicCaptureInfo.dynamic.dynamicThemes[stage - 1].userTrackKey
-        }
-
-        let predict_key = localStorage.getItem(key)
-        if (userTrackKeyText === "" || userTrackKeyText === undefined || userTrackKeyText === "undefined" || (predict_key === "" || predict_key === undefined || predict_key === "undefined")) {
-            return false
-        }
-
-        var postJson = { userId: userLoginId, levelId: moduleLevelId, themeId: themeId, feedBackKey: userTrackKeyText.toLowerCase(), activity: predict_key.toLowerCase(), attemptCount: parseInt(attemptCount) };
-        console.log(postJson)
-        let responseData = await doConnect("feedbackCapture", "POST", postJson);
-        console.log("responseData", responseData);
-    }
-
-
     render() {
 
-        let { viewScreen, scorePointsView, scoreCurrentStage, callAtOnce, dynamicCaptureInfo } = this.state
+        let { viewScreen, scorePointsView, scoreCurrentStage } = this.state
+
         var horizontalScreen = ""
+
+
         if (window.innerHeight > window.innerWidth || window.innerHeight > 768) {
             horizontalScreen = ""
         }
@@ -713,14 +480,13 @@ class ModuleScreenMange extends React.Component {
                 if (kval.storyPoints) {
                     totalPoint = totalPoint + kval.storyPoints
                 }
-                return true
+                return false
             })
         }
 
-
         let trustPointText = this.return_content(1, 3)
 
-        let displayPage = this.state.moduleJson && this.state.moduleJson.stages && this.state.moduleJson.stages.map((stage, index) => {
+        let displayPage = this.state.moduleJson && this.state.moduleJson.stages.map((stage, index) => {
             let stageIndex = parseInt(index) + 1;
             if (this.state.stage === stageIndex) {
                 let theme = stage.theme;
@@ -742,69 +508,9 @@ class ModuleScreenMange extends React.Component {
                                     navigation={this.props.history}
                                     changeStage={this.changeStage}
                                     stage={this.state.stage}
-                                    data={stage}
-                                    dynamicCaptureInfo={dynamicCaptureInfo}
-                                    predictOnchange={(apiPredict, emotion) => { this.predictOnchange(apiPredict, emotion) }}
-
                                 />
                             </div>
                         );
-                    case 'godot':
-                        // setTimeout(() => {
-                        console.log("Delayed for 2 second.");
-                        console.log("stage", stage)
-                        let overAlllStages = this.state.moduleJson.stages;
-                        let stagePlusOne = stageIndex + 1;
-                        console.log("stagePlusOne", stagePlusOne)
-                        console.log("stageIndex", stageIndex)
-                        console.log("overAlllStages", overAlllStages)
-                        let gameIsEnd = false
-                        if (overAlllStages[stageIndex]) {
-                            console.log("next dynamic module there!")
-                            console.log("next", overAlllStages[stageIndex])
-                        }
-                        else {
-                            gameIsEnd = true
-                            console.log("no there!")
-                        }
-
-                        let urlId = this.props.match.params.id;
-                        let urllevelIndex = this.props.match.params.levelIndex;
-                        let progressingLevel = this.props.match.params.progressingLevel;
-                        let gameStatus = { gameIsEnd: gameIsEnd, id: urlId, levelIndex: urllevelIndex, progressingLevel: progressingLevel, nextModuleIndex: stagePlusOne }
-                        let { gameFileInfo } = stage
-                        if (gameFileInfo && Object.keys(gameFileInfo).length > 0) {
-                            let { gameId, themeId } = gameFileInfo
-                            localStorage.setItem("gameStatusInfo", JSON.stringify(gameStatus))
-                            localStorage.setItem("d_theme_gameIndex", "")
-                            let infoTheme = { themeName: stage.theme, themeType, stageIndex: stageIndex, gameInfo: { gameId, themeId } }
-                            dynamicCaptureInfo.dynamic.dynamicThemes[stageIndex - 1] = infoTheme;
-                            localStorage.setItem("d_theme_dynamicCaptureInfo", JSON.stringify(dynamicCaptureInfo))
-                            if (gameIsEnd && overAlllStages[stageIndex - 1].themeType === "godot") {
-                                if (callAtOnce) {
-                                    console.log("call at once-->")
-                                    this.checkCallAtOnceState()
-                                    this.updateStatusDynamicBasedOnStory()
-                                }
-                            }
-                            // this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}`)
-                            setTimeout(() => {
-                                let acvityName = "";
-                                let activityResponse = localStorage.getItem('predictApiMsg')
-                                if (activityResponse && activityResponse !== "") {
-                                    acvityName = activityResponse;
-                                }
-                                if (acvityName) {
-                                    this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}?activity=${acvityName}`)
-                                }
-                                else {
-                                    this.props.history.push(`/${MyConstant.keyList.projectUrl}/godotplay/${gameId}/${themeId}`)
-                                }
-                            }, 3000);
-                            ///${stagePlusOne}
-                        }
-                        // }, 2000)
-                        return (<div>...loading</div>)
                     default:
                 }
 
@@ -1159,5 +865,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export { ModuleScreenMange };
-export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(ModuleScreenMange);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleScreen_2);
