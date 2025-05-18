@@ -35,7 +35,6 @@ class ChooseCheckboxQuestions extends React.Component {
         deviceHeight: window.innerHeight,
     });
     
-    /* istanbul ignore next */
     pushData(data) {
         let selectedData = this.state.selectedData;
 

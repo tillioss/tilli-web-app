@@ -424,23 +424,14 @@ class ModuleScreen_2 extends React.Component {
         var postJson = postdata;
         let responseData = await doConnect("updateUserDetails", "POST", postJson);
         console.log("responseData", responseData)
-
     }
 
     previousScorePagefun(type, index) {
-
-
         this.setState({ scorePointsView: true, })
-
-
     }
     render() {
-
         let { viewScreen, scorePointsView, scoreCurrentStage } = this.state
-
         var horizontalScreen = ""
-
-
         if (window.innerHeight > window.innerWidth || window.innerHeight > 768) {
             horizontalScreen = ""
         }
@@ -515,7 +506,6 @@ class ModuleScreen_2 extends React.Component {
                 }
 
                 switch (theme) {
-
                     case 'DoubleBoxOverlapWithImage':
                         return (
                             <div key={index.toString()}>
@@ -865,5 +855,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-
+export {ModuleScreen_2};
 export default connect(mapStateToProps, mapDispatchToProps)(ModuleScreen_2);

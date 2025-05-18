@@ -1159,5 +1159,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ModuleScreenMange);
+export { ModuleScreenMange };
+export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(ModuleScreenMange);

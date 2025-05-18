@@ -121,11 +121,12 @@ const AudioRecognize1 = ({ data, index_value, deviceHeight, imagePath, viewType,
 
                 <div className="col-3 pt-2" >
                     {viewType === 'answer' ?
-                        <div className="col-2" onClick={(e) => {
+                        <div className="col-2" onClick={
+                            (e) => {
                             data.content.feelingsDataList[index_value].results = "";
                             resetTranscript();
-                            resetInput(data)
-                        }}>
+                            resetInput(data)}
+                        }>
                             <img className="repeat-img" src={repeatImage} style={{ width: 42, height: 40 }} alt={""}  />
                         </div>
 
@@ -157,6 +158,7 @@ class AudioQuizScreen extends React.Component {
         this.onTranscriptChange = this.onTranscriptChange.bind(this);
     }
 
+    
     componentDidMount() {
 
         this.handleResize();
@@ -224,6 +226,7 @@ class AudioQuizScreen extends React.Component {
         data.content.feelingsDataList[index_value].questionText = plainText
 
         if (data.content.feelingsDataList.length !== index_value + 1) {
+            
             this.setState({ index_value: index_value + 1, bg_color: "#FFBD12", viewType: "question" })
         }
         else if (data.content.feelingsDataList.length === index_value + 1) {
@@ -266,6 +269,7 @@ class AudioQuizScreen extends React.Component {
         this.setState({ viewType: "onrecord" })
     }
 
+    
     async onStopRecord() {
         if (!SupportedBrowser) {
             SpeechRecognition.stopListening({ continuous: false })
@@ -285,6 +289,7 @@ class AudioQuizScreen extends React.Component {
         }
     }
 
+    
     enableEventListener() {
         console.log("event listener")
         if (!SupportedBrowser) {
@@ -313,6 +318,7 @@ class AudioQuizScreen extends React.Component {
         }
     }
 
+    
     returnButtonContent(detectHorizontal) {
         let { viewType, deviceHeight } = this.state
         if (!SupportedBrowser) {
@@ -405,6 +411,7 @@ class AudioQuizScreen extends React.Component {
     }
 
     resetInput(data) {
+        
         this.setState({ data })
     }
     render() {
@@ -428,24 +435,29 @@ class AudioQuizScreen extends React.Component {
 
         var imagePath = ""
         if (this.props.themeType === "StoryCard") {
+            
             if (data.content.image) {
                 imagePath = MyConstant.keyList.apiURL + 'vp?action=module&key=' + data.content.image.json.fileName + '&id=' + data.content.image.json.fileType
             }
             else {
                 imagePath = people_set
             }
-
         }
+        
         else {
             if (data.content.image) {
+                
                 imagePath = MyConstant.keyList.apiURL + 'vp?action=module&key=' + data.content.image.fileName + '&id=' + data.content.image.fileType
             } else {
                 imagePath = people_set
             }
         }
         let imagestyle = {};
+        
         if (data.content.imagestyle)
             var imgstyle = data.content.imagestyle.split(',')
+
+        
         if (imgstyle && imgstyle.length > 1) {
             imgstyle.map(ival => {
                 let i = ival.split(':');
@@ -494,18 +506,17 @@ class AudioQuizScreen extends React.Component {
                         <p className={"audio-font " + (matchString ? "lego-font" : "")}  >
                             <div dangerouslySetInnerHTML={{ __html: data.content.feelingsDataList[index_value].questions }} /></p> :
                         <React.Fragment>
-                            <div className="row ml-0 audio-scroll" style={{
-                                height: 150, width: "100%",
-                                padding: "25px 0px 25px 0px "
-                            }}>
+                            <div className="row ml-0 audio-scroll" style={{height: 150, width: "100%", padding: "25px 0px 25px 0px "}}>
                                 <div className="row ml-0">
                                     <div className="col-12 col-sm-12">
                                         <textarea style={{ width: "100%" }} className="rectextType" rows="3"
-                                            value={data.content.feelingsDataList[index_value].results} onChange={(e) => {
+                                            value={data.content.feelingsDataList[index_value].results} onChange={
+                                                
+                                                (e) => {
                                                 data.content.feelingsDataList[index_value].results = e.target.value;
                                                 this.setState({ data })
-
-                                            }} />
+                                               }
+                                               } />
                                     </div>
                                 </div>
                             </div>
@@ -557,6 +568,8 @@ class AudioQuizScreen extends React.Component {
                 </div>
             </div>
         </>
+
+        
         return (<div>
             <div className="module-parent-audio-screen">
                 <div className="row ml-0 mt-4" >
