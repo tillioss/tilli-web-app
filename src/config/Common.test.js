@@ -335,32 +335,6 @@ describe('getMyIp', () => {
         fetch.mockClear();
     });
 
-    // it('should fetch the IP address and return it', async () => {
-    //     const mockIp = '203.0.113.1';
-    //     fetch.mockResolvedValueOnce({
-    //         json: jest.fn().mockResolvedValueOnce({ ip: mockIp }),
-    //     });
-    //
-    //     const result = await getMyIp();
-    //
-    //     expect(fetch).toHaveBeenCalledWith(MyConstant.keyList.apiURL);
-    //     expect(result).toBe(mockIp);
-    // });
-    //
-    // it('should propagate fetch errors', async () => {
-    //     fetch.mockRejectedValueOnce(new Error('Network error'));
-    //
-    //     await expect(getMyIp()).rejects.toThrow('Network error');
-    // });
-    //
-    // it('should propagate JSON parsing errors', async () => {
-    //     fetch.mockResolvedValueOnce({
-    //         json: jest.fn().mockRejectedValueOnce(new Error('Invalid JSON')),
-    //     });
-    //
-    //     await expect(getMyIp()).rejects.toThrow('Invalid JSON');
-    // });
-
     it('should return undefined if response does not contain ip', async () => {
         fetch.mockResolvedValueOnce({
             json: jest.fn().mockResolvedValueOnce({}),
