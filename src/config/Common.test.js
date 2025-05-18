@@ -135,37 +135,6 @@ describe('doFileConnect', () => {
 
         expect(fetch).not.toHaveBeenCalled();
     });
-
-    // it('should handle fetch errors gracefully', async () => {
-    //     const dataJson = {
-    //         file: new Blob(['test content'], { type: 'text/plain' }),
-    //         fileName: 'test.txt',
-    //         processType: 'process1',
-    //         docsId: '123',
-    //         fileType: 'type1',
-    //     };
-    //
-    //     fetch.mockRejectedValueOnce(new Error('Fetch failed'));
-    //
-    //     await expect(doFileConnect(dataJson)).resolves.toBeUndefined();
-    //     expect(console.warn).toHaveBeenCalledWith(expect.any(Error));
-    // });
-
-    // it('should handle fetch errors gracefully', async () => {
-    //     const dataJson = {
-    //         file: new Blob(['test content'], { type: 'text/plain' }),
-    //         fileName: 'test.txt',
-    //         processType: 'process1',
-    //         docsId: '123',
-    //         fileType: 'type1',
-    //     };
-    //
-    //     const error = new Error('Fetch failed');
-    //     fetch.mockRejectedValueOnce(error);
-    //
-    //     await expect(doFileConnect(dataJson)).resolves.toBeUndefined();
-    //     expect(console.warn).toHaveBeenCalledWith(error);
-    // });
 });
 
 describe('doConnect', () => {
