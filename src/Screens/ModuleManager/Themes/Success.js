@@ -1,6 +1,5 @@
 import React from "react";
-import nextPng from '../../images/next.png';
-import MyConstant from "../../config/MyConstant";
+import nextPng from '../../../images/next.png';
 
 class Success extends React.Component {
 
