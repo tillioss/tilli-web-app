@@ -1,0 +1,40 @@
+name: CD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to GCP VM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup gcloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Build and push Docker image
+        env:
+          IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/tilli-web-app:${{ github.sha }}
+        run: |
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+
+      - name: Deploy to VM over SSH
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: 22
+          script: |
+            docker pull gcr.io/${{ secrets.GCP_PROJECT_ID }}/tilli-web-app:${{ github.sha }}
+            docker stop tilli-web-app || true
+            docker rm tilli-web-app || true
+            docker run -d --name tilli-web-app -p 80:3000 --env-file /home/$USER/app/.env \
+              gcr.io/${{ secrets.GCP_PROJECT_ID }}/tilli-web-app:${{ github.sha }}
