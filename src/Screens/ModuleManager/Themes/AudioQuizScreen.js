@@ -126,7 +126,7 @@ const AudioRecognize1 = ({ data, index_value, deviceHeight, imagePath, viewType,
                             resetTranscript();
                             resetInput(data)
                         }}>
-                            <img className="repeat-img" src={repeatImage} style={{ width: 42, height: 40 }} alt={""} />
+                            <img className="repeat-img" src={repeatImage} style={{ width: 42, height: 40 }} alt={""}  />
                         </div>
 
                         : null}
@@ -550,7 +550,7 @@ class AudioQuizScreen extends React.Component {
                             data.content.feelingsDataList[index_value].results = "";
                             this.setState({ data, })
                         }}>
-                            <img className="repeat-img" src={repeatImage} style={{ width: 42, height: 40 }} alt={""} />
+                            <img className="repeat-img" src={repeatImage} style={{ width: 42, height: 40 }} alt={""} data-testid="repeat"/>
                         </div>
 
                         : null}
@@ -634,13 +634,13 @@ class AudioQuizScreen extends React.Component {
                                     }
 
                                 }} >
-                                    <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                                    <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} data-testid="next"/>
                                 </Link>
                                 : <Link to="#" onClick={() => {
                                     SpeechRecognition.stopListening({ continuous: false });
                                     this.changeInnerIndex()
                                 }} >
-                                    <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                                    <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} data-testid="next"/>
                                 </Link>
                             }
 

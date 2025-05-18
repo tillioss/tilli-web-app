@@ -155,7 +155,7 @@ class AskAge extends React.Component {
             <div className="module-parent">
                 <div className={"row ml-0 " + (deviceHeight < 640 ? "pt-2 " : "pt-4")}>
                     <div className="col-2">
-                        <Link to="#" onClick={() => {
+                        <Link data-testid="back" to="#" onClick={() => {
                             // this.props.previousScorePage('Previous', stage,)
                             if (this.state.chooseAge) {
 
@@ -227,7 +227,7 @@ class AskAge extends React.Component {
             </div>
             <div className={"bottom-style " + changeLang}>
                 <div style={{ textAlign: "right" }}>
-                    <Link to="#" onClick={() => {
+                    <Link data-testid="next" to="#" onClick={() => {
                         if (this.state.chooseAge) {
                             this.updateDetails_Info(this.state.chooseAge)
                             this.props.changeStage('Next', stage, "scorepoint")

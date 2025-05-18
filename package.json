@@ -151,6 +151,7 @@
     ]
   },
   "devDependencies": {
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "regenerator-runtime": "^0.14.1"
   }
 }
