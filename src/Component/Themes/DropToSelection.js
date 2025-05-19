@@ -281,7 +281,7 @@ return true
                 <div className="col-12" style={{ margin: 0, padding: 0 }}>
                     <div className="row mt-5 ml-0">
                         <div className="col-2">
-                            <Link onClick={() => {
+                            <Link to="#" data-testid="previous" onClick={() => {
                                 this.selectedView()
                                 if (this.props.themeType === "StoryCard") {
                                     this.props.changeindex('Previous', stage)
@@ -327,7 +327,7 @@ return true
                         marginLeft: 50, position: 'absolute',
                     }}>
                         
-                        <img id="drag1" draggable="true"
+                        <img data-testid="draggable-image" id="drag1" draggable="true"
                             onDragStart={(e) => { 
                                 console.log(e)
                                 this.drag(e) }} onDragEnd={(e) => { 
@@ -455,7 +455,7 @@ return true
                                                 }
 
                                                 if (anotherChoice === 4) {
-                                                    this.props.history.push('/' + MyConstant.keyList.projectUrl + '/home/')
+                                                    this.props.history?.push('/' + MyConstant.keyList.projectUrl + '/home/')
                                                 }
 
 
@@ -521,7 +521,7 @@ return true
                             </div>
                         </div>
                        
-                        <div id="Red" onDrop={(event) => { this.drop(event) }} onDragOver={(event) => { this.allowDrop(event) }} style={{ marginTop: '30%' }} className="col-3">
+                        <div id="Red" data-testid="drop-red" onDrop={(event) => { this.drop(event) }} onDragOver={(event) => { this.allowDrop(event) }} style={{ marginTop: '30%' }} className="col-3">
                             {this.state.boderView ?
                                 <div style={{ border: "2px dotted white", position: "absolute", marginLeft: -10, marginTop: "45%", width: 75, height: 80, borderRadius: 75 / 2 }}> </div>
                                 : null}
@@ -533,7 +533,7 @@ return true
 
             </div>
             <div style={{ position: 'fixed', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
-                <Link onClick={() => {
+                <Link data-testid="next-button" to="#" onClick={() => {
                     if (this.state.imageDraged) {
                         this.setState({ modelView: true, show_con: "show", display_view: "block", })
                     }

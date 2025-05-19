@@ -122,7 +122,7 @@ class CircleWithInfoAnimations extends React.Component {
             //console.log('btn moving cancel');
         })
 
-        if (window.matchMedia('screen and (max-width: 768px)').matches) {
+        if (window.matchMedia('screen and (max-width: 768px)')?.matches) {
             console.log("if==> responsive")
         }
         else {
@@ -173,13 +173,6 @@ class CircleWithInfoAnimations extends React.Component {
     allowDrop(ev) {
         //alert(JSON.stringify(ev.target.id))
         ev.preventDefault();
-    }
-
-
-    drag(ev) {
-
-
-
     }
 
 
@@ -433,10 +426,7 @@ class CircleWithInfoAnimations extends React.Component {
                     >
 
                         <img id="drag1" draggable="true"
-                            onDragStart={(e) => {
-
-                                this.drag(e)
-                            }} onDragEnd={(e) => {
+                            onDragEnd={(e) => {
                                 this.setState({ imageBackground_color: this.state.imageBgColor, appendData: e.target, })
 
                             }} src={MyConstant.keyList.apiURL + 'vp?action=module&key=' + data.content.image.fileName + '&id=' + data.content.image.fileType}
@@ -475,7 +465,7 @@ class CircleWithInfoAnimations extends React.Component {
                     <div className="col-1"> </div>
                 </div>
 
-                <div class={"modal fade bd-example-modal-lg " + this.state.show_con} style={{ display: this.state.display_view, top: deviceHeight < 700 ? "20%" : modelContent ? "30%" : "30%" }} tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className={"modal fade bd-example-modal-lg " + this.state.show_con} style={{ display: this.state.display_view, top: deviceHeight < 700 ? "20%" : modelContent ? "30%" : "30%" }} tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg">
 
                         {modelContent ? <img src={Awesome_JobImg} style={{
@@ -483,7 +473,7 @@ class CircleWithInfoAnimations extends React.Component {
                             position: "inherit"
                         }} alt={""} /> : null}
 
-                        <div class={"modal-content box-bgcolor "} style={Orientation ? { top: 0 } : {}} >
+                        <div className={"modal-content box-bgcolor "} style={Orientation ? { top: 0 } : {}} >
                             {this.state.modelContent === true ?
                                 <React.Fragment>
 
@@ -522,9 +512,9 @@ class CircleWithInfoAnimations extends React.Component {
                                             })
 
                                         }} >
-                                            {localStorage.getItem("loggedUserId") || localStorage.getItem("demoUserId") ? <button style={{ color: "inherit" }} className={"lego-box-btnbg btn btn-warning"}
-                                                type="button" data-dismiss="modal" aria-label="Close" >{true_button}</button> : <button type="button" className="lego-box-btnbg"
-                                                    data-toggle={this.state.succesMsgCount > 1 ? "modal" : ""} data-target="#myModal"> {false_button}</button>}
+                                            {localStorage.getItem("loggedUserId") || localStorage.getItem("demoUserId") ? <button data-testid="modal-next-btn" style={{ color: "inherit" }} className={"lego-box-btnbg btn btn-warning"}
+                                                type="button" data-dismiss="modal" aria-label="Close" >{true_button}</button> : <button data-testid="modal-next-btn" type="button" className="lego-box-btnbg"
+                                                    data-toggle={this.state.succesMsgCount > 1 ? "modal" : ""} data-target="#myModal">{false_button}</button>}
 
                                         </div>
                                         <div className="col-sm-2"> </div>
@@ -568,9 +558,9 @@ class CircleWithInfoAnimations extends React.Component {
                                             window.scroll(10, 10)
                                         }} >
 
-                                            {localStorage.getItem("loggedUserId") ? <button className={"lego-box-btnbg btn btn-warning"}
-                                                type="button" data-dismiss="modal" aria-label="Close" >{false_button} </button> : <button type="button" className="lego-box-btnbg"
-                                                    data-toggle={this.state.anotherChoice > 2 ? "modal" : ""} data-target="#myModal"> {false_button}</button>}
+                                            {localStorage.getItem("loggedUserId") ? <button data-testid="modal-retry-btn" className={"lego-box-btnbg btn btn-warning"}
+                                                type="button" data-dismiss="modal" aria-label="Close" >{false_button} </button> : <button data-testid="modal-retry-btn" type="button" className="lego-box-btnbg"
+                                                    data-toggle={this.state.anotherChoice > 2 ? "modal" : ""} data-target="#myModal">{false_button}</button>}
 
                                         </div>
                                         <div className="col-2" > </div>
