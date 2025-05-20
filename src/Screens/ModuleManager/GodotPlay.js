@@ -29,6 +29,7 @@ function GodotPlay(props) {
             script.onload = onLoad
             document.body.appendChild(script)
 
+            
             if (MyConfig.isLocal) {
                 setTimeout(() => {
                     console.log("Delayed for 4 second.");
@@ -39,6 +40,8 @@ function GodotPlay(props) {
 
 
         }
+
+        
         function onLoad() {
             if (godDotDocsId && godDotDocsId !== "") {
                 const GODOT_CONFIG = { "args": [], "canvasResizePolicy": 2, "executable": `${MyConstant.keyList.apiURL}vp-game-file/module/zip/${godDotDocsId}/index`, "experimentalVK": false, "fileSizes": { pck: 1703792, wasm: 17503191 }, "focusCanvas": true, "gdnativeLibs": [] };
@@ -51,6 +54,7 @@ function GodotPlay(props) {
         }
     }, [godDotDocsId, props])
 
+    
     useEffect(() => {
         if (engine) {
             const INDETERMINATE_STATUS_STEP_MS = 100;
