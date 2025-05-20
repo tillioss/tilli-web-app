@@ -163,6 +163,7 @@ class CircleWithInfoAnimations extends React.Component {
                                             : null
                                         }
                                     </div>
+                                    
                                     {this.state.ImageView === 1 && this.state.showIcon ?
                                         <Link to="#" onClick={() => this.setState({ showIcon: false })} style={{ zIndex: 2 }}>
                                             <div style={{
@@ -230,7 +231,7 @@ class CircleWithInfoAnimations extends React.Component {
                             }
                             this.setState({ ImageView: true })
                         }}>
-                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""}/>
+                            <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
                         </Link> : null}
 
                 </div>

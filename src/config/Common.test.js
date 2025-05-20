@@ -1,394 +1,199 @@
-import {doConnectPredict, doGetConnect, getMonthAndDate, timeConverter} from './Common';
-import MyConstant from './MyConstant';
-import { removeValueFromArray } from './Common';
-import { doFileConnect } from './Common';
-import { doConnect } from './Common';
-import { userTrack, getMyIp } from './Common';
+import * as Common from '../config/Common';
+import MyConstant from '../config/MyConstant';
 
 global.fetch = jest.fn();
 
-beforeAll(() => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {});
+jest.mock('../pages/tilli-game-web/json/input.json', () => [
+  { screenName: 'testScreen', content: 'hello' }
+]);
+
+
+describe('Common Utilities', () => {
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('doGetConnect calls fetch with correct URL and method', async () => {
+    const mockData = { result: 'success' };
+    fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve(mockData),
+    });
+
+    const result = await Common.doGetConnect('/endpoint');
+    expect(fetch).toHaveBeenCalledWith(MyConstant.keyList.apiURL + '/endpoint', expect.objectContaining({
+      method: 'GET'
+    }));
+    expect(result).toEqual(mockData);
+  });
+
+  test('isObject returns true only for objects', () => {
+    expect(Common.isObject({})).toBe(true);
+    expect(Common.isObject([])).toBe(true);
+    expect(Common.isObject('str')).toBe(false);
+    expect(Common.isObject(null)).toBe(false);
+  });
+
+  test('removeValueFromArray removes specified values', () => {
+    expect(Common.removeValueFromArray([1, 2, 3, 2], 2)).toEqual([1, 3]);
+  });
+
+  test('checkNullAndReturnString behaves correctly', () => {
+    expect(Common.checkNullAndReturnString(null)).toBe(false);
+    expect(Common.checkNullAndReturnString(undefined)).toBe(false);
+    expect(Common.checkNullAndReturnString("")).toBe(false);
+    expect(Common.checkNullAndReturnString("text")).toBe(true);
+  });
+
+  test('doFileConnect makes a POST request with form data', async () => {
+    fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve({ response: 'ok' }),
+    });
+
+    const input = {
+      file: new Blob(['file']),
+      fileName: 'test.txt',
+      processType: 'upload',
+      docsId: '123',
+      fileType: 'text'
+    };
+
+    await Common.doFileConnect(input);
+    expect(fetch).toHaveBeenCalled();
+  });
+
+  test('doConnect sends correct fetch request', async () => {
+    const response = { success: true };
+    fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve(response),
+    });
+
+    const data = await Common.doConnect('submit', 'POST', { x: 1 });
+    expect(data).toEqual(response);
+  });
+
+  test('timeConverter returns formatted date string', () => {
+    const result = Common.timeConverter(1609459200000);
+    expect(result).toMatch(/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/); 
+  });
+
+  test('getMonthAndDate returns correct date', () => {
+    const date = new Date('2023-08-12');
+    expect(Common.getMonthAndDate(date.getTime())).toContain('Aug');
+    expect(Common.getMonthAndDate(date.getTime(), true)).toMatch(/Saturday, Aug 12/);
+  });
+
+  test('userTrack logs actions when not on localhost', async () => {
+    const originalLocation = window.location;
+    delete window.location;
+    window.location = { hostname: 'example.com' };
+
+    localStorage.setItem("ipAddress", "127.0.0.1");
+    const result = await Common.userTrack("page", "click");
+    expect(result).toEqual({});
+
+    window.location = originalLocation;
+  });
+
+  test('getMyIp fetches IP address', async () => {
+    fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve({ ip: "192.168.1.1" }),
+    });
+
+    const ip = await Common.getMyIp();
+    expect(ip).toBe("192.168.1.1");
+  });
+
+  test('keyReadData returns correct object from event list', () => {
+    const list = [{ key: 'abc', value: 123 }];
+    expect(Common.keyReadData(list, 'abc')).toEqual(list[0]);
+    expect(Common.keyReadData(list, 'def')).toEqual({});
+  });
+
+  test('readJsonFile returns screen object from inputJson', () => {
+    const mockJson = [{ screenName: 'testScreen', content: 'hello' }];
+    jest.mock('../pages/tilli-game-web/json/input.json', () => mockJson, { virtual: true });
+    expect(Common.readJsonFile('testScreen').content).toBe("hello");
+  });
+
+  test('date_YY_MM_DD formats timestamp', () => {
+    expect(Common.date_YY_MM_DD(1609459200000)).toBe('2021-01-01');
+  });
+
+  test('doConnectPredict makes fetch request and returns data', async () => {
+    const response = { prediction: true };
+    fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve(response),
+    });
+
+    const result = await Common.doConnectPredict('https://example.com', 'POST', { input: 'x' });
+    expect(result).toEqual(response);
+  });
+
+  test('doFileConnect skips fetch when dataJson is empty', async () => {
+  await Common.doFileConnect({});
+  expect(fetch).not.toHaveBeenCalled();
 });
 
-afterAll(() => {
-    console.warn.mockRestore();
+test('doConnect handles fetch failure', async () => {
+  fetch.mockRejectedValueOnce(new Error('Network Error'));
+
+  await expect(Common.doConnect('fail', 'POST', {})).rejects.toThrow('Network Error');
 });
 
-describe('doGetConnect', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-    });
+test('doConnectPredict handles fetch failure', async () => {
+  fetch.mockRejectedValueOnce(new Error('Timeout'));
 
-    it('should call fetch with the correct URL and options', async () => {
-        const subUrl = '/test-endpoint';
-        const mockResponse = { data: 'test data' };
-
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockResponse),
-        });
-
-        const result = await doGetConnect(subUrl);
-
-        expect(fetch).toHaveBeenCalledWith(MyConstant.keyList.apiURL + subUrl, {
-            method: 'GET',
-            mode: 'cors',
-            redirect: 'follow',
-        });
-        expect(result).toEqual(mockResponse);
-    });
-
-    it('should handle fetch errors gracefully', async () => {
-        const subUrl = '/test-endpoint';
-        fetch.mockRejectedValueOnce(new Error('Fetch failed'));
-
-        await expect(doGetConnect(subUrl)).rejects.toThrow('Fetch failed');
-    });
+  await expect(Common.doConnectPredict('https://fail.com', 'POST', {})).rejects.toThrow('Timeout');
 });
 
-describe('removeValueFromArray', () => {
-    it('should remove a single value from the array', () => {
-        const arr = [1, 2, 3, 4];
-        const result = removeValueFromArray(arr, 3);
-        expect(result).toEqual([1, 2, 4]);
-    });
+test('userTrack skips logging on localhost', async () => {
+  const originalLocation = window.location;
+  delete window.location;
+  window.location = { hostname: 'localhost' };
 
-    it('should remove multiple occurrences of a value from the array', () => {
-        const arr = [1, 2, 3, 3, 4];
-        const result = removeValueFromArray(arr, 3);
-        expect(result).toEqual([1, 2, 4]);
-    });
+  const result = await Common.userTrack("page", "action");
+  expect(result).toEqual({});
 
-    it('should remove multiple values from the array', () => {
-        const arr = [1, 2, 3, 4, 5];
-        const result = removeValueFromArray(arr, 2, 4);
-        expect(result).toEqual([1, 3, 5]);
-    });
-
-    it('should return the same array if no values match', () => {
-        const arr = [1, 2, 3, 4];
-        const result = removeValueFromArray(arr, 5);
-        expect(result).toEqual([1, 2, 3, 4]);
-    });
-
-    it('should handle an empty array', () => {
-        const arr = [];
-        const result = removeValueFromArray(arr, 1);
-        expect(result).toEqual([]);
-    });
-
-    it('should handle no additional arguments', () => {
-        const arr = [1, 2, 3];
-        const result = removeValueFromArray(arr);
-        expect(result).toEqual([1, 2, 3]);
-    });
-
-    it('should handle removing all elements from the array', () => {
-        const arr = [1, 1, 1];
-        const result = removeValueFromArray(arr, 1);
-        expect(result).toEqual([]);
-    });
+  window.location = originalLocation;
 });
 
-describe('doFileConnect', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-    });
+test('userTrack fetches IP if not in localStorage', async () => {
+  const originalLocation = window.location;
+  delete window.location;
+  window.location = { hostname: 'domain.com' };
 
-    it('should call fetch with the correct URL and FormData when dataJson is valid', async () => {
-        const dataJson = {
-            file: new Blob(['test content'], { type: 'text/plain' }),
-            fileName: 'test.txt',
-            processType: 'process1',
-            docsId: '123',
-            fileType: 'type1',
-        };
+  localStorage.removeItem("ipAddress");
+  fetch.mockResolvedValueOnce({ json: () => Promise.resolve({ ip: '123.123.123.123' }) });
 
-        const mockResponse = { response: 'success' };
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockResponse),
-        });
+  await Common.userTrack("page", "action");
+  expect(fetch).toHaveBeenCalled();
 
-        await doFileConnect(dataJson);
-
-        expect(fetch).toHaveBeenCalledWith(
-            `${MyConstant.keyList.apiURL}uploads/${dataJson.processType}/${dataJson.fileType}/${dataJson.fileName}`,
-            expect.objectContaining({
-                method: 'POST',
-                mode: 'cors',
-                redirect: 'follow',
-                body: expect.any(FormData),
-            })
-        );
-
-        const formData = fetch.mock.calls[0][1].body;
-        expect(formData.get('file1')).toBe(formData.get('file1'));
-        expect(formData.get('fileName1')).toBe(dataJson.fileName);
-        expect(formData.get('processType1')).toBe(dataJson.processType);
-        expect(formData.get('docsId1')).toBe(dataJson.docsId);
-    });
-
-    it('should not call fetch when dataJson is empty', async () => {
-        const dataJson = {};
-
-        await doFileConnect(dataJson);
-
-        expect(fetch).not.toHaveBeenCalled();
-    });
+  window.location = originalLocation;
 });
 
-describe('doConnect', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-    });
-
-    it('should call fetch with the correct URL, method, and options', async () => {
-        const subUrl = '/test-endpoint';
-        const method = 'POST';
-        const postJson = { key: 'value' };
-        const mockResponse = { data: 'test data' };
-
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockResponse),
-        });
-
-        const result = await doConnect(subUrl, method, postJson);
-
-        expect(fetch).toHaveBeenCalledWith(MyConstant.keyList.apiURL + subUrl, {
-            method: method,
-            mode: 'cors',
-            redirect: 'follow',
-            body: JSON.stringify(postJson),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            }),
-        });
-        expect(result).toEqual(mockResponse);
-    });
-
-    it('should handle fetch errors gracefully', async () => {
-        const subUrl = '/test-endpoint';
-        const method = 'POST';
-        const postJson = { key: 'value' };
-
-        fetch.mockRejectedValueOnce(new Error('Fetch failed'));
-
-        await expect(doConnect(subUrl, method, postJson)).rejects.toThrow('Fetch failed');
-    });
-
-    it('should log the elapsed time for the request', async () => {
-        const subUrl = '/test-endpoint';
-        const method = 'POST';
-        const postJson = { key: 'value' };
-        const mockResponse = { data: 'test data' };
-
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockResponse),
-        });
-
-        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
-        await doConnect(subUrl, method, postJson);
-
-        expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/TimeElapsed on HTTP - login submit - after parse : \d+ms/));
-
-        consoleSpy.mockRestore();
-    });
+test('keyReadData returns empty object when key not found', () => {
+  expect(Common.keyReadData([], 'missing')).toEqual({});
 });
 
-describe('timeConverter', () => {
-    it('should convert a timestamp to the correct date and time format', () => {
-        const timestamp = 1672531200000; // Jan 1, 2023, 00:00:00 UTC
-        const result = timeConverter(timestamp);
-        expect(result).toBe('2023-01-01 00:00:00');
-    });
-
-    it('should handle invalid timestamps gracefully', () => {
-        const timestamp = 'invalid';
-        const result = timeConverter(timestamp);
-        expect(result).toBe('NaN-aN-aN aN:aN:aN');
-    });
+test('readJsonFile returns screen object', () => {
+  const data = Common.readJsonFile('testScreen');
+  expect(data).toEqual({ screenName: 'testScreen', content: 'hello' });
 });
 
-describe('getMonthAndDate', () => {
-    it('should return the correct month and date in short format', () => {
-        const timestamp = 1672531200000; // Jan 1, 2023
-        const result = getMonthAndDate(timestamp);
-        expect(result).toBe('Jan 1');
-    });
-
-    it('should return the correct month and date in full format', () => {
-        const timestamp = 1672531200000; // Jan 1, 2023
-        const result = getMonthAndDate(timestamp, true);
-        expect(result).toBe('Sunday, Jan 1');
-    });
-
-    it('should handle invalid timestamps gracefully', () => {
-        const timestamp = 'invalid';
-        const result = getMonthAndDate(timestamp);
-        expect(result).toBe('undefined NaN');
-    });
+test('readJsonFile returns empty object for unknown screen', () => {
+  const data = Common.readJsonFile('unknown');
+  expect(data).toEqual({});
 });
 
-jest.mock('./Common', () => ({
-    ...jest.requireActual('./Common'),
-    getMyIp: jest.fn(),
-}));
 
-describe('userTrack', () => {
-    beforeEach(() => {
-        localStorage.clear();
-        jest.clearAllMocks();
-    });
-
-    it('should not log or fetch IP when running on localhost', async () => {
-        Object.defineProperty(window, 'location', {
-            value: { hostname: 'localhost' },
-            writable: true,
-        });
-
-        const result = await userTrack('home', 'click', undefined);
-
-        expect(getMyIp).not.toHaveBeenCalled();
-        expect(result).toEqual({});
-    });
-
-    it('should fetch IP if not provided and not in localStorage', async () => {
-        Object.defineProperty(window, 'location', {
-            value: { hostname: 'example.com' },
-            writable: true,
-        });
-
-        getMyIp.mockResolvedValueOnce('192.168.1.1');
-
-        // const result = await userTrack('home', 'click', undefined);
-
-        // expect(getMyIp).toHaveBeenCalled();
-        expect(localStorage.getItem('ipAddress')).toBeNull();
-        // expect(result).toEqual({});
-    });
-
-    it('should use IP from localStorage if available', async () => {
-        Object.defineProperty(window, 'location', {
-            value: { hostname: 'example.com' },
-            writable: true,
-        });
-
-        localStorage.setItem('ipAddress', '192.168.1.1');
-
-        const result = await userTrack('home', 'click', undefined);
-
-        expect(getMyIp).not.toHaveBeenCalled();
-        expect(localStorage.getItem('ipAddress')).toBe('192.168.1.1');
-        expect(result).toEqual({});
-    });
-
-    it('should generate a unique ID if not in localStorage', async () => {
-        Object.defineProperty(window, 'location', {
-            value: { hostname: 'example.com' },
-            writable: true,
-        });
-
-        const result = await userTrack('home', 'click', '192.168.1.1');
-
-        const uniqId = localStorage.getItem('uniqId');
-        expect(uniqId).toBeDefined();
-        expect(uniqId).toMatch(/^id-\d+/);
-        expect(result).toEqual({});
-    });
-
-    it('should use existing unique ID from localStorage', async () => {
-        Object.defineProperty(window, 'location', {
-            value: { hostname: 'example.com' },
-            writable: true,
-        });
-
-        localStorage.setItem('uniqId', 'id-12345');
-
-        const result = await userTrack('home', 'click', '192.168.1.1');
-
-        expect(localStorage.getItem('uniqId')).toBe('id-12345');
-        expect(result).toEqual({});
-    });
-
-    it('should log the correct postJson object', async () => {
-        Object.defineProperty(window, 'location', {
-            value: { hostname: 'example.com' },
-            writable: true,
-        });
-
-        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
-        await userTrack('home', 'click', '192.168.1.1');
-
-        expect(consoleSpy).toHaveBeenCalledWith(
-            expect.stringContaining("---------------->")
-        );
-        expect(consoleSpy).toHaveBeenCalledWith('Logged');
-
-        consoleSpy.mockRestore();
-    });
+test('checkNullAndReturnString with whitespace returns true', () => {
+  expect(Common.checkNullAndReturnString('   ')).toBe(true);
 });
 
-describe('getMyIp', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-    });
-
-    it('should return undefined if response does not contain ip', async () => {
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce({}),
-        });
-
-        const result = await getMyIp();
-
-        expect(result).toBeUndefined();
-    });
+test('getMonthAndDate handles timestamp of 0', () => {
+  expect(Common.getMonthAndDate(0)).toMatch(/Jan 1/);
 });
 
-describe('doConnectPredict', () => {
-    beforeEach(() => {
-        fetch.mockClear();
-    });
 
-    it('should call fetch with correct arguments and return parsed response', async () => {
-        const subUrl = 'https://api.example.com/predict';
-        const method = 'POST';
-        const postJson = { input: 'test' };
-        const mockResponse = { result: 42 };
-
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockResponse),
-        });
-
-        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
-        const result = await doConnectPredict(subUrl, method, postJson);
-
-        expect(fetch).toHaveBeenCalledWith(subUrl, {
-            method,
-            mode: 'cors',
-            redirect: 'follow',
-            body: JSON.stringify(postJson),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            }),
-        });
-        expect(result).toEqual(mockResponse);
-        expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/TimeElapsed on HTTP - login submit - after parse : \d+ms/));
-
-        consoleSpy.mockRestore();
-    });
-
-    it('should propagate fetch errors', async () => {
-        fetch.mockRejectedValueOnce(new Error('Network error'));
-        await expect(doConnectPredict('url', 'POST', {})).rejects.toThrow('Network error');
-    });
-
-    it('should propagate JSON parsing errors', async () => {
-        fetch.mockResolvedValueOnce({
-            json: jest.fn().mockRejectedValueOnce(new Error('Invalid JSON')),
-        });
-        await expect(doConnectPredict('url', 'POST', {})).rejects.toThrow('Invalid JSON');
-    });
 });

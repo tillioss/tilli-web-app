@@ -34,9 +34,8 @@ class ChooseCheckboxQuestions extends React.Component {
     handleResize = () => this.setState({
         deviceHeight: window.innerHeight,
     });
+    
     pushData(data) {
-
-
         let selectedData = this.state.selectedData;
 
         if (selectedData.length > 0 && selectedData.includes(data)) {
@@ -48,8 +47,6 @@ class ChooseCheckboxQuestions extends React.Component {
             selectedData.push(data);
         }
         this.setState({ selectedData });
-
-
     }
 
     checkedData() {
@@ -147,7 +144,7 @@ class ChooseCheckboxQuestions extends React.Component {
                                 this.checkedData()
                                 this.props.changeStage('Previous', stage)
                             }}>
-                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""}/>
+                                <img style={{ width: 48, height: 48 }} src={backImage} alt={""} data-testid="back"/>
                             </Link>
                         </div>
                         <div className="col-10">
@@ -180,7 +177,7 @@ class ChooseCheckboxQuestions extends React.Component {
             <div className="bottom-style">
                 <div style={{ textAlign: "right" }}>
                     <Link to="#" onClick={() => this.props.changeStage('Next', stage)}>
-                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} />
+                        <img style={{ width: 44, height: 44 }} src={nextImage} alt={""} data-testid="next"/>
                     </Link>
                 </div>
                 <div className="progress-div">

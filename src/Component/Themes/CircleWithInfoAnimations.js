@@ -70,7 +70,7 @@ class CircleWithInfoAnimations extends React.Component {
           <div className="col-12" style={{ margin: 0, padding: 0 }}>
             <div className="row mt-4 ml-0">
               <div className="col-2">
-                <Link onClick={() => this.props.changeStage("Previous", stage)}>
+                <Link data-testid="back-link" onClick={() => this.props.changeStage("Previous", stage)}>
                   <img
                     style={{ width: 48, height: 48 }}
                     src={backImage}
@@ -166,6 +166,7 @@ class CircleWithInfoAnimations extends React.Component {
                               onClick={() => {}}
                             >
                               <span
+                              data-testid="circle-name-1"
                                 style={{
                                   backgroundColor: this.state.selectColor_1,
                                   fontWeight: "700",
@@ -214,6 +215,7 @@ class CircleWithInfoAnimations extends React.Component {
                             }}
                           >
                             <span
+                            data-testid="circle-name-2"
                               style={{
                                 backgroundColor: this.state.selectColor_2,
                                 color: "white",
@@ -231,6 +233,7 @@ class CircleWithInfoAnimations extends React.Component {
                     </div>
                     {this.state.ImageView === 1 && this.state.showIcon ? (
                       <Link
+                      data-testid="overlay-close"
                         onClick={() => this.setState({ showIcon: false })}
                         style={{ zIndex: 2 }}
                       >
@@ -289,6 +292,7 @@ class CircleWithInfoAnimations extends React.Component {
                     />
                     <div style={{ width: "100%", whiteSpace: "nowrap" }}>
                       <span
+                      data-testid="circle-name-3"
                         style={{
                           backgroundColor: this.state.selectColor_3,
                           color: "white",
@@ -324,6 +328,7 @@ class CircleWithInfoAnimations extends React.Component {
         <div className="forward-step">
           {this.state.currentIndex === 1 ? (
             <Link
+            data-testid="forward-link"
               onClick={() => {
                 if (this.state.ImageView) {
                   this.props.changeStage("Next", stage);

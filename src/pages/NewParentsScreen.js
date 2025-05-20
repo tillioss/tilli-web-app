@@ -23,7 +23,7 @@ class NewParentScreen extends Component {
                 <div className='newParentsBody'>
                     <div className='headers mt-2'>
                         <div className='d-flex justify-content-start backbtn ml-3' style={{ width: '10%' }}>
-                            <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent') }} alt=""/>
+                            <img data-testid="backBtn" src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parent') }} alt=""/>
                         </div>
                         <div className='d-flex justify-content-center mt-2 mx-4 headtext' style={{ width: '68%' }}>
                             <h3 className='headerStr'>Parent's Corner</h3>

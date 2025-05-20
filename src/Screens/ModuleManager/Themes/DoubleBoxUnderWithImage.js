@@ -83,7 +83,7 @@ class DoubleBoxUnderWithImage extends React.Component {
                         <div className="row" style={{ marginTop: 0, }}>
                             <div className="col-3" />
                             <div className="col-6 text-center" style={{ display: "flex", }}>
-                                <img style={{ width: 227, height: 233 }} src={MyConstant.keyList.apiURL +
+                                <img data-testid="image" style={{ width: 227, height: 233 }} src={MyConstant.keyList.apiURL +
                                     'vp?action=module&key=' +
                                     content.image.fileName +
                                     '&id=' +

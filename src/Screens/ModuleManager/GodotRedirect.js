@@ -11,11 +11,22 @@ export default class GodotRedirect extends React.Component {
 
     }
 
-    async componentDidMount() {
-        let getGameInfo = await localStorage.getItem("gameStatusInfo");
+    componentDidMount() {
+        let getGameInfoRaw = localStorage.getItem("gameStatusInfo");
+        let getGameInfo = null;
         let redirectPage = false
-        if (getGameInfo) {
-            getGameInfo = JSON.parse(getGameInfo);
+
+        try {
+            if (getGameInfoRaw) {
+                getGameInfo = JSON.parse(getGameInfoRaw);
+            }
+        } catch (error) {
+            console.error("Invalid JSON in localStorage for 'gameStatusInfo':", error);
+            this.setState({ redirectPage: false });
+            return;
+        }
+        
+        if (getGameInfo && Object.keys(getGameInfo).length > 0) {
             console.log("getGameInfo", getGameInfo)
             if (getGameInfo && Object.keys(getGameInfo).length > 0) {
                 redirectPage = true

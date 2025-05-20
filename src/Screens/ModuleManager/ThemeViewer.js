@@ -213,6 +213,7 @@ export default class ThemeViewer extends React.Component {
             case "rectangle":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -247,6 +248,7 @@ export default class ThemeViewer extends React.Component {
             case "rectangle":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -280,6 +282,7 @@ export default class ThemeViewer extends React.Component {
             case "ellipse":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -303,6 +306,7 @@ export default class ThemeViewer extends React.Component {
             case "circle":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -326,6 +330,7 @@ export default class ThemeViewer extends React.Component {
             case "text":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -346,6 +351,7 @@ export default class ThemeViewer extends React.Component {
             case "image":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -365,6 +371,7 @@ export default class ThemeViewer extends React.Component {
             case "video":
                 builder = <div
                     className={`layer`}
+                    data-testid={`layer-${index}`}
                     style={{
                         visibility: layer.visibility,
                         position: "absolute",
@@ -421,6 +428,7 @@ export default class ThemeViewer extends React.Component {
 
         return <div className="mobile-responsive tilli-web"
             ref={(e) => { this.mobile = e }}
+            data-testid="theme-container"
         >
             <div className="dynamic-form"
                 style={{ position: "relative", height: "100%" }}
