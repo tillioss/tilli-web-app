@@ -70,10 +70,10 @@ class SignUp extends React.Component {
     if (Object.keys(this.state.errors).length === 0) {
       let responseData = await doConnect("createUser", "POST", postJson);
       let json = responseData;
-      let response1 = json.response;
+      let response1 = json?.response;
       if (response1 === 'Success') {
         //that.props.navigation.navigate('SignIn');
-        window.location = '/' + MyConstant.keyList.projectUrl + '/'
+        window.location.assign('/' + MyConstant.keyList.projectUrl + '/');
       }
       
     }
@@ -185,7 +185,7 @@ class SignUp extends React.Component {
     let postJson = { emailId: this.state.email, sessionId: '1223' };
     let responseData = await doConnect("checkEmailIdAlreadyExist", "POST", postJson);
     var json = responseData;
-    var response1 = json.response;
+    var response1 = json?.response;
     console.log('response1', response1)
     if (response1) {
       let errors = this.state.errors;
@@ -211,7 +211,7 @@ class SignUp extends React.Component {
 
         <div className="row mx-0">
           <div className="col-sm-2"> </div>
-          <div className="col-sm-8"><h5 style={{ color: "black", fontWeight: 'bold' }}> {this.returnContent(1)}</h5> </div>
+          <div className="col-sm-8"><h5 data-testid="heading-text" style={{ color: "black", fontWeight: 'bold' }}> {this.returnContent(1)}</h5> </div>
           <div className="col-sm-2"> </div>
         </div>
 
@@ -370,7 +370,7 @@ class SignUp extends React.Component {
           <div className="row mx-0">
             <div className="col-sm-3"> </div>
             <div className="col-sm-6">
-              <span style={{ fontSize: 20, color: '#18191F' }}> {this.returnContent(10)}   </span> <span style={{ fontSize: 20, cursor: 'pointer', color: '#DD3B96' }} onClick={() => {
+              <span style={{ fontSize: 20, color: '#18191F' }}> {this.returnContent(10)}   </span> <span data-testid="login-here-link" style={{ fontSize: 20, cursor: 'pointer', color: '#DD3B96' }} onClick={() => {
                 this.props.history.push("/tilli-web")
               }}>  {this.returnContent(11)}.</span>
 
@@ -403,8 +403,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
-
-
-
-
-
