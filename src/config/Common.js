@@ -133,12 +133,10 @@ export async function userTrack(page, action, ipAddress) {
 }
 
 export async function getMyIp() {
-    return await fetch(MyConstant.keyList.apiURL)
-        .then((res) => res.json())
-        .then((json) => {
-            var ipAddress = json.ip
-            return ipAddress;
-        });
+    return await fetch(MyConstant.keyList.ipURL + "myIP").then((res) => res.json()).then((json) => {
+        var ipAddress = json.ip
+        return ipAddress;
+    });
 }
 
 export function keyReadData(eventList, keyName) {
