@@ -126,7 +126,7 @@ class TrackProgressScreen extends Component {
                     <div className='emotionChat'>
                        <div className='headers mt-2'>
                             <div className='d-flex justify-content-start backbtn ml-3' style={{ width: '10%' }}>
-                                <img src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen') }} alt=""/>
+                                <img data-testid="backBtn" src={Back_Button} style={{ width: '50px' }} onClick={() => { this.props.history?.push('/' + MyConstant.keyList.projectUrl + '/newparentsscreen') }} alt=""/>
                             </div>
                             <div className='d-flex justify-content-center mt-2 mx-4 headtext' style={{ width: '68%' }}>
                                 <h3 className='headerStr'>Track Progress</h3>
@@ -165,7 +165,7 @@ class TrackProgressScreen extends Component {
                         <div className='container_strategies'>
                             <div className="tabs">
                                 <div className={`tab ${tabTxt === "likes" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "likes" }) }}>LIKES</div>
-                                <div className={`tab ${tabTxt === "neutral" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "neutral" }) }}>NEUTRAL</div>
+                                <div data-testid="neutral-tab" className={`tab ${tabTxt === "neutral" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "neutral" }) }}>NEUTRAL</div>
                                 <div className={`tab ${tabTxt === "dislikes" ? "active" : ""}`} onClick={(e) => { this.setState({ tabTxt: "dislikes" }) }}>DISLIKES</div>
                             </div>
                             {tabTxt === "likes" &&
@@ -222,12 +222,12 @@ class TrackProgressScreen extends Component {
                                         </div>
                                     })}
                                     {
-                                        loopNeutralArr.map((e) => {
+                                        loopNeutralArr.map((e, index) => {
                                             return <div className='ABCDE_Strategies_games'>
                                                 <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' alt=""/>
                                                 <div className='gameTitle mx-3'>
                                                     <div className='gameName mt-1'>Not Applicable</div>
-                                                    <div className='gameLikes'>Neutral: 0</div>
+                                                    <div data-testid={`neutral-count-${index + 1}`} className='gameLikes'>Neutral: 0</div>
                                                 </div>
                                             </div>
                                         })
@@ -250,12 +250,12 @@ class TrackProgressScreen extends Component {
                                         </div>
                                     })}
                                     {
-                                        loopDislikedArr.map((e) => {
+                                        loopDislikedArr.map((e, index) => {
                                             return <div className='ABCDE_Strategies_games'>
                                                 <img src={emptyLogo} style={{ width: '60px' }} className='mx-2' alt=""/>
                                                 <div className='gameTitle mx-3'>
                                                     <div className='gameName mt-1'>Not Applicable</div>
-                                                    <div className='gameLikes'>Disliked: 0</div>
+                                                    <div data-testid={`disliked-count-${index + 1}`} className='gameLikes'>Disliked: 0</div>
                                                 </div>
                                             </div>
                                         })
