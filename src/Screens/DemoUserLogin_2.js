@@ -44,7 +44,8 @@ class DemoUserLogin_2 extends React.Component {
   });
 
   async UserLogin(ipAddress, deviceInfo) {
-    let { match, location } = this.props
+    let match = this.props.match || { params: {} };
+    let location = this.props.location || window.location;
     // console.log("this", this.props)
     //localStorage.removeItem("demoUserId");
     console.log(localStorage.getItem("demoUserId"))
@@ -60,7 +61,6 @@ class DemoUserLogin_2 extends React.Component {
     }
 
     if (location.search) {
-
       let data_1 = location.search.split("?")
       let data_2 = data_1[1].split("&")
       data_2.map((ival, i) => {
@@ -84,9 +84,9 @@ class DemoUserLogin_2 extends React.Component {
         }
         return true
       })
-
     }
-    else if (match.params.age && match.params.gender) {
+
+    else if (match.params?.age && match.params?.gender) {
       age = match.params.age
       gender = match.params.gender
       demoUserId = match.params.demoUserId
@@ -151,7 +151,7 @@ class DemoUserLogin_2 extends React.Component {
             // let test = "/8ea8622f-2f22-4e11-8946-65b7a580577d/0/0"
             //  let test = "/7e90729e-d904-4c54-a6a6-913ff472d5bf/0/0"
 
-            this.props.history.push('/' + MyConstant.keyList.projectUrl + '/module/11a13ad4-7877-4c5c-81d1-88d29435eb0a/5/5')
+            this.props.history?.push('/' + MyConstant.keyList.projectUrl + '/module/11a13ad4-7877-4c5c-81d1-88d29435eb0a/5/5')
 
             //  this.props.history.push('/' + MyConstant.keyList.projectUrl + '/module'+test)
           }
@@ -231,6 +231,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchGetLevelNameLanguageMapping: (postJson) => dispatch(fetchGetLevelNameLanguageMapping(postJson))
   };
 };
+
+export {DemoUserLogin_2};
 export default connect(mapStateToProps, mapDispatchToProps)(DemoUserLogin_2);
 
 

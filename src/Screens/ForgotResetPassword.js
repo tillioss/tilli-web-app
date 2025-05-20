@@ -100,7 +100,7 @@ class ForgotResetPassword extends React.Component {
                             <div className="row mx-0">
                                 <div className="col-sm-3"> </div>
                                 <div className="col-sm-6">
-                                    <div class="alert alert-danger" role="alert">
+                                    <div data-testid="error-alert" class="alert alert-danger" role="alert">
                                         {this.state.error}
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@ class ForgotResetPassword extends React.Component {
                         <div className="col-sm-6">
                             <div className="fontuser">
 
-                                <input type="password" value={this.state.newpass}
+                                <input data-testid="password" type="password" value={this.state.newpass}
                                     placeholder={this.returnContent(2)}
                                     onChange={(e) => {
                                         this.setState({ newpass: e.target.value })
@@ -157,7 +157,7 @@ class ForgotResetPassword extends React.Component {
                         <div className="col-sm-6">
                             <div className="fontuser">
 
-                                <input type="password" value={this.state.confirmpass}
+                                <input data-testid="confirm-password" type="password" value={this.state.confirmpass}
                                     placeholder={this.returnContent(3)}
                                     onChange={(e) => {
                                         this.setState({ confirmpass: e.target.value })
@@ -172,7 +172,7 @@ class ForgotResetPassword extends React.Component {
                     <div className="row mx-0">
                         <div className="col-sm-3"> </div>
                         <div className="col-sm-6">
-                            <button style={{ borderColor: '#18191F', borderRadius: 10 }} type="submit" onClick={this.submit}>
+                            <button data-testid="submit-btn" style={{ borderColor: '#18191F', borderRadius: 10 }} type="submit" onClick={this.submit}>
                                 {this.returnContent(4)}
                             </button>
                         </div>
