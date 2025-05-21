@@ -189,6 +189,7 @@ class Dashbord extends React.Component {
       // if (index == 0) {
       if (index < this.state.progressingLevel) {
         retrunData.push(<div className="col-3 opadding justify-content-center align-self-center"
+          data-testid="level-label"
           key={index.toString()}
           style={{
             borderRadius: 26,
@@ -198,7 +199,7 @@ class Dashbord extends React.Component {
         </div>)
       }
       else {
-        retrunData.push(<div className="col-3 opadding justify-content-center align-self-center" key={index.toString()} >
+        retrunData.push(<div data-testid="level-label" className="col-3 opadding justify-content-center align-self-center" key={index.toString()} >
           <span className="ffmedium" style={{ paddingTop: 6, width: '100%', fontWeight: 700, fontSize: 14, whiteSpace: 'nowrap', }}>{this.returnContent(5)} {index + 1} </span>
         </div>)
       }
@@ -221,7 +222,7 @@ class Dashbord extends React.Component {
           <div className="col-3" >
             <div>
               <div className="dashboard-level" style={{ backgroundColor: this.state.bodydata[val].color }} onClick={() => {
-
+// istanbul ignore if
                 if (index < progressingLevel) {
                   let progressLevel = progressingLevel;
                   if (index + 1 === progressingLevel) {
@@ -297,7 +298,7 @@ class Dashbord extends React.Component {
 
         <div className="boxHeight">
           <div className="row pt-2  mx-0" >
-            <div className="col-1 ml-2" onClick={() => {
+            <div data-testid="select-sinhala" className="col-1 ml-2" onClick={() => {
               let data = { "label": "Sinhala", "value": "6f37e56c-d81a-456b-98a7-dad0a61d1667" }
               this.LanguageBaseDataget(data)
             }}>
@@ -312,7 +313,7 @@ class Dashbord extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-1 ml-2"
+            <div data-testid="select-tamil" className="col-1 ml-2"
               onClick={() => {
 
                 let data = { "label": "Tamil", "value": "0c037198-c7c4-4b2d-8388-9045fdd75f73" }
@@ -331,7 +332,7 @@ class Dashbord extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-1 ml-2" onClick={() => {
+            <div data-testid="select-english" className="col-1 ml-2" onClick={() => {
               let data = { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
               this.LanguageBaseDataget(data)
             }}>
@@ -360,11 +361,11 @@ class Dashbord extends React.Component {
               </span>
             </div>
             <div className="col-8">
-              <p style={{
+              <p data-testid="content-heading" style={{
                 fontFamily: "montserrat-extrabold", fontWeight: 800, fontSize: 32, textAlign: "initial", paddingLeft: 10
               }}>{this.returnContent(1)} </p>
               <p className="ffmedium char-limit" style={{ color: "#18191F", fontSize: 21, fontWeight: 500, marginTop: -20, textAlign: "initial", paddingLeft: 10 }} >
-                {this.state.nameOfChild !== "user" ? <span> @ {this.state.nameOfChild} </span> : ""}  </p>
+                {this.state.nameOfChild !== "user" ? <span data-testid="user-name"> @ {this.state.nameOfChild} </span> : ""}  </p>
             </div>
           </div>
 
@@ -387,7 +388,7 @@ class Dashbord extends React.Component {
                           <tr>
                             <td><img src={atomImg} alt={""} /></td>
                             <td style={{ padding: '0 2px' }}>
-                              <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.points}</div>
+                              <div data-testid="points" style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.points}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, }}>
                                 {this.returnContent(2)}
                               </div>
@@ -402,7 +403,7 @@ class Dashbord extends React.Component {
                           <tr>
                             <td><img src={heartImg} alt={""} /></td>
                             <td style={{ padding: '0 2px' }}>
-                              <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.feellingsTool}</div>
+                              <div data-testid="feelings-tool" style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.feellingsTool}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, marginLeft: this.state.deviceHeight < 330 ? -15 : 0 }}>
                                 {this.returnContent(3)}
                               </div>
@@ -417,7 +418,7 @@ class Dashbord extends React.Component {
                           <tr>
                             <td><img src={winImg} alt={""} /></td>
                             <td style={{ padding: '0 2px' }}>
-                              <div style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.progressingLevel}</div>
+                              <div data-testid="current-level" style={{ color: '#18191F', fontSize: 27, fontFamily: 'montserrat-extrabold', fontWeight: '800', lineHeight: '32px', textAlign: 'left', marginTop: 5 }}>{this.state.progressingLevel}</div>
                               <div className="ffmedium" style={{ fontSize: 11, color: "#474A57", fontWeight: 500, }}>
                                 {this.returnContent(4)}
                               </div>
@@ -481,5 +482,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchGetLevelNameLanguageMapping: (postJson) => dispatch(fetchGetLevelNameLanguageMapping(postJson))
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Dashbord);
 

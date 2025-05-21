@@ -18,7 +18,6 @@ import  downArrow  from "../../src/images/downArrow.png";
 import  upArrow  from "../../src/images/upArrow.png";
 import { doConnect } from '../config/Common';
 
-
 const options = [
   { value: 'DoubleBoxOverlapWithImage', label: 'DoubleBoxOverlapWithImage' },
   { value: 'QuestionsList', label: 'QuestionsList' }, { value: 'ImageWithThinking', label: 'ImageWithThinking' },
@@ -296,7 +295,7 @@ async getImages() {
       let level_Id = this.props.match.params.levelid
       let select_Level={}
       select_Level.value=level_Id;
-      select_Level.label=levelsMap[level_Id].name;
+      select_Level.label=levelsMap[level_Id]?.name || "";
       that.setState({levelsJson: levelsMap,levelSelect:select_Level })
        this.getLevelMappingData(level_Id)
 
@@ -452,7 +451,7 @@ ival.content.questionList.map((value,index_1)=>{
     var json = responseData;
     var response = json.response;
     if (response == 'Success') {
-      toast.success('Added data !', {
+      toast.success('', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -460,6 +459,7 @@ ival.content.questionList.map((value,index_1)=>{
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
+        render: () => <div data-testid="submit-success-toast">Added data !</div>
       });
 this.setState({enableLoader:false})
 
@@ -479,7 +479,7 @@ this.setState({enableLoader:false})
     
 
     var found_index = LevelStage.findIndex((a) =>
-      a.theme === e.label
+      a.theme === e?.label
     )
 console.log(e, index)
 
@@ -497,7 +497,7 @@ if(found_index !='-1')
 }
 else
 {
-  Contentdata[index].theme=e.label
+  Contentdata[index].theme=e?.label || ""
 
 }
 
@@ -859,10 +859,10 @@ if(type=="Up")
         <div className="col-sm-1">Level</div>
         <div className="col-sm-5">
           <DropDown
-            selectedOption={levelSelect}
+            selectedOption={{...levelSelect, testid: "level-dropdown"}}
             onChange={(e) => {
               this.setState({ levelSelect: e })
-              this.getLevelMappingData(e.value)
+              this.getLevelMappingData(e?.value || "")
             }}
             options={levelOption}
           />
@@ -928,8 +928,7 @@ if(type=="Up")
                   <div className="col-sm-1 text-ali-left">Theme </div>
                   <div className="col-sm-5">
                     <DropDown
-                      selectedOption=
-                      {Contentdata[index].theme == Contentdata[index].theme ?  {label:Contentdata[index].theme,value:Contentdata[index].theme}  :  !SelectedValue[index] ? {label:"Select",value:"Select"}  :  SelectedValue[index]}
+                      selectedOption={{...(Contentdata[index].theme == Contentdata[index].theme ?  {label:Contentdata[index].theme,value:Contentdata[index].theme}  :  !SelectedValue[index] ? {label:"Select",value:"Select"}  :  SelectedValue[index]), testid: `theme-dropdown-${index}`}}
                       onChange={(e) => this.handleChange(e, index)}
                       options={this.state.options}
                     />
@@ -956,7 +955,7 @@ alt={'No Image'} class="img-responsive" onClick={()=>{
 
                     <div className="col-sm-2"></div>
                     <div className="col-sm-5">
-                      <h4>Form Generator</h4>
+                      <h4 data-testid="form-generator">Form Generator</h4>
                     </div>
 
                     <div className="col-sm-6"></div>
