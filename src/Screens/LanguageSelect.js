@@ -36,19 +36,29 @@ class LanguageSelect extends React.Component {
     async getLanguageList() {
         const { optionsData } = this.state;
         let postJson = { sessionId: '1223' };
-        let responseData = await doConnect("getLanguages", "POST", postJson);
-        let datavalue = JSON.parse(responseData.response)
-        Object.keys(datavalue).map(ival => {
-            optionsData.push({ label: datavalue[ival], value: ival })
-            return true
-        })
-        // selectedOption.push({label:"",value:""})
-        this.setState({ "languagesData": JSON.parse(responseData.response), optionsData }, () => {
-            this.checklanguageChoose()
-        })
+
+        try {
+            let responseData = await doConnect("getLanguages", "POST", postJson);
+
+            if (!responseData || !responseData.response) {
+                console.warn("Invalid response from getLanguages");
+                return;
+            }
+
+            let datavalue = JSON.parse(responseData.response);
+
+            Object.keys(datavalue).forEach(ival => {
+                optionsData.push({ label: datavalue[ival], value: ival });
+            });
+
+            this.setState({ languagesData: datavalue, optionsData }, () => {
+                this.checklanguageChoose();
+            });
+        } catch (err) {
+            console.error("Failed to parse language data:", err);
+            this.setState({ languagesData: [], optionsData: [] }); // fallback
+        }
     }
-
-
 
     async getLangugeBaseData(e) {
         console.log("this get call")
