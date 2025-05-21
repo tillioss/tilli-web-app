@@ -87,6 +87,7 @@ class AudioQuizScreen extends React.Component {
             <div className="row" style={{ marginTop: 40 }}>
               <div className="col-5"> </div>
               <Link
+              to="#"
                 onClick={async () => {
                   if (
                     data.content.feelingsDataList[index_value].results.length
@@ -162,6 +163,7 @@ class AudioQuizScreen extends React.Component {
             </div>
 
             <div
+            data-testid="question-box"
               className="col-11"
               style={{
                 height: 251,
@@ -274,6 +276,8 @@ class AudioQuizScreen extends React.Component {
                 <React.Fragment>
                   <div>
                     <Link
+                    to="#"
+                    data-testid="record-button"
                       className="col-2"
                       onClick={() => {
                         SpeechRecognition.startListening({ continuous: true });
@@ -306,6 +310,7 @@ class AudioQuizScreen extends React.Component {
               ) : (
                 <React.Fragment>
                   <div
+                  data-testid="stop-record-button"
                     style={{ marginTop: "14%" }}
                     onClick={async () => {
                       SpeechRecognition.stopListening({ continuous: false });
@@ -374,6 +379,7 @@ class AudioQuizScreen extends React.Component {
             <div className="col-3">
               {bg_color === "#FF89BB" ? (
                 <div
+                data-testid="repeat-button"
                   className="col-2"
                   onClick={(e) => {
                     data.content.feelingsDataList[index_value].results = "";
@@ -458,12 +464,15 @@ class AudioQuizScreen extends React.Component {
             >
               {this.props.themeType === "StoryCard" ? (
                 <Link
+                to="#"
+                data-testid="next-link"
                   onClick={() => {
                     SpeechRecognition.stopListening({ continuous: false });
                     this.props.changeindex("Next", stage);
                   }}
                 >
                   <img
+                  data-testid="next-image"
                     style={{ width: 44, height: 44 }}
                     src={nextImage}
                     alt={""}
@@ -471,12 +480,14 @@ class AudioQuizScreen extends React.Component {
                 </Link>
               ) : (
                 <Link
+                to="#"
                   onClick={() => {
                     SpeechRecognition.stopListening({ continuous: false });
                     this.props.changeStage("Next", stage);
                   }}
                 >
                   <img
+                  data-testid="next-image"
                     style={{ width: 44, height: 44 }}
                     src={nextImage}
                     alt={""}
