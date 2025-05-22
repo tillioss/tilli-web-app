@@ -167,11 +167,11 @@ class Theme extends React.Component {
                 cell: (row, index, column, id) =>
                 {
                     let image = row.image;
-                    return <div style={{padding: 10}}><img src={MyConstant.keyList.apiURL + "vp?action=module&key=" + image.fileName + "&id=" + image.fileType} width="75" height="75" onClick={async()=>{
+                    return <div data-testid={`table-image-${row.id}`} style={{padding: 10}} onClick={async()=>{
                         
                     await this.setState({imageView:{json:row.image},displayImage:"block"})
                        
-                    }}/></div>
+                    }}><img src={MyConstant.keyList.apiURL + "vp?action=module&key=" + image.fileName + "&id=" + image.fileType} width="75" height="75"/></div>
                 },
 
             },
@@ -182,7 +182,7 @@ class Theme extends React.Component {
                 cell: (row, index, column, id) =>
                     <div id={row.id}                       >
                         <div style={{fontWeight: 700}}></div>
-                        <button  id={row.id} class="btn btn-info"  onClick={(e) => {
+                        <button data-testid={`table-edit-${row.id}`} id={row.id} class="btn btn-info"  onClick={(e) => {
                              console.log('e', e.target.id)
                              var found = Object.keys(this.state.themesList).findIndex((a) =>
                              this.state.themesList[e.target.id] === e.target.id
@@ -206,7 +206,7 @@ class Theme extends React.Component {
                 cell: (row, index, column, id) =>
                     <div id={row.id} >
                         <div style={{fontWeight: 700}}></div>
-                        <button  id={row.id} class="btn btn-danger"  onClick={(e) => {
+                        <button data-testid={`table-delete-${row.id}`}  id={row.id} class="btn btn-danger"  onClick={(e) => {
                             this.deleteThemes(e.target.id)
                          }}>Delete</button>
                         </div>,
@@ -283,7 +283,7 @@ class Theme extends React.Component {
                                        value={this.state.themeName} onChange={(e) => {
                                     this.setState({themeName: e.target.value})
                                 }}/>
-                                <span style={{color: 'red', fontSize: 12,float:'inherit',marginTop:5}}> {this.state.themeNameValidate} </span>
+                                <span data-testid="theme-validation" style={{color: 'red', fontSize: 12,float:'inherit',marginTop:5}}> {this.state.themeNameValidate} </span>
                             </div>
                         </div>
                         <br/>
@@ -297,7 +297,7 @@ class Theme extends React.Component {
                                     }}
                                     options={options}
                                 />
-                                   <span style={{color: 'red', fontSize: 12,float:'inherit',marginTop:5}}> {this.state.levelImageValidate} </span>
+                                   <span data-testid="image-validation" style={{color: 'red', fontSize: 12,float:'inherit',marginTop:5}}> {this.state.levelImageValidate} </span>
                             </div>
                         </div>
                         <br/>
@@ -330,7 +330,7 @@ class Theme extends React.Component {
                                 this.UpdateFunction()
                             }}>{submitButtton}
                             </button>
-    <button type="button" className={'btn btn-info '} onClick={() => {
+    <button data-testid="add-button" type="button" className={'btn btn-info '} onClick={() => {
         this.setState({selectedOption:{},typeSelect: '', idvalue:"", themeName:'',submitButtton:'Submit'})
     }}>Add new
     </button>
@@ -367,13 +367,13 @@ class Theme extends React.Component {
 
 
 
-<div id="myModal" class="modal_image" style={{display:displayImage }} >
+<div data-testid="modal" id="myModal" class="modal_image" style={{display:displayImage }} >
   <span class="close" onClick={()=>{
       this.setState({displayImage:"none"})
   }}  >&times;</span>
   {this.state.imageView  ?
 
-  <img src={MyConstant.keyList.apiURL + "vp?action=module&key=" + this.state.imageView.json.fileName + "&id=" + this.state.imageView.json.fileType} class="modal-content_image" id="img01"/>
+  <img data-testid="modal-image" src={MyConstant.keyList.apiURL + "vp?action=module&key=" + this.state.imageView.json.fileName + "&id=" + this.state.imageView.json.fileType} class="modal-content_image" id="img01"/>
 
   : null}
 

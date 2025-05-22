@@ -12,7 +12,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
   }
   render() {
     let { stage, data } = this.props;
-    let content = data.content;
+    let content = data?.content || {};
     console.log(window.innerWidth);
     return (
       <React.Fragment>
@@ -67,7 +67,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
                     alignSelf: "center",
                   }}
                 >
-                  {data.title}
+                  {data?.title}
                 </p>
               </div>
             </div>
@@ -121,6 +121,7 @@ class DoubleBoxOverlapWithImage extends React.Component {
             </div>
           </div>
           <div
+          data-testid="theme-image"
             style={{
               position: "absolute",
               bottom: "17%",
@@ -133,9 +134,9 @@ class DoubleBoxOverlapWithImage extends React.Component {
               src={
                 MyConstant.keyList.apiURL +
                 "vp?action=module&key=" +
-                content.image.fileName +
+                (content.image?.fileName || "") +
                 "&id=" +
-                content.image.fileType
+                (content.image?.fileType || "")
               }
               alt={""}
             />

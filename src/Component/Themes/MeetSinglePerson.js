@@ -24,7 +24,6 @@ class MeetSinglePerson extends React.Component {
     }
 
     return_content(pageIndex, index) {
-
         const { commonGroupLanguageMappingData, commonGroupLanguageBaseData } = this.props
 
         if (commonGroupLanguageMappingData && commonGroupLanguageMappingData[pageIndex] && commonGroupLanguageMappingData[pageIndex].fieldData[index]) {
@@ -34,7 +33,6 @@ class MeetSinglePerson extends React.Component {
 
         else if (commonGroupLanguageBaseData && commonGroupLanguageBaseData[pageIndex] && commonGroupLanguageBaseData[pageIndex].fieldData[index]) {
             return commonGroupLanguageBaseData[pageIndex].fieldData[index].value
-
         }
 
         else
@@ -58,7 +56,7 @@ class MeetSinglePerson extends React.Component {
                     <div className="row mt-4">
 
                         <div className="col-2">
-                            <Link onClick={() => {
+                            <Link to="#" data-testid="back" onClick={() => {
                                 if (themeType === "StoryCard") {
 
                                     this.props.changeStage('Previous', this.props.parentindex)
@@ -135,17 +133,13 @@ class MeetSinglePerson extends React.Component {
                                 {content.bottomText}
 
 
-                                <span style={{ marginLeft: 20 }} onClick={() => {
-
-
+                                <span data-testid="next" style={{ marginLeft: 20 }} onClick={() => {
                                     if (themeType === "StoryCard") {
-
                                         this.props.changeindex('Next', stage)
                                     }
                                     else {
                                         this.props.changeStage('Next', stage)
                                     }
-
                                 }}>  <img style={{ width: 31, height: 31 }} src={nextImage} alt={""}/> </span>
                             </p>
                         </div>
