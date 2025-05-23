@@ -239,7 +239,7 @@ class Level extends React.Component {
                 cell: (row, index, column, id) =>
                     <div id={row.id}>
                         <div style={{fontWeight: 700}}></div>
-                        <button  id={row.id} class="btn btn-info" onClick={(e) => {
+                        <button data-testid={`edit-${row.id}`}  id={row.id} class="btn btn-info" onClick={(e) => {
                             console.log(this.state.gamingArray)
 
                              let object={};
@@ -364,7 +364,7 @@ class Level extends React.Component {
                             <div className="col-sm-3 text-ali-left"> Transparent image</div>
                             <div className="col-sm-9">
                                 <DropDown
-                                    selectedOption={this.state.selectedOption.label ? this.state.selectedOption  :  {label:'Select',value:'Select' } }
+                                    selectedOption={this.state.selectedOption?.label ? this.state.selectedOption  :  {label:'Select',value:'Select' } }
                                     onChange={(e) => {
                                         this.setState({ selectedOption: e })
                                     }}
