@@ -3,8 +3,10 @@ import { withRouter } from "react-router-dom";
 import MyConstant from "../../config/MyConstant";
 
 let script;
+export let testSetEngine = null;
 function GamePlay(props) {
-    const [engine, setEngine] = useState(null)
+    const [engine, setEngine] = useState(null);
+    testSetEngine = setEngine;
     useEffect(() => {
 
         async function setScript() {
@@ -16,7 +18,9 @@ function GamePlay(props) {
         }
         setScript();
         return () => {
-            document.body.removeChild(script)
+            if (script && script.parentNode === document.body) {
+                document.body.removeChild(script);
+            }
         }
     }, [])
 

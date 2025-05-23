@@ -105,7 +105,7 @@ class WinningPage2 extends React.Component {
                         var filterJson = kval.content.filter((mval) => { return (mval.theme === "DropToSelection") ? true : false
                     })
                         if (filterJson) {
-                            imageChange = MyConstant.keyList.apiURL + 'vp?action=module&key=' + filterJson[0].content.image.fileName + '&id=' + filterJson[0].content.image.fileType
+                            imageChange = MyConstant.keyList.apiURL + 'vp?action=module&key=' + filterJson[0]?.content.image.fileName || "" + '&id=' + filterJson[0].content.image.fileType
                         }
 
                     }
@@ -114,7 +114,7 @@ class WinningPage2 extends React.Component {
                     DataPushArray.push(<div className="col-3 col-sm-3 mb-3" key={k.toString()}
                         style={{ marginLeft: "8%", marginTop: "5%" }}>
                         <div className="" style={{ width: 85, height: 85, }}>
-                            <div style={{
+                            <div data-testid={`stage-point-${k}`} style={{
                                 backgroundColor: kval.storyPoints || kval.storyPoints === 0 ? "#D6FCF7" : "#9FA4B4", border: "2px solid black", borderRadius: 24, width: "80px", height: "80px",
                                 paddingTop: kval.storyPoints ? 10 : 15
                             }} onClick={() => {
@@ -191,18 +191,18 @@ class WinningPage2 extends React.Component {
                 } : {}} >
                 <div className="col-12 col-sm-12" style={{ width: "80%", marginLeft: "3%" }}>
                     {totalPoint > 0 && currentJson && currentJson.storyPoints > 0 ? <span>
-                        <img className="rocket-image" src={Rocket_Launch} style={{
+                        <img data-testid="rocket-image" className="rocket-image" src={Rocket_Launch} style={{
                             width: 80, height: 60,
                         }} alt={""} />
                     </span> : null}
 
-                    <span style={{
+                    <span data-testid="points-earned" style={{
                         fontFamily: "montserrat-medium", fontSize: 12, fontWeight: 800
                         , color: "#18191F"
                     }}> {totalPoint}  {this.return_content(11)}</span>
 
                     <div className="progress mb-2">
-                        <div className="progress-bar" role="progressbar" aria-valuenow={PercentageTotal}
+                        <div data-testid="progress-bar" className="progress-bar" role="progressbar" aria-valuenow={PercentageTotal}
                             aria-valuemin="0" aria-valuemax="100" style={{
                                 width: PercentageTotal + "%",
                                 backgroundColor: '#61E4C5', borderRadius: "16px",

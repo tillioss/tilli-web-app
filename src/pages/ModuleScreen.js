@@ -34,14 +34,23 @@ export default class ModuleScreen extends React.Component {
     }
     async getLevelMappingData(levelId) {
         let postJson = { levelId: levelId, sessionId: '1223' };
-        let responseData = await doConnect("getLevelMappingData", "POST", postJson);
-        var json = responseData;
-        var response = JSON.parse(json.response);
-        this.setState({
-            moduleJson: {
-                stages: response
-            }
-        })
+        try {
+            let responseData = await doConnect("getLevelMappingData", "POST", postJson);
+            var json = responseData;
+            var response = JSON.parse(json?.response);
+            this.setState({
+                moduleJson: {
+                    stages: response
+                }
+            });
+        } catch (error) {
+            console.error("Error parsing level mapping data:", error);
+            this.setState({
+                moduleJson: {
+                    stages: []
+                }
+            });
+        }
     }
     changeStage = (action, currentStage) => {
 
@@ -95,7 +104,7 @@ export default class ModuleScreen extends React.Component {
 
         let responseData = await doConnect("getModuleLanguageMapping", "POST", postJson);
         var json = responseData;
-        var response = json.response;
+        var response = json?.response;
 
         if (response) {
             let { moduleJson } = this.state;
@@ -257,12 +266,12 @@ export default class ModuleScreen extends React.Component {
 
                                 <div style={{ position: 'absolute', bottom: window.innerHeight / 15, right: '5%', zIndex: 3 }} >
                                     <Link onClick={() => this.changeStage('Next', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""} />
+                                        <img  data-testid="next-stage" style={{ width: window.innerHeight / 15 }} src={nextImage} alt={""} />
                                     </Link>
                                 </div>
                                 <div className="col-2">
-                                    <Link onClick={() => this.changeStage('Previous', this.state.stage)}>
-                                        <img style={{ width: window.innerHeight / 10 }} src={backImage} alt={""} />
+                                    <Link  onClick={() => this.changeStage('Previous', this.state.stage)}>
+                                        <img data-testid="prev-stage" style={{ width: window.innerHeight / 10 }} src={backImage} alt={""} />
                                     </Link>
                                 </div>
                             </React.Fragment>
