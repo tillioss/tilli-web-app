@@ -105,7 +105,7 @@ class WinningPage2 extends React.Component {
                         var filterJson = kval.content.filter((mval) => { return (mval.theme === "DropToSelection") ? true : false
                     })
                         if (filterJson) {
-                            imageChange = MyConstant.keyList.apiURL + 'vp?action=module&key=' + (filterJson[0]?.content.image.fileName || "") + '&id=' + filterJson[0].content.image.fileType
+                            imageChange = MyConstant.keyList.apiURL + 'vp?action=module&key=' + (filterJson[0]?.content.image.fileName || "") + '&id=' + (filterJson[0]?.content.image.fileType || "")
                         }
 
                     }
