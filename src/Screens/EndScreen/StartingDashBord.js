@@ -12,7 +12,7 @@ import outlineRoundIconOnly from '../../images/outlineRoundIconOnly.png';
 import { fetchGetLanguageMapping, fetchGetLevelNameLanguageMapping } from '../../redux/actions/languageActions';
 
 
-class StartingDashBord extends React.Component {
+export class StartingDashBord extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -70,7 +70,7 @@ class StartingDashBord extends React.Component {
             this.props.lanuguageJsonUpdate()
 
             let responseData = await doConnect("getLevelsNameLanguageMapping", "POST", postJson_4);
-            if (responseData.response != null) {
+            if (responseData && responseData.response != null) {
                 this.setState({ levelLanguageMappingData: JSON.parse(responseData.response) })
             }
             else {
@@ -228,7 +228,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchGetLanguageMappingData: (postJson) => dispatch(fetchGetLanguageMapping(postJson)),
-        fetchGetLevelNameLanguageMapping: (postJson) => dispatch(fetchGetLevelNameLanguageMapping(postJson))
+        fetchGetLevelNameLanguageMapping: (postJson) => dispatch(fetchGetLevelNameLanguageMapping(postJson)),
+        lanuguageJsonUpdate: () => dispatch({ type: 'LANGUAGE_JSON_UPDATE' })
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(StartingDashBord);
