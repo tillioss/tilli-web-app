@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent, act, waitFor } from "@testing-library/react";
 import PersonWithTextAnimation from "./PersonWithTextAnimation";
 
 jest.mock("../../../images/outlineBackIcon.png", () => "backImage.png");
@@ -84,4 +84,37 @@ describe("PersonWithTextAnimation Component", () => {
     fireEvent.click(nextBtn);
     expect(mockChangeStage).toHaveBeenCalledWith("Next", 1);
   });
+
+  it("calls changeStage with 'Previous' when back button is clicked", () => {
+  render(<PersonWithTextAnimation {...props} />);
+  const backBtn = screen.getByTestId("back");
+  fireEvent.click(backBtn);
+  expect(mockChangeStage).toHaveBeenCalledWith("Previous", 1);
+});
+
+it("renders image correctly", () => {
+  render(<PersonWithTextAnimation {...props} />);
+  const image = screen.getByTestId("image");
+  expect(image).toBeInTheDocument();
+  expect(image.src).toContain("http://localhost/vp?action=module&key=test-img&id=png");
+});
+
+it("renders the dynamic text correctly", () => {
+  render(<PersonWithTextAnimation {...props} />);
+  const text = screen.getByText("This is a test paragraph.");
+  expect(text).toBeInTheDocument();
+});
+
+it("should show 'Next' button after 4 seconds", async () => {
+  render(<PersonWithTextAnimation {...props} />);
+  act(() => {
+    jest.advanceTimersByTime(4000);
+  });
+  await waitFor(() => {
+    const nextButton = screen.getByTestId("next");
+    expect(nextButton).toBeInTheDocument();
+  });
+});
+
+
 });

@@ -108,7 +108,7 @@ class ParentPasswordSetup extends React.Component {
                     <div className='row-number'>
                         <div className='number'></div>
                         <div className='number maxwidth' onClick={() => this.setPassword(0)}>0</div>
-                        <div className='number' onClick={() => this.setPassword("delete")}>
+                        <div data-testid="delete-btn" className='number' onClick={() => this.setPassword("delete")}>
                             <div className='delete'>
                                 <i className='fa fa-times'></i>
                             </div>

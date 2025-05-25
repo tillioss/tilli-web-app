@@ -49,7 +49,7 @@ class EmpathyScreen extends React.Component {
                         this.props.history.push('/' + MyConstant.keyList.projectUrl + '/Parenthome')
                     }
                 }}> <img src={LeftIcon} style={{ height: 50, width: 50 }} alt={""}/> </div>
-                <div className="col-8"> <p style={{ fontSize: 27, fontFamily: 'montserrat-bold', }}>
+                <div  data-testid="page-title" className="col-8"> <p style={{ fontSize: 27, fontFamily: 'montserrat-bold', }}>
                     {this.return_content(5, 1)}  </p> </div>
                 <div className="col-2"> </div>
             </div>
