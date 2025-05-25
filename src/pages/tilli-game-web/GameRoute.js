@@ -18,7 +18,7 @@ function GameRoute(props) {
     useEffect(() => {
         let loggedIn = localStorage.getItem("TilliGameLoggedIn");
         if (!loggedIn) {
-            props.history.push(path + "/login")
+            props.history.push(`${path.replace(/\/$/, '')}/login`);
         }
     }, [path,props.history])
     return <Switch>

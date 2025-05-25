@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
-class Login extends React.Component {
+export class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

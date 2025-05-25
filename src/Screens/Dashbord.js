@@ -222,7 +222,6 @@ class Dashbord extends React.Component {
           <div className="col-3" >
             <div>
               <div className="dashboard-level" style={{ backgroundColor: this.state.bodydata[val].color }} onClick={() => {
-// istanbul ignore if
                 if (index < progressingLevel) {
                   let progressLevel = progressingLevel;
                   if (index + 1 === progressingLevel) {

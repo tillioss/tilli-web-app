@@ -114,7 +114,7 @@ class LanguageScreen extends React.Component {
                                         </div>
                                         <div style={{ flex: 1, fontSize: 18, fontWeight: 300, color: showTickIcon ? "#FFFFF1" : "#333333" }}>{label}</div>
                                         {showTickIcon && <div style={{ width: 20 }}>
-                                            <img style={{ width: 20, height: 20 }} src={TickImg} alt={""}/>
+                                            <img data-testid={`tick-icon-${value}`} style={{ width: 20, height: 20 }} src={TickImg} alt={""}/>
                                         </div>}
 
                                     </div>;

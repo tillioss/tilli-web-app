@@ -32,7 +32,7 @@ class PersonWithTextAnimation extends React.Component {
                 <div className="col-1"></div>
                 <div className="col-2">
                     <a onClick={() => this.props.changeStage('Previous', stage)}>
-                        <img style={{ width: window.innerHeight / 10 }} src={backImage} />
+                        <img data-testid="back" style={{ width: window.innerHeight / 10 }} src={backImage} />
                     </a>
                 </div>
                 <div className="col-8 ">

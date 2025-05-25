@@ -178,7 +178,7 @@ class UserManage extends React.Component {
 
         <div className="my-3">
           <div className="submit-div">
-            <button className="submit" onClick={() => this.gotoModule()}>
+            <button data-testid="continue-button" className="submit" onClick={() => this.gotoModule()}>
               Continue
             </button>
           </div>

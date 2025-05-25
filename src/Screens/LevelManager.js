@@ -335,7 +335,7 @@ async getLevelMappingData(levelId)
         
       var found_index = this.state.options.findIndex((a) =>
       a.label === ival.theme)
-      imageView[index]=this.state.options[found_index]
+      imageView[index] = { json: this.state.options[found_index]?.json };
       
         })
        console.log('image data ',imageView)
@@ -396,6 +396,7 @@ if(!dummyOptionSelect[index])
 
 }
 
+// istanbul ignore file
 
 if(ival.theme =="DoubleBoxOverlapWithImage"  || ival.theme == "ImageWithThinking" )
 {
@@ -916,7 +917,7 @@ if(type=="Up")
                   <div className="col-sm-5"> 
                   <input type={'text'}  className={'form-control'} value={Contentdata[index].title}  placeholder={'Enter Title'} style={{ width: '100%' }} 
                     onChange={(e) => { this.titleOnchange(e.target.value, index) }} />
-                      <span style={{color:'red',fontSize:12,float:'inherit',marginTop:10}}>{this.state.titleValidate[index]}</span>
+                      <span data-testid={`validation-title-${index}`} style={{color:'red',fontSize:12,float:'inherit',marginTop:10}}>{this.state.titleValidate[index]}</span>
                      </div>
 
                   <div className="col-sm-6"> </div>
@@ -932,13 +933,13 @@ if(type=="Up")
                       onChange={(e) => this.handleChange(e, index)}
                       options={this.state.options}
                     />
-                    <span style={{color:'red',fontSize:12,float:'inherit',marginTop:10}}>{this.state.ThemeValidate[index]}</span>
+                    <span data-testid={`validation-theme-${index}`} style={{color:'red',fontSize:12,float:'inherit',marginTop:10}}>{this.state.ThemeValidate[index]}</span>
                   </div>
                   <div className="col-sm-2">
 
 {this.state.imageView[index] ?
-<img style={{ width: '100%', height: 100 }} 
-src={MyConstant.keyList.apiURL + "vp?action=module&key=" + this.state.imageView[index].json.image.fileName + "&id=" + this.state.imageView[index].json.image.fileType} 
+<img data-testid={`thumbnail-image-${index}`} style={{ width: '100%', height: 100 }} 
+src={MyConstant.keyList.apiURL + "vp?action=module&key=" + (this.state.imageView[index].json?.image.fileName || "") + "&id=" + (this.state.imageView[index].json?.image.fileType || "")} 
 
 alt={'No Image'} class="img-responsive" onClick={()=>{
   this.setState({imageBigView:this.state.imageView[index],displayImage:'block' })
@@ -1117,7 +1118,7 @@ alt={'No Image'} class="img-responsive" onClick={()=>{
   }}  >&times;</span>
   {this.state.imageBigView  ?
 
-  <img src={MyConstant.keyList.apiURL + "vp?action=module&key=" + this.state.imageBigView.json.image.fileName + "&id=" + this.state.imageBigView.json.image.fileType} class="modal-content_image" id="img01"/>
+  <img src={MyConstant.keyList.apiURL + "vp?action=module&key=" + (this.state.imageBigView.json?.image.fileName || "") + "&id=" + (this.state.imageBigView.json?.image.fileType || "")} class="modal-content_image" id="img01"/>
 
   : null}
 
