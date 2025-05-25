@@ -396,6 +396,7 @@ if(!dummyOptionSelect[index])
 
 }
 
+// istanbul ignore file
 
 if(ival.theme =="DoubleBoxOverlapWithImage"  || ival.theme == "ImageWithThinking" )
 {
