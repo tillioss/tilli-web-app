@@ -165,9 +165,6 @@ export default class ThemeViewer extends React.Component {
             default:
         }
 
-        // console.log("action", action)
-        // console.log("layers", layers)
-        // console.log("index", index)
         this.setState({ layers }, () => {
             // if (action == "Next" && layers.length - 1 == index) {
             //     console.log("action-->", action)
@@ -190,20 +187,16 @@ export default class ThemeViewer extends React.Component {
     }
 
     setRecord(text) {
-        this.setState({
-            recordText: text
-        })
+        this.setState({recordText: text})
     }
 
     mouseEnterfunction() {
         var that = this
-        console.log("start web");
         that.onStartRecord()
     }
 
     mouseMouseLeavefunction() {
         var that = this
-        console.log("end  web")
         that.onStopRecord()
     }
     layerBuildRecord(layer, index, recordText) {
@@ -264,9 +257,7 @@ export default class ThemeViewer extends React.Component {
                     }}
                     key={index}
                     id={"layer" + index}
-                    onClick={() => {
-                        this.dynamicThemeAction(layer, index)
-                    }}
+                    onClick={() => {this.dynamicThemeAction(layer, index)}}
                 >
                 </div>
                 break;
@@ -297,9 +288,7 @@ export default class ThemeViewer extends React.Component {
                         borderRadius: layer.borderRadius + "px",
                     }} key={index}
                     id={"layer" + index}
-                    onClick={() => {
-                        this.dynamicThemeAction(layer, index)
-                    }}
+                    onClick={() => {this.dynamicThemeAction(layer, index)}}
                 >
                 </div>
                 break;
@@ -321,9 +310,7 @@ export default class ThemeViewer extends React.Component {
                         borderRadius: "50%",
                     }} key={index}
                     id={"layer" + index}
-                    onClick={() => {
-                        this.dynamicThemeAction(layer, index)
-                    }}
+                    onClick={() => {this.dynamicThemeAction(layer, index)}}
                 >
                 </div>
                 break;
@@ -342,9 +329,7 @@ export default class ThemeViewer extends React.Component {
                     key={index}
                     id={"layer" + index}
                     dangerouslySetInnerHTML={{ __html: layer.text }}
-                    onClick={() => {
-                        this.dynamicThemeAction(layer, index)
-                    }}
+                    onClick={() => {this.dynamicThemeAction(layer, index)}}
                 >
                 </div>
                 break;
@@ -361,9 +346,7 @@ export default class ThemeViewer extends React.Component {
                         height: parseInt((layer.height / 100) * deviceHeight) + "px",
                     }} key={index}
                     id={"layer" + index}
-                    onClick={() => {
-                        this.dynamicThemeAction(layer, index)
-                    }}
+                    onClick={() => {this.dynamicThemeAction(layer, index)}}
                 >
                     <img style={{ width: "100%", height: "100%" }} src={layer.image ? layer.image : drag_drop} alt={""} />
                 </div>
@@ -381,9 +364,7 @@ export default class ThemeViewer extends React.Component {
                         height: parseInt((layer.height / 100) * deviceHeight) + "px",
                     }} key={index}
                     id={"layer" + index}
-                    onClick={() => {
-                        this.dynamicThemeAction(layer, index)
-                    }}
+                    onClick={() => {this.dynamicThemeAction(layer, index)}}
                 >
                     <video style={{ width: "100%", height: "100%" }} >
                         <source src={layer.video ? layer.video : drag_drop} />
@@ -412,14 +393,10 @@ export default class ThemeViewer extends React.Component {
         }
 
         dynamicCaptureInfo.dynamic.dynamicThemes[stageIndex] = infoTheme;
-        // console.log("***--->", stageIndex, dynamicCaptureInfo)
-
     }
     render() {
         let { layers, audioRecognize, recordText, } = this.state;
         let { data } = this.props
-        // console.log("audioRecognize", audioRecognize)
-        // console.log("layers", layers)
 
         let audioFileFind = ""
         if (data && data.backgroundAudio && data.backgroundAudio !== "") {
