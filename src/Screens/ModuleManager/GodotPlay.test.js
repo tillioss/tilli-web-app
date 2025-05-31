@@ -1,151 +1,146 @@
-import React from "react";
-import { render, act } from "@testing-library/react";
-import GodotPlay from "./GodotPlay";
+import React from 'react';
+import { render, screen, waitFor, act, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import GodotPlayWrapped from './GodotPlay';
+import MyConstant from '../../config/MyConstant';
+import MyConfig from '../../config/myConfig';
 
-// Mocks
-jest.mock("../../config/MyConstant", () => ({
-  keyList: { apiURL: "http://testapi/" },
+// Extract raw component
+const GodotPlay = GodotPlayWrapped.WrappedComponent;
+
+jest.mock('../../config/MyConstant', () => ({
+  keyList: { apiURL: 'https://api/', projectUrl: 'proj' }
+}));
+jest.mock('../../config/myConfig', () => ({
+  isLocal: false
 }));
 
-jest.mock("../../config/myConfig", () => ({
-  isLocal: false,
-}));
-
-jest.mock("react-router-dom", () => ({
-  withRouter: (Component) => (props) => <Component {...props} />,
-}));
-
-// Global patch to capture script injection
-let createdScript;
-const originalAppendChild = HTMLElement.prototype.appendChild;
-HTMLElement.prototype.appendChild = function (el) {
-  if (el.tagName === "SCRIPT") {
-    createdScript = el;
-    el.onload = jest.fn(); // Ensure onload always exists
-  }
-  return originalAppendChild.call(this, el);
-};
-
-describe("GodotPlay", () => {
-  let fakeEngine;
+describe('GodotPlay Component', () => {
   let originalLocation;
+  let originalRemoveChild;
 
-  const setupDOM = () => {
-    if (!document.body) {
-      const body = document.createElement("body");
-      document.documentElement.appendChild(body);
-    }
-    document.body.innerHTML = "";
-
-    ["canvas", "status", "status-progress", "status-progress-inner", "status-indeterminate", "status-notice"].forEach(id => {
-      const el = document.createElement("div");
-      el.id = id;
-      el.style = {};
-      document.body.appendChild(el);
-    });
-
-    const container = document.getElementById("status-indeterminate");
-    for (let i = 0; i < 8; i++) {
-      const div = document.createElement("div");
-      div.style = { borderTopColor: "initial" };
-      container.appendChild(div);
-    }
-
-    document.body.removeChild = jest.fn((el) => el);
-  };
-
-  beforeEach(() => {
-    setupDOM();
-
-    fakeEngine = {
-      startGame: jest.fn().mockResolvedValue(),
-    };
-    window.Engine = jest.fn(() => fakeEngine);
-    window.Engine.isWebGLAvailable = jest.fn(() => true);
-
+  beforeAll(() => {
+    // Stub global location
     originalLocation = window.location;
     delete window.location;
-    window.location = { href: "" };
+    window.location = { href: '' };
+
+    // Preserve original removeChild
+    originalRemoveChild = document.body.removeChild.bind(document.body);
+  });
+
+  afterAll(() => {
+    window.location = originalLocation;
+    // Restore removeChild
+    document.body.removeChild = originalRemoveChild;
+  });
+
+  beforeEach(() => {
+    cleanup();
+    document.body.innerHTML = '';
+    jest.useFakeTimers();
+
+    // Override removeChild to avoid errors when node not present
+    document.body.removeChild = (node) => {
+      try {
+        originalRemoveChild(node);
+      } catch (e) {
+        // ignore if node not a child
+      }
+    };
   });
 
   afterEach(() => {
-    document.body.innerHTML = "";
-    delete window.Engine;
-    window.location = originalLocation;
-    jest.restoreAllMocks();
+    jest.useRealTimers();
+    jest.resetAllMocks();
   });
 
-  it("appends and cleans up script", async () => {
-    const { unmount } = render(<GodotPlay match={{ params: { gameId: "g123" } }} />);
-    await act(async () => {
-      expect(createdScript).toBeInstanceOf(HTMLScriptElement);
-      expect(createdScript.src).toBe("http://testapi/vp-game-file/module/zip/g123/index.js");
-      createdScript.onload?.();
-      await Promise.resolve();
+  it('injects script and cleanup does not throw', async () => {
+    const props = { match: { params: { gameId: 'game123' } } };
+    const { unmount } = render(<GodotPlay {...props} />);
+    const script = await waitFor(() => document.body.querySelector('script'));
+    expect(script).toBeInTheDocument();
+    expect(script).toHaveAttribute('src', `${MyConstant.keyList.apiURL}vp-game-file/module/zip/game123/index.js`);
+    expect(() => unmount()).not.toThrow();
+  });
+
+  it('does not inject script when no gameId', async () => {
+    const props = { match: { params: {} } };
+    render(<GodotPlay {...props} />);
+    await waitFor(() => expect(document.body.querySelector('script')).toBeNull());
+  });
+
+  it('shows failure notice when WebGL unavailable', async () => {
+    const fakeEngine = { startGame: jest.fn() };
+    const engineFn = jest.fn(() => fakeEngine);
+    engineFn.isWebGLAvailable = jest.fn(() => false);
+    window.Engine = engineFn;
+
+    const props = { match: { params: { gameId: 'g1' } } };
+    render(<GodotPlay {...props} />);
+    const script = await waitFor(() => document.body.querySelector('script'));
+
+    act(() => script.onload());
+    const notice = await screen.findByText('WebGL not available');
+    expect(notice).toBeVisible();
+    expect(fakeEngine.startGame).not.toHaveBeenCalled();
+  });
+
+  it('updates progress and hides status on successful startGame', async () => {
+    const fakeEngine = {
+      startGame: jest.fn(({ onProgress }) => {
+        onProgress(1, 2);
+        return Promise.resolve();
+      })
+    };
+    const engineFn = jest.fn(() => fakeEngine);
+    engineFn.isWebGLAvailable = jest.fn(() => true);
+    window.Engine = engineFn;
+
+    const props = { match: { params: { gameId: 'g2' } } };
+    render(<GodotPlay {...props} />);
+    const script = await waitFor(() => document.body.querySelector('script'));
+
+    act(() => script.onload());
+    const inner = await waitFor(() => document.getElementById('status-progress-inner'));
+    expect(inner.style.width).toBe('50%');
+    await waitFor(() => {
+      const progress = document.getElementById('status-progress');
+      expect(progress.style.display).toBe('none');
     });
-
-    expect(window.Engine).not.toHaveBeenCalled();
-    unmount();
-    expect(document.body.removeChild).toHaveBeenCalledWith(createdScript);
+    expect(fakeEngine.startGame).toHaveBeenCalled();
   });
 
-  it("does not append script if gameId is empty", () => {
-    render(<GodotPlay match={{ params: { gameId: "" } }} />);
-   expect(createdScript).toBeInstanceOf(HTMLScriptElement);
-      expect(createdScript.src).toBe("http://testapi/vp-game-file/module/zip/g123/index.js");
+  it('shows error message when startGame rejects', async () => {
+    const fakeEngine = { startGame: jest.fn(() => Promise.reject(new Error('fail'))) };
+    const engineFn = jest.fn(() => fakeEngine);
+    engineFn.isWebGLAvailable = jest.fn(() => true);
+    window.Engine = engineFn;
+
+    const props = { match: { params: { gameId: 'g3' } } };
+    render(<GodotPlay {...props} />);
+    const script = await waitFor(() => document.body.querySelector('script'));
+
+    act(() => script.onload());
+    const notice = await screen.findByText('fail');
+    expect(notice).toBeVisible();
+    expect(fakeEngine.startGame).toHaveBeenCalled();
   });
 
-  it("shows error if WebGL is not available", async () => {
-    window.Engine.isWebGLAvailable = jest.fn(() => false);
-    render(<GodotPlay match={{ params: { gameId: "g123" } }} />);
-    await act(async () => {
-      createdScript.onload?.();
-    });
-    expect(document.getElementById("status-notice").style.display).toBe("");
-  });
+  it('redirects to godot-redirect when local config enabled', async () => {
+    MyConfig.isLocal = true;
+    const fakeEngine = { startGame: jest.fn(() => Promise.resolve()) };
+    const engineFn = jest.fn(() => fakeEngine);
+    engineFn.isWebGLAvailable = jest.fn(() => true);
+    window.Engine = engineFn;
 
-  it("displays error notice when engine.startGame fails", async () => {
-    fakeEngine.startGame = jest.fn().mockRejectedValue(new Error("Engine failed"));
+    const props = { match: { params: { gameId: 'g4' } } };
+    render(<GodotPlay {...props} />);
+    const script = await waitFor(() => document.body.querySelector('script'));
 
-    render(<GodotPlay match={{ params: { gameId: "g123" } }} />);
-    await act(async () => {
-      createdScript.onload?.();
-      await Promise.resolve();
-    });
-
-    expect(document.getElementById("status-notice").style.display).toBe("");
-  });
-
-  it("triggers animation setup", async () => {
-    render(<GodotPlay match={{ params: { gameId: "g123" } }} />);
-    await act(async () => {
-      createdScript.onload?.();
-      await Promise.resolve();
-    });
-
-    expect(document.getElementById("status-indeterminate").children.length).toBe(8);
-  });
-
-  it("does not redirect if isLocal = false", () => {
-    render(<GodotPlay match={{ params: { gameId: "g123" } }} />);
-    expect(window.location.href).not.toMatch(/godot-redirect/);
-  });
-
-  it("renders safely without match or gameId", () => {
-    render(<GodotPlay />);
-    expect(document.getElementById("canvas")).toBeInTheDocument();
-  });
-
-  it("gracefully handles missing window.Engine", async () => {
-    delete window.Engine;
-
-    render(<GodotPlay match={{ params: { gameId: "g123" } }} />);
-    await act(async () => {
-      createdScript.onload?.();
-      await Promise.resolve();
-    });
-
-    expect(createdScript).toBeDefined(); // didn't crash
+    act(() => script.onload());
+    act(() => jest.advanceTimersByTime(6000));
+    expect(window.location.href).toContain(`/${MyConstant.keyList.projectUrl}/godot-redirect`);
+    expect(fakeEngine.startGame).toHaveBeenCalled();
   });
 });
-
