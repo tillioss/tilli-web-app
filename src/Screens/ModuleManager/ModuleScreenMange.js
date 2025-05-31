@@ -545,7 +545,7 @@ class ModuleScreenMange extends React.Component {
             attemptCount: this.state.attemptCount,
         };
 
-        let languageType = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
+        let languageType = localStorage.getItem("ChooseLanguage") ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
         let responseData = await doConnect("getStoryBasedStatus", "POST", postJson);
         var json = responseData;
 

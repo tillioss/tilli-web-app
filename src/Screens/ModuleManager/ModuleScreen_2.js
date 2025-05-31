@@ -370,7 +370,7 @@ class ModuleScreen_2 extends React.Component {
             attemptCount: this.state.attemptCount,
         };
 
-        let languageType = JSON.parse(localStorage.getItem("ChooseLanguage")) ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
+        let languageType = localStorage.getItem("ChooseLanguage") ? JSON.parse(localStorage.getItem("ChooseLanguage")) : { "label": "English", "value": "dbc995a7-0715-4c80-aeef-35f77e9fb517" }
         let responseData = await doConnect("getStoryBasedStatus", "POST", postJson);
         var json = responseData;
         if (json && json.response) {
@@ -439,15 +439,15 @@ class ModuleScreen_2 extends React.Component {
             horizontalScreen = "horizontal"
         }
 
-        let languageChoose = JSON.parse(localStorage.getItem("ChooseLanguage"))
+        let languageChoose = localStorage.getItem("ChooseLanguage")
 
         let changeLang = ""
         if (languageChoose) {
-            if (languageChoose.label === "Tamil") {
+            if (JSON.parse(languageChoose).label === "Tamil") {
                 changeLang = "tamil"
             }
-            else if (languageChoose.label === "Sinhala") {
-                changeLang = "singala"
+            else if (JSON.parse(languageChoose).label === "Sinhala") {
+                changeLang = "sinhala"
             }
 
         }

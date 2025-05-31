@@ -444,7 +444,6 @@ class AudioQuizScreen extends React.Component {
             }
         }
         
-        // istanbul ignore file
         else {
             if (data.content.image) {
                 
